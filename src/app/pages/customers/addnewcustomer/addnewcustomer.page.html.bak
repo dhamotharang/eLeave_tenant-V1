@@ -37,8 +37,7 @@
                       <ion-label>Primary Contact</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input type="text" placeholder="Full Name"></ion-input>
-                      <!-- <ion-input type="text"  [(ngModel)]="newFullName" placeholder="Full Name"></ion-input> -->
+                      <ion-input type="text"  [(ngModel)]="newFullName" placeholder="Full Name"></ion-input>
                     </ion-row>
 
                     <ion-row>

@@ -16,20 +16,25 @@ export class AppComponent {
       url: '/main/dashboard',
       icon: 'icon_customers.svg'
     },
+    // {
+    //   title: 'List',
+    //   url: '/main/list',
+    //   icon: 'icon_setting.svg'
+    // },
     {
       title: 'Dashboard',
       url: '/main/dashboard',
       icon: 'icon_dashboard.svg'
     },
     {
-      title: 'Customers',
-      url: '/main/customers',
-      icon: 'icon_customers.svg'
-    },
-    {
       title: 'Subscriptions',
       url: '/main/subscriptions',
       icon: 'icon_products.svg'
+    },
+    {
+      title: 'Customers',
+      url: '/main/customers',
+      icon: 'icon_customers.svg'
     },
     {
       title: 'Support',

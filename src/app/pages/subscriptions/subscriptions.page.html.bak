@@ -14,7 +14,7 @@
           <ion-button class="subscriptionDropDownMenuButton"> 
             <ion-icon slot="icon-only" name="menu"></ion-icon>
           </ion-button>
-          <ion-button class="subscriptionAddNewButton"  [routerDirection]="'root'" [routerLink]="'/main/subscriptions/add-new-subscriber'">
+          <ion-button class="subscriptionAddNewButton" (click)="addNewSubscriber()">
             <ion-icon name="add"></ion-icon> 
             <ion-text style="padding-left: 2px; ">Add New</ion-text>
           </ion-button>
@@ -72,8 +72,8 @@
             
             <!-- body -->
             <ion-row class="subscriptionTableBodyTheme subscriptionTableLine" ion-item 
-              *ngFor="let table of subscribers"
-              [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
+              *ngFor="let table of subscribers" (click)="selectedRow($event,table)"
+              ondblclick="location.href='/main/subscriptions/subscriber-details'" 
               [class.highlight]="table.clientName === currentClient"> 
                <!-- ondblclick="location.href='/main/subscriptions/subscriber-details'"> 
               class.highlight="table.clientName"  -->

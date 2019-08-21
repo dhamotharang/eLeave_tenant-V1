@@ -260,4 +260,16 @@ export class SubscriptionsPage implements OnInit {
 
   ngOnInit() {
   }
+
+  selectedRow(evt, item) {
+    console.log('hi');
+    console.log(evt);
+    console.log(item);
+    this.currentClient = item.clientName;
+    // return location.href = '/main/subscriptions/subscriber-details';
+  }
+
+  addNewSubscriber() {
+    return location.href = '/main/subscriptions/add-new-subscriber';
+  }
 }
