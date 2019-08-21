@@ -1,0 +1,75 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu type="overlay" class="sidebarBackground">
+      <ion-header>
+        <ion-toolbar>
+          <!-- <ion-title>logo</ion-title> -->
+          <ion-avatar class="sidebarLogo">
+            <img src="../assets/icon/logo.PNG">
+          </ion-avatar>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <!-- <ion-icon slot="start" [name]="p.icon"></ion-icon> -->
+              <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
+              <ion-label class="sidebarList">
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <!-- <ion-router-outlet main></ion-router-outlet> -->
+      <ion-router-outlet main>
+        <ion-header>
+          <!-- <ion-toolbar style="height: 70px;">  -->
+            <!-- <ion-searchbar class="searchbar"></ion-searchbar> -->
+            <ion-toolbar style="height: 70px; ">
+              <ion-searchbar slot="start" class="searchbar"></ion-searchbar>
+              <ion-buttons slot="secondary">
+                <ion-button style="width:fit-content; height:fit-content">
+                  <ion-icon slot="icon-only" class="toolbarIcon" src="../assets/icon/layout/icon-chat.svg"></ion-icon>
+                  <!-- <ion-icon slot="icon-only" name="contact"></ion-icon> -->
+                </ion-button>
+                <ion-button style="width:fit-content; height:fit-content">
+                  <ion-icon slot="icon-only" class="toolbarIcon" src="../assets/icon/layout/icon-notification.svg"></ion-icon>
+                  <!-- <ion-icon slot="icon-only" name="search"></ion-icon> -->
+                </ion-button>
+                <div class="verticalLine"></div>
+                <ion-button>
+                    <ion-list>
+                      <!-- <ion-list-header class="labelName">
+                        dsd
+                        <ion-select>
+                          <ion-select-option value="1">Option 1</ion-select-option>
+                          <ion-select-option value="2">Option 2</ion-select-option>
+                          <ion-select-option value="3">Option 3</ion-select-option>
+                        </ion-select>
+                      </ion-list-header> -->
+                      <ion-select placeholder="John Doe" class="custom-select">
+                        <ion-select-option value="1">Option 1</ion-select-option>
+                        <ion-select-option value="2">Option 2</ion-select-option>
+                        <ion-select-option value="3">Option 3</ion-select-option>
+                      </ion-select>
+                    </ion-list>
+                </ion-button>
+                <ion-avatar class="userProfile">
+                <!-- <ion-avatar style=" width: 32px; height: 32px; float: right;"> -->
+                  <img src="../assets/icon/layout/picture.png">
+                </ion-avatar>
+              </ion-buttons>
+              <!-- <ion-buttons slot="primary">
+                <ion-button color="danger">
+                  <ion-icon slot="icon-only" name="more"></ion-icon>
+                </ion-button>
+              </ion-buttons> -->
+            </ion-toolbar>
+          <!-- </ion-toolbar> -->
+        </ion-header>
+      </ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

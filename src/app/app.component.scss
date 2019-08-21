@@ -1,0 +1,111 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These 
+// styles are for the entire app and not just one component. Additionally, this 
+// file can hold Sass mixins, functions, and placeholder classes to be imported 
+// and used throughout the application.
+:host{
+    
+    .splitPaneBackground {
+        // --ion-background-color: #f0f0f7
+        width: 130px;
+        // height: 540px;
+        object-fit: contain;
+    }
+
+    .sidebarBackground {
+        width: 130px;
+        --width: 130px;
+        --ion-background-color: #43425d;
+        $menu-width: 130px;
+        max-width: 150px;
+    }
+
+    .sidebarLogo {
+        width: 70px;
+        height: 70px;
+        margin: auto;
+    }
+
+    .sidebarIcon {
+        width: 16px; 
+        height: 16px;
+    }
+
+    .sidebarList {
+        font-family: var(--ion-);
+        font-size: 15px;
+        // font-size: 7.5px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.27;
+        letter-spacing: normal;
+        text-align: left;
+        // color: #43425d;
+        color: #ffffff;
+    }
+
+    .toolbarIcon {
+        width: 16px; 
+        height: 16px;
+        padding: 2px;
+        // --padding-top: 3px;
+        // --padding-end: 3px;
+        // --padding-bottom: 3px;
+        // --padding-start: 3px;
+        // --border-radius: 50%;
+    }
+
+    .searchbar {
+        // padding-left: 0px;
+        // padding-top: 0px;
+        height: 70px;
+        --ion-background-color: #ffffff;
+        --icon-color: #bcbccb;
+        ::placeholder {
+            font-size: 6px; //sets placeholder font size
+        }
+    }
+
+    .verticalLine {
+        border-left: 1px solid #bcbccb;
+        height: 20px;
+        float: right;
+        padding-right: 10px;
+      }   
+      
+      .labelName {
+        font-size: 15px;
+        line-height: 1.54;
+        color: #4d4f5c;
+        text-align: left;
+        // width:max-content;
+        width: 70px;
+        text-transform: capitalize;
+      }
+
+      .userProfile {
+        width: 65px;
+        height: 30px;
+        padding-left: 10px;
+        padding-right: 25px;
+      }
+
+      ion-select {
+        &.custom-select {
+          font-size: 15px; //sets text font size
+          text-align: start;
+          vertical-align: bottom;
+          padding-bottom: initial;
+          color: #4d4f5c;
+          text-transform: capitalize;
+          ::placeholder {
+            font-size: 15px; //sets placeholder font size
+            text-align: start;
+            vertical-align: bottom;
+            color: #4d4f5c;
+          }
+        }
+      }
+}
