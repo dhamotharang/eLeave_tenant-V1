@@ -8,5 +8,5 @@ $ npm install
 Running the app
 --------------
 
-In developement mode:
+In developement mode
 $ ionic serve
