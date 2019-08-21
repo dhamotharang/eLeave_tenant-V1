@@ -1,0 +1,46 @@
+<ion-list>
+  <!-- Sort by part -->
+  <ion-title class="popoverTitle">
+    SORT BY
+  </ion-title>
+  <ion-row>
+    <ion-label class="popoverBodyStyle" (click)="doc()">
+      Name
+    </ion-label>
+  </ion-row>
+  <ion-row>
+    <ion-label class="popoverBodyStyle" (click)="close()">
+      Company Name
+    </ion-label>
+  </ion-row>
+  <ion-row>
+    <ion-label class="popoverBodyStyle" (click)="close()">
+      Status
+    </ion-label>
+  </ion-row>
+
+  <!-- View by part -->  
+  <ion-row>
+    <ion-title class="popoverTitle">
+      VIEW BY
+    </ion-title>
+  </ion-row>
+  <ion-col>
+    <ion-row>
+      <ion-text class="popoverBodyStyle" (click)="viewOption('card')">
+        Card
+      </ion-text>
+    </ion-row>
+    <ion-row>
+      <ion-text class="popoverBodyStyle" (click)="viewOption('table')">
+        Table
+      </ion-text>
+    </ion-row>
+  </ion-col>
+ 
+  <!-- <ion-item class="popoverBodyStyle" (click)="close()">
+    <ion-label>
+      Close
+    </ion-label>
+  </ion-item> -->
+</ion-list>
