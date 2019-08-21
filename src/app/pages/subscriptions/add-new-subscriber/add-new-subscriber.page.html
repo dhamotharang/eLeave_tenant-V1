@@ -1,0 +1,37 @@
+<ion-app style="padding-top: 73px; --ion-background-color: #f0f0f7;">
+  <ion-content>
+    <ion-row>
+      <ion-col>
+        <ion-title class="addNewSubscriberTitleStyle">
+          Subscriptions
+        </ion-title>
+
+        <ion-row class="addNewSubscriberLayout">
+          <ion-col style="padding: 0px; margin: 15px;">
+            <ion-title class="addNewSubscrierSubtitle">
+              NEW SUBSCRIPTION
+            </ion-title>
+            <ion-list style="margin:0px; padding: 0; background-color: #ffffff;">
+              <ion-list-header class="addNewSubscriberTextStyle addNewSubscriberBodyLayout">
+                Customer Name
+              </ion-list-header>
+              <!-- <ion-item> -->
+                <ion-select placeholder="Select Customer" style="font-size: 9px; 
+                border-radius: 5px; color: #808495; border: solid 0.5px #a5a4bf;
+                margin-left: 15px; margin-right: 15px; line-height: 24px;">
+                <!-- <ion-select [compareWith]="compareWith"> -->
+                  <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
+                </ion-select>
+              <!-- </ion-item> -->
+            </ion-list>
+          </ion-col>
+          <ion-col style="padding: 0px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; background-color: chocolate;">
+            <ion-title class="addNewSubscrierSubtitle">SUBSCRIPTION PLAN</ion-title>
+            c2
+          </ion-col>
+          <ion-col style="background-color: #fcfcfc">c3</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+</ion-app>

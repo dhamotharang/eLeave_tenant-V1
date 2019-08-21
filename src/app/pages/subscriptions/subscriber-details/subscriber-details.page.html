@@ -1,0 +1,241 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>subscriberDetails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+
+<ion-app style="padding-top: 73px; --ion-background-color: #f0f0f7;">
+    <ion-content>
+      
+      <!---------------------------- Title  ----------------------------------->
+      <ion-row>
+        <ion-col>
+          <ion-title class="subscriberTitleStyle">
+            Subscriptions
+          </ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="subscriberLayout">
+          <ion-row>
+            
+            <!------------------------ Client's List  -------------------------------> 
+            <ion-col size="2" style="padding: 0px;">
+              <!-- Header -->
+              <ion-title text-wrap class="subsctiberTitleStyle">
+                CLIENT NAME
+              </ion-title>
+              <ion-item-group  *ngFor="let subscribersList of subscribersDetails">
+                <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)"
+                [ngStyle]="{'color': subscribersList.clientName === subscriberOverviewAdminName ? '#3b86ff' : '#4d4f5c'}">
+                <!-- <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)" > -->
+                  <!-- <ion-text> -->
+                    {{subscribersList.clientName}}
+                  <!-- </ion-text> -->
+                </ion-item>
+              </ion-item-group>
+            </ion-col>
+
+            <!---------------------- Client's Overview  ----------------------------->
+            <ion-col size="3"  style="padding: 0px; background-color: #fcfcfc;">
+              <!-- Header -->
+              <ion-title class="subsctiberTitleStyle">
+                OVERVIEW
+              </ion-title>
+              
+              <!-- Company name -->
+              <ion-item-group text-wrap lines="full" style="padding: 0px;">
+                <ion-item class="subscriberOverviewParentCompanyStyle" style="padding: 0px; padding-right:20px; padding-bottom: 5px;" >
+                  <ion-text>
+                    {{subscriberOverviewParentCompany}} (Parent Company)
+                  </ion-text>
+                </ion-item>
+  
+                <!-- Admin details -->
+                <ion-row text-wrap class="subscriberOverviewStyle" style="padding-right:20px; padding-top: 5px;">
+                  <ion-col size="2.6">
+                    <ion-avatar class="subscriberOverviewPic">
+                      <img src="../../../../assets/icon/layout/picture.png">
+                    </ion-avatar>
+                  </ion-col>
+                  <ion-col>
+                    <ion-text>{{subscriberOverviewAdminName}}</ion-text>
+                    <ion-text>{{subscriberOverviewAdminEmail}}</ion-text>
+                  </ion-col>
+                </ion-row>
+
+                <!-- Address -->
+                <ion-item class="subscriberOverviewParentCompanyStyle" style="padding: 0px; padding-right:20px;" >
+                  <ion-label style="font-weight: bold;">
+                    ADDRESS
+                  </ion-label>
+                </ion-item>
+                <ion-col class="subscriberOverviewStyle">
+                  <ion-label class="subscriberOverViewAddressStyle">Billing Address</ion-label>
+                  <ion-label class="subscriberOverViewAddressStyle">{{subscriberOverciewAddressLine1}}</ion-label>
+                  <ion-label class="subscriberOverViewAddressStyle">{{subscriberOverciewAddressLine2}}</ion-label>
+                  <ion-label class="subscriberOverViewAddressStyle">{{subscriberOverciewAddressZip}} {{subscriberOverciewAddressState}}</ion-label>
+                  <ion-label class="subscriberOverViewAddressStyle">{{subscriberOverciewAddressCountry}}</ion-label>
+                </ion-col>
+
+                <!-- Associated contacts -->
+                <ion-item class="subscriberOverviewParentCompanyStyle" style="padding: 0px; padding-right:20px;" >
+                  <ion-label style="font-weight: bold;">
+                    ASSOCIATED CONTACTS
+                  </ion-label>
+                </ion-item>
+                <ion-col class="subscriberOverviewStyle">
+                  <ion-label class="subscriberOverViewAddressStyle">{{subscriberOverviewAdminEmail}}</ion-label>
+                  <ion-label class="subscriberOverViewAddressStyle" style="color: #3b86ff">Manage</ion-label>
+                </ion-col>
+
+                <!-- Other details -->
+                <ion-item class="subscriberOverviewParentCompanyStyle" style="padding: 0px; padding-right:20px;" >
+                  <ion-label style="font-weight: bold;">
+                    OTHER DETAILS
+                  </ion-label>
+                </ion-item>
+                <ion-row  class="subscriberOverviewStyle">
+                  <ion-col size="4.4" style="padding-left: 18px;">
+                    <ion-label>Repeat every</ion-label>                      
+                    <ion-label>Activation Date</ion-label>                      
+                    <ion-label>Sales Person</ion-label>                      
+                  </ion-col>
+                  <ion-col style="font-weight: bold; text-align: left;">
+                    <ion-label>: {{subscriberOvercieRepeatEvery}}</ion-label>                      
+                    <ion-label>: {{subscriberOverciewSalesPerson}}</ion-label>                      
+                    <ion-label>: {{subscriberOverciewActivationDate}}</ion-label>
+                    <ion-label style="font-weight:normal; color: #3b86ff; padding-left: 7px;">  Update</ion-label>                  
+                  </ion-col>
+                </ion-row>  
+              </ion-item-group>
+            </ion-col>
+
+            <!-------------------- Client's Description  ---------------------------->
+            <ion-col style="padding: 0px;">
+              <!-- Header -->
+              <ion-row>
+                  <!-- <ion-row style="background-color: #f5f6fa; height: 45px;"> -->
+                <ion-col style="padding:0px;">
+                  <ion-title class="subsctiberTitleStyle">
+                    DESCRIPTION
+                  </ion-title>
+                </ion-col>
+                <ion-col class="subsctiberRecentActivitiesStyle" style="padding:0px;">
+                  <ion-label style="padding-right:15px; ">
+                    Recent Activities
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+
+              <ion-row  style="justify-content: center; padding:0px;">
+                <!-- Last billing date -->
+                <ion-card class="subscriberDescriptionCardLayout">
+                  <ion-card-content style="padding-bottom: 0px;">
+                    <ion-row>
+                      <ion-card-title class="subscriberDescriptionCardTitle">Last Billing Date</ion-card-title>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col style="padding-left: 0px;">
+                        <ion-label class="subscriberDescriptionCardValue">{{subscriberDetailsLastBillingDate}}</ion-label>
+                      </ion-col>
+                      <ion-col size="3">
+                        <ion-icon class="subscriberCardIconStyle" src="../../../../assets/icon/subscriptions/icon-last-billing-date.svg"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card-content>
+                </ion-card>
+
+                <!-- Next billing date -->
+                <ion-card class="subscriberDescriptionCardLayout">
+                  <ion-card-content style="padding-bottom: 0px;">
+                    <ion-row>
+                      <ion-card-title class="subscriberDescriptionCardTitle">Next Billing Date</ion-card-title>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col style="padding-left: 0px;">
+                        <ion-row>
+                            <ion-label class="subscriberDescriptionCardValue">{{subscriberDetailsNextBillingDate}}</ion-label>
+                        </ion-row>
+                        <ion-row>
+                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="showCalenderPicker()">
+                            Change Date
+                          </ion-label>
+                          <ion-datetime detail pickerFormat="D MMMM YYYY" max="2100" *ngIf="this.isShowingPicker">
+                          </ion-datetime>
+                          <!-- <ion-datetime *ngIf=“this.isShowingPicker” pickerFormat=“DD MMMM YYYY” [min]=“datePickerMin” [(ngModel)]=“datePicker” (ionChange)=“changeDate()”> </ion-datetime> -->
+                        </ion-row>
+                      </ion-col>
+                      <ion-col size="3">
+                        <ion-icon class="subscriberCardIconStyle" src="../../../../assets/icon/subscriptions/icon-next-billing-date.svg"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                    </ion-row>
+                  </ion-card-content>
+                </ion-card>
+
+                <!-- Days left -->
+                <ion-card class="subscriberDescriptionCardLayout">
+                  <ion-card-content style="padding-bottom: 0px;">
+                      <ion-row>
+                        <ion-card-title class="subscriberDescriptionCardTitle">Day Left</ion-card-title>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col style="padding-left: 0px;">
+                          <ion-label class="subscriberDescriptionCardValue">{{subscriberDetailsDaysLeft}} Day(s)</ion-label>
+                        </ion-col>
+                        <ion-col size="3">
+                          <ion-icon class="subscriberCardIconStyle" src="../../../../assets/icon/subscriptions/icon-days-left.svg"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                  </ion-card-content>
+                </ion-card>
+              </ion-row>
+
+              <!-- Plan status -->
+              <ion-row style="margin-top: 10px; margin-left:15px; margin-right:15px;">
+                <ion-col>
+                  <!-- Plan details -->
+                  <ion-row style="justify-content: flex-start;" >
+                    <ion-col size="auto" style="display: flex; justify-content: center;" > 
+                      <ion-label class="subscriberPlanCompanyName">{{subscriberOverviewParentCompany}} </ion-label>
+                    </ion-col>
+                      <ion-label>
+                        <div [ngSwitch]="subscriberDetailsStatus">
+                          <div *ngSwitchCase="'TRIAL'" [ngClass]="{'subscriberPlanStatusBlue': true}">{{subscriberDetailsStatus}}</div>
+                          <div *ngSwitchCase="'PAST DUE'" [ngClass]="{'subscriberPlanStatusRed': true}">{{subscriberDetailsStatus}}</div>
+                          <div *ngSwitchCase="'CANCEL SUBSCRIPTION'" [ngClass]="{'subscriberPlanStatusRed': true}">{{subscriberDetailsStatus}}</div>
+                          <div *ngSwitchDefault [ngClass]="{'subscriberPlanStatusGreen': true}">{{subscriberDetailsStatus}}</div>
+                        </div>
+                      </ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label class="subscriberPlanType">Standard Plan</ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label class="subscriberPlanCode">{{subscriberDetailsSubscriptionCode}}</ion-label>
+                  </ion-row>  
+                  
+                  <!-- Plan & addon details -->
+                  <!-- Header -->
+                  <ion-title class="subsctiberTitleStyle" style="margin-top: 20px;">
+                    PLAN & ADD-ON DETAILS
+                  </ion-title>
+                  <ion-item-group class="subscribePlanAddOnDetails">
+                    <ion-label>This is item detail 1</ion-label>
+                    <ion-label>This is item detail 2</ion-label>
+                    <ion-label>This is item detail 3</ion-label>
+                  </ion-item-group>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+  </ion-app>

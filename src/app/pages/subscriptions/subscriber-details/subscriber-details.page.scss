@@ -1,0 +1,199 @@
+:host{
+    .subscriberTitleStyle {
+        padding-left: 22.5px;
+        padding-top: 16px;
+        font-size: 17px;
+        color: #43425d;
+    }
+
+    .subscriberLayout {
+        background-color: #ffffff;
+        margin-left:20px;
+        margin-right:20px;
+        margin-top:15px;
+        margin-bottom:20px;
+        padding: 16px;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .subsctiberTitleStyle {
+        background-color: #f5f6fa; 
+        color: #a5a4bf;  
+        object-fit: contain;
+        font-size: 11px;
+        font-weight: bold; 
+        height: 45px;
+    }    
+    
+    .subsctiberRecentActivitiesStyle {
+        background-color: #f5f6fa; 
+        color: #3b86ff;  
+        object-fit: contain;
+        font-size: 11px;
+        height: 45px;
+        display: flex!important;
+        align-items: center!important;
+        justify-content: flex-end!important;
+    }
+
+    .subscriberListStyle {
+        font-size: 10px;
+        padding-right: 5px;
+        color: #4d4f5c;
+        --ion-background-color: #ffffff;
+    }
+
+    .subscriberOverviewParentCompanyStyle {
+        opacity: 0.8;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: #4d4f5c;
+        --ion-background-color: transparent !important;
+        // height: 40px;
+        // padding: 15px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .subscriberOverviewPic {
+        width: 31px;
+        height: 31px;
+        padding: 0px;
+        text-align: center;
+        // display: flex;
+        // justify-content:center;
+    }
+
+    .subscriberOverviewStyle {
+        opacity: 0.8;
+        font-size: 10px;
+        text-align: left;
+        color: #4d4f5c;
+        --ion-background-color: transparent !important;
+        // height: 40px;
+        // padding: 15px;
+        // padding-right: 15px;
+        // padding-left: 15px;   
+    }
+
+    .subscriberOverViewAddressStyle {
+        height: 13px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .subscriberDescriptionCardLayout {
+        // padding: 10px;
+        width: 29%;
+        object-fit: contain;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.17);
+    }
+
+    .subscriberDescriptionCardTitle {
+        font-size: 10px;
+        color: var(--dusk);
+    }
+
+    .subscriberDescriptionCardValue {
+        height: 30px;
+        font-size: 10px;
+        color: var(--dusk);
+        object-fit: contain;
+        // font-family: SourceSansPro;
+        font-size: 12px;
+        font-weight: bold;
+        color: #4d4f5c;
+        display: flex !important;
+        align-items: flex-end !important;
+    }
+
+    .subscriberDescriptionCardChangeDate {
+        opacity: 0.8;
+        // font-family: SourceSansPro;
+        font-size: 10px;
+        line-height: 1.6;
+        color: #3b86ff;
+    }
+
+    .subscriberCardIconStyle {
+        width: 30px;
+        height: 30px;
+    }
+
+    .subscriberPlanCompanyName {
+        opacity: 0.8;
+        // font-family: SourceSansPro;
+        font-size: 12px;
+        font-weight: bold;  
+        line-height: 1.67;
+        color: #4d4f5c;
+        text-transform: uppercase;
+        height: 15px;
+    }
+
+    .subscriberPlanStatusRed {
+        font-size: 10px;
+        line-height: 2;
+        text-align: center;
+        color: #ffffff;
+        // width: 43px;
+        height: 21px;
+        border-radius: 30px;
+        background-color: #d41a13;
+        padding-left: 10px;
+        padding-right: 10px;         
+    }
+    .subscriberPlanStatusBlue {
+        font-size: 10px;
+        line-height: 2;
+        text-align: center;
+        color: #ffffff;
+        // width: 43px;
+        height: 21px;
+        border-radius: 30px;
+        background-color: #3b86ff;
+        padding-left: 10px;
+        padding-right: 10px;         
+    }
+    .subscriberPlanStatusGreen {
+        font-size: 10px;
+        line-height: 2;
+        text-align: center;
+        color: #ffffff;
+        // width: 43px;
+        height: 21px;
+        border-radius: 30px;
+        background-color: #5ee2a0;
+        padding-left: 10px;
+        padding-right: 10px;         
+    }
+
+    .subscriberPlanType {
+        opacity: 0.8;
+        // font-family: SourceSansPro;
+        font-size: 12px;
+        line-height: 1.67;
+        color: #4d4f5c;
+        margin-left: 5px;
+    }
+
+    .subscriberPlanCode {
+        opacity: 0.8;
+        // font-family: SourceSansPro;
+        font-size: 12px;
+        line-height: 1.67;
+        color: #a5a4bf;
+        margin-left: 5px;
+
+    }
+
+    .subscribePlanAddOnDetails {
+        opacity: 0.8;
+        // font-family: SourceSansPro;
+        font-size: 11px;
+        line-height: 1.82;
+        color: #4d4f5c;
+        margin: 10px;
+    }
+}
