@@ -1,0 +1,375 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>dashboard</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content>
+  <ion-title>dashboard</ion-title>
+
+</ion-content> -->
+
+<ion-app style="padding-top: 73px; --ion-background-color: #f0f0f7;">
+  <ion-content>
+    <ion-row>
+      <ion-col>
+        <ion-title class="dashboardTitleStyle">
+          Overview
+        </ion-title>
+      </ion-col>
+      <ion-col>
+        <!-------------------------- Segment Section -------------------------->
+        <!-------- Dashboard record's period (All/week/month/quarter) --------->
+        <ion-segment value="all" (ionChange)="segmentChanged($event)">
+        <!-- <ion-segment (ionchange)=segmentChanged($event) value="all"> -->
+          <ion-segment-button class="overviewSegment" value="all">
+            <ion-label>All</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="overviewSegment" value="week">
+            <ion-label>Week</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="overviewSegment" value="month">
+            <ion-label>Month</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="overviewSegment" value="quarter">
+            <ion-label>Quarter</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+
+    <!--------------------------- Card Section --------------------------------->
+    <ion-row style="justify-content: center;">      
+      <!-- All Subscriptions -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">All Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  246K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr">
+              <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  13.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" item-right src="../../../assets/icon/dashboard/icon-greet.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+        
+      <!-- Active Subscriptions -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Active Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  2453K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleIncr">
+              <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <ion-icon name="arrow-up"></ion-icon>
+              <ion-label>
+                  13.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-binoculars.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+        
+      <!-- Trial Subscriptions -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Trial Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  4180K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr">
+              <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  9.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-survey.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+        
+      <!-- Past Due Subscriptions -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Past Due Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  1980K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr">
+              <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  12.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-past-due-subs.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+        
+      <!-- Cancel Subscriptions -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Cancel Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  3711K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleIncr">
+              <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <ion-icon name="arrow-up"></ion-icon>
+              <ion-label>
+                  4.3%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-email-response.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+        
+      <!-- All Customers -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">All Customers</ion-card-title>
+        </ion-card-header>
+          <ion-card-content>
+            <div class="cardColumn">
+              <div class="cardRow">
+                <ion-label class="cardValueStyle">
+                  7721K
+                </ion-label>
+              </div>
+              <div class="cardRow cardValueDiffStyleIncr">
+                <!-- ngif diff, arrow down (red). else arrow up (green) -->
+                <ion-icon name="arrow-up"></ion-icon>
+                <ion-label>
+                    11.2%
+                </ion-label>
+              </div>
+            </div>
+            <div class="cardColumn">
+              <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-trolley.svg"></ion-icon>
+            </div>
+          </ion-card-content>
+      </ion-card>
+        
+      <!-- Active Customers -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Active Customers</ion-card-title>
+        </ion-card-header>
+          <ion-card-content>
+            <div class="cardColumn">
+              <div class="cardRow">
+                <ion-label class="cardValueStyle">
+                    7000K
+                </ion-label>
+              </div>
+              <div class="cardRow cardValueDiffStyleIncr">
+                <!-- ngif diff, arrow down (red). else arrow up (green) -->
+                <ion-icon name="arrow-up"></ion-icon>
+                <ion-label>
+                    8.8%
+                </ion-label>
+              </div>
+            </div>
+            <div class="cardColumn">
+              <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-active-customer.svg"></ion-icon>
+            </div>
+          </ion-card-content>
+      </ion-card>
+        
+      <!-- Inactive Customers -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Inactive Customers</ion-card-title>
+        </ion-card-header>
+          <ion-card-content>
+            <div class="cardColumn">
+              <div class="cardRow">
+                <ion-label class="cardValueStyle">
+                    13K
+                </ion-label>
+              </div>
+              <div class="cardRow cardValueDiffStyleDecr">
+                <!-- ngif diff, arrow down (red). else arrow up (green) -->
+                <ion-icon name="arrow-down"></ion-icon>
+                <ion-label>
+                    13.6%
+                </ion-label>
+              </div>
+            </div>
+            <div class="cardColumn">
+              <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-sales-analysis-report.svg"></ion-icon>
+            </div>
+          </ion-card-content>
+      </ion-card>
+    </ion-row>
+    
+    <div style="height: 15px;"></div>
+    <!--------------------------- Table Section --------------------------------->
+    <ion-row class="tableMainLayout">
+      <ion-col class="tableMainLayoutStyle">
+        <ion-row>
+          <ion-col class="tableTitle">
+            Recent Subscribers
+          </ion-col>
+          <ion-col >
+            <ion-item class="tableShowMore" lines="none" [routerDirection]="'root'" [routerLink]="'/main/subscriptions'">
+                <!-- <ion-label class="tableShowMore"> -->
+                    Show More
+                <!-- </ion-label> -->
+            </ion-item>
+            <!-- <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
+              <ion-label class="sidebarList">
+                {{p.title}}
+              </ion-label>
+            </ion-item> -->
+          </ion-col>
+        </ion-row>
+
+        <div style="height: 5px;"></div>
+        <ion-row>
+         
+        <ion-grid>
+          <!-- Table Header -->
+          <ion-row class="tableHeaderTheme">
+            <ion-col size="4">
+              <div>
+                CLIENT NAME
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                ACTIVATED ON
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                CREATED ON
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                PLAN NAME
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                STATUS
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                LAST BILLED ON
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                NEXT BILLED ON
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <!-- Table body. NOTE: At this moment use dummy data only -->
+          <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers">
+            <ion-col size="4" style="text-align: left; width:40%;" >
+              <div>
+                {{table.companyName}}
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{table.activatedOn}}
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{table.createdOn}}
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{table.plan}}
+              </div>
+            </ion-col>
+            <ion-col>
+              <span [ngSwitch]="table.status">
+                <p *ngSwitchCase="'LIVE'" class="columnStatusGreen">
+                    {{table.status}}
+                </p>
+                <p *ngSwitchCase="'TRIAL'" class="columnStatusBlue">
+                    {{table.status}}                  
+                </p>
+                <p *ngSwitchCase="'PAST DUE'" class="columnStatusRed">
+                    {{table.status}}                  
+                </p>
+                <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="columnStatusRed">
+                    {{table.status}}                  
+                </p>
+              </span>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{table.lastBillingOn}}
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{table.nextBillingOn}}
+              </div>
+            </ion-col>
+          </ion-row> 
+          </ion-grid>
+        
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <div style="height: 59px;"></div>
+
+  </ion-content>
+</ion-app>

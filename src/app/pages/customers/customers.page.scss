@@ -1,0 +1,98 @@
+:host{
+    .customerTitleStyle {
+        padding-left: 22.5px;
+        padding-top: 16px;
+        font-size: 17px;
+        color: #43425d;
+    }
+
+    .customerSearchBar {
+        width: 302px;
+        height: 45px;
+        padding-top: 17px;
+        --ion-background-color: #ffffff;
+        ::placeholder {
+            font-size: 6px; //sets placeholder font size
+        }
+    }
+
+    .customerDropDownMenuButton {
+        width: 51.5px;
+        height: 45px;
+        border-radius: 4px;
+        padding-right: 2px;
+        padding-top: 2px;
+    }
+
+    .customerAddNewButton {
+        // width: 51.5px;
+        height: 45px;
+        border-radius: 4px;
+        padding-left: 2px;
+        padding-right: 5px;
+        padding-top: 2px;
+        text-transform: capitalize;
+        font-size: 13px;
+    }
+
+    .customerCardStyle {
+        background-color: #ffffff;
+        width: 31%;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 23px;
+        padding-right: 11px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .customerCardTitleStyle {
+        font-size: 11px;
+        font-weight: bold;
+        text-align: left;
+        color: #4d4f5c;
+        padding-left: 5px;
+    }
+
+    .customerProfilePicture { 
+        width: 48.7px;
+        height: 48.7px;
+        padding: 0px;
+        align-content: flex-start;
+        
+        // width: 2px;
+        // padding-left: 10px;
+        // padding-right: 25px;
+    }
+
+    .customerCardBodyStyle {
+        color: #43425d;
+        font-size: 11px;
+        float: left;
+        padding: 0px;
+        padding-top: 5px;
+        padding-left: 5px;
+    }
+
+    .customerCardViewDetails {        
+        font-size: 10px;
+        float:right;
+        color: #3b86ff;
+        --ion-background-color: white;
+    }
+
+    .customerCardIcon {
+        width: 25px;
+        height: 20px;
+        padding-top: 15px;
+    }
+
+    .customerCardIconText {
+        font-size: 17px;
+        font-weight: bold; 
+        align-content: center; 
+        text-align: center;  
+        padding-left: 7px;
+        padding-top: 13px;
+    }
+
+}
