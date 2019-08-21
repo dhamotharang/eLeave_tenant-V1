@@ -2,11 +2,11 @@
 
 Installation
 ------------
-$ npm install
+> $ npm install
 
 
 Running the app
 --------------
 
 In developement mode
-$ ionic serve
+> $ ionic serve
