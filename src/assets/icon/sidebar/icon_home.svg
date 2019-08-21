@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{clip-path:url(#clip-path)}.cls-3{fill:#a5a4bf}
+        </style>
+        <clipPath id="clip-path">
+            <path d="M0 0h16v16H0z" class="cls-1"/>
+        </clipPath>
+    </defs>
+    <g id="icon_home" class="cls-2">
+        <path id="Path_357" d="M15.581 5.186l-7-5a1 1 0 0 0-1.162 0l-7 5a1 1 0 0 0 1.162 1.628L2 6.515V15a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6.515A1.7 1.7 0 0 0 15 7a1 1 0 0 0 .582-1.814zM12 14h-2v-3a2 2 0 0 0-4 0v3H4V5.086l4-2.857 4 2.857z" class="cls-3" data-name="Path 357"/>
+    </g>
+</svg>
