@@ -17,7 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'main/customers',
-    loadChildren: './pages/customers/customers.module#CustomersPageModule' 
+    loadChildren: './pages/customers/customers.module#CustomersPageModule'
+  },
+  {
+    path: 'main/customers/customer-details',
+    loadChildren: './pages/customers/customer-details/customer-details.module#CustomerDetailsPageModule'
   },
   {
     path: 'main/customers/addnewcustomer',
@@ -43,6 +47,7 @@ const routes: Routes = [
     path: 'main/settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   }
+
 ];
 
 @NgModule({

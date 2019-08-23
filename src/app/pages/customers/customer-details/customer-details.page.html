@@ -1,0 +1,258 @@
+<ion-app style="padding-top: 73px; --ion-background-color: #f0f0f7;">
+  <ion-content>
+    
+    <!---------------------------- Title  ----------------------------------->
+    <ion-row>
+      <ion-col>
+        <ion-title class="custDtlMainTitleStyle">
+          Customer Details
+        </ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="contentLayout contentFlexDisplay">
+
+      <!------------------------ Client's List  ------------------------------->  
+      <ion-col size="2" style="padding:0;">
+        <!-- Header -->
+        <ion-title class="custDtlTitleStyle">
+          CLIENT NAME
+        </ion-title>
+        
+        <!-- Body -->
+        <ion-list class="customerListContent" *ngFor="let cL of customerList" (click)="onChangeSelectedCustomer(cL)">
+          <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
+              {{cL.clientName}}
+          </ion-label>
+        </ion-list>
+        <!-- <ion-item-group  *ngFor="let cL of customerList">
+          <ion-item class="customerListStyle" (click)="onChangeSelectedCustomer(cL)" 
+            [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
+              {{cL.clientName}}
+          </ion-item>
+        </ion-item-group> -->
+
+      </ion-col>
+
+      <!---------------------- Client's Overview  ----------------------------->
+      <ion-col size="3" style="padding:0; background-color: #fcfcfc;">
+        <!-- Header -->
+        <ion-title class="custDtlTitleStyle">
+          OVERVIEW
+        </ion-title>
+
+        <!-- Body -->
+        <!-- Company Name -->
+        <ion-list  class="customerOverviewContent">
+          <ion-label>
+              {{selectedCustomerInfo.companyName}}
+          </ion-label>
+        </ion-list>
+
+        <!-- Company Overview Details -->
+        <ion-row style="margin: 1rem;">
+            <ion-col size="3">
+            <!-- <ion-col size="3" style="background-color: rgb(182, 182, 218)"> -->
+              <ion-avatar class="customerAvatar">
+                <img src="../../../../assets/icon/layout/picture.png">
+              </ion-avatar>
+            </ion-col>
+
+            <ion-col>
+            <!-- <ion-col style="background-color: rgb(210, 226, 189)"> -->
+              <ion-item-group class="customerOverviewDetails">
+                  <ion-label style="padding: 1.5%;">{{selectedCustomerInfo.clientName}}</ion-label>
+                  <ion-label style="padding: 1.5%;">{{selectedCustomerInfo.clientEmail}}</ion-label>
+                  <ion-label style="padding: 1.5%;">{{selectedCustomerInfo.clientContactNo}}</ion-label>
+                  <ion-label style="padding: 1.5%; font-weight: bold; color: #3b86ff;">Edit Profile</ion-label>
+              </ion-item-group>
+            </ion-col>
+        </ion-row>
+
+        <!-- Address Details -->
+        <ion-list  class="customerOverviewContent">
+          <ion-label>
+              ADDRESS
+          </ion-label>
+        </ion-list>
+        <ion-item-group class="customerOverviewDetails" style="margin: 3% 8% 3% 8%;">
+          <ion-label style="padding: 1%;">Billing Address: </ion-label>
+          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressLine1}}</ion-label>
+          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressLine2}}</ion-label>
+          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressZip}} {{selectedCustomerInfo.addressCity}}</ion-label>
+          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressState}}</ion-label>
+          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressCountry}}</ion-label>
+        </ion-item-group>
+        
+        <!-- Other Details -->
+        <ion-list  class="customerOverviewContent">
+          <ion-label>
+              OTHER DETAILS
+          </ion-label>
+        </ion-list>
+        <ion-item-group class="customerOverviewDetails" style="margin: 3% 8% 3% 8%;">
+          <ion-label style="padding: 1%;">Customer ID: {{selectedCustomerInfo.clientID}}</ion-label>
+          <ion-label style="padding: 1%;">Currency: {{selectedCustomerInfo.currency}}</ion-label>
+        </ion-item-group>
+
+        <!--Customer Status -->
+        <ion-list  class="customerOverviewContent">
+          <ion-label>
+              CUSTOMER STATUS
+          </ion-label>
+        </ion-list>
+        <ion-item-group class="customerOverviewDetails" style="max-width: min-content;
+        margin: auto;">
+          <div class="onoffswitch">
+            <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" unchecked> -->
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+        </ion-item-group>
+      </ion-col>
+
+      <!-------------------- Client's Description  ---------------------------->
+      <ion-col style="padding:0;">
+        <!-- Header -->
+        <ion-title class="custDtlTitleStyle">
+          DESCRIPTION
+        </ion-title>
+
+        <!-- Body -->
+        <!-- Cards -->
+        <ion-row  style="justify-content: center; padding:0px;
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;">
+          <!-- Last billing date -->
+          <ion-card class="customerCard">
+            <ion-card-content style="padding-bottom: 0px;">
+              <ion-row>
+                <ion-card-title class="customerCardTitle">Last Billing Date</ion-card-title>
+              </ion-row>
+              <ion-row>
+                <ion-col style="padding-left: 0px;">
+                  <ion-label class="customerCardContents">{{selectedCustomerInfo.lastBillingOn}}</ion-label>
+                </ion-col>
+                <ion-col size="3">
+                  <ion-icon class="customerCardIcon" src="../../../../assets/icon/subscriptions/icon-last-billing-date.svg"></ion-icon>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- Next billing date -->
+          <ion-card class="customerCard">
+            <ion-card-content style="padding-bottom: 0px;">
+              <ion-row>
+                <ion-card-title class="customerCardTitle">Next Billing Date</ion-card-title>
+              </ion-row>
+              <ion-row>
+                <ion-col style="padding-left: 0px;">
+                  <ion-label class="customerCardContents">{{selectedCustomerInfo.nextBillingOn}}</ion-label>
+                </ion-col>
+                <ion-col size="3">
+                  <ion-icon class="customerCardIcon" src="../../../../assets/icon/subscriptions/icon-next-billing-date.svg"></ion-icon>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- Days left -->
+          <ion-card class="customerCard">
+            <ion-card-content style="padding-bottom: 0px;">
+                <ion-row>
+                  <ion-card-title class="customerCardTitle">Day Left</ion-card-title>
+                </ion-row>
+                <ion-row>
+                  <ion-col style="padding-left: 0px;">
+                    <ion-label class="customerCardContents">{{calcDays}} Day(s)</ion-label>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-icon class="customerCardIcon" src="../../../../assets/icon/subscriptions/icon-days-left.svg"></ion-icon>
+                  </ion-col>
+                </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-row>
+
+        <ion-card class="viewSubscriptionDetailsCard">
+          <ion-card-content  style="display: flow-root;flex-grow: inherit;">
+            <ion-row>
+              <ion-col style="margin: 0 5px 0 5px;">
+                <ion-item-group class="viewSubscriptionDetailsTextFormat">
+                  <ion-row class="innerCardContentSpaceBetween">
+                      <ion-label>
+                        TOTAL USERS: {{selectedCustomerInfo.employeeNumber}}/{{selectedCustomerInfo.employeeQuota}}
+                      </ion-label>
+                      <ion-label class="innerCardContentViewHistoryStyle">
+                        View History
+                      </ion-label>
+                  </ion-row>
+                  <ion-progress-bar [value]="progressBarValue" style="border-radius: 10px; margin-top: 3%; height: 1em;">
+                  </ion-progress-bar>
+                </ion-item-group>
+              </ion-col>
+              <ion-col size="4" style="margin: 0 5px 0 5px;">
+                <ion-item-group class="viewSubscriptionDetailsTextFormat">
+                  <ion-label>SUBSCRIPTION PLAN: {{selectedCustomerInfo.plan}}</ion-label>
+                  <ion-row [ngSwitch]="selectedCustomerInfo.status">
+                    <ion-label >
+                      STATUS: 
+                    </ion-label>
+                    <ion-label *ngSwitchCase="'LIVE'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #5ee2a0">
+                      {{selectedCustomerInfo.status}}
+                    </ion-label>
+                    <ion-label *ngSwitchCase="'TRIAL'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #3b86ff">
+                      {{selectedCustomerInfo.status}}
+                    </ion-label>
+                    <ion-label *ngSwitchCase="'PAST DUE'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: red">
+                      {{selectedCustomerInfo.status}}
+                    </ion-label>
+                    <ion-label *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: red">
+                      {{selectedCustomerInfo.status}}
+                    </ion-label>
+                  </ion-row>
+                </ion-item-group>
+              </ion-col>
+              <ion-col size="1.5">
+                  <ion-icon style="display: contents;" src="../../../../assets/icon/customer/icon-total-user.svg"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row style="display: flex; justify-content: flex-end;">
+              <!-- <ion-item> -->
+                <ion-button class="viewSubscriptionButton">
+                  <ion-label style="padding: 5%">
+                    View & Edit Subscriptions
+                  </ion-label>
+                </ion-button>
+              <!-- </ion-item> -->
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Company Details -->
+        <!-- Header -->
+        <ion-title class="custDtlTitleStyle" style="margin: 4% 0% 4% 1.5%;">
+          COMPANY DETAILS
+        </ion-title>
+        <ion-row>
+          <ion-content> 
+            Add your content here!
+          </ion-content>
+        </ion-row>
+      </ion-col>
+
+
+    </ion-row>
+  </ion-content>
+</ion-app>
+
+

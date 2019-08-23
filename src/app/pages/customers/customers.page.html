@@ -72,7 +72,8 @@
                   </ion-card-content>
                 </ion-col>
                 <ion-col>
-                  <ion-label class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/subscriptions'">
+                  <ion-label class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
+                    (click)="onClickCustomerViewDetails(cardData)">
                     View Details
                   </ion-label>   
                   

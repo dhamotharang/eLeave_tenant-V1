@@ -358,7 +358,6 @@ export class SubscriberDetailsPage implements OnInit {
 
   ngOnInit() {
   }
-
   dateDifference(startdt, enddt) {
     const dropdt: number = Number(new Date(enddt));
     const pickdt: number = Number(new Date(startdt));
