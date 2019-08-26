@@ -240,14 +240,75 @@
 
         <!-- Company Details -->
         <!-- Header -->
-        <ion-title class="custDtlTitleStyle" style="margin: 4% 0% 4% 1.5%;">
+        <ion-title class="custDtlTitleStyle" style="margin: 4% 0% 1.5% 1.5%;">
           COMPANY DETAILS
         </ion-title>
-        <ion-row>
-          <ion-content> 
-            Add your content here!
-          </ion-content>
-        </ion-row>
+        <ion-content [scrollEvents]="true" 
+          class="childCompanyContentFormat childCompanyListStyle"> 
+          <ion-row>     
+            <ion-item-group *ngFor="let childCompanies of selectedCustomerInfo.childrenCompany"
+              style="margin: 2%;">
+                <ion-label style="font-weight: bold;">
+                  {{childCompanies.childCpnyName}}
+                </ion-label>
+                <ion-label>
+                    {{childCompanies.childCpnyAddrL1}}            
+                </ion-label>
+                <ion-label>
+                    {{childCompanies.childCpnyAddrL2}}            
+                </ion-label>
+                <ion-label>
+                    {{childCompanies.childCpnyAddrZip}} {{childCompanies.childCpnyAddrCity}}             
+                </ion-label>
+                <ion-label>
+                    {{childCompanies.childCpnyAddrState}}            
+                </ion-label>
+                <ion-label>
+                    {{childCompanies.childCpnyAddrCountry}}            
+                </ion-label>
+                <ion-label style="font-weight: bold;">
+                  Staff No: {{childCompanies.childCpnyEmployeeNo}}
+                </ion-label>
+            </ion-item-group>
+          </ion-row> 
+        </ion-content>
+
+        <!-- <ion-row
+          class="columntest childCompanyListStyle"
+          style= "margin-left: 2%;">
+          <ion-item-group *ngFor="let childCompanies of selectedCustomerInfo.childrenCompany"
+            style="margin: 2%;">
+              <ion-label style="font-weight: bold;">
+                {{childCompanies.childCpnyName}}
+              </ion-label>
+              <ion-label>
+                  {{childCompanies.childCpnyAddrL1}}            
+              </ion-label>
+              <ion-label>
+                  {{childCompanies.childCpnyAddrL2}}            
+              </ion-label>
+              <ion-label>
+                  {{childCompanies.childCpnyAddrZip}} {{childCompanies.childCpnyAddrCity}}             
+              </ion-label>
+              <ion-label>
+                  {{childCompanies.childCpnyAddrState}}            
+              </ion-label>
+              <ion-label>
+                  {{childCompanies.childCpnyAddrCountry}}            
+              </ion-label>
+              <ion-label style="font-weight: bold;">
+                Staff No: {{childCompanies.childCpnyEmployeeNo}}
+              </ion-label>
+          </ion-item-group>
+          
+          <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-row> -->
+
       </ion-col>
 
 

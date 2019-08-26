@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {customerInfo, customerDummyData} from '../customers.page';
 import {SubscriberDetailsPage} from '../../subscriptions/subscriber-details/subscriber-details.page';
 
+
 @Component({
   selector: 'app-customer-details',
   templateUrl: './customer-details.page.html',
@@ -23,6 +24,8 @@ export class CustomerDetailsPage implements OnInit {
     this.selectedCustomerInfo = customerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
+    console.log(this.selectedCustomerInfo.childrenCompany);
+    // this.selectedCustomerInfo.childrenCompany = JSON.stringify(this.selectedCustomerInfo.childrenCompany);
   }
 
   onChangeSelectedCustomer(changedCustomerItem) {
@@ -31,6 +34,4 @@ export class CustomerDetailsPage implements OnInit {
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
 
   }
-
-
 }

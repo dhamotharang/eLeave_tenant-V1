@@ -183,6 +183,21 @@
         inline-size: max-content;
         display: contents;
     }
+
+    .childCompanyListStyle {
+        opacity: 0.8; 
+        font-size: 10px; 
+        color: #4d4f5c;
+        line-height: 1.2;
+    }
+
+    .childCompanyContentFormat {
+        columns: 3 50px;
+        height: 16rem; 
+        overflow: hidden; 
+        --ion-background-color: white;
+    }
+
     .onoffswitch {
         position: relative; width: 100px;
         -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
