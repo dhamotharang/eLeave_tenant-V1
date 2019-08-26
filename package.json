@@ -1,7 +1,7 @@
 {
   "name": "eLeave-v1-tenant",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Nor Hanani Rafei",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "doc:build": "npx compodoc -p tsconfig.json",
+    "doc:serve": "npx compodoc -p tsconfig.json -s"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@angular/compiler": "~8.1.2",
     "@angular/compiler-cli": "~8.1.2",
     "@angular/language-service": "~8.1.2",
+    "@compodoc/compodoc": "^1.1.10",
     "@ionic/angular-toolkit": "~2.0.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
@@ -55,5 +58,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "eLeave Tenant Administration"
 }
