@@ -151,7 +151,7 @@ export class AppComponent {
       ],
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -161,7 +161,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -171,7 +171,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 11
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -181,7 +181,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 11
         },
         {
-          childCpnyName: 'Child Company 4 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 4 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -191,7 +191,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 11
         },
         {
-          childCpnyName: 'Child Company 5 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 5 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -201,7 +201,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 6
         },
         {
-          childCpnyName: 'Child Company 6 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 6 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -211,7 +211,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 22
         },
         {
-          childCpnyName: 'Child Company 7 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 7 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -221,7 +221,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 22
         },
         {
-          childCpnyName: 'Child Company 8 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 8 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -231,7 +231,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 22
         },
         {
-          childCpnyName: 'Child Company 9 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 9 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -241,7 +241,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 10 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 10 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -251,7 +251,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 13
         },
         {
-          childCpnyName: 'Child Company 11 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 11 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -261,7 +261,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 27
         },
         {
-          childCpnyName: 'Child Company 12 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 12 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -271,7 +271,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 88
         },
         {
-          childCpnyName: 'Child Company 13 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 13 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -281,7 +281,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 63
         },
         {
-          childCpnyName: 'Child Company 14 Sdn. Bhd.',
+          childCpnyName: 'Child Company a 14 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -357,7 +357,7 @@ export class AppComponent {
       ],
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company b 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -367,7 +367,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 13
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company b 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -377,7 +377,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 20
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company b 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -415,7 +415,7 @@ export class AppComponent {
       nextBillingOn: '3 Aug 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -425,7 +425,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 2
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -435,7 +435,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -445,7 +445,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 4 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 4 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -455,7 +455,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 5 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 5 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -465,7 +465,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 6 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 6 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -475,7 +475,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 7 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 7 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -485,7 +485,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 8 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 8 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -495,7 +495,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 9 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 9 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -505,7 +505,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 10 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 10 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -515,7 +515,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 11 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 11 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -525,7 +525,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 12 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 12 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -535,7 +535,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 13 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 13 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -545,7 +545,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 14 Sdn. Bhd.',
+          childCpnyName: 'Child Company  c14 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -555,7 +555,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 15 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 15 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -565,7 +565,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 16 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 16 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -575,7 +575,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 17 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 17 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -585,7 +585,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 18 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 18 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -595,7 +595,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 19 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 19 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -605,7 +605,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 20 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 20 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -615,7 +615,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 21 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 21 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -625,7 +625,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 22 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 22 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -635,7 +635,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 23 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 23 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -645,7 +645,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 24 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 24 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -655,7 +655,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 25 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 25 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -665,7 +665,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 26 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 26 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -675,7 +675,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 27 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 27 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -685,7 +685,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 28 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 28 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -695,7 +695,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 29 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 29 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -705,7 +705,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 3- Sdn. Bhd.',
+          childCpnyName: 'Child Company c 3- Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -715,7 +715,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 31 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 31 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -725,7 +725,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 32 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 32 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -735,7 +735,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 32 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 32 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -745,7 +745,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 33 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 33 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -755,7 +755,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 34 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 34 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -765,7 +765,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 35 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 35 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -775,7 +775,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 36 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 36 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -785,7 +785,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 37 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 37 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -795,7 +795,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 38 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 38 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -805,157 +805,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 3
         },
         {
-          childCpnyName: 'Child Company 39 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 4- Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
-          childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
-          childCpnyAddrL2: 'Jalan Kerinchi',
-          childCpnyAddrCity: 'Pantai Dalam',
-          childCpnyAddrZip: '59200',
-          childCpnyAddrState: 'Kuala Lumpur',
-          childCpnyAddrCountry: 'Malaysia',
-          childCpnyEmployeeNo: 3
-        },
-        {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company c 39 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -993,7 +843,7 @@ export class AppComponent {
       nextBillingOn: '4 Aug 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company d 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1003,7 +853,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 50
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company d 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1041,7 +891,7 @@ export class AppComponent {
       nextBillingOn: '1 Sep 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company e 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1079,7 +929,7 @@ export class AppComponent {
       nextBillingOn: '30 Aug 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company f 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1089,7 +939,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company f 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1099,7 +949,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company f 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1137,7 +987,7 @@ export class AppComponent {
       nextBillingOn: '24 Jul 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company g 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1147,7 +997,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company g 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1157,7 +1007,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company g 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1195,7 +1045,7 @@ export class AppComponent {
       nextBillingOn: '30 Jul 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company h 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1205,7 +1055,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 26
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company h 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1215,7 +1065,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 40
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company h 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1253,7 +1103,7 @@ export class AppComponent {
       nextBillingOn: '19 Sept 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company i 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1263,7 +1113,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 20
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company i 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1273,7 +1123,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 22
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company i 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1311,7 +1161,7 @@ export class AppComponent {
       nextBillingOn: '19 Sept 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company j 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1321,7 +1171,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 12
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company j 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1331,7 +1181,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company j 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1369,7 +1219,7 @@ export class AppComponent {
       nextBillingOn: '19 Sept 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company k 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1379,7 +1229,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 100
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company k 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1389,7 +1239,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 5
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company k 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1427,7 +1277,7 @@ export class AppComponent {
       nextBillingOn: '30 Sept 2019',
       childrenCompany: [
         {
-          childCpnyName: 'Child Company 1 Sdn. Bhd.',
+          childCpnyName: 'Child Company l 1 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-09, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1437,7 +1287,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 50
         },
         {
-          childCpnyName: 'Child Company 2 Sdn. Bhd.',
+          childCpnyName: 'Child Company l 2 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-08, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
@@ -1447,7 +1297,7 @@ export class AppComponent {
           childCpnyEmployeeNo: 10
         },
         {
-          childCpnyName: 'Child Company 3 Sdn. Bhd.',
+          childCpnyName: 'Child Company l 3 Sdn. Bhd.',
           childCpnyAddrL1: 'C-15-07, KL Gateway Residence 2',
           childCpnyAddrL2: 'Jalan Kerinchi',
           childCpnyAddrCity: 'Pantai Dalam',
