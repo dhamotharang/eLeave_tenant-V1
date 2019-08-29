@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import {customerDummyData} from '../customers/customers.page';
 import {customersDummiesData} from '../../app.component';
 
+export let selectedSubscribersInfo;
+
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.page.html',
@@ -15,11 +17,9 @@ export class SubscriptionsPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    // console.log(customersDummiesData);
-    // console.log(this.subscribers);
-    // this.subscribers = customersDummiesData;
-    // console.log(this.subscribers);
+  ngOnInit() { }
 
+  viewSubscriptionDetails(subscribersData) {
+    return selectedSubscribersInfo = subscribersData;
   }
 }

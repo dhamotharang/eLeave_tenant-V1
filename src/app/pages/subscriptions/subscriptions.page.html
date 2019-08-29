@@ -74,7 +74,8 @@
             <ion-row class="subscriptionTableBodyTheme subscriptionTableLine" ion-item 
               *ngFor="let table of subscribers"
               [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
-              [class.highlight]="table.clientName === currentClient"> 
+              [class.highlight]="table.clientName === currentClient"
+              (click)="viewSubscriptionDetails(table)"> 
                <!-- ondblclick="location.href='/main/subscriptions/subscriber-details'"> 
               class.highlight="table.clientName"  -->
               <ion-col>
