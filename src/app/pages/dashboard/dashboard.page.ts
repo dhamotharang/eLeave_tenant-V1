@@ -10,8 +10,8 @@ export class DashboardPage implements OnInit {
   constructor() { }
   public subscribers = [
     {
-      createdOn: '3 Jan 2018',
-      activatedOn: '3 Jan 2018',
+      creationDate: '3 Jan 2018',
+      activationDate: '3 Jan 2018',
       subscription: 'SUB-00008',
       clientName: 'Amelia Hart',
       clientEmail: 'amelia@abccompany1.com.my',
@@ -22,8 +22,8 @@ export class DashboardPage implements OnInit {
       nextBillingOn: '20 Jul 2019'
     },
     {
-      createdOn: '5 Jan 2018',
-      activatedOn: '6 Jan 2018',
+      creationDate: '5 Jan 2018',
+      activationDate: '6 Jan 2018',
       subscription: 'SUB-00007',
       clientName: 'Brit Robertson',
       clientEmail: 'brit@celtic.com.my',
@@ -34,8 +34,8 @@ export class DashboardPage implements OnInit {
       nextBillingOn: '6 Jul 2019'
     },
     {
-      createdOn: '3 Feb 2018',
-      activatedOn: '3 Feb 2018',
+      creationDate: '3 Feb 2018',
+      activationDate: '3 Feb 2018',
       subscription: 'SUB-00006',
       clientName: 'Maya Hopkins',
       clientEmail: 'maya@boghope.com',
@@ -46,8 +46,8 @@ export class DashboardPage implements OnInit {
       nextBillingOn: '3 Aug 2019'
     },
     {
-      createdOn: '10 Feb 2018',
-      activatedOn: '10 Feb 2018',
+      creationDate: '10 Feb 2018',
+      activationDate: '10 Feb 2018',
       subscription: 'SUB-00005',
       clientName: 'James Moya',
       clientEmail: 'James@cdfcompany.com',
@@ -58,8 +58,8 @@ export class DashboardPage implements OnInit {
       nextBillingOn: '4 Aug 2019'
     },
     {
-      createdOn: '12 Feb 2018',
-      activatedOn: '15 Feb 2018',
+      creationDate: '12 Feb 2018',
+      activationDate: '15 Feb 2018',
       subscription: 'SUB-00004',
       clientName: 'Camella Hips',
       clientEmail: 'camella@camelloind.com',
@@ -70,8 +70,8 @@ export class DashboardPage implements OnInit {
       nextBillingOn: '1 Sep 2019'
     },
     {
-      createdOn: '20 Mar 2018',
-      activatedOn: '20 Mar 2018',
+      creationDate: '20 Mar 2018',
+      activationDate: '20 Mar 2018',
       subscription: 'SUB-00003',
       clientName: 'Richards Hanks',
       clientEmail: 'richards@celticcorp.com',

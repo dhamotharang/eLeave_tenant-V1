@@ -24,3 +24,14 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.pop-over-style .popover-content {
+    --min-width: 300px !important;
+	bottom: 0 !important;
+	top: 0 !important;
+	right: 0 !important;
+	left: unset !important;
+	transform-origin: initial !important;
+	max-height: fit-content !important;
+}

@@ -73,39 +73,39 @@
         height: 20px;
         float: right;
         padding-right: 10px;
-      }   
+    }   
       
-      .labelName {
-        font-size: 15px;
-        line-height: 1.54;
+    .labelName {
+      font-size: 15px;
+      line-height: 1.54;
+      color: #4d4f5c;
+      text-align: left;
+      // width:max-content;
+      width: 70px;
+      text-transform: capitalize;
+    }
+
+    .userProfile {
+      width: 65px;
+      height: 30px;
+      padding-left: 10px;
+      padding-right: 25px;
+    }
+
+    ion-select {
+      &.custom-select {
+        font-size: 15px; //sets text font size
+        text-align: start;
+        vertical-align: bottom;
+        padding-bottom: initial;
         color: #4d4f5c;
-        text-align: left;
-        // width:max-content;
-        width: 70px;
         text-transform: capitalize;
-      }
-
-      .userProfile {
-        width: 65px;
-        height: 30px;
-        padding-left: 10px;
-        padding-right: 25px;
-      }
-
-      ion-select {
-        &.custom-select {
-          font-size: 15px; //sets text font size
+        ::placeholder {
+          font-size: 15px; //sets placeholder font size
           text-align: start;
           vertical-align: bottom;
-          padding-bottom: initial;
           color: #4d4f5c;
-          text-transform: capitalize;
-          ::placeholder {
-            font-size: 15px; //sets placeholder font size
-            text-align: start;
-            vertical-align: bottom;
-            color: #4d4f5c;
-          }
         }
       }
+    }
 }

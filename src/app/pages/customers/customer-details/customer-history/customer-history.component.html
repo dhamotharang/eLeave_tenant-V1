@@ -1,0 +1,33 @@
+<ion-content style="padding:10px; margin: 10px;">
+  <ion-header>
+    <ion-item-group  class="headerStyle">
+      <ion-icon src="../../../../../assets/icon/customer/icon_history.svg"></ion-icon>
+      <ion-label>
+        HISTORY
+      </ion-label>
+    </ion-item-group>
+  </ion-header>
+
+  <!-- History Body -->
+  <ion-list class="bodyStyle">
+    <ion-item-group *ngFor="let customerHistory of customerData">
+      <ion-item lines="none">
+        <ion-col>
+          <ion-icon src="../../../../../assets/icon/customer/icon-small-down.svg"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            {{customerHistory.date}} - {{customerHistory.time}}
+          </ion-label>
+          <ion-label>
+            {{customerHistory.description}}
+          </ion-label>
+          <ion-label style="font-weight: normal;">
+            by {{customerHistory.pic}}
+          </ion-label>
+        </ion-col>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>

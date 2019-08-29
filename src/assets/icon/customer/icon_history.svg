@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_history" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{fill:#fcfcfc}
+        </style>
+    </defs>
+    <path id="Path_548" d="M0 0h24v24H0z" class="cls-1" data-name="Path 548"/>
+    <path id="Path_549" d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7.034 7.034 0 1 1 2.06 4.94l-1.42 1.42A9 9 0 1 0 13 3zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8z" class="cls-2" data-name="Path 549"/>
+</svg>

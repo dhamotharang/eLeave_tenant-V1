@@ -198,6 +198,14 @@
         --ion-background-color: white;
     }
 
+    .alertDanger{
+        background-color: white;
+        color: red;
+        button{
+            color: red;
+        }
+    }
+
     .onoffswitch {
         position: relative; width: 100px;
         -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;

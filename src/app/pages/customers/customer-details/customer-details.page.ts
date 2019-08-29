@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import {customerInfo, customerDummyData} from '../customers.page';
 import {SubscriberDetailsPage} from '../../subscriptions/subscriber-details/subscriber-details.page';
+import { UpdateCustomerDetailsComponent } from './update-customer-details/update-customer-details.component';
+import { CustomerHistoryComponent } from './customer-history/customer-history.component';
 
+
+export let customerUpdateInfo;
+export let popovrCtrlr;
 
 @Component({
   selector: 'app-customer-details',
@@ -11,27 +17,73 @@ import {SubscriberDetailsPage} from '../../subscriptions/subscriber-details/subs
 
 export class CustomerDetailsPage implements OnInit {
 
-  public customerList;
+  public customerList = customerDummyData;
   public selectedCustomerInfo;
   public calcDays: number;
   public progressBarValue;
 
   public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage();
-  constructor() { }
+  constructor(
+    public popoverController: PopoverController
+  ) { }
 
   ngOnInit() {
-    this.customerList = customerDummyData;
+    // this.customerList = customerDummyData;
     this.selectedCustomerInfo = customerInfo;
+    customerUpdateInfo = this.selectedCustomerInfo;
+    // console.log('11');
+    // console.log(customerUpdateInfo);
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
-    console.log(this.selectedCustomerInfo.childrenCompany);
-    // this.selectedCustomerInfo.childrenCompany = JSON.stringify(this.selectedCustomerInfo.childrenCompany);
+    popovrCtrlr = this.popoverController;
   }
 
   onChangeSelectedCustomer(changedCustomerItem) {
     this.selectedCustomerInfo = changedCustomerItem;
+    customerUpdateInfo = this.selectedCustomerInfo;
+    // console.log('12');
+    // console.log(customerUpdateInfo);
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
-
   }
+
+
+  async updateDetailsPopover(evt) {
+    const popover = await this.popoverController.create({
+      component: UpdateCustomerDetailsComponent,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
+      cssClass: 'pop-over-style'
+    });
+    return await popover.present();
+  }
+
+  async openHistoryPopover(evt) {
+    const historyPopOver = await this.popoverController.create({
+      component: CustomerHistoryComponent,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
+      cssClass: 'pop-over-style'
+    });
+    return await historyPopOver.present();
+  }
+
+  checkStatus(remainingDays) {
+    console.log('checkStatus');
+    console.log(remainingDays);
+    if (remainingDays < 1) {
+      document.getElementById('myonoffswitch');
+    }
+  }
+
+  optionsSelected(obj) {
+    console.log('optionsSelected');
+    console.log(obj);
+  }
+
+
 }
