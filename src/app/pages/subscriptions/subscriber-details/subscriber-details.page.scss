@@ -77,10 +77,31 @@
         // padding-left: 15px;   
     }
 
-    .subscriberOverViewAddressStyle {
-        height: 13px;
-        padding-left: 18px;
-        padding-right: 18px;
+    .adminDetails {
+        padding-left:20px;
+        padding-top: 5px;
+        ion-col {
+            ion-avatar {
+                width: 31px;
+                height: 31px;
+                padding: 0px;
+                text-align: center;
+            }
+
+            ion-label {
+                padding: 2px 0px;
+            }
+        }
+    }
+
+    .adminLabelStyle {
+        margin: 18px;
+        ion-label {
+            height: 13px;
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
     }
 
     .subscriberDescriptionCardLayout {
@@ -194,4 +215,106 @@
         color: #4d4f5c;
         margin: 10px;
     }
+
+    .detailsCard {
+        display: flex;
+        width: -webkit-fill-available;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.17);
+        margin: 10px 18px;
+        padding: 15px;
+
+        ion-col {
+            ion-item-group {
+                font-weight: bold;
+                color: var(--dusk);
+                font-size: 10px;
+                opacity: 0.8;
+
+                ion-progress-bar {
+                    border-radius: 10px;
+                    margin-top: 3%;
+                    height: 1em;
+                }
+
+                ion-button {
+                    font-size: 9px;
+                    text-transform: capitalize;
+                    display: flex;
+                    letter-spacing: normal;
+                    height: 20px;
+                    width: 50%;
+                    margin: 15px 0px;
+                }
+
+                ion-label {
+                    padding: 3px 0px;
+                }
+
+                ion-row {
+                    display: flex;
+                    align-items: center;
+                }
+
+                // ion-row {
+                //     margin: 3px 0px;
+                // }
+            }
+        }
+    }
+
+    .onoffswitch {
+        position: relative; width: 100px;
+        -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    }
+
+    .onoffswitch-checkbox {
+        display: none;
+    }
+
+    .onoffswitch-label {
+        display: block; overflow: hidden; cursor: pointer;
+        border: 2px solid #FFFFFF; border-radius: 30px;
+    }
+
+    .onoffswitch-inner {
+        display: block; width: 200%; margin-left: -100%;
+        transition: margin 0.3s ease-in 0s;
+    }
+
+    .onoffswitch-inner:before, .onoffswitch-inner:after {
+        display: block; float: left; width: 50%; height: 26px; padding: 0; line-height: 26px;
+        font-size: 8px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    .onoffswitch-inner:before {
+        content: "ACTIVE";
+        padding-left: 18px;
+        background-color: #5EE2A0; color: #FFFFFF;
+    }
+    
+    .onoffswitch-inner:after {
+        content: "INACTIVE";
+        padding-right: 18px;
+        background-color: #EEEEEE; color: #999999;
+        text-align: right;
+    }
+
+    .onoffswitch-switch {
+        display: block; width: 20px; margin: 5px;
+        background: #FFFFFF;
+        position: absolute; top: 0; bottom: 0;
+        right: 70px;
+        border: 2px solid #FFFFFF; border-radius: 30px;
+        transition: all 0.3s ease-in 0s; 
+    }
+
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+        margin-left: 0;
+    }
+
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+        right: 0px; 
+    }
+    
 }

@@ -18,21 +18,13 @@ export class UpdateCustomerDetailsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    // console.log(customerDummyData);
     this.selectedUpdateCustomerInfo = customerUpdateInfo;
     Object.assign(this.updateCustomerInfo, this.selectedUpdateCustomerInfo);
     this.salesmanList = salesPersonDummyData;
-    // console.log('1');
-    // console.log(this.updateCustomerInfo);
-    // console.log(this.selectedUpdateCustomerInfo);
-
   }
 
   saveChanges() {
     Object.assign(this.selectedUpdateCustomerInfo, this.updateCustomerInfo);
-    // console.log('2');
-    // console.log(this.updateCustomerInfo);
-    // console.log(this.selectedUpdateCustomerInfo);
     this.dissmissPopup();
   }
 

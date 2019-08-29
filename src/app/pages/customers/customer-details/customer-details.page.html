@@ -65,7 +65,7 @@
                   <ion-label style="padding: 1.5%;">{{selectedCustomerInfo.clientEmail}}</ion-label>
                   <ion-label style="padding: 1.5%;">{{selectedCustomerInfo.clientContactNo}}</ion-label>
                   <!-- <ion-label style="padding: 1.5%; font-weight: bold; color: #3b86ff;" (click)="updateCustomerDetailsPopup($event)">Edit Profile</ion-label> -->
-                  <ion-label style="padding: 1.5%; font-weight: bold; color: #3b86ff;" (click)="updateDetailsPopover($event)">Edit Profile</ion-label>
+                  <ion-label style="padding: 1.5%; font-weight: bold; color: #3b86ff;" (click)="openPopover($event, 'UpdateCustomerDetailsComponent')">Edit Profile</ion-label>
               </ion-item-group>
             </ion-col>
         </ion-row>
@@ -194,7 +194,7 @@
                       <ion-label>
                         TOTAL USERS: {{selectedCustomerInfo.employeeNumber}}/{{selectedCustomerInfo.employeeQuota}}
                       </ion-label>
-                      <ion-label class="innerCardContentViewHistoryStyle" (click)="openHistoryPopover($event)">
+                      <ion-label class="innerCardContentViewHistoryStyle" (click)="openPopover($event, 'CustomerHistoryComponent')">
                         View History
                       </ion-label>
                   </ion-row>

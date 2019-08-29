@@ -31,8 +31,6 @@ export class CustomerDetailsPage implements OnInit {
     // this.customerList = customerDummyData;
     this.selectedCustomerInfo = customerInfo;
     customerUpdateInfo = this.selectedCustomerInfo;
-    // console.log('11');
-    // console.log(customerUpdateInfo);
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
     popovrCtrlr = this.popoverController;
@@ -41,40 +39,26 @@ export class CustomerDetailsPage implements OnInit {
   onChangeSelectedCustomer(changedCustomerItem) {
     this.selectedCustomerInfo = changedCustomerItem;
     customerUpdateInfo = this.selectedCustomerInfo;
-    // console.log('12');
-    // console.log(customerUpdateInfo);
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
   }
 
-
-  async updateDetailsPopover(evt) {
-    const popover = await this.popoverController.create({
-      component: UpdateCustomerDetailsComponent,
-      componentProps: {
-        viewType: this
-      },
-      event: evt,
-      cssClass: 'pop-over-style'
-    });
-    return await popover.present();
-  }
-
-  async openHistoryPopover(evt) {
+  async openPopover(evt, compName) {
     const historyPopOver = await this.popoverController.create({
-      component: CustomerHistoryComponent,
+      component: (compName === 'UpdateCustomerDetailsComponent') ? UpdateCustomerDetailsComponent : CustomerHistoryComponent,
       componentProps: {
         viewType: this
       },
       event: evt,
       cssClass: 'pop-over-style'
     });
+
     return await historyPopOver.present();
   }
 
   checkStatus(remainingDays) {
-    console.log('checkStatus');
-    console.log(remainingDays);
+    // console.log('checkStatus');
+    // console.log(remainingDays);
     if (remainingDays < 1) {
       document.getElementById('myonoffswitch');
     }
