@@ -36,10 +36,6 @@ const routes: Routes = [
     loadChildren: './pages/subscriptions/subscriber-details/subscriber-details.module#SubscriberDetailsPageModule'
   },
   {
-    path: 'main/subscriptions/add-new-subscriber',
-    loadChildren: './pages/subscriptions/add-new-subscriber/add-new-subscriber.module#AddNewSubscriberPageModule'
-  },
-  {
     path: 'main/support',
     loadChildren: './pages/support/support.module#SupportPageModule'
   },
