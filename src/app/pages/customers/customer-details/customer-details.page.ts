@@ -21,8 +21,8 @@ export class CustomerDetailsPage implements OnInit {
   public selectedCustomerInfo;
   public calcDays: number;
   public progressBarValue;
-
-  public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage();
+  public comp;
+  public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp);
   constructor(
     public popoverController: PopoverController
   ) { }

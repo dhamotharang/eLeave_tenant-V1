@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { Timestamp } from 'rxjs';
 import {customersDummiesData} from '../../../app.component';
 import { selectedSubscribersInfo } from '../subscriptions.page';
+import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
+
+export let subscriberUpdateInfo;
+export let subsDtlPopoverCtrlr;
 
 @Component({
   selector: 'app-subscriber-details',
@@ -11,20 +16,25 @@ import { selectedSubscribersInfo } from '../subscriptions.page';
 
 export class SubscriberDetailsPage implements OnInit {
 
-  constructor() { }
+  constructor(public popoverController: PopoverController) { }
+  
   
   public subscribersDetails = customersDummiesData;
-  public subscriberInfo = selectedSubscribersInfo;
+  public subscriberInfo;
   public isShowingPicker = true;
   public subscriberDetailsDaysLeft;
   public subsProgressBarValue;
 
   ngOnInit() {
-    console.log(customersDummiesData);
-    console.log(this.subscriberInfo);
+    // console.log(customersDummiesData);
+    // console.log(this.subscriberInfo);
+    this.subscriberInfo = selectedSubscribersInfo;
+    subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.lastBillingOn,
       this.subscriberInfo.nextBillingOn);
-    this.subsProgressBarValue = this.subscriberInfo.employeeNumber / this.subscriberInfo.employeeQuota;
+    // this.subsProgressBarValue = this.subscriberInfo.employeeNumber / this.subscriberInfo.employeeQuota;
+    this.updateProgressBar(this.subscriberInfo.employeeNumber, this.subscriberInfo.employeeQuota);
+    subsDtlPopoverCtrlr = this.popoverController;
   }
 
   dateDifference(startdt, enddt) {
@@ -37,17 +47,18 @@ export class SubscriberDetailsPage implements OnInit {
 
   async openSubsPopover(evt, compName) {
     console.log('openSubsPopover');
-  // const popover = await this.popoverController.create({
-  //   component: (compName === 'subsUpdateCustomerDetailsComponent') ? UpdateCustomerDetailsComponent : UpdateCustomerDetailsComponent,
-  //   // component: (compName === 'UpdateCustomerDetailsComponent') ? UpdateCustomerDetailsComponent : CustomerHistoryComponent,
-  //   componentProps: {
-  //     viewType: this
-  //   },
-  //   event: evt,
-  //   cssClass: 'pop-over-style'
-  // });
+    console.log(compName);
+    const popover = await this.popoverController.create({
+      component: UpdateUserNumbersComponent,
+      // component: (compName === 'UpdateCustomerDetailsComponent') ? UpdateCustomerDetailsComponent : CustomerHistoryComponent,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
+      cssClass: 'pop-over-style'
+    });
 
-  // return await popover.present();
+    return await popover.present();
   }
 
   checkStatus(obj, statusVal) {
@@ -79,9 +90,14 @@ export class SubscriberDetailsPage implements OnInit {
 
   selectedClient(updateSubscriberInfo) {
     this.subscriberInfo = updateSubscriberInfo;
+    subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(updateSubscriberInfo.lastBillingOn, updateSubscriberInfo.nextBillingOn);
-    this.subsProgressBarValue = updateSubscriberInfo.employeeNumber / updateSubscriberInfo.employeeQuota;
+    // this.subsProgressBarValue = updateSubscriberInfo.employeeNumber / updateSubscriberInfo.employeeQuota;
+    this.updateProgressBar(updateSubscriberInfo.employeeNumber, updateSubscriberInfo.employeeQuota);
   }
 
-
+  updateProgressBar(currEmp, totalEmp) {
+    this.subsProgressBarValue = currEmp / totalEmp;
+    return this.subscriberInfo.progressBarValue =  this.subsProgressBarValue;
+  }
 }

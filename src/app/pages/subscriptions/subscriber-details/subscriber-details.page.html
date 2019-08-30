@@ -205,15 +205,16 @@
               </ion-row>
 
               <!-- Plan details new -->
-              <ion-row>
+              <ion-label>
                 <ion-card class="detailsCard">
                   <ion-col>
                       <ion-item-group>
                         <ion-label>
                           TOTAL USERS: {{subscriberInfo.employeeNumber}}/{{subscriberInfo.employeeQuota}}
                         </ion-label>
-                        <ion-progress-bar [value]="subsProgressBarValue"></ion-progress-bar>
-                        <ion-button>
+                        <ion-progress-bar id="subdtlPrgssBar" [value]="subscriberInfo.progressBarValue"></ion-progress-bar>
+                        <!-- <ion-progress-bar id="subdtlPrgssBar" [value]="subsProgressBarValue"></ion-progress-bar> -->
+                        <ion-button (click)="openSubsPopover($event, 'UpdateUserNumbersComponent')">
                           Update No. of Users
                         </ion-button>
                       </ion-item-group>
@@ -249,7 +250,7 @@
                       <ion-icon style="display: contents;" src="../../../../assets/icon/customer/icon-total-user.svg"></ion-icon>
                   </ion-col>
                 </ion-card>
-              </ion-row>
+              </ion-label>
             </ion-col>
           </ion-row>
         </ion-col>
