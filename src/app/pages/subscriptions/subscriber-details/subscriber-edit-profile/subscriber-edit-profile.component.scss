@@ -1,0 +1,108 @@
+:host {
+    
+    .headerStyle {
+        background-color: #a3a0fb;
+        font-size: 11px;
+        font-weight: bold; 
+        color: #fcfcfc;
+        padding: 8% 5% 8% 5%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        ion-icon {
+            width: 2em; 
+            height: 2em;
+        }
+
+        ion-label {
+            margin-left: 3%;
+        }
+    }
+
+    .titleStyle {
+        background-color: #f5f6fa;
+        font-size: 11px;
+        font-weight: bold;
+        color: #a5a4bf;
+        padding: 5%;
+    }
+
+    .contentStyle {
+        margin: 0% 5% 5% 5%;
+        font-size: 10px;
+        color: #808495;
+
+        ion-item {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 9px; 
+            color: #808495;
+            left: -6%;
+            width: 110%;
+            -moz-border-radius: 45px;
+            -webkit-border-radius: 45px;
+
+            ion-input {
+                border: 1px solid #f1f1f3;
+                margin-top: 3%;     
+                --padding-start: 8px;
+                min-height: 32px;
+            }
+        }
+
+        ion-list {
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+            ion-item {
+                font-size: 9px; 
+                color: #808495;
+                left: -6%;
+
+                ion-select {
+                    border: 1px solid #f1f1f3;
+                    margin-top: 3%;
+                    place-items: center;
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        ion-label {
+            font-size: 12px;
+        }
+
+        ion-input {
+            border: 1px solid #f1f1f3;
+            margin-top: 3%;
+            min-height: 32px;
+        }
+    }
+
+    .buttonzStyle {
+        margin: 8%;
+
+        ion-button {
+            text-transform: capitalize;
+            text-align: center;
+            font-size: 9px;
+            border-radius: 2px;
+            width: 70px;
+        }
+
+        .saveButton {
+            background-color: #3b86ff;
+            color: #ffffff;
+        }
+    
+        .cancelButton {
+            background-color: #ffffff;
+            color: #a5a4bf;
+            border: solid 1px #a5a4bf;
+        }
+    }
+
+
+
+}

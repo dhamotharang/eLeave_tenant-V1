@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { SubscriberDetailsPage } from './subscriber-details.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
+import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,16 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [UpdateUserNumbersComponent, SubscriberRecentActivitiesComponent],
-  declarations: [SubscriberDetailsPage, UpdateUserNumbersComponent, SubscriberRecentActivitiesComponent]
+  entryComponents: [
+                      UpdateUserNumbersComponent,
+                      SubscriberRecentActivitiesComponent,
+                      SubscriberEditProfileComponent
+                    ],
+  declarations: [
+                  SubscriberDetailsPage,
+                  UpdateUserNumbersComponent,
+                  SubscriberRecentActivitiesComponent,
+                  SubscriberEditProfileComponent
+                ]
 })
 export class SubscriberDetailsPageModule {}

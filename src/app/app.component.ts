@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 export let customersDummiesData;
+export let salesmanDummiesData;
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,14 @@ export let customersDummiesData;
 })
 export class AppComponent {
   
+  public salepersonData = [
+    {name: 'Alia'},
+    {name: 'Tarmizi'},
+    {name: 'Lee Siew Maya'},
+    {name: 'Jacky'},
+    {name: 'Noraini'}
+  ];
+
   public customerSample = [
     {
       clientID: '0000001',
@@ -1370,5 +1379,6 @@ export class AppComponent {
     });
 
     customersDummiesData = this.customerSample;
+    salesmanDummiesData = this.salepersonData;
   }
 }

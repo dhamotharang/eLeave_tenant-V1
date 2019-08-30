@@ -5,6 +5,7 @@ import {customersDummiesData} from '../../../app.component';
 import { selectedSubscribersInfo } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
+import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 
 export let subscriberUpdateInfo;
 export let subsDtlPopoverCtrlr;
@@ -51,7 +52,9 @@ export class SubscriberDetailsPage implements OnInit {
     console.log(compName);
     const popover = await this.popoverController.create({
       // component: UpdateUserNumbersComponent,
-      component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent : SubscriberRecentActivitiesComponent,
+      component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
+                  (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
+                    SubscriberEditProfileComponent,
       componentProps: {
         viewType: this
       },

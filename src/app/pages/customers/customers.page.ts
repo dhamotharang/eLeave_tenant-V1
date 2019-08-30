@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { CustomerPopoverComponent } from './customer-popover/customer-popover.component';
-import { customersDummiesData } from '../../app.component';
+import { customersDummiesData, salesmanDummiesData } from '../../app.component';
 
 export let customerInfo: any = {};
 export let customerDummyData: any = [];
@@ -20,18 +20,9 @@ export class CustomersPage implements OnInit {
 
   public customerData = customersDummiesData;
 
-  public salepersonData = [
-    {name: 'Alia'},
-    {name: 'Tarmizi'},
-    {name: 'Lee Siew Maya'},
-    {name: 'Jacky'},
-    {name: 'Noraini'}
-  ];
+  public salepersonData = salesmanDummiesData;
 
- 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async ngOnClickPophoverButton(evt: any) {
     console.log('popphowver');

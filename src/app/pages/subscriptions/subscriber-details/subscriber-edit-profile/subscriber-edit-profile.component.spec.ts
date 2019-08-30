@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddNewSubscriberPage } from './add-new-subscriber.page';
+import { SubscriberEditProfileComponent } from './subscriber-edit-profile.component';
 
-describe('AddNewSubscriberPage', () => {
-  let component: AddNewSubscriberPage;
-  let fixture: ComponentFixture<AddNewSubscriberPage>;
+describe('SubscriberEditProfileComponent', () => {
+  let component: SubscriberEditProfileComponent;
+  let fixture: ComponentFixture<SubscriberEditProfileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddNewSubscriberPage ],
+      declarations: [ SubscriberEditProfileComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddNewSubscriberPage);
+    fixture = TestBed.createComponent(SubscriberEditProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

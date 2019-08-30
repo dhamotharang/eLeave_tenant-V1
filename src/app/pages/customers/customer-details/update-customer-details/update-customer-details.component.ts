@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {customerDummyData, salesPersonDummyData} from '../../customers.page';
-import {customerUpdateInfo, popovrCtrlr} from '../customer-details.page';
+import { salesPersonDummyData } from '../../customers.page';
+import { customerUpdateInfo, popovrCtrlr } from '../customer-details.page';
 
 @Component({
   selector: 'app-update-customer-details',

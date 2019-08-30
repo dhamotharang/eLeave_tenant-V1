@@ -1,0 +1,73 @@
+<ion-content style="padding:10px; margin: 10px;">
+  <ion-header>
+    <ion-item-group  class="headerStyle">
+      <ion-icon src="../../../../../assets/icon/customer/icon_customer.svg">
+        CUSTOMER DETAILS
+      </ion-icon>
+      <ion-label>
+        CUSTOMER DETAILS
+      </ion-label>
+    </ion-item-group>
+  </ion-header>
+
+  <!-- Contact Details -->
+  <ion-title class="titleStyle">
+    CONTACT DETAILS
+  </ion-title>
+  <ion-item-group class="contentStyle">
+    <ion-item>
+      <ion-label position="stacked">Primary Contact</ion-label>
+      <ion-input type="text" placeholder="Insert Username" [(ngModel)]="updateClientInfo.clientName"></ion-input>    
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Company Name</ion-label>
+      <ion-input type="text" placeholder="Insert Company Name" [(ngModel)]="updateClientInfo.companyName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Customer Email*</ion-label>
+      <ion-input type="email" inputmode="email" placeholder="Email" [(ngModel)]="updateClientInfo.clientEmail"
+                  required="true" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Phone No.*</ion-label>
+      <ion-input type="tel" inputmode="tel" placeholder="Phone no." [(ngModel)]="updateClientInfo.clientContactNo"
+                  required="true" ></ion-input>
+    </ion-item>
+  </ion-item-group>
+  
+  <!-- Billing Address -->
+  <ion-title class="titleStyle">
+    BILLING ADDRESS
+  </ion-title>
+  <ion-item-group class="contentStyle">
+    <ion-item>
+      <ion-label position="stacked">Customer Address</ion-label>
+      <ion-input type="text" placeholder="Insert Street address" [(ngModel)]="updateClientInfo.addressLine1"></ion-input>
+      <ion-input type="text" placeholder="Insert Village/Township Name" [(ngModel)]="updateClientInfo.addressLine2"></ion-input>
+      <ion-row>
+        <ion-input style="max-width: 40%;" type="text" placeholder="Insert Postal code" [(ngModel)]="updateClientInfo.addressZip"></ion-input>
+        <ion-input type="text" placeholder="Insert City Name" [(ngModel)]="updateClientInfo.addressCity"></ion-input>
+      </ion-row>
+      <ion-input type="text" placeholder="Insert State Name" [(ngModel)]="updateClientInfo.addressState"></ion-input>
+      <ion-input type="text" placeholder="Insert Country/Region Name" [(ngModel)]="updateClientInfo.addressCountry"></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-label position="stacked">Sales Person</ion-label>
+        <ion-select placeholder="Select Sales Person" [(ngModel)]="updateClientInfo.salesPerson">
+          <ion-select-option *ngFor="let salesman of salesmanLists" 
+            [value]=salesman.name name=salesman.name>
+              {{salesman.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  <!-- Save / Cancel button -->
+  <ion-buttons class="buttonzStyle">
+    <ion-button class="saveButton" (click)="saveChanges()">Save</ion-button>
+    <ion-button class="cancelButton" (click)="dissmissPopup()">Cancel</ion-button>
+  </ion-buttons>
+  
+</ion-content>
