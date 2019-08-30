@@ -57,7 +57,7 @@
                     <ion-label>{{subscriberInfo.clientEmail}}</ion-label>
                     <ion-label>{{subscriberInfo.clientContactNo}}</ion-label>
                     <ion-label style="font-weight: bold; color: #3b86ff;" 
-                      (click)="openSubsPopover($event, 'subsUpdateCustomerDetailsComponent')">
+                      (click)="openSubsPopover($event, 'UpdateUserNumbersComponent')">
                         Edit Profile
                       </ion-label>
                   </ion-col>
@@ -133,7 +133,7 @@
                   </ion-title>
                 </ion-col>
                 <ion-col class="subsctiberRecentActivitiesStyle" style="padding:0px;">
-                  <ion-label style="padding-right:15px; ">
+                  <ion-label style="padding-right:15px; " (click)="openSubsPopover($event, 'SubscriberRecentActivitiesComponent')">
                     Recent Activities
                   </ion-label>
                 </ion-col>

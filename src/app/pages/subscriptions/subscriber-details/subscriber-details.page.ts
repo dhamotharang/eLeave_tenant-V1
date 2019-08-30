@@ -4,6 +4,7 @@ import { Timestamp } from 'rxjs';
 import {customersDummiesData} from '../../../app.component';
 import { selectedSubscribersInfo } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
+import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 
 export let subscriberUpdateInfo;
 export let subsDtlPopoverCtrlr;
@@ -49,8 +50,8 @@ export class SubscriberDetailsPage implements OnInit {
     console.log('openSubsPopover');
     console.log(compName);
     const popover = await this.popoverController.create({
-      component: UpdateUserNumbersComponent,
-      // component: (compName === 'UpdateCustomerDetailsComponent') ? UpdateCustomerDetailsComponent : CustomerHistoryComponent,
+      // component: UpdateUserNumbersComponent,
+      component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent : SubscriberRecentActivitiesComponent,
       componentProps: {
         viewType: this
       },
