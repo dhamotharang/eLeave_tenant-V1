@@ -61,7 +61,7 @@ export class SubscriberDetailsPage implements OnInit {
     const pickdt: number = Number(new Date(startdt));
     let daysleft: number = (dropdt - pickdt) / (24 * 3600 * 1000);
     daysleft = isNaN(daysleft) ? daysleft = 0 : daysleft ;
-    this.subsToggle = (daysleft === 0) ? false : true;
+    this.subsToggle = (daysleft < 0) ? false : true;
     return daysleft;
   }
 
