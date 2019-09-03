@@ -77,17 +77,6 @@
                   <ion-label>{{subscriberInfo.addressCountry}}</ion-label>
                 </ion-item-group>
 
-                <!-- Associated contacts -->
-                <!-- <ion-item class="subscriberOverviewParentCompanyStyle" style="padding: 0px; padding-right:20px;" >
-                  <ion-label style="font-weight: bold;">
-                    ASSOCIATED CONTACTS
-                  </ion-label>
-                </ion-item>
-                <ion-col class="subscriberOverviewStyle adminLabelStyle">
-                  <ion-label>{{subscriberInfo.clientEmail}}</ion-label>
-                  <ion-label style="color: #3b86ff">Manage</ion-label>
-                </ion-col> -->
-
                 <!-- Other details -->
                 <ion-item class="subscriberOverviewParentCompanyStyle" style="padding: 0px; padding-right:20px; margin-bottom: 15px;" >
                   <ion-label style="font-weight: bold;">
@@ -107,19 +96,21 @@
                 </ion-item>
                 <ion-item-group class="adminLabelStyle" style="display: flex; justify-content: center;">
                   <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" checked class="onoffswitch-checkbox" aria-checked="true" id="myonoffswitch" (click)="checkStatus(this, onoffswitch)">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"  id="myonoffswitch" [(ngModel)]="subsToggle" (click)="checkToggle()">
                     <label class="onoffswitch-label" for="myonoffswitch">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                     </label>
                   </div>
-
                 </ion-item-group>
 
-
+                <ion-item-group id="reactivesubsnotice" hidden class="subscriberOverviewStyle subsReactivationNotice">
+                  <ion-icon name="warning"></ion-icon>
+                  <ion-text>
+                      Please fill in the subscription details upon reactivation of your customers.
+                  </ion-text>
+                </ion-item-group>
               </ion-item-group>
-
-
             </ion-col>
 
             <!-------------------- Client's Description  ---------------------------->

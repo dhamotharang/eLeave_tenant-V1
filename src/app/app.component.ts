@@ -47,6 +47,7 @@ export class AppComponent {
       subscription: 'SUB-00008',
       creationDate: '3 Jan 2018',
       activationDate: '20 Jan 2019',
+      expiryDate: '20 Jan 2020',
       lastBillingOn: '20 Jun 2019',
       nextBillingOn: '20 Jul 2019',
       history: [
@@ -326,6 +327,7 @@ export class AppComponent {
       subscription: 'SUB-00007',
       creationDate: '6 Jan 2018',
       activationDate: '6 Jan 2018',
+      expiryDate: '6 Jan 2020',
       lastBillingOn: '6 Jun 2019',
       nextBillingOn: '6 Jul 2019',
       history: [
@@ -423,6 +425,7 @@ export class AppComponent {
       subscription: 'SUB-00006',
       creationDate: '3 June 2018',
       activationDate: '3 June 2019',
+      expiryDate: '3 June 2020',
       lastBillingOn: '-',
       nextBillingOn: '3 Aug 2019',
       childrenCompany: [
@@ -852,6 +855,7 @@ export class AppComponent {
       subscription: 'SUB-00005',
       creationDate: '4 Jan 2018',
       activationDate: '4 Jan 2019',
+      expiryDate: '4 Jan 2020',
       lastBillingOn: '4 Jul 2019',
       nextBillingOn: '4 Aug 2019',
       childrenCompany: [
@@ -901,7 +905,8 @@ export class AppComponent {
       subscription: 'SUB-00004',
       creationDate: '1 Jan 2019',
       activationDate: '1 Jan 2019',
-      lastBillingOn: '1 Aug 2019-',
+      expiryDate: '1 Jan 2020',
+      lastBillingOn: '-',
       nextBillingOn: '1 Sep 2019',
       childrenCompany: [
         {
@@ -940,6 +945,7 @@ export class AppComponent {
       subscription: 'SUB-00003',
       creationDate: '29 Jan 2018',
       activationDate: '30 Jan 2019',
+      expiryDate: '30 Jan 2020',
       lastBillingOn: '30 Jul 2019',
       nextBillingOn: '30 Aug 2019',
       childrenCompany: [
@@ -999,6 +1005,7 @@ export class AppComponent {
       subscription: 'SUB-00002',
       creationDate: '24 May 2018',
       activationDate: '24 May 2018',
+      expiryDate: '24 May 2020',
       lastBillingOn: '24 Jun 2019',
       nextBillingOn: '24 Jul 2019',
       childrenCompany: [
@@ -1058,6 +1065,7 @@ export class AppComponent {
       subscription: 'SUB-00001',
       creationDate: '20 Dec 2018',
       activationDate: '30 Dec 2018',
+      expiryDate: '30 Dec 2020',
       lastBillingOn: '30 Apr 2019',
       nextBillingOn: '30 May 2019',
       childrenCompany: [
@@ -1117,6 +1125,7 @@ export class AppComponent {
       subscription: 'SUB-00009',
       creationDate: '19 Feb 2018',
       activationDate: '19 Feb 2019',
+      expiryDate: '19 Feb 2020',
       lastBillingOn: '19 Aug 2019',
       nextBillingOn: '19 Sept 2019',
       childrenCompany: [
@@ -1176,6 +1185,7 @@ export class AppComponent {
       subscription: 'SUB-00010',
       creationDate: '19 May 2018',
       activationDate: '19 May 2019',
+      expiryDate: '19 May 2020',
       lastBillingOn: '19 Aug 2019',
       nextBillingOn: '19 Sept 2019',
       childrenCompany: [
@@ -1235,6 +1245,7 @@ export class AppComponent {
       subscription: 'SUB-00011',
       creationDate: '19 Feb 2018',
       activationDate: '19 Feb 2019',
+      expiryDate: '19 Feb 2020',
       lastBillingOn: '19 Aug 2019',
       nextBillingOn: '19 Sept 2019',
       childrenCompany: [
@@ -1294,6 +1305,7 @@ export class AppComponent {
       subscription: 'SUB-00012',
       creationDate: '30 Dec 2018',
       activationDate: '30 Dec 2018',
+      expiryDate: '30 Dec 2020',
       lastBillingOn: '30 Aug 2019',
       nextBillingOn: '30 Sept 2019',
       childrenCompany: [

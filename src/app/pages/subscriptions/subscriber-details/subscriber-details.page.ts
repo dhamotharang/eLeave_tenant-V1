@@ -6,6 +6,9 @@ import { selectedSubscribersInfo } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
+import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
+import { $ } from 'protractor';
+
 
 export let subscriberUpdateInfo;
 export let subsDtlPopoverCtrlr;
@@ -19,13 +22,15 @@ export let subsDtlPopoverCtrlr;
 export class SubscriberDetailsPage implements OnInit {
 
   constructor(public popoverController: PopoverController) { }
-  
-  
+
+
   public subscribersDetails = customersDummiesData;
   public subscriberInfo;
   public isShowingPicker = true;
   public subscriberDetailsDaysLeft;
   public subsProgressBarValue;
+  public subsToggle = false;
+  public prevToggleVal = true;
 
   ngOnInit() {
     // console.log(customersDummiesData);
@@ -39,6 +44,18 @@ export class SubscriberDetailsPage implements OnInit {
     subsDtlPopoverCtrlr = this.popoverController;
   }
 
+  checkToggle() {
+    if (this.subsToggle !== this.prevToggleVal) {
+      if ((this.prevToggleVal === true) && (this.subsToggle === false)) {
+        document.getElementById('reactivesubsnotice').hidden = false;
+        this.openSubsPopover(Event, 'ReactiveSubscriptionComponent');
+      } else {
+        document.getElementById('reactivesubsnotice').hidden = true;
+      }
+      this.prevToggleVal = this.subsToggle;
+    }
+  }
+
   dateDifference(startdt, enddt) {
     const dropdt: number = Number(new Date(enddt));
     const pickdt: number = Number(new Date(startdt));
@@ -48,13 +65,11 @@ export class SubscriberDetailsPage implements OnInit {
   }
 
   async openSubsPopover(evt, compName) {
-    console.log('openSubsPopover');
-    console.log(compName);
     const popover = await this.popoverController.create({
-      // component: UpdateUserNumbersComponent,
       component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
                   (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
-                    SubscriberEditProfileComponent,
+                   (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
+                    ReactiveSubscriptionComponent,
       componentProps: {
         viewType: this
       },
@@ -68,6 +83,8 @@ export class SubscriberDetailsPage implements OnInit {
   checkStatus(obj, statusVal) {
     console.log(obj);
     console.log(statusVal);
+    document.getElementById('myonoffswitch');
+    console.log(document.getElementById('myonoffswitch'));
   }
 
   checkvalue(val, val2) {

@@ -1,4 +1,5 @@
 :host{
+
     .subscriberTitleStyle {
         padding-left: 22.5px;
         padding-top: 16px;
@@ -77,6 +78,19 @@
         // padding-left: 15px;   
     }
 
+    .subsReactivationNotice {
+        display: flex;
+        border: solid 1px #a5a4bf;
+        margin: 5px 35px;
+        padding: 10px;
+
+        ion-icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+            color: orangered;
+        }
+    }
     .adminDetails {
         padding-left:20px;
         padding-top: 5px;

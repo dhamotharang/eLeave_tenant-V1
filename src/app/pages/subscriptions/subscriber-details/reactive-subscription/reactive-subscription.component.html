@@ -1,0 +1,56 @@
+<ion-content>
+  <ion-header>
+    <ion-item-group  class="headerStyle">
+      <ion-icon src="../../../../../assets/icon/customer/icon_customer.svg"></ion-icon>
+      <ion-label>
+        SUBSCRIPTIONS
+      </ion-label>
+    </ion-item-group>
+  </ion-header>
+  
+  <!-- Title -->
+  <ion-title class="titleStyle">
+    DETAILS
+ </ion-title>
+
+ <!-- Update No of total users -->
+ <ion-item-group class="contentStyle">
+   <ion-item>
+      <ion-label position="stacked">Subscription Start On</ion-label>
+      <ion-input type="date" placeholder="Insert start date" [(ngModel)]="subsStartDate"></ion-input>    
+   </ion-item>
+
+   <ion-item lines="none">
+    <ion-label position="stacked">Bill Every</ion-label>
+    <ion-row>
+      <ion-col>
+        <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo"></ion-input>
+      </ion-col> 
+      <ion-col class="repeatEvery">
+        <ion-select [(ngModel)]="cycleEvery">
+          <ion-select-option selected value="Week(s)">Week(s)</ion-select-option>
+          <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+          <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+        </ion-select>   
+      </ion-col>
+    </ion-row>
+   </ion-item>
+   
+   <ion-item>
+      <ion-label position="stacked">Subscription Expiry On</ion-label>
+      <ion-input type="date" placeholder="Insert expired date" [(ngModel)]="subsExpDate"></ion-input>    
+   </ion-item>
+
+   <ion-item>
+      <ion-label position="stacked">No of users</ion-label>
+      <ion-input type="number" placeholder="Insert number of users" [(ngModel)]="userNo"></ion-input>    
+   </ion-item>
+ </ion-item-group>
+
+ <!-- Save / Cancel button -->
+ <ion-buttons class="buttonzStyle">
+   <ion-button class="saveButton" (click)="saveReactiveSubsChanges()">Activate</ion-button>
+   <ion-button class="cancelButton" (click)="dissmissReactiveSubsPopup()">Cancel</ion-button>
+ </ion-buttons>
+
+</ion-content>

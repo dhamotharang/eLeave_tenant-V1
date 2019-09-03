@@ -9,6 +9,7 @@ import { SubscriberDetailsPage } from './subscriber-details.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
+import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
 
 const routes: Routes = [
   {
@@ -27,13 +28,15 @@ const routes: Routes = [
   entryComponents: [
                       UpdateUserNumbersComponent,
                       SubscriberRecentActivitiesComponent,
-                      SubscriberEditProfileComponent
+                      SubscriberEditProfileComponent,
+                      ReactiveSubscriptionComponent
                     ],
   declarations: [
                   SubscriberDetailsPage,
                   UpdateUserNumbersComponent,
                   SubscriberRecentActivitiesComponent,
-                  SubscriberEditProfileComponent
+                  SubscriberEditProfileComponent,
+                  ReactiveSubscriptionComponent
                 ]
 })
 export class SubscriberDetailsPageModule {}
