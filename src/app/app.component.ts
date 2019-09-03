@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 export let customersDummiesData;
 export let salesmanDummiesData;
+export let userDummiesData;
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,57 @@ export class AppComponent {
     {name: 'Lee Siew Maya'},
     {name: 'Jacky'},
     {name: 'Noraini'}
+  ];
+
+  public userDetails = [
+    {
+      username: 'Wan Fathurrahman',
+      email: 'fathurrahman@zen.com.my',
+      status: '(active)',
+      role: 'Super Admin'
+    },
+    {
+      username: 'Lee Chong Weng',
+      email: 'chongweng@zen.com.my',
+      status: '(inactive)',
+      role: 'Super Admin'
+    },
+    {
+      username: 'Maisarah Mansor',
+      email: 'maisarah@zen.com.my',
+      status: '(active)',
+      role: 'Salesperson'
+    },
+    {
+      username: 'Sarra Bella',
+      email: 'sarra@zen.com.my',
+      status: '(active)',
+      role: 'Support'
+    },
+    {
+      username: 'Alan Walker',
+      email: 'alan@zen.com.my',
+      status: '(active)',
+      role: 'Support'
+    },
+    {
+      username: 'Bea Miller',
+      email: 'miller@zen.com.my',
+      status: '(inactive))',
+      role: 'Super Admin'
+    },
+    {
+      username: 'Faizal Tahir',
+      email: 'faizal@zen.com.my',
+      status: '(active)',
+      role: 'Salesperson'
+    },
+    {
+      username: 'Tom Miller',
+      email: 'tom@zen.com.my',
+      status: '(inactive))',
+      role: 'Support'
+    },
   ];
 
   public customerSample = [
@@ -328,7 +380,7 @@ export class AppComponent {
       creationDate: '6 Jan 2018',
       activationDate: '6 Jan 2018',
       expiryDate: '6 Jan 2020',
-      lastBillingOn: '6 Jun 2019',
+      lastBillingOn: '6 Jul 2019',
       nextBillingOn: '6 Jul 2019',
       history: [
         {
@@ -856,7 +908,7 @@ export class AppComponent {
       creationDate: '4 Jan 2018',
       activationDate: '4 Jan 2019',
       expiryDate: '4 Jan 2020',
-      lastBillingOn: '4 Jul 2019',
+      lastBillingOn: '5 Aug 2019',
       nextBillingOn: '4 Aug 2019',
       childrenCompany: [
         {
@@ -1347,7 +1399,7 @@ export class AppComponent {
     {
       title: 'Home',
       url: '/main/dashboard',
-      icon: 'icon_customers.svg'
+      icon: 'icon_home.svg'
     },
     {
       title: 'Dashboard',
@@ -1392,5 +1444,6 @@ export class AppComponent {
 
     customersDummiesData = this.customerSample;
     salesmanDummiesData = this.salepersonData;
+    userDummiesData = this.userDetails;
   }
 }
