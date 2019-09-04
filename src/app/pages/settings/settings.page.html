@@ -15,18 +15,20 @@
       </ion-col>
 
       <ion-col style="background-color: #ffffff; padding:10px;">
-        <ion-title class="settingsTitleStyle">
-          Users & Roles
-        </ion-title>
-        <ion-item-group lines="none" style="--ion-background-color: transparent; display: flex; justify-content: flex-end;">
-          <ion-button style="text-transform: capitalize;
-          width: 100px;
-          height: 30px;
-          font-size: 10px;
-          margin-right: 25px;">
-            Add User
-          </ion-button>
-        </ion-item-group>
+        <ion-row>
+          <ion-title class="settingsTitleStyle">
+            Users & Roles
+          </ion-title>
+          <ion-item-group lines="none" style="--ion-background-color: transparent; display: flex; justify-content: flex-end;">
+            <ion-button style="text-transform: capitalize;
+            width: 100px;
+            height: 30px;
+            font-size: 10px;
+            margin: 25px 25px 0px 0px;" (click)="openSettingPopover($event, 'AddNewUserComponent')">
+              Add User
+            </ion-button>
+          </ion-item-group>
+        </ion-row>
 
         <ion-row>
           <ion-segment style="width: 200px;" [(ngModel)]="userSagment">
@@ -82,15 +84,15 @@
                 </ion-item-group>
               </ion-col>
               <ion-col style="display: flex; justify-content: center; font-weight: bold;">
-                <ion-label [ngStyle]="{'color': (user.status === '(active)')? '#5ee2a0' : '#808495'}">
-                  {{user.status}}
+                <ion-label [ngStyle]="{'color': (user.status === 'active')? '#5ee2a0' : '#808495'}">
+                  ({{user.status}})
                 </ion-label>
               </ion-col>
               <ion-col style="display: flex; justify-content: center;">
                 <ion-label>{{user.role}}</ion-label>
               </ion-col>
               <ion-col style="display: flex; justify-content: center;">
-                <ion-label>Edit</ion-label>
+                <ion-label (click)="initEditUserPopup(user, $event, 'EditUserComponent')">Edit</ion-label>
               </ion-col>
             </ion-row>
           </ion-grid>

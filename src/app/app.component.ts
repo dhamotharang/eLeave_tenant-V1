@@ -27,49 +27,49 @@ export class AppComponent {
     {
       username: 'Wan Fathurrahman',
       email: 'fathurrahman@zen.com.my',
-      status: '(active)',
+      status: 'active',
       role: 'Super Admin'
     },
     {
       username: 'Lee Chong Weng',
       email: 'chongweng@zen.com.my',
-      status: '(inactive)',
+      status: 'inactive',
       role: 'Super Admin'
     },
     {
       username: 'Maisarah Mansor',
       email: 'maisarah@zen.com.my',
-      status: '(active)',
+      status: 'active',
       role: 'Salesperson'
     },
     {
       username: 'Sarra Bella',
       email: 'sarra@zen.com.my',
-      status: '(active)',
+      status: 'active',
       role: 'Support'
     },
     {
       username: 'Alan Walker',
       email: 'alan@zen.com.my',
-      status: '(active)',
+      status: 'active',
       role: 'Support'
     },
     {
       username: 'Bea Miller',
       email: 'miller@zen.com.my',
-      status: '(inactive))',
+      status: 'inactive',
       role: 'Super Admin'
     },
     {
       username: 'Faizal Tahir',
       email: 'faizal@zen.com.my',
-      status: '(active)',
+      status: 'active',
       role: 'Salesperson'
     },
     {
       username: 'Tom Miller',
       email: 'tom@zen.com.my',
-      status: '(inactive))',
+      status: 'inactive',
       role: 'Support'
     },
   ];

@@ -1,0 +1,58 @@
+<ion-content style="padding:10px; margin: 10px;">
+  <!-- Header -->
+  <ion-header>
+    <ion-item-group  class="headerStyle">
+      <ion-icon src="../../../../../assets/icon/customer/icon_customer.svg"></ion-icon>
+      <ion-label>
+        EDIT USER
+      </ion-label>
+    </ion-item-group>
+  </ion-header>
+
+  <!-- Title -->
+  <ion-title class="titleStyle">
+      USER DETAILS
+  </ion-title> 
+
+  <!-- Content -->
+  <ion-item-group class="contentStyle">
+    <ion-item>
+      <ion-label position="stacked">Email*</ion-label>
+      <ion-input type="email" inputmode="email" placeholder="Insert email" required="true"
+      [(ngModel)]="userInfo.email"></ion-input>    
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Name*</ion-label>
+      <ion-input type="text" placeholder="Insert Name" required="true"
+      [(ngModel)]="userInfo.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Role</ion-label>
+      <ion-select [(ngModel)]="userInfo.role">
+        <ion-select-option value="Super Admin" >Super Admin</ion-select-option>
+        <ion-select-option value="Salesperson">Salesperson</ion-select-option>
+        <ion-select-option value="Support">Support</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked" style="flex: inherit;">Status</ion-label>
+      <ion-item-group>
+        <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"  id="myonoffswitch" [(ngModel)]="toggleVal"
+            (click)="checkSettingToggle()">
+          <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+          </label>
+        </div>
+      </ion-item-group>
+    </ion-item>
+  </ion-item-group>
+
+  <!-- Save / Cancel button -->
+  <ion-buttons class="buttonzStyle">
+    <ion-button class="saveButton" (click)="saveEditUser()">Save</ion-button>
+    <ion-button class="cancelButton" (click)="cancelEditUser()">Cancel</ion-button>
+  </ion-buttons>
+
+</ion-content>

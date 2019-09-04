@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { AddNewUserComponent } from './add-new-user/add-new-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -21,6 +23,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SettingsPage]
+  entryComponents: [AddNewUserComponent, EditUserComponent],
+  declarations: [SettingsPage, AddNewUserComponent, EditUserComponent]
 })
 export class SettingsPageModule {}
