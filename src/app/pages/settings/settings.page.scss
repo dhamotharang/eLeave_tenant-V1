@@ -6,6 +6,20 @@
         color: #43425d;
     }
 
+    .settingAddUser {
+        --ion-background-color: transparent;
+        display: flex;
+        justify-content: flex-end;
+
+        ion-button {
+            text-transform: capitalize;
+            width: 100px;
+            height: 30px;
+            font-size: 10px;
+            margin: 25px 25px 0px 0px;
+        }
+    }
+    
     .settingMenuList {
         display: inherit;
 
@@ -34,5 +48,67 @@
             }
         }
     }
+
+    .settingSegment {
+        ion-segment {
+            width: 200px;
+
+            ion-segment-button {
+                font-size: 10px;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .userTableHeader {
+        background-color: #f5f6fa;
+        font-size: 11px;
+        font-weight: bold;
+        color: #a5a4bf;
+        padding: 5px;
+
+        .role {
+            display: flex; justify-content: center;
+        }
+    }
+
+    .userBodyContent {
+        padding: 10px;
+        border-bottom: solid 1px lightgray;
+        color: #808495;
+        font-size: 9px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+
+        .avatarSetting {
+            max-width: fit-content;
+
+            ion-avatar {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .userInfoSetting {
+            ion-label {
+                margin: 5px 10px;
+
+            }
+        }
+
+        .userStatusSetting {
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .userRoleSetting {
+            display: flex;
+            justify-content: center;
+        }
+
+    }
+
 
 }

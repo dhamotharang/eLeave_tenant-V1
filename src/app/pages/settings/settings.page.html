@@ -6,40 +6,35 @@
           <ion-menu-toggle auto-hide="false" *ngFor="let list of settingMenuList">
             <ion-item lines="none">
               <ion-icon slot="start" name="menu"></ion-icon>
-              <ion-label style="font-size: 10px;">
+              <ion-label>
                 {{list.title}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
       </ion-col>
-
+ 
       <ion-col style="background-color: #ffffff; padding:10px;">
         <ion-row>
           <ion-title class="settingsTitleStyle">
             Users & Roles
           </ion-title>
-          <ion-item-group lines="none" style="--ion-background-color: transparent; display: flex; justify-content: flex-end;">
-            <ion-button style="text-transform: capitalize;
-            width: 100px;
-            height: 30px;
-            font-size: 10px;
-            margin: 25px 25px 0px 0px;" (click)="openSettingPopover($event, 'AddNewUserComponent')">
+          <ion-item-group lines="none" class="settingAddUser">
+            <ion-button (click)="openSettingPopover($event, 'AddNewUserComponent')">
               Add User
             </ion-button>
           </ion-item-group>
         </ion-row>
 
-        <ion-row>
-          <ion-segment style="width: 200px;" [(ngModel)]="userSagment">
-            <ion-segment-button value="users" style="font-size: 10px;
-            text-transform: capitalize;">
+        <!-- User/Roles segment -->
+        <ion-row class="settingSegment">
+          <ion-segment [(ngModel)]="userSagment">
+            <ion-segment-button value="users">
               <ion-label>
                 Users
               </ion-label>
             </ion-segment-button>
-            <ion-segment-button value="roles"  style="font-size: 10px;
-            text-transform: capitalize;">
+            <ion-segment-button value="roles">
               <ion-label>
                 Roles
               </ion-label>
@@ -50,58 +45,53 @@
         <ng-container *ngIf="userSagment === 'users'; then thenTemplate; else elseTemplate"></ng-container>
         <ng-template #thenTemplate>
           <ion-grid>
-            <ion-row style="background-color: #f5f6fa;
-            font-size: 11px;
-            font-weight: bold;
-            color: #a5a4bf;
-            padding: 5px;">
+            <ion-row class="userTableHeader">
               <ion-col>
                 USER DETAILS
               </ion-col>
-              <ion-col  style="display: flex; justify-content: center;">
+              <ion-col size="7.45" class="role">
                 ROLES
               </ion-col>
             </ion-row>
-            <ion-row *ngFor="let user of userData" style="padding: 10px;
-            border-bottom: solid 1px lightgray;
-            color: #808495;
-            font-size: 9px;
-            line-height: 1;
-            display: flex;
-            align-items: center;">
-              <ion-col style="
-              display: flex;
-              max-width: fit-content;">
-                <ion-avatar style="width: 40px;
-                height: 40px;">
+            <ion-row *ngFor="let user of userData" class="userBodyContent">
+              <ion-col class="avatarSetting">
+                <ion-avatar>
                     <img src="../assets/icon/samplepic/johnwick.jpg">
                 </ion-avatar>
               </ion-col>
               <ion-col size="4">
-                <ion-item-group>
-                  <ion-label style="margin: 5px 10px;">{{user.username}}</ion-label>
-                  <ion-label style="margin: 5px 10px;">{{user.email}}</ion-label>
+                <ion-item-group class="userInfoSetting">
+                  <ion-label>{{user.username}}</ion-label>
+                  <ion-label>{{user.email}}</ion-label>
                 </ion-item-group>
               </ion-col>
-              <ion-col style="display: flex; justify-content: center; font-weight: bold;">
+              <ion-col class="userStatusSetting">
                 <ion-label [ngStyle]="{'color': (user.status === 'active')? '#5ee2a0' : '#808495'}">
                   ({{user.status}})
                 </ion-label>
               </ion-col>
-              <ion-col style="display: flex; justify-content: center;">
+              <ion-col class="userRoleSetting">
                 <ion-label>{{user.role}}</ion-label>
               </ion-col>
-              <ion-col style="display: flex; justify-content: center;">
+              <ion-col class="userRoleSetting">
                 <ion-label (click)="initEditUserPopup(user, $event, 'EditUserComponent')">Edit</ion-label>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ng-template>
         <ng-template #elseTemplate>
-            <ion-label>
-              roelssssssss
-            </ion-label>
-          
+          <ion-grid>
+            <ion-row class="userTableHeader" style="padding: 10px;">
+              ROLE LIST
+            </ion-row>
+            <ion-row>
+              <ion-item-group>
+                <ion-label style="padding: 10px; font-size: 10px; color: #808495;">Super Admin</ion-label>
+                <ion-label style="padding: 10px; font-size: 10px; color: #808495;">Salesperson</ion-label>
+                <ion-label style="padding: 10px; font-size: 10px; color: #808495;">Support</ion-label>
+              </ion-item-group>
+            </ion-row>
+          </ion-grid>          
         </ng-template>
         
 
