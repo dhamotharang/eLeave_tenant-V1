@@ -20,7 +20,7 @@
       <ion-col>
         <!-------------------------- Segment Section -------------------------->
         <!-------- Dashboard record's period (All/week/month/quarter) --------->
-        <ion-segment value="all" (ionChange)="segmentChanged($event)">
+        <ion-segment value="all" [(ngModel)]="overviewSgmtOpt" (ionChange)="segmentChanged($event)">
         <!-- <ion-segment (ionchange)=segmentChanged($event) value="all"> -->
           <ion-segment-button class="overviewSegment" value="all">
             <ion-label>All</ion-label>
@@ -52,7 +52,8 @@
                   246K
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleDecr">
+            <div class="cardRow cardValueDiffStyleDecr"  
+              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
               <!-- ngif diff, arrow down (red). else arrow up (green) -->
               <ion-icon name="arrow-down"></ion-icon>
               <ion-label>
@@ -78,7 +79,8 @@
                   2453K
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleIncr">
+            <div class="cardRow cardValueDiffStyleIncr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
               <!-- ngif diff, arrow down (red). else arrow up (green) -->
               <ion-icon name="arrow-up"></ion-icon>
               <ion-label>
@@ -104,7 +106,8 @@
                   4180K
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleDecr">
+            <div class="cardRow cardValueDiffStyleDecr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
               <!-- ngif diff, arrow down (red). else arrow up (green) -->
               <ion-icon name="arrow-down"></ion-icon>
               <ion-label>
@@ -130,7 +133,8 @@
                   1980K
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleDecr">
+            <div class="cardRow cardValueDiffStyleDecr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
               <!-- ngif diff, arrow down (red). else arrow up (green) -->
               <ion-icon name="arrow-down"></ion-icon>
               <ion-label>
@@ -156,7 +160,8 @@
                   3711K
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleIncr">
+            <div class="cardRow cardValueDiffStyleIncr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
               <!-- ngif diff, arrow down (red). else arrow up (green) -->
               <ion-icon name="arrow-up"></ion-icon>
               <ion-label>
@@ -182,7 +187,8 @@
                   7721K
                 </ion-label>
               </div>
-              <div class="cardRow cardValueDiffStyleIncr">
+              <div class="cardRow cardValueDiffStyleIncr"
+              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
                 <!-- ngif diff, arrow down (red). else arrow up (green) -->
                 <ion-icon name="arrow-up"></ion-icon>
                 <ion-label>
@@ -208,7 +214,8 @@
                     7000K
                 </ion-label>
               </div>
-              <div class="cardRow cardValueDiffStyleIncr">
+              <div class="cardRow cardValueDiffStyleIncr"
+              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
                 <!-- ngif diff, arrow down (red). else arrow up (green) -->
                 <ion-icon name="arrow-up"></ion-icon>
                 <ion-label>
@@ -234,7 +241,8 @@
                     13K
                 </ion-label>
               </div>
-              <div class="cardRow cardValueDiffStyleDecr">
+              <div class="cardRow cardValueDiffStyleDecr"
+              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
                 <!-- ngif diff, arrow down (red). else arrow up (green) -->
                 <ion-icon name="arrow-down"></ion-icon>
                 <ion-label>
@@ -316,8 +324,8 @@
           </ion-row>
 
           <!-- Table body. NOTE: At this moment use dummy data only -->
-          <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers">
-            <ion-col size="4" style="text-align: left; width:40%;" >
+          <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers; let i=index">
+            <ion-col size="4" style="text-align: left; width:40%;">
               <div>
                 {{table.companyName}}
               </div>

@@ -83,6 +83,7 @@ export class DashboardPage implements OnInit {
     }
   ];
 
+  public overviewSgmtOpt;
 
   /**
    *
@@ -90,11 +91,13 @@ export class DashboardPage implements OnInit {
    * @memberof DashboardPage
    */
   ngOnInit() {
+    this.overviewSgmtOpt = 'all';
   }
 
   segmentChanged(ev: any) {
     // console.log('Segment changed:', ev);
     console.log('Segment changed:', ev.detail.value);
+    console.log(this.overviewSgmtOpt);
   }
 
 
