@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { selCustView, CustomersPage } from '../customers.page';
+
 
 @Component({
   selector: 'app-customer-popover',
   templateUrl: './customer-popover.component.html',
   styleUrls: ['./customer-popover.component.scss'],
 })
+
 export class CustomerPopoverComponent implements OnInit {
 
-  public customerReportViewType = 'card';
+  public popoverCustObj;
+  public popoverCtrlr;
 
-  constructor( public popoverController: PopoverController) { }
+  public const2 = new CustomersPage(this.popoverCtrlr);
 
-  ngOnInit() {}
+  constructor(public popoverController: PopoverController) { }
+
+  ngOnInit() {
+    this.popoverCustObj = selCustView;
+  }
 
   close() {
     this.popoverController.dismiss();
@@ -23,9 +31,8 @@ export class CustomerPopoverComponent implements OnInit {
     this.popoverController.dismiss();
   }
 
-  viewOption(viewType: string) {
-    console.log('viewOption');
-    console.log(viewType);
-    this.popoverController.dismiss(viewType);
+  viewOption(evt, viewType) {
+    this.popoverCustObj.val = viewType;
+    this.popoverController.dismiss();
   }
 }

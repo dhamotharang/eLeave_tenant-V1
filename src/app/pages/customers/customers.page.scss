@@ -95,4 +95,34 @@
         padding-top: 13px;
     }
 
+    .customerTable {
+        background-color: #ffff;
+        margin: 10px;
+        padding: 10px;
+        
+        .headerStyle {
+            ion-col {
+                color: #a3a6b4;
+                background-color: #f5f6fa;
+                font-size: 11px;
+                font-weight: bold;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                padding-left: 15px;
+            }
+        }
+
+        .bodyStyle {
+            ion-col {
+                color: #4d4f5c;
+                font-size: 11px;
+                border-bottom: solid 0.1px #f1f1f3;
+                display: flex;
+                align-items: center;
+                padding-left: 15px;
+                height: 50px;
+            }
+        }
+    }
 }

@@ -6,6 +6,8 @@ import { customersDummiesData, salesmanDummiesData } from '../../app.component';
 export let customerInfo: any = {};
 export let customerDummyData: any = [];
 export let salesPersonDummyData: any = [];
+export let selCustView;
+
 
 @Component({
   selector: 'app-customers',
@@ -18,17 +20,17 @@ export class CustomersPage implements OnInit {
     public popoverController: PopoverController
   ) { }
 
+  public selectedVal;
+  public currentCustomer;
   public customerData = customersDummiesData;
-
   public salepersonData = salesmanDummiesData;
 
-  ngOnInit() {}
+  ngOnInit() {
+    selCustView = {val: 'card'};
+    this.selectedVal = 'card';
+  }
 
   async ngOnClickPophoverButton(evt: any) {
-    console.log('popphowver');
-    console.log(evt);
-    // $scope.popover.show($event);
-
     const popover = await this.popoverController.create({
       component: CustomerPopoverComponent,
       componentProps: {
@@ -36,12 +38,12 @@ export class CustomersPage implements OnInit {
       },
       event: evt,
     });
-    return await popover.present();
 
-    // await popover.dismiss(data => {
-    //   console.log('popover dismissed');
-    //   console.log(data);
-    // });
+    popover.onDidDismiss().then((data) => {
+      this.selectedVal = selCustView.val;
+    });
+
+    return await popover.present();
   }
 
   onClickCustomerViewDetails(item) {
