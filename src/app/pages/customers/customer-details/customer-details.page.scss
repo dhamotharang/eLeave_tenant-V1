@@ -43,6 +43,7 @@
         padding: 1.5em;
         border-bottom: 1px solid #f1f1f3;
         margin: 2px;
+        cursor: pointer;
     }
 
     .customerListStyle {
@@ -174,7 +175,8 @@
     }
 
     .innerCardContentSpaceBetween {
-        display: flex; justify-content: space-between;
+        display: flex; 
+        justify-content: space-between;        
     }
 
     .innerCardContentViewHistoryStyle {
@@ -182,6 +184,7 @@
         float: right;
         inline-size: max-content;
         display: contents;
+        cursor: pointer;
     }
 
     .childCompanyListStyle {
