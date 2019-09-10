@@ -19,14 +19,27 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.initUser = selectedEditUser;
     Object.assign(this.userInfo, this.initUser);
+    console.log(this.userInfo);
+    this.userInfo.password2 = this.userInfo.password;
     this.toggleVal = (this.userInfo.status === 'active') ? true : false;
   }
-
   checkSettingToggle() {
     this.userInfo.status = (this.toggleVal === true) ? 'inactive' : 'active';
   }
 
+  editPassValidation(p1, p2) {
+    console.log(p1);
+    console.log(p2);
+    if (p1 === p2) {
+      return this.userInfo.password = p1;
+    } else {
+      console.error ('Password Mismatch');
+      return null;
+    }
+  }
+
   saveEditUser() {
+    this.editPassValidation(this.userInfo.password1, this.userInfo.password2);
     Object.assign(this.initUser, this.userInfo);
     this.cancelEditUser();
   }

@@ -27,6 +27,17 @@
       [(ngModel)]="userInfo.username"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" placeholder="Password" required="true"
+      [(ngModel)]="userInfo.password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Retype Password</ion-label>
+      <ion-input type="password" placeholder="Retype Password" required="true"
+      [(ngModel)]="userInfo.password2"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Role</ion-label>
       <ion-select [(ngModel)]="userInfo.role">
         <ion-select-option value="Super Admin" >Super Admin</ion-select-option>
