@@ -198,6 +198,12 @@
         --ion-background-color: white;
     }
 
+    .subscriptionDisabled {
+        cursor: default;
+        opacity: .3;
+        pointer-events: none;
+    }
+
     .alertDanger{
         background-color: white;
         color: red;

@@ -22,6 +22,8 @@ export class CustomerDetailsPage implements OnInit {
   public calcDays: number;
   public progressBarValue;
   public comp;
+  public custToggle = false;
+  public prevCustToggleVal = true;
   public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp);
   constructor(
     public popoverController: PopoverController
@@ -32,6 +34,7 @@ export class CustomerDetailsPage implements OnInit {
     this.selectedCustomerInfo = customerInfo;
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
+    this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
     popovrCtrlr = this.popoverController;
   }
@@ -40,6 +43,7 @@ export class CustomerDetailsPage implements OnInit {
     this.selectedCustomerInfo = changedCustomerItem;
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
+    this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
   }
 
@@ -56,12 +60,16 @@ export class CustomerDetailsPage implements OnInit {
     return await historyPopOver.present();
   }
 
-  checkStatus(remainingDays) {
-    // console.log('checkStatus');
-    // console.log(remainingDays);
-    if (remainingDays < 1) {
-      document.getElementById('myonoffswitch');
-    }
+  checkStatus() {
+    console.log('checkStatus');
+    
+    // if (this.custToggle !== this.prevCustToggleVal) {
+    //   if ((this.prevCustToggleVal === true) && (this.custToggle === false)) {
+    //     console.log('ddd');
+    //   } else {
+    //     console.log('ssss');
+    //   }
+    // }
   }
 
   optionsSelected(obj) {

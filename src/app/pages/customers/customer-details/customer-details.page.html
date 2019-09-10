@@ -106,7 +106,7 @@
         margin: auto;">
           <div class="onoffswitch">
             <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" unchecked> -->
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked value="1" (click)="checkStatus(this)">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" [(ngModel)]="custToggle" (click)="checkStatus()">
             <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="1" (click)="optionsSelected(this)"> -->
             <label class="onoffswitch-label" for="myonoffswitch">
               <span class="onoffswitch-inner"></span>
@@ -246,7 +246,8 @@
           COMPANY DETAILS
         </ion-title>
         <ion-content [scrollEvents]="true" 
-          class="childCompanyContentFormat childCompanyListStyle"> 
+          class="childCompanyContentFormat childCompanyListStyle"
+          [ngClass]="{'subscriptionDisabled': (custToggle === false) ? true : false}"> 
           <ion-row>     
             <ion-item-group *ngFor="let childCompanies of selectedCustomerInfo.childrenCompany"
               style="margin: 2%;">
