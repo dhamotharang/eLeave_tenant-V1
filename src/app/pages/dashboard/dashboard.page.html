@@ -40,141 +40,6 @@
 
     <!--------------------------- Card Section --------------------------------->
     <ion-row style="justify-content: center;">      
-      <!-- All Subscriptions -->
-      <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">All Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  246K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleDecr"  
-              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <!-- ngif diff, arrow down (red). else arrow up (green) -->
-              <ion-icon name="arrow-down"></ion-icon>
-              <ion-label>
-                  13.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" item-right src="../../../assets/icon/dashboard/icon-greet.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card>
-        
-      <!-- Active Subscriptions -->
-      <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Active Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  2453K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleIncr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <!-- ngif diff, arrow down (red). else arrow up (green) -->
-              <ion-icon name="arrow-up"></ion-icon>
-              <ion-label>
-                  13.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-binoculars.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card>
-        
-      <!-- Trial Subscriptions -->
-      <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Trial Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  4180K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleDecr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <!-- ngif diff, arrow down (red). else arrow up (green) -->
-              <ion-icon name="arrow-down"></ion-icon>
-              <ion-label>
-                  9.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-survey.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card>
-        
-      <!-- Past Due Subscriptions -->
-      <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Past Due Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  1980K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleDecr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <!-- ngif diff, arrow down (red). else arrow up (green) -->
-              <ion-icon name="arrow-down"></ion-icon>
-              <ion-label>
-                  12.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-past-due-subs.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card>
-        
-      <!-- Cancel Subscriptions -->
-      <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Cancel Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  3711K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleIncr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <!-- ngif diff, arrow down (red). else arrow up (green) -->
-              <ion-icon name="arrow-up"></ion-icon>
-              <ion-label>
-                  4.3%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-email-response.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card>
-        
       <!-- All Customers -->
       <ion-card class="cardStyle">
         <ion-card-header>
@@ -255,6 +120,190 @@
             </div>
           </ion-card-content>
       </ion-card>
+
+      <!-- Company Number -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Company Numbers</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  2453K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleIncr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <ion-icon name="arrow-up"></ion-icon>
+              <ion-label>
+                  13.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Employee Numbers -->
+      <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Employee Numbers</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  43180K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  9.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/customer/icon-total-user.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+        
+      
+      <!-- All Subscriptions -->
+      <!-- <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">All Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  246K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr"  
+              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  13.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" item-right src="../../../assets/icon/dashboard/icon-greet.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
+        
+      <!-- Active Subscriptions -->
+      <!-- <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Active Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  2453K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleIncr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-up"></ion-icon>
+              <ion-label>
+                  13.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-binoculars.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
+        
+      <!-- Trial Subscriptions -->
+      <!-- <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Trial Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  4180K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  9.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-survey.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
+        
+      <!-- Past Due Subscriptions -->
+      <!-- <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Past Due Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  1980K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleDecr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                  12.8%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-past-due-subs.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
+        
+      <!-- Cancel Subscriptions -->
+      <!-- <ion-card class="cardStyle">
+        <ion-card-header>
+          <ion-card-title class="cardTitleStyle">Cancel Subscriptions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="cardColumn">
+            <div class="cardRow">
+              <ion-label class="cardValueStyle">
+                  3711K
+              </ion-label>
+            </div>
+            <div class="cardRow cardValueDiffStyleIncr"
+            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-up"></ion-icon>
+              <ion-label>
+                  4.3%
+              </ion-label>
+            </div>
+          </div>
+          <div class="cardColumn">
+            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-email-response.svg"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
     </ion-row>
     
     <div style="height: 15px;"></div>
