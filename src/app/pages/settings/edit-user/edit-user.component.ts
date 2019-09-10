@@ -23,17 +23,18 @@ export class EditUserComponent implements OnInit {
     this.userInfo.password2 = this.userInfo.password;
     this.toggleVal = (this.userInfo.status === 'active') ? true : false;
   }
+
   checkSettingToggle() {
     this.userInfo.status = (this.toggleVal === true) ? 'inactive' : 'active';
   }
 
-  editPassValidation(p1, p2) {
-    console.log(p1);
-    console.log(p2);
-    if (p1 === p2) {
-      return this.userInfo.password = p1;
+  editPassValidation(pass1, pass2) {
+    console.log(pass1);
+    console.log(pass2);
+    if (pass1 === pass2) {
+      return this.userInfo.password = pass1;
     } else {
-      console.error ('Password Mismatch');
+      console.error ('Password is Mismatch');
       return null;
     }
   }

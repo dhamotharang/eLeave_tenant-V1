@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
 
 export let customersDummiesData;
 export let salesmanDummiesData;
@@ -28,49 +30,57 @@ export class AppComponent {
       username: 'Wan Fathurrahman',
       email: 'fathurrahman@zen.com.my',
       status: 'active',
-      role: 'Super Admin'
+      role: 'Super Admin',
+      password: 'P@ssword1'
     },
     {
       username: 'Lee Chong Weng',
       email: 'chongweng@zen.com.my',
       status: 'inactive',
-      role: 'Super Admin'
+      role: 'Super Admin',
+      password: 'P@ssword2'
     },
     {
       username: 'Maisarah Mansor',
       email: 'maisarah@zen.com.my',
       status: 'active',
-      role: 'Salesperson'
+      role: 'Salesperson',
+      password: 'P@ssword3'
     },
     {
       username: 'Sarra Bella',
       email: 'sarra@zen.com.my',
       status: 'active',
-      role: 'Support'
+      role: 'Support',
+      password: 'P@ssword4'
     },
     {
       username: 'Alan Walker',
       email: 'alan@zen.com.my',
       status: 'active',
-      role: 'Support'
+      role: 'Support',
+      password: 'P@ssword5'
     },
     {
       username: 'Bea Miller',
       email: 'miller@zen.com.my',
       status: 'inactive',
-      role: 'Super Admin'
+      role: 'Super Admin',
+      password: 'P@ssword6'
     },
     {
       username: 'Faizal Tahir',
       email: 'faizal@zen.com.my',
       status: 'active',
-      role: 'Salesperson'
+      role: 'Salesperson',
+      password: 'P@ssword7'
     },
     {
       username: 'Tom Miller',
       email: 'tom@zen.com.my',
       status: 'inactive',
-      role: 'Support'
+      role: 'Support',
+      password: 'P@ssword8'
     },
   ];
 
@@ -1431,7 +1441,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private popoverController: PopoverController
   ) {
     this.initializeApp();
   }
@@ -1446,4 +1457,18 @@ export class AppComponent {
     salesmanDummiesData = this.salepersonData;
     userDummiesData = this.userDetails;
   }
+
+  async openToolbarPopover(evt, compoName) {
+    const toolbarPopup = await this.popoverController.create({
+      component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
+      // cssClass: 'pop-over-style'
+    });
+
+    return await toolbarPopup.present();
+  }
+
 }
