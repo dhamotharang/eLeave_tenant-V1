@@ -17,17 +17,19 @@
  <ion-item-group class="contentStyle">
    <ion-item>
       <ion-label position="stacked">Subscription Start On</ion-label>
-      <ion-input type="date" placeholder="Insert start date" [(ngModel)]="subsStartDate"></ion-input>    
+      <ion-input type="date" placeholder="Insert start date" [(ngModel)]="subsStartDate" (change)="newStartDate($event)" 
+      ></ion-input>    
+      <!-- <ion-input type="date" placeholder="Insert start date" [(ngModel)]="subsStartDate" (ioninput)="newStartDate(subsStartDate)"></ion-input>     -->
    </ion-item>
 
    <ion-item lines="none">
     <ion-label position="stacked">Bill Every</ion-label>
     <ion-row>
       <ion-col>
-        <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo"></ion-input>
+        <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo" (ionChange)="newCycleTimes(cycleNo)"></ion-input>
       </ion-col> 
       <ion-col class="repeatEvery">
-        <ion-select [(ngModel)]="cycleEvery">
+        <ion-select [(ngModel)]="cycleEvery" (ionChange)="newCyclePeriod()">
           <ion-select-option selected value="Week(s)">Week(s)</ion-select-option>
           <ion-select-option value="Month(s)">Month(s)</ion-select-option>
           <ion-select-option value="Year(s)">Year(s)</ion-select-option>
@@ -35,15 +37,21 @@
       </ion-col>
     </ion-row>
    </ion-item>
+   <ion-item lines="none">
+     <ion-row style="display: flow-root;">
+      <ion-label position="stacked">Next Billing Date:</ion-label>
+      <ion-label class="nextBillingDateStyle" >{{subsNewNextBillDate}}</ion-label>
+     </ion-row>
+   </ion-item>
    
-   <ion-item>
+   <!-- <ion-item>
       <ion-label position="stacked">Subscription Expiry On</ion-label>
       <ion-input type="date" placeholder="Insert expired date" [(ngModel)]="subsExpDate"></ion-input>    
-   </ion-item>
+   </ion-item> -->
 
    <ion-item>
-      <ion-label position="stacked">No of users</ion-label>
-      <ion-input type="number" placeholder="Insert number of users" [(ngModel)]="userNo"></ion-input>    
+      <ion-label position="stacked">User Quota</ion-label>
+      <ion-input type="number" placeholder="User qouta" [(ngModel)]="userNo"></ion-input>    
    </ion-item>
  </ion-item-group>
 

@@ -43,6 +43,17 @@
             -moz-border-radius: 45px;
             -webkit-border-radius: 45px;
 
+            .nextBillingDateStyle {
+                min-height: 32px;
+                display: flex;
+                align-items: center;
+                border: solid 1px #f1f1f3;
+                margin: 10px 0px;
+                padding: 10px;
+                font-weight: bold;
+                letter-spacing: 0.3px;
+            }
+
             ion-input {
                 border: 1px solid #f1f1f3;
                 margin-top: 3%;     

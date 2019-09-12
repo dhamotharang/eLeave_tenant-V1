@@ -34,4 +34,8 @@
 	left: unset !important;
 	transform-origin: initial !important;
 	max-height: fit-content !important;
+	
+	ion-backdrop {
+	  opacity: 0.33 !important;
+	}
 }
