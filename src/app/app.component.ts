@@ -76,10 +76,10 @@ export class AppComponent {
   async openToolbarPopover(evt, compoName) {
     const toolbarPopup = await this.popoverController.create({
       component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
-      componentProps: {
-        viewType: this
-      },
-      event: evt,
+      // componentProps: {
+      //   viewType: this
+      // },
+      // event: evt,
       // cssClass: 'pop-over-style'
     });
 

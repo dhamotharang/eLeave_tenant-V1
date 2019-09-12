@@ -50,10 +50,10 @@ export class CustomerDetailsPage implements OnInit {
   async openPopover(evt, compName) {
     const historyPopOver = await this.popoverController.create({
       component: (compName === 'UpdateCustomerDetailsComponent') ? UpdateCustomerDetailsComponent : CustomerHistoryComponent,
-      componentProps: {
-        viewType: this
-      },
-      event: evt,
+      // componentProps: {
+      //   viewType: this
+      // },
+      // event: evt,
       cssClass: 'pop-over-style'
     });
 
