@@ -12,17 +12,16 @@ export class ReactiveSubscriptionComponent implements OnInit {
 
   public subsStartDate: Date;
   public subsNStartDate: Date;
+  public subsActivatedDate;
   public subsExpDate;
+  public subsNextBillDate;
   public subsNewNextBillDate;
   public cycleNo;
   public cycleEvery;
-  public currUser = '';
-  public userNo;
+  public currUser;
 
   ngOnInit() {
-    console.log(subscriberUpdateInfo);
-    Object.assign(this.currUser, subscriberUpdateInfo.employeeQuota);
-    console.log(this.currUser);
+    this.currUser = subscriberUpdateInfo.employeeQuota;
   }
 
   newStartDate(evtVal) {
@@ -40,11 +39,11 @@ export class ReactiveSubscriptionComponent implements OnInit {
 
   checkCycleType() {
     if (this.cycleEvery === 'Week(s)') {
-      this.subsNStartDate = new Date(this.subsNStartDate.setDate(this.subsNStartDate.getDate() + (7 * this.cycleNo)));
+      this.subsNextBillDate = new Date(this.subsNStartDate.setDate(this.subsNStartDate.getDate() + (7 * this.cycleNo)));
     } else if (this.cycleEvery === 'Month(s)') {
-      this.subsNStartDate = new Date(this.subsNStartDate.setMonth(this.subsNStartDate.getMonth() + this.cycleNo));
+      this.subsNextBillDate = new Date(this.subsNStartDate.setMonth(this.subsNStartDate.getMonth() + this.cycleNo));
     } else {
-      this.subsNStartDate = new Date(this.subsNStartDate.setFullYear(this.subsNStartDate.getFullYear() + this.cycleNo));
+      this.subsNextBillDate = new Date(this.subsNStartDate.setFullYear(this.subsNStartDate.getFullYear() + this.cycleNo));
     }
   }
 
@@ -52,26 +51,49 @@ export class ReactiveSubscriptionComponent implements OnInit {
     const dd = (valDate.getDate() < 10) ? '0' + valDate.getDate() : valDate.getDate();
     let mm = valDate.getMonth() + 1;
     mm = (mm < 10) ? '0' + mm : mm;
+
     this.subsNewNextBillDate = dd + '/' + mm + '/' + valDate.getFullYear();
-
   }
-  calcNextBillingDate() {
 
+  calcNextBillingDate() {
     if ((this.subsStartDate !== undefined) && (this.cycleEvery !== undefined) && (this.cycleNo !== undefined) ) {
       this.subsNStartDate =  new Date(this.subsStartDate);
+      this.subsActivatedDate = new Date(this.subsStartDate);
       this.checkCycleType();
-      this.getNextBillingDateFormat(this.subsNStartDate);
+      this.getNextBillingDateFormat(this.subsNextBillDate);
     }
   }
 
+  dateFormatOnCard(activatedOn, expiredOn) {
+    const ddStart = (activatedOn.getDate() < 10) ? '0' + activatedOn.getDate() : activatedOn.getDate();
+    const ddEnd = (expiredOn.getDate() < 10) ? '0' + expiredOn.getDate() : expiredOn.getDate();
+    const months = [
+                      'Jan',
+                      'Feb',
+                      'Mar',
+                      'Apr',
+                      'May',
+                      'Jun',
+                      'Jul',
+                      'Aug',
+                      'Sept',
+                      'Oct',
+                      'Nov',
+                      'Dec'
+                    ];
+
+    this.subsActivatedDate = ddStart + ' ' + months[activatedOn.getMonth()] + ' ' + activatedOn.getFullYear();
+    this.subsExpDate = ddEnd + ' ' + months[expiredOn.getMonth()] + ' ' + expiredOn.getFullYear();
+
+  }
   saveReactiveSubsChanges() {
-    console.log(subscriberUpdateInfo);
-    subscriberUpdateInfo.activationDate = this.subsNStartDate;
-    subscriberUpdateInfo.lastBillingOn = this.subsNewNextBillDate;
-    subscriberUpdateInfo.nextBillingOn = this.subsNewNextBillDate;
+    this.dateFormatOnCard(this.subsActivatedDate, this.subsNextBillDate);
+    subscriberUpdateInfo.activationDate = this.subsActivatedDate;
+    subscriberUpdateInfo.lastBillingOn = this.subsActivatedDate;
+    subscriberUpdateInfo.nextBillingOn = this.subsExpDate;
     subscriberUpdateInfo.expiryDate = this.subsExpDate;
     subscriberUpdateInfo.repeatEvery = this.cycleNo + ' ' + this.cycleEvery;
-    subscriberUpdateInfo.employeeQuota = this.userNo;
+    subscriberUpdateInfo.employeeQuota = this.currUser;
     this.dissmissReactiveSubsPopup();
   }
 

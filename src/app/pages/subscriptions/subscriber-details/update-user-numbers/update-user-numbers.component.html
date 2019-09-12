@@ -10,15 +10,15 @@
   
   <!-- Title -->
   <ion-title class="titleStyle">
-    TOTAL USERS : {{selectedSubscriberInfo.employeeQuota}}
+    USER QOUTA : {{selectedSubscriberInfo.employeeQuota}}
     <!-- TOTAL USERS : {{updateEmployeeQuota.employeeQuota}} -->
   </ion-title>
 
   <!-- Update No of total users -->
   <ion-item-group class="contentStyle">
     <ion-item>
-      <ion-label position="stacked">No of Total Users</ion-label>
-      <ion-input type="number" placeholder="Insert total user number" [(ngModel)]="updateClientData.employeeQuota"></ion-input>    
+      <ion-label position="stacked">User Quota</ion-label>
+      <ion-input type="number" placeholder="Insert qouta for users" [(ngModel)]="updateClientData.employeeQuota"></ion-input>    
       <!-- <ion-input type="text" placeholder="Insert Username" [(ngModel)]="updateCustomerInfo.clientName"></ion-input>     -->
     </ion-item>
   </ion-item-group>
