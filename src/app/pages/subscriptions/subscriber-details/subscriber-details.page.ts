@@ -7,7 +7,7 @@ import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-nu
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
-import { $ } from 'protractor';
+import { ChangeNextBillingDateComponent } from './change-next-billing-date/change-next-billing-date.component';
 
 
 export let subscriberUpdateInfo;
@@ -65,16 +65,26 @@ export class SubscriberDetailsPage implements OnInit {
     return daysleft;
   }
 
-  async openSubsPopover(evt, compName) {
+  async openChangeDatePopup(evt) {
+    const popup = await this.popoverController.create({
+      component: ChangeNextBillingDateComponent,
+      componentProps: { viewType: this},
+      event: evt
+    });
+
+    return await popup.present();
+  }
+
+  async openSubsPopover(evtSubs, compName) {
     const popover = await this.popoverController.create({
       component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
                   (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
                    (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
                     ReactiveSubscriptionComponent,
-      componentProps: {
-        viewType: this
-      },
-      event: evt,
+      // componentProps: {
+      //   viewType: this
+      // },
+      // event: evtSubs,
       cssClass: 'pop-over-style'
     });
 
@@ -93,23 +103,7 @@ export class SubscriberDetailsPage implements OnInit {
     console.log(val);
     console.log(val2);
   }
-  showCalenderPicker() {
-    console.log('hi: ' + this.isShowingPicker);
-
-    if (this.isShowingPicker) {
-      this.isShowingPicker = true;
-    } else {
-      this.isShowingPicker = false;
-    }
-    return this.isShowingPicker;
-    // if (this.isShowingPicker) {
-    //   this.isShowingPicker = true;
-    // } else {
-    //   this.isShowingPicker = false;
-    // }
-    // return this.isShowingPicker;
-  }
-
+  
   selectedClient(updateSubscriberInfo) {
     this.subscriberInfo = updateSubscriberInfo;
     subscriberUpdateInfo = this.subscriberInfo;

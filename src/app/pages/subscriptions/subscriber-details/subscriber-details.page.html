@@ -160,11 +160,11 @@
                             <ion-label class="subscriberDescriptionCardValue">{{subscriberInfo.nextBillingOn}}</ion-label>
                         </ion-row>
                         <ion-row>
-                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="showCalenderPicker()">
+                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="openChangeDatePopup($event)">
                             Change Date
                           </ion-label>
-                          <ion-datetime detail pickerFormat="D MMMM YYYY" max="2100" *ngIf="this.isShowingPicker">
-                          </ion-datetime>
+                          <!-- <ion-datetime detail pickerFormat="D MMMM YYYY" max="2100" *ngIf="this.isShowingPicker">
+                          </ion-datetime> -->
                           <!-- <ion-datetime *ngIf=“this.isShowingPicker” pickerFormat=“DD MMMM YYYY” [min]=“datePickerMin” [(ngModel)]=“datePicker” (ionChange)=“changeDate()”> </ion-datetime> -->
                         </ion-row>
                       </ion-col>

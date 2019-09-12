@@ -1,0 +1,26 @@
+<ion-content class="contentStyle">
+  <ion-item-group>
+    <ion-item calss="boldText">
+      <ion-input type="date" (change)="updateNextBillingDate($event)"></ion-input>    
+    </ion-item>
+    <ion-item lines="none" [style.display]="(newDateFull !== '') ? 'flex' : 'none'">
+      <ion-row>
+        <ion-text>
+            This subscription will be renewed on 
+            <ion-label style="padding-bottom:5px;" class="boldText"> {{newDateFull}} </ion-label>
+        </ion-text>
+        <ion-text>
+            If you change it, it will not make any prorated credit or charge for the affected period.
+        </ion-text>
+      </ion-row>
+    </ion-item>
+  </ion-item-group>
+  <ion-buttons class="buttonsStyle">
+    <ion-button class="saveButton" fill="clear" (click)="saveNextBillingDate()">
+      Save
+    </ion-button>
+    <ion-button class="cancelButton" fill="clear" (click)="cancelChgNextBillingDate()">
+      Cancel
+    </ion-button>
+  </ion-buttons>
+</ion-content>

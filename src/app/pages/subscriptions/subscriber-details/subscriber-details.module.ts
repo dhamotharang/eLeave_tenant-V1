@@ -10,6 +10,7 @@ import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-nu
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
+import { ChangeNextBillingDateComponent } from './change-next-billing-date/change-next-billing-date.component';
 
 const routes: Routes = [
   {
@@ -29,14 +30,16 @@ const routes: Routes = [
                       UpdateUserNumbersComponent,
                       SubscriberRecentActivitiesComponent,
                       SubscriberEditProfileComponent,
-                      ReactiveSubscriptionComponent
+                      ReactiveSubscriptionComponent,
+                      ChangeNextBillingDateComponent
                     ],
   declarations: [
                   SubscriberDetailsPage,
                   UpdateUserNumbersComponent,
                   SubscriberRecentActivitiesComponent,
                   SubscriberEditProfileComponent,
-                  ReactiveSubscriptionComponent
+                  ReactiveSubscriptionComponent,
+                  ChangeNextBillingDateComponent
                 ]
 })
 export class SubscriberDetailsPageModule {}

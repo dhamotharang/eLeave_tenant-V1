@@ -1,0 +1,44 @@
+:host {
+    .contentStyle {
+        ion-item-group {
+            ion-item {
+                font-size: 11px;
+                color: #4d4f5c;
+                opacity: 0.8;
+                
+                ion-row {
+                    margin: 10px 0px;
+                }
+                
+                .boldText {
+                    font-weight: bold;
+                }
+
+            }
+        }
+    }
+
+    .buttonsStyle {
+        margin: 8%;
+
+        ion-button {
+            text-transform: capitalize;
+            text-align: center;
+            font-size: 9px;
+            border-radius: 2px;
+            width: 70px;
+        }
+
+        .saveButton {
+            background-color: #3b86ff;
+            color: #ffffff;
+        }
+    
+        .cancelButton {
+            background-color: #ffffff;
+            color: #a5a4bf;
+            border: solid 1px #a5a4bf;
+        }
+    }
+
+}
