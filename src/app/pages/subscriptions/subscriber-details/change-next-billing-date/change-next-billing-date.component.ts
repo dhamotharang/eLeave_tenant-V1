@@ -24,9 +24,11 @@ export class ChangeNextBillingDateComponent implements OnInit {
     const MM = [ 'January', 'February', 'March', 'April', 'May', 'June',
                   'July', 'August', 'September', 'October', 'November', 'December'
                 ];
+    const mmshort = mm[evt.target.valueAsDate.getMonth()];
+    const mmfull = MM[evt.target.valueAsDate.getMonth()];
 
-    this.newDateShort = dd + ' ' + mm[evt.target.valueAsDate.getMonth()] + ' ' + evt.target.valueAsDate.getFullYear();
-    this.newDateFull = dd + ' ' + MM[evt.target.valueAsDate.getMonth()] + ' ' + evt.target.valueAsDate.getFullYear();
+    this.newDateShort = dd + ' ' + mmshort + ' ' + evt.target.valueAsDate.getFullYear();
+    this.newDateFull = dd + ' ' + mmfull + ' ' + evt.target.valueAsDate.getFullYear();
   }
 
   saveNextBillingDate() {
