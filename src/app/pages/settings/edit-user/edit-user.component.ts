@@ -12,15 +12,17 @@ export class EditUserComponent implements OnInit {
 
   constructor() { }
 
-  public userInfo = {};
-  public initUser = {};
+  public userInfo;
+  public initUser;
   public toggleVal;
 
   ngOnInit() {
     this.initUser = selectedEditUser;
-    Object.assign(this.userInfo, this.initUser);
+    console.log(this.initUser);
+    // Object.assign(this.userInfo, this.initUser);
+    this.userInfo = {...this.initUser, password2: this.initUser.password};
     console.log(this.userInfo);
-    this.userInfo.password2 = this.userInfo.password;
+    // this.userInfo.password2 = this.userInfo.password;
     this.toggleVal = (this.userInfo.status === 'active') ? true : false;
   }
 
@@ -40,7 +42,7 @@ export class EditUserComponent implements OnInit {
   }
 
   saveEditUser() {
-    this.editPassValidation(this.userInfo.password1, this.userInfo.password2);
+    this.editPassValidation(this.userInfo.password, this.userInfo.password2);
     Object.assign(this.initUser, this.userInfo);
     this.cancelEditUser();
   }

@@ -10,6 +10,8 @@ export let customersDummiesData;
 export let salesmanDummiesData;
 export let userDummiesData;
 
+declare const require: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
