@@ -14,6 +14,10 @@
   </ion-title> 
 
   <ion-item-group class="contentStyle">
+    <ion-list [hidden]="!errPass" lines="none">
+      <ion-note color="danger" *ngFor="let errRet of errMsg">{{errRet.val}}</ion-note>
+      <!-- <ion-note color="danger" *ngFor="let errRet of errMsg1">{{errRet.val}}</ion-note> -->
+    </ion-list>
     <ion-item>
       <ion-label position="stacked">Email*</ion-label>
       <ion-input type="email" inputmode="email" placeholder="Email" required="true"

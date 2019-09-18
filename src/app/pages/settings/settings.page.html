@@ -1,16 +1,23 @@
 <ion-app style="padding-top: 73px; --ion-background-color: #f0f0f7;">
   <ion-content>
-    <ion-row>
+    <ion-row style="height: -webkit-fill-available;">
       <ion-col class="settingMenuList">
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let list of settingMenuList">
+          <ion-header>
             <ion-item lines="none">
-              <ion-icon slot="start" name="menu"></ion-icon>
-              <ion-label>
-                {{list.title}}
+                <ion-icon slot="start" name="person"></ion-icon>
+                <ion-label>
+                  Users & Roles
+                </ion-label>
+              </ion-item>
+          </ion-header>
+          <ion-item-group>
+            <ion-item lines="none" *ngFor="let list of settingMenuList" (click)="clickRoles($event)" [ngStyle]="{'--ion-background-color': list.role === selectedRole ? 'grey' : '#8b89b4'}" >
+              <ion-label [ngStyle]="{'color': list.role === selectedRole ? 'darkslateblue' : '#ffffff'}">
+                {{list.role}}
               </ion-label>
             </ion-item>
-          </ion-menu-toggle>
+          </ion-item-group>
         </ion-list>
       </ion-col>
  
@@ -27,74 +34,42 @@
           </ion-item-group>
         </ion-row>
 
-        <!-- User/Roles segment -->
-        <ion-row class="settingSegment">
-          <ion-segment [(ngModel)]="userSagment">
-            <ion-segment-button value="users">
-              <ion-label>
-                Users
-              </ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="roles">
-              <ion-label>
-                Roles
-              </ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-row>
-        
-        <ng-container *ngIf="userSagment === 'users'; then thenTemplate; else elseTemplate"></ng-container>
-        <ng-template #thenTemplate>
-          <ion-grid>
-            <ion-row class="userTableHeader">
-              <ion-col>
-                USER DETAILS
-              </ion-col>
-              <ion-col size="7.45" class="role">
-                ROLES
-              </ion-col>
-            </ion-row>
-            <ion-row *ngFor="let user of userData" class="userBodyContent">
-              <ion-col class="avatarSetting">
-                <ion-avatar>
-                    <img src="../assets/icon/samplepic/johnwick.jpg">
-                </ion-avatar>
-              </ion-col>
-              <ion-col size="4">
-                <ion-item-group class="userInfoSetting">
-                  <ion-label>{{user.username}}</ion-label>
-                  <ion-label>{{user.email}}</ion-label>
-                </ion-item-group>
-              </ion-col>
-              <ion-col class="userStatusSetting">
-                <ion-label [ngStyle]="{'color': (user.status === 'active')? '#5ee2a0' : '#808495'}">
-                  ({{user.status}})
-                </ion-label>
-              </ion-col>
-              <ion-col class="userRoleSetting">
-                <ion-label>{{user.role}}</ion-label>
-              </ion-col>
-              <ion-col class="userRoleSetting">
-                <ion-label style="cursor: pointer;" (click)="initEditUserPopup(user, $event, 'EditUserComponent')">Edit</ion-label>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ng-template>
-        <ng-template #elseTemplate>
-          <ion-grid>
-            <ion-row class="userTableHeader" style="padding: 10px;">
-              ROLE LIST
-            </ion-row>
-            <ion-row>
-              <ion-item-group>
-                <ion-label style="padding: 10px; font-size: 10px; color: #808495;">Super Admin</ion-label>
-                <ion-label style="padding: 10px; font-size: 10px; color: #808495;">Salesperson</ion-label>
-                <ion-label style="padding: 10px; font-size: 10px; color: #808495;">Support</ion-label>
+        <ion-grid  id="userconfiglist" >
+          <ion-row class="userTableHeader">
+            <ion-col>
+              USER DETAILS
+            </ion-col>
+            <ion-col size="7.45" class="role">
+              ROLES
+            </ion-col>
+          </ion-row>
+          
+          <ion-row *ngFor="let user of userData" class="userBodyContent">
+          <!-- <ion-row *ngFor="let user of userData | userFilterRoles:{roles: selectedRole}" class="userBodyContent"> -->
+            <ion-col class="avatarSetting">
+              <ion-avatar>
+                  <img src="../assets/icon/samplepic/johnwick.jpg">
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item-group class="userInfoSetting">
+                <ion-label>{{user.username}}</ion-label>
+                <ion-label>{{user.email}}</ion-label>
               </ion-item-group>
-            </ion-row>
-          </ion-grid>          
-        </ng-template>
-        
+            </ion-col>
+            <ion-col class="userStatusSetting">
+              <ion-label [ngStyle]="{'color': (user.status === 'active')? '#5ee2a0' : '#808495'}">
+                ({{user.status}})
+              </ion-label>
+            </ion-col>
+            <ion-col class="userRoleSetting">
+              <ion-label>{{user.role}}</ion-label>
+            </ion-col>
+            <ion-col class="userRoleSetting">
+              <ion-label style="cursor: pointer;" (click)="initEditUserPopup(user, $event, 'EditUserComponent')">Edit</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>       
 
       </ion-col>
     </ion-row>

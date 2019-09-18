@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { settingPopoverCtrlr } from '../settings.page';
 import { userDummiesData } from '../../../app.component';
+
 import { Validators } from '@angular/forms';
+import { Events } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-new-user',
@@ -10,9 +12,11 @@ import { Validators } from '@angular/forms';
 })
 export class AddNewUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(public events: Events) { }
 
   public newUser;
+  private errPass = false;
+  public errMsg: any[];
 
   ngOnInit() {
     this.newUser = {
@@ -29,18 +33,20 @@ export class AddNewUserComponent implements OnInit {
   saveNewUser() {
     this.passValidation(this.newUser.password, this.newUser.password2);
     userDummiesData.push(this.newUser);
-    console.log(userDummiesData);
-    this.cancelAddNew();
+    this.events.publish('newUserAdded', userDummiesData);
+    if (this.errPass === false) {
+      this.cancelAddNew();
+    }
+
   }
 
   passValidation(p1, p2) {
-    console.log(p1);
-    console.log(p2);
     if (p1 === p2) {
+      this.errPass = false;
       return this.newUser.password = p1;
     } else {
-      console.error ('Password Mismatch');
-      return null;
+      this.errMsg = [{val: 'Password Mismatch'}];
+      this.errPass = true;
     }
   }
 

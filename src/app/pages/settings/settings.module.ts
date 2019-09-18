@@ -8,6 +8,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { IonicModule } from '@ionic/angular';
 
 import { SettingsPage } from './settings.page';
+import { UserFilterRolesPipe } from './user-filter-roles/user-filter-roles.pipe';
 
 const routes: Routes = [
   {
@@ -24,6 +25,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   entryComponents: [AddNewUserComponent, EditUserComponent],
-  declarations: [SettingsPage, AddNewUserComponent, EditUserComponent]
+  declarations: [SettingsPage, AddNewUserComponent, EditUserComponent, UserFilterRolesPipe]
 })
 export class SettingsPageModule {}
