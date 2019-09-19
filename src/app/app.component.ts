@@ -6,12 +6,20 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
 
+import { UserDataService } from './services/user-data.service';
+
 export let customersDummiesData;
 export let salesmanDummiesData;
 export let userDummiesData;
 
 declare const require: any;
 
+/**
+ * App Component
+ *
+ * @export
+ * @class AppComponent
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -19,12 +27,22 @@ declare const require: any;
 })
 export class AppComponent {
 
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private popoverController: PopoverController,
+    // private userData: UserDataService
+  ) {
+    this.initializeApp();
+  }
+
   public appPages = [
-    {
-      title: 'Home',
-      url: '/main/dashboard',
-      icon: 'icon_home.svg'
-    },
+    // {
+    //   title: 'Home',
+    //   url: '/main/dashboard',
+    //   icon: 'icon_home.svg'
+    // },
     {
       title: 'Dashboard',
       url: '/main/dashboard',
@@ -51,15 +69,9 @@ export class AppComponent {
       icon: 'icon_setting.svg'
     }
   ];
+  public selectedSidebar = 'Dashboard';
 
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private popoverController: PopoverController
-  ) {
-    this.initializeApp();
-  }
+  // private loggedUser = this.userData.getUsername();
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -67,6 +79,8 @@ export class AppComponent {
       this.splashScreen.hide();
     });
 
+    // console.log('this.loggedUser');
+    // console.log(this.loggedUser);
     const json = require('./sample.json');
     // console.log('initttt');
     customersDummiesData = json.customerSample;
@@ -76,16 +90,23 @@ export class AppComponent {
   }
 
   async openToolbarPopover(evt, compoName) {
+    console.log('sdsds');
     const toolbarPopup = await this.popoverController.create({
       component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
-      // componentProps: {
-      //   viewType: this
-      // },
-      // event: evt,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
       // cssClass: 'pop-over-style'
     });
 
     return await toolbarPopup.present();
   }
 
+  onClickSideMenu(evt) {
+    console.log('intestttt');
+    console.log(evt.srcElement.innerText);
+    this.selectedSidebar = evt.srcElement.innerText;
+    console.log(this.selectedSidebar);
+  }
 }

@@ -4,13 +4,18 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'main/home',
+    redirectTo: 'login',
+    // redirectTo: 'main/home',
     pathMatch: 'full'
   },
   {
-    path: 'main/home',
-    loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule'
+    path: 'login',
+    loadChildren: './auth/login/login.module#LoginPageModule'
   },
+  // {
+  //   path: 'main/home',
+  //   loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule'
+  // },
   {
     path: 'main/dashboard',
     loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule'
@@ -43,6 +48,7 @@ const routes: Routes = [
     path: 'main/settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   }
+
 
 ];
 

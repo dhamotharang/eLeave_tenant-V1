@@ -12,12 +12,14 @@
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]"
+             lines="none" (click)="onClickSideMenu($event)" 
+             [ngStyle]="{'--ion-background-color': 'blue' }" class='highlight-focus'>
               <!-- <ion-icon slot="start" [name]="p.icon"></ion-icon> -->
+              <!-- 
+             [ngStyle]="{'--ion-background-color': (p.url === selectedSidebar) ? '#32314e' : '#43425d' }" -->
               <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
-              <ion-label class="sidebarList">
-                {{p.title}}
-              </ion-label>
+              <ion-label class="sidebarList">{{p.title}}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
@@ -40,18 +42,11 @@
                 <div class="verticalLine"></div>
                 <ion-button style="font-size: 9px;
                   color: #4d4f5c;
-                  text-transform: capitalize;">
+                  text-transform: capitalize;" (click)="openToolbarPopover($event, 'UserDropDownComponent')">
                   <ion-label>
                     John Doe
                   </ion-label>
                   <ion-icon src="../assets/icon/layout/icon-arrow-down.svg" style="padding: 5px;"></ion-icon>
-                    <!-- <ion-list>
-                      <ion-select placeholder="John Doe" class="custom-select">
-                        <ion-select-option value="1">Option 1</ion-select-option>
-                        <ion-select-option value="2">Option 2</ion-select-option>
-                        <ion-select-option value="3">Option 3</ion-select-option>
-                      </ion-select>
-                    </ion-list> -->
                 </ion-button>
                 <ion-avatar class="userProfile">
                 <!-- <ion-avatar style=" width: 32px; height: 32px; float: right;"> -->

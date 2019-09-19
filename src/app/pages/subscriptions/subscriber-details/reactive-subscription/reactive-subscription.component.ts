@@ -67,20 +67,7 @@ export class ReactiveSubscriptionComponent implements OnInit {
   dateFormatOnCard(activatedOn, expiredOn) {
     const ddStart = (activatedOn.getDate() < 10) ? '0' + activatedOn.getDate() : activatedOn.getDate();
     const ddEnd = (expiredOn.getDate() < 10) ? '0' + expiredOn.getDate() : expiredOn.getDate();
-    const months = [
-                      'Jan',
-                      'Feb',
-                      'Mar',
-                      'Apr',
-                      'May',
-                      'Jun',
-                      'Jul',
-                      'Aug',
-                      'Sept',
-                      'Oct',
-                      'Nov',
-                      'Dec'
-                    ];
+    const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
     this.subsActivatedDate = ddStart + ' ' + months[activatedOn.getMonth()] + ' ' + activatedOn.getFullYear();
     this.subsExpDate = ddEnd + ' ' + months[expiredOn.getMonth()] + ' ' + expiredOn.getFullYear();
