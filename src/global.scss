@@ -39,3 +39,32 @@
 	  opacity: 0.33 !important;
 	}
 }
+
+.pagination-style .ngx-pagination{
+// .pagination-style::ng-deep .ngx-pagination{
+	li {
+		background: white;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 31px;
+		height: 31px;
+
+	}
+
+	.small-screen {
+		display: none;
+	}
+
+	.current {
+		padding: 0.1875rem 0.625rem;
+		background: #2199e8;
+		color: #fefefe;
+		cursor: default;
+	}
+	.disabled {
+		padding: 0.1875rem 0.625rem;
+		color: #cacaca;
+		cursor: default;
+	}
+}

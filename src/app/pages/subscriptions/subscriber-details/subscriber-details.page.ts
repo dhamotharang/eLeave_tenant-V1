@@ -1,6 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+
 import { Timestamp } from 'rxjs';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 import {customersDummiesData} from '../../../app.component';
 import { selectedSubscribersInfo } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
@@ -21,7 +24,13 @@ export let subsDtlPopoverCtrlr;
 
 export class SubscriberDetailsPage implements OnInit {
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController) {
+    this.configPageSubDtls = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: this.subscribersDetails.length
+    };
+  }
 
 
   public subscribersDetails = customersDummiesData;
@@ -31,8 +40,10 @@ export class SubscriberDetailsPage implements OnInit {
   public subsProgressBarValue;
   public subsToggle = false;
   public prevToggleVal = true;
+  configPageSubDtls: any;
 
   ngOnInit() {
+    console.log(this.subscribersDetails.length);
     this.subscriberInfo = selectedSubscribersInfo;
     subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.lastBillingOn,
@@ -100,5 +111,9 @@ export class SubscriberDetailsPage implements OnInit {
   updateProgressBar(currEmp, totalEmp) {
     this.subsProgressBarValue = currEmp / totalEmp;
     return this.subscriberInfo.progressBarValue =  this.subsProgressBarValue;
+  }
+
+  pageChanged(event) {
+    this.configPageSubDtls.currentPage = event;
   }
 }

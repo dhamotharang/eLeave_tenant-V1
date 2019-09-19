@@ -19,7 +19,7 @@
               <ion-title text-wrap class="subsctiberTitleStyle">
                 SUBSCRIBER LIST
               </ion-title>
-              <ion-item-group  *ngFor="let subscribersList of subscribersDetails">
+              <ion-item-group  *ngFor="let subscribersList of subscribersDetails  | paginate: configPageSubDtls">
                 <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)"
                 [ngStyle]="{'color': subscribersList.clientName === subscriberInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
                 <!-- <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)" > -->
@@ -258,5 +258,11 @@
           </ion-row>
         </ion-col>
       </ion-row>
+      
+      <!-- Subscriber list's pagination -->
+      <ion-item-group class="custom">        
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+      </ion-item-group>
+      
     </ion-content>
   </ion-app>
