@@ -33,8 +33,6 @@ export class SubscriberDetailsPage implements OnInit {
   public prevToggleVal = true;
 
   ngOnInit() {
-    // console.log(customersDummiesData);
-    // console.log(this.subscriberInfo);
     this.subscriberInfo = selectedSubscribersInfo;
     subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.lastBillingOn,
@@ -91,19 +89,6 @@ export class SubscriberDetailsPage implements OnInit {
     return await popover.present();
   }
 
-  checkStatus(obj, statusVal) {
-    console.log(obj);
-    console.log(statusVal);
-    document.getElementById('myonoffswitch');
-    console.log(document.getElementById('myonoffswitch'));
-  }
-
-  checkvalue(val, val2) {
-    console.log('checkvalue');
-    console.log(val);
-    console.log(val2);
-  }
-  
   selectedClient(updateSubscriberInfo) {
     this.subscriberInfo = updateSubscriberInfo;
     subscriberUpdateInfo = this.subscriberInfo;

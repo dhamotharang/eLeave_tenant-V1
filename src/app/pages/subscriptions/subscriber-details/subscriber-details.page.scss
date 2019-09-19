@@ -43,6 +43,12 @@
         color: #4d4f5c;
         --ion-background-color: #ffffff;
         cursor: pointer;
+        ion-list {
+            ion-label {
+                white-space: pre-wrap;
+                padding: 1px 0px;
+            }
+        }
     }
 
     .subscriberOverviewParentCompanyStyle {
