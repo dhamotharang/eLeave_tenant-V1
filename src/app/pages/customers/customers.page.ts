@@ -47,10 +47,11 @@ export class CustomersPage implements OnInit {
   async ngOnClickPophoverButton(evt: any) {
     const popover = await this.popoverController.create({
       component: CustomerPopoverComponent,
-      // componentProps: {
-      //   viewType: this
-      // },
-      // event: evt,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
+      cssClass: 'pop-over-dropdown-style'
     });
 
     popover.onDidDismiss().then((data) => {

@@ -40,8 +40,17 @@
 	}
 }
 
+.pop-over-dropdown-style .popover-content {
+    // left: 1134px;
+    display: flex;
+    width: 125px;
+}
+
 .pagination-style .ngx-pagination{
 // .pagination-style::ng-deep .ngx-pagination{
+	font-size: 11px;
+	padding-left: 20px;
+	
 	li {
 		background: white;
 		display: inline-flex;

@@ -1,46 +1,36 @@
-<ion-list>
+<ion-list class="popoverStyle">
   <!-- Sort by part -->
   <ion-title class="popoverTitle">
     SORT BY
   </ion-title>
   <ion-row>
-    <ion-label class="popoverBodyStyle" (click)="doc()">
+    <ion-label (click)="doc()">
       Name
     </ion-label>
   </ion-row>
   <ion-row>
-    <ion-label class="popoverBodyStyle" (click)="close()">
+    <ion-label (click)="close()">
       Company Name
     </ion-label>
   </ion-row>
   <ion-row>
-    <ion-label class="popoverBodyStyle" (click)="close()">
+    <ion-label (click)="close()">
       Status
     </ion-label>
   </ion-row>
 
   <!-- View by part -->  
+  <ion-title>
+    VIEW BY
+  </ion-title>
   <ion-row>
-    <ion-title class="popoverTitle">
-      VIEW BY
-    </ion-title>
+    <ion-text (click)="viewOption($event, 'card')">
+      Card
+    </ion-text>
   </ion-row>
-  <ion-col>
-    <ion-row>
-      <ion-text class="popoverBodyStyle" (click)="viewOption($event, 'card')">
-        Card
-      </ion-text>
-    </ion-row>
-    <ion-row>
-      <ion-text class="popoverBodyStyle" (click)="viewOption($event, 'table')">
-        Table
-      </ion-text>
-    </ion-row>
-  </ion-col>
- 
-  <!-- <ion-item class="popoverBodyStyle" (click)="close()">
-    <ion-label>
-      Close
-    </ion-label>
-  </ion-item> -->
+  <ion-row>
+    <ion-text (click)="viewOption($event, 'table')">
+      Table
+    </ion-text>
+  </ion-row>
 </ion-list>
