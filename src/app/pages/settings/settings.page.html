@@ -27,10 +27,15 @@
             Users & Roles
           </ion-title>
           <ion-item-group lines="none" class="settingAddUser">
-              <ion-searchbar class="settingSearchbar"></ion-searchbar>
-            <ion-button (click)="openSettingPopover($event, 'AddNewUserComponent')">
-              Add User
-            </ion-button>
+            <!-- <ion-item> -->
+              <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSettings($event)"></ion-searchbar>
+            <!-- </ion-item>
+            <ion-item> -->
+              <ion-button (click)="openSettingPopover($event, 'AddNewUserComponent')">
+                Add User
+              </ion-button>
+            <!-- </ion-item> -->
+            
           </ion-item-group>
         </ion-row>
 

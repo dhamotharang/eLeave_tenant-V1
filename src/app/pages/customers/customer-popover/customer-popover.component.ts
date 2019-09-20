@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { selCustView, CustomersPage } from '../customers.page';
+import { selCustView } from '../customers.page';
 
 
 @Component({
@@ -15,8 +15,6 @@ export class CustomerPopoverComponent implements OnInit {
   public popoverCtrlr;
   public custPaging;
 
-  public const2 = new CustomersPage(this.popoverCtrlr, this.custPaging);
-
   constructor(public popoverController: PopoverController) { }
 
   ngOnInit() {
@@ -24,11 +22,6 @@ export class CustomerPopoverComponent implements OnInit {
   }
 
   close() {
-    this.popoverController.dismiss();
-  }
-
-  doc() {
-    window.open('https://ionicframework.com/docs', '_blank');
     this.popoverController.dismiss();
   }
 

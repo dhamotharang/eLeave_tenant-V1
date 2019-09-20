@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController, Events } from '@ionic/angular';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
-
+import { SearchDataService } from '../../services/search-data.service';
 
 import { userDummiesData } from '../../app.component';
 
@@ -25,7 +25,8 @@ export class SettingsPage implements OnInit {
   constructor(
       public popoverController: PopoverController,
       private event: Events,
-      private settingPaging: PaginationServiceService
+      private settingPaging: PaginationServiceService,
+      private settingSearch: SearchDataService
     ) {
     event.subscribe('newUserAdded', (data) => {
       const nvar  = {srcElement: {innerText : this.selectedRole}};
@@ -87,5 +88,13 @@ export class SettingsPage implements OnInit {
 
   pageSettingChanged(event) {
     this.configPageSetting = this.settingPaging.pageConfig(10, event, this.userData.length);
+  }
+
+  onSearchSettings(event) {
+    this.userData = userDummiesData;
+    this.userData = (event.detail.value.length > 0 ) ?
+                      this.settingSearch.filerSearch(event.detail.value, userDummiesData, 'username') :
+                        userDummiesData;
+    this.pageSettingChanged(1);
   }
 }

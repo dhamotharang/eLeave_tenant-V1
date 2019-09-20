@@ -51,8 +51,13 @@
 	font-size: 11px;
 	padding-left: 20px;
 	
+	ul {
+		display: inline-flex;
+	}
 	li {
 		background: white;
+		border: solid 1px #e8e9ec;
+		border-radius: 3px;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;

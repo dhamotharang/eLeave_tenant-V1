@@ -6,8 +6,7 @@ import { Injectable } from '@angular/core';
 export class SearchDataService {
 
   constructor() { }
-
-  filterClientList(searchTerm, data) {
-    return data.filter(it => new RegExp(searchTerm, 'i').test(it.clientName));
+  filerSearch(searchKeyword, data, arg) {
+    return data.filter(itm => new RegExp(searchKeyword, 'i').test(itm[arg]));
   }
 }

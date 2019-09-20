@@ -75,8 +75,9 @@ export class CustomerDetailsPage implements OnInit {
 
   onSearchCustDtls(event) {
     this.customerList = customerDummyData;
-    this.customerList = (event.detail.value.length > 0 ) ? this.custListSearch.filterClientList(event.detail.value, this.customerList)
-                              : this.customerList;
+    this.customerList = (event.detail.value.length > 0 ) ?
+                          this.custListSearch.filerSearch(event.detail.value, this.customerList, 'clientName') :
+                            this.customerList;
     this.pageCustDtlsChanged(1);
   }
 
