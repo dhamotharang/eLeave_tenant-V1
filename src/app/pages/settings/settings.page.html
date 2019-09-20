@@ -44,7 +44,7 @@
             </ion-col>
           </ion-row>
           
-          <ion-row *ngFor="let user of userData" class="userBodyContent">
+          <ion-row *ngFor="let user of userData | paginate: configPageSetting" class="userBodyContent">
           <!-- <ion-row *ngFor="let user of userData | userFilterRoles:{roles: selectedRole}" class="userBodyContent"> -->
             <ion-col class="avatarSetting">
               <ion-avatar>
@@ -69,7 +69,13 @@
               <ion-label style="cursor: pointer;" (click)="initEditUserPopup(user, $event, 'EditUserComponent')">Edit</ion-label>
             </ion-col>
           </ion-row>
-        </ion-grid>       
+        </ion-grid>  
+
+        <!-- Settings list's pagination -->
+        <ion-row>        
+          <pagination-controls (pageChange)="pageSettingChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+        </ion-row>
+        
 
       </ion-col>
     </ion-row>

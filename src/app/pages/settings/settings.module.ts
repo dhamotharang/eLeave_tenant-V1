@@ -7,6 +7,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 
 import { IonicModule } from '@ionic/angular';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 import { SettingsPage } from './settings.page';
 import { UserFilterRolesPipe } from './user-filter-roles/user-filter-roles.pipe';
 
@@ -22,6 +24,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes)
   ],
   entryComponents: [AddNewUserComponent, EditUserComponent],

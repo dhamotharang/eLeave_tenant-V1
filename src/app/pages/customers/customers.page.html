@@ -144,22 +144,9 @@
         </ng-template>
       </ion-row>
 
-      <!-- ----- Pagingation Card View -----
-      <ion-row style="justify-content:flex-end; padding-right: 20px; padding-bottom: 20px;"> 
-          <ion-button><</ion-button>
-          <ion-button>1</ion-button>
-          <ion-button>2</ion-button>
-          <ion-button>3</ion-button>
-          <ion-button>4</ion-button>
-          <ion-button>5</ion-button>
-          <ion-button>></ion-button>
-        </ion-row> -->
-      
-
-      <!-- Subscriber list's pagination -->
+      <!-- Customer list's pagination -->
       <ion-row>        
         <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
-        <!-- <pagination-controls (pageChange)="custPaging.pageConfig(1, 9, customerData.length)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls> -->
       </ion-row>
     </ion-content>
   </ion-app>

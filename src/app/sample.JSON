@@ -62,6 +62,216 @@
           "status": "inactive",
           "role": "Support",
           "password": "P@ssword8"
+        },
+        {
+          "username": "Adam Chong",
+          "email": "adam@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Adam1 Chong",
+          "email": "adam1@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Adam2 Chong",
+          "email": "adam2@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Adam3 Chong",
+          "email": "adam3@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Adam4 Chong",
+          "email": "adam4@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Adam5 Chong",
+          "email": "adam5@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Goku",
+          "email": "goku@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Goku1",
+          "email": "goku@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Goku2",
+          "email": "goku@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Goku3",
+          "email": "goku@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Hanani",
+          "email": "hanani@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Hanani1",
+          "email": "hanani1@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Hanani2",
+          "email": "hanani2@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Hanani3",
+          "email": "hanani3@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "David Tan",
+          "email": "david@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "David Tan1",
+          "email": "david1@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "David Tan2",
+          "email": "david2@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "David Tan3",
+          "email": "david3@zen.com.my",
+          "status": "active",
+          "role": "Salesperson",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Kristopher Leverich",
+          "email": "kristopher@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Catina Tessman",
+          "email": "catina@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Nigel Cammack",
+          "email": "nigel@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Jasper Winkles",
+          "email": "jasper@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Lorine Metzler",
+          "email": "lorine@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Scotty Southall",
+          "email": "scotty@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Scott Beil",
+          "email": "scott@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "April Wedding",
+          "email": "April@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Lucretia Haskin",
+          "email": "Lucretia@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Buena Mcculler",
+          "email": "Buena@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Claretta Elliot",
+          "email": "Claretta@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
+        },
+        {
+          "username": "Tanna Ewert",
+          "email": "Tanna@zen.com.my",
+          "status": "active",
+          "role": "Support",
+          "password": "P@ssword8"
         }
       ],
       "customerSample": [

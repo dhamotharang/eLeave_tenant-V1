@@ -35,7 +35,6 @@ export class CustomersPage implements OnInit {
   public currentCustomer;
   public customerData = customersDummiesData;
   public salepersonData = salesmanDummiesData;
-  pageConfigCust: PaginationServiceService;
   public configPageCust;
 
   ngOnInit() {

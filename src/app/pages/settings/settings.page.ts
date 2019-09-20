@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, Events } from '@ionic/angular';
 
+import { PaginationServiceService } from '../../services/pagination-service.service';
+
+
 import { userDummiesData } from '../../app.component';
 
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
@@ -19,7 +22,11 @@ export let settingPopoverCtrlr;
 
 export class SettingsPage implements OnInit {
 
-  constructor(public popoverController: PopoverController, private event: Events) {
+  constructor(
+      public popoverController: PopoverController,
+      private event: Events,
+      private settingPaging: PaginationServiceService
+    ) {
     event.subscribe('newUserAdded', (data) => {
       const nvar  = {srcElement: {innerText : this.selectedRole}};
       if (nvar.srcElement.innerText !== 'All roles') {
@@ -31,7 +38,7 @@ export class SettingsPage implements OnInit {
   public settingMenuList;
   public userData;
   public selectedRole = 'All roles';
-
+  public configPageSetting;
   ngOnInit() {
     this.settingMenuList = [
       {
@@ -50,6 +57,7 @@ export class SettingsPage implements OnInit {
 
     this.userData = userDummiesData;
     settingPopoverCtrlr = this.popoverController;
+    this.configPageSetting = this.settingPaging.pageConfig(10, 1, this.userData.length);
   }
 
   async openSettingPopover(evt, compName) {
@@ -74,5 +82,10 @@ export class SettingsPage implements OnInit {
     this.selectedRole = evt.srcElement.innerText;
     this.userData = (evt.srcElement.innerText === 'All roles') ? userDummiesData :
                       userDummiesData.filter(userObj => userObj.role === evt.srcElement.innerText);
+    this.pageSettingChanged(1);
+  }
+
+  pageSettingChanged(event) {
+    this.configPageSetting = this.settingPaging.pageConfig(10, event, this.userData.length);
   }
 }
