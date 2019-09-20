@@ -1,10 +1,12 @@
 import { Component, OnInit} from '@angular/core';
+
+import { PaginationServiceService } from '../../services/pagination-service.service';
+
 import {customerDummyData} from '../customers/customers.page';
 import {customersDummiesData} from '../../app.component';
 
 
-export let selectedSubscribersInfo;
-
+export let selectedSubscribersInfo, currSubsPage;
 
 /**
  * Component for subscriptions page
@@ -23,13 +25,21 @@ export class SubscriptionsPage implements OnInit {
 
   public currentClient;
   public subscribers = customersDummiesData;
-
+  configPageSubs: any;
 
   /**
    *Creates an instance of SubscriptionsPage.
    * @memberof SubscriptionsPage
    */
-  constructor() { }
+  constructor(
+    public subsPaging: PaginationServiceService
+    ) {
+      this.configPageSubs = {
+        itemsPerPage: 10,
+        currentPage: 1,
+        totalItems: this.subscribers.length
+    };
+  }
 
 
   /**
@@ -37,7 +47,9 @@ export class SubscriptionsPage implements OnInit {
    *
    * @memberof SubscriptionsPage
    */
-  ngOnInit() { }
+  ngOnInit() {
+    // currSubsPage = this.subsPaging.pageConfig(10, 1, this.subscribers.length);
+  }
 
 
   /**
@@ -49,5 +61,18 @@ export class SubscriptionsPage implements OnInit {
    */
   viewSubscriptionDetails(subscribersData) {
     return selectedSubscribersInfo = subscribersData;
+  }
+
+
+  /**
+   * Event for subscriber pagination changes
+   *
+   * @param {*} event
+   * @memberof SubscriptionsPage
+   */
+  pageSubsChanged(event) {
+    this.configPageSubs.currentPage = event;
+    currSubsPage = this.configPageSubs.currentPage;
+    // currSubsPage = this.subsPaging.pageConfig(10, this.configPageSubs.currentPage, this.subscribers.length);
   }
 }

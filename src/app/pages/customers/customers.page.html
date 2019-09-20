@@ -44,11 +44,11 @@
       </ion-row>
       
       <!----------- Customers Details ----------->
-      <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px;">     
+      <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px; height: -webkit-fill-available;">     
         <ng-container *ngIf="selectedVal === 'card'; else elseTemplate">   
 
           <!------- Customer Card View ------->
-          <ion-card class="customerCardStyle" *ngFor="let cardData of customerData">
+          <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
             <ion-item-divider style="background-color: #ffffff; padding: 0px;">
               <ion-grid>
                 <ion-row>
@@ -112,7 +112,7 @@
               <ion-col size="1.5">PLAN NAME</ion-col>
               <ion-col size="1">STATUS</ion-col>
             </ion-row>
-            <ion-row *ngFor="let tableData of customerData" class="bodyStyle"
+            <ion-row *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
             [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
             [class.highlight]="tableData.clientName === currentCustomer"
             (click)="onClickCustomerViewDetails(tableData)">
@@ -144,16 +144,22 @@
         </ng-template>
       </ion-row>
 
-      <!------- Pagingation Card View ------->
+      <!-- ----- Pagingation Card View -----
       <ion-row style="justify-content:flex-end; padding-right: 20px; padding-bottom: 20px;"> 
           <ion-button><</ion-button>
           <ion-button>1</ion-button>
-          <!-- <ion-button class="subscriptionTablePagingIcon" style="color: #3b86ff;">1</ion-button> -->
           <ion-button>2</ion-button>
           <ion-button>3</ion-button>
           <ion-button>4</ion-button>
           <ion-button>5</ion-button>
           <ion-button>></ion-button>
-        </ion-row>
+        </ion-row> -->
+      
+
+      <!-- Subscriber list's pagination -->
+      <ion-row>        
+        <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+        <!-- <pagination-controls (pageChange)="custPaging.pageConfig(1, 9, customerData.length)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls> -->
+      </ion-row>
     </ion-content>
   </ion-app>

@@ -20,17 +20,18 @@
         </ion-title>
         
         <!-- Body -->
-        <ion-list class="customerListContent" *ngFor="let cL of customerList" (click)="onChangeSelectedCustomer(cL)">
+        <ion-item-group style="height: 94%">
+          <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
+            <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
+                {{cL.clientName}}
+            </ion-label>
+          </ion-list>
+        </ion-item-group>
+        <!-- <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
           <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
               {{cL.clientName}}
           </ion-label>
-        </ion-list>
-        <!-- <ion-item-group  *ngFor="let cL of customerList">
-          <ion-item class="customerListStyle" (click)="onChangeSelectedCustomer(cL)" 
-            [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
-              {{cL.clientName}}
-          </ion-item>
-        </ion-item-group> -->
+        </ion-list> -->
 
       </ion-col>
 
@@ -276,45 +277,14 @@
           </ion-row> 
         </ion-content>
 
-        <!-- <ion-row
-          class="columntest childCompanyListStyle"
-          style= "margin-left: 2%;">
-          <ion-item-group *ngFor="let childCompanies of selectedCustomerInfo.childrenCompany"
-            style="margin: 2%;">
-              <ion-label style="font-weight: bold;">
-                {{childCompanies.childCpnyName}}
-              </ion-label>
-              <ion-label>
-                  {{childCompanies.childCpnyAddrL1}}            
-              </ion-label>
-              <ion-label>
-                  {{childCompanies.childCpnyAddrL2}}            
-              </ion-label>
-              <ion-label>
-                  {{childCompanies.childCpnyAddrZip}} {{childCompanies.childCpnyAddrCity}}             
-              </ion-label>
-              <ion-label>
-                  {{childCompanies.childCpnyAddrState}}            
-              </ion-label>
-              <ion-label>
-                  {{childCompanies.childCpnyAddrCountry}}            
-              </ion-label>
-              <ion-label style="font-weight: bold;">
-                Staff No: {{childCompanies.childCpnyEmployeeNo}}
-              </ion-label>
-          </ion-item-group>
-          
-          <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event)">
-            <ion-infinite-scroll-content
-              loadingSpinner="bubbles"
-              loadingText="Loading more data...">
-            </ion-infinite-scroll-content>
-          </ion-infinite-scroll>
-        </ion-row> -->
-
       </ion-col>
 
 
+    </ion-row>
+    
+    <!-- Customer Details pagination -->
+    <ion-row>
+      <pagination-controls (pageChange)="pageCustDtlsChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
     </ion-row>
   </ion-content>
   

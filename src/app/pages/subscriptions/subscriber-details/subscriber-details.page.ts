@@ -5,7 +5,8 @@ import { Timestamp } from 'rxjs';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {customersDummiesData} from '../../../app.component';
-import { selectedSubscribersInfo } from '../subscriptions.page';
+
+import { selectedSubscribersInfo, currSubsPage } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
@@ -27,7 +28,7 @@ export class SubscriberDetailsPage implements OnInit {
   constructor(public popoverController: PopoverController) {
     this.configPageSubDtls = {
       itemsPerPage: 10,
-      currentPage: 1,
+      currentPage: currSubsPage,
       totalItems: this.subscribersDetails.length
     };
   }

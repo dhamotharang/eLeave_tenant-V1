@@ -68,7 +68,7 @@
             
             <!-- body -->
             <ion-row class="subscriptionTableBodyTheme subscriptionTableLine" ion-item 
-              *ngFor="let table of subscribers"
+              *ngFor="let table of subscribers  | paginate: configPageSubs"
               [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
               [class.highlight]="table.clientName === currentClient"
               (click)="viewSubscriptionDetails(table)"> 
@@ -134,14 +134,10 @@
           </ion-grid>
       </ion-col>
     </ion-row>
-    <ion-row style="justify-content:flex-end; padding-right: 20px; padding-bottom: 20px; font-size: 9px;"> 
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton"><</ion-button>
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton" >1</ion-button>
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton">2</ion-button>
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton">3</ion-button>
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton">4</ion-button>
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton">5</ion-button>
-      <ion-button class="subscriptionTablePagingIcon" fill="clear" class="subscriptionPagingationButton">></ion-button>
-    </ion-row>
+
+    <!-- Subscriber list's pagination -->
+    <ion-item-group>        
+      <pagination-controls (pageChange)="pageSubsChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+    </ion-item-group>
   </ion-content>
 </ion-app>

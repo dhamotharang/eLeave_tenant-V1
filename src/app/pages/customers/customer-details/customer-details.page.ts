@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import {customerInfo, customerDummyData} from '../customers.page';
+
+import { PaginationServiceService } from '../../../services/pagination-service.service';
+
+import {customerInfo, customerDummyData, currCustPage} from '../customers.page';
 import {SubscriberDetailsPage} from '../../subscriptions/subscriber-details/subscriber-details.page';
 import { UpdateCustomerDetailsComponent } from './update-customer-details/update-customer-details.component';
 import { CustomerHistoryComponent } from './customer-history/customer-history.component';
@@ -25,8 +28,11 @@ export class CustomerDetailsPage implements OnInit {
   public custToggle = false;
   public prevCustToggleVal = true;
   public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp);
+  public configPageCustDtls;
+
   constructor(
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private custDtlsPaging: PaginationServiceService
   ) { }
 
   ngOnInit() {
@@ -37,6 +43,7 @@ export class CustomerDetailsPage implements OnInit {
     this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
     popovrCtrlr = this.popoverController;
+    this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, currCustPage, this.customerList.length);
   }
 
   onChangeSelectedCustomer(changedCustomerItem) {
@@ -60,16 +67,8 @@ export class CustomerDetailsPage implements OnInit {
     return await historyPopOver.present();
   }
 
-  checkStatus() {
-    console.log('checkStatus');
-    
-    // if (this.custToggle !== this.prevCustToggleVal) {
-    //   if ((this.prevCustToggleVal === true) && (this.custToggle === false)) {
-    //     console.log('ddd');
-    //   } else {
-    //     console.log('ssss');
-    //   }
-    // }
+  pageCustDtlsChanged(event) {
+    this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, event, this.customerList.length);
   }
 
   optionsSelected(obj) {

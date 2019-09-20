@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 import { SubscriptionsPage } from './subscriptions.page';
 
 const routes: Routes = [
@@ -19,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SubscriptionsPage]
