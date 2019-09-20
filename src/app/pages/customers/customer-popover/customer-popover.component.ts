@@ -13,8 +13,9 @@ export class CustomerPopoverComponent implements OnInit {
 
   public popoverCustObj;
   public popoverCtrlr;
+  public custPaging;
 
-  public const2 = new CustomersPage(this.popoverCtrlr);
+  public const2 = new CustomersPage(this.popoverCtrlr, this.custPaging);
 
   constructor(public popoverController: PopoverController) { }
 
