@@ -8,10 +8,7 @@
 
     .contentLayout {
         background-color: #ffffff;
-        margin-left: 2.578%;
-        margin-right: 2.578%;
-        margin-top: 1.875%;
-        margin-bottom:5%;
+        margin: 1.9%;
         padding: 1.265%;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.04);
     }
@@ -34,7 +31,6 @@
         font-weight: bold; 
         height: 45px;
     }
-
     .customerListContent {
         font-size: 10px;
         // padding-right: 5px;
@@ -45,7 +41,7 @@
         margin: 2px;
         cursor: pointer;
         display: flex;
-        height: 10.4%;
+        // height: 10.4%;
         align-items: center;
     }
 
@@ -272,8 +268,6 @@
     .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
         right: 0px; 
     }
-    
-
       
 }
 

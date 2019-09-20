@@ -77,3 +77,17 @@
 		cursor: default;
 	}
 }
+
+.customer-searchbar-style {
+	--background: white;
+	
+	.searchbar-input {
+		font-size: 11px !important;
+		padding: 0px 10px 0px 30px;
+		text-align: start;
+	}
+	.searchbar-search-icon {
+		left: 7px;
+		top: 5px;
+	}
+}

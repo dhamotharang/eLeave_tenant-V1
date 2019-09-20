@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
+import { SearchDataService } from '../../../services/search-data.service';
 
 import {customerInfo, customerDummyData, currCustPage} from '../customers.page';
 import {SubscriberDetailsPage} from '../../subscriptions/subscriber-details/subscriber-details.page';
@@ -29,14 +30,15 @@ export class CustomerDetailsPage implements OnInit {
   public prevCustToggleVal = true;
   public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp);
   public configPageCustDtls;
+  public searchCust = '';
 
   constructor(
     public popoverController: PopoverController,
-    private custDtlsPaging: PaginationServiceService
+    private custDtlsPaging: PaginationServiceService,
+    private custListSearch: SearchDataService
   ) { }
 
   ngOnInit() {
-    // this.customerList = customerDummyData;
     this.selectedCustomerInfo = customerInfo;
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
@@ -71,9 +73,11 @@ export class CustomerDetailsPage implements OnInit {
     this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, event, this.customerList.length);
   }
 
-  optionsSelected(obj) {
-    console.log('optionsSelected');
-    console.log(obj);
+  onSearchCustDtls(event) {
+    this.customerList = customerDummyData;
+    this.customerList = (event.detail.value.length > 0 ) ? this.custListSearch.filterClientList(event.detail.value, this.customerList)
+                              : this.customerList;
+    this.pageCustDtlsChanged(1);
   }
 
 

@@ -21,6 +21,7 @@
         
         <!-- Body -->
         <ion-item-group style="height: 94%">
+          <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
           <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
             <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
                 {{cL.clientName}}
