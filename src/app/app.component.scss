@@ -5,44 +5,42 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
 :host{
-    
-    .splitPaneBackground {
-        // --ion-background-color: #f0f0f7
-        width: 130px;
-        // height: 540px;
-        object-fit: contain;
-    }
 
+    .active-link {
+      --ion-background-color: rgba(0, 0, 0, 0.1);;
+    }
+    
     .sidebarBackground {
-        width: 130px;
-        --width: 130px;
         --ion-background-color: #43425d;
-        $menu-width: 130px;
         max-width: 150px;
     }
 
+    .sidebarBackgroundIconView {
+        --ion-background-color: #43425d;
+        max-width: 56px;
+    }
     .sidebarLogo {
+        display: flex;
+        margin: 0% 20% 0% auto;
         width: 70px;
         height: 70px;
-        margin: auto;
     }
 
     .sidebarIcon {
         width: 16px; 
         height: 16px;
+        display: flex;
     }
 
     .sidebarList {
         font-family: var(--ion-);
         font-size: 15px;
-        // font-size: 7.5px;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.27;
         letter-spacing: normal;
         text-align: left;
-        // color: #43425d;
         color: #ffffff;
     }
 
@@ -50,21 +48,14 @@
         width: 16px; 
         height: 16px;
         padding: 2px;
-        // --padding-top: 3px;
-        // --padding-end: 3px;
-        // --padding-bottom: 3px;
-        // --padding-start: 3px;
-        // --border-radius: 50%;
     }
 
     .searchbar {
-        // padding-left: 0px;
-        // padding-top: 0px;
         height: 70px;
         --ion-background-color: #ffffff;
         --icon-color: #bcbccb;
         ::placeholder {
-            font-size: 6px; //sets placeholder font size
+            font-size: 6px;
         }
     }
 
@@ -80,7 +71,6 @@
       line-height: 1.54;
       color: #4d4f5c;
       text-align: left;
-      // width:max-content;
       width: 70px;
       text-transform: capitalize;
     }
@@ -94,14 +84,14 @@
 
     ion-select {
       &.custom-select {
-        font-size: 15px; //sets text font size
+        font-size: 15px;
         text-align: start;
         vertical-align: bottom;
         padding-bottom: initial;
         color: #4d4f5c;
         text-transform: capitalize;
         ::placeholder {
-          font-size: 15px; //sets placeholder font size
+          font-size: 15px;
           text-align: start;
           vertical-align: bottom;
           color: #4d4f5c;

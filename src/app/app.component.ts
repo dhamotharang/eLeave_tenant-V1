@@ -83,7 +83,7 @@ export class AppComponent {
     // console.log('this.loggedUser');
     // console.log(this.loggedUser);
     const json = require('./sample.json');
-    // console.log('initttt');
+    
     customersDummiesData = json.customerSample;
     salesmanDummiesData = json.salepersonList;
     userDummiesData = json.userDetails;
@@ -103,13 +103,6 @@ export class AppComponent {
     });
 
     return await toolbarPopup.present();
-  }
-
-  onClickSideMenu(evt) {
-    console.log('intestttt');
-    console.log(evt.srcElement.innerText);
-    this.selectedSidebar = evt.srcElement.innerText;
-    console.log(this.selectedSidebar);
   }
 
   collapseMenu(boolCollapse) {
