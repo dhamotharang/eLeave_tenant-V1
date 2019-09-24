@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { Platform, PopoverController, MenuController } from '@ionic/angular';
 
-import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
@@ -32,6 +31,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private popoverController: PopoverController,
+    private menuController: MenuController
     // private userData: UserDataService
   ) {
     this.initializeApp();
@@ -69,8 +69,9 @@ export class AppComponent {
       icon: 'icon_setting.svg'
     }
   ];
-  public selectedSidebar = 'Dashboard';
 
+  public selectedSidebar = 'Dashboard';
+  public sideMenuStyle = 'fullMenu';
   // private loggedUser = this.userData.getUsername();
 
   initializeApp() {
@@ -86,6 +87,7 @@ export class AppComponent {
     customersDummiesData = json.customerSample;
     salesmanDummiesData = json.salepersonList;
     userDummiesData = json.userDetails;
+
 
   }
 
@@ -108,5 +110,9 @@ export class AppComponent {
     console.log(evt.srcElement.innerText);
     this.selectedSidebar = evt.srcElement.innerText;
     console.log(this.selectedSidebar);
+  }
+
+  collapseMenu(boolCollapse) {
+    this.sideMenuStyle = (boolCollapse === true) ? 'iconMenu' : 'fullMenu';
   }
 }
