@@ -5,7 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
-import { UserMenuComponent } from './layout/user-menu/user-menu.component';
+// import { UserMenuComponent } from '../layout/user-menu/user-menu.component';
+// import { UserMenuComponent } from './layout/user-drop-down/user-drop-down.component';
 
 import { PaginationServiceService } from './services/pagination-service.service';
 import { UserDataService } from './services/user-data.service';

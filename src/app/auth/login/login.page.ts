@@ -49,12 +49,6 @@ export class LoginPage implements OnInit {
   public showPass = false;
   public homePage = '/main/dashboard';
 
-  // public formGroupValidation = new FormGroup({
-  //   email: new FormControl(null, [Validators.required, Validators.email]),
-  //   pass: new FormControl(null, [Validators.required]),
-  // });
-
-
   /**
    * Function executed when initialize login page
    *
@@ -78,15 +72,17 @@ export class LoginPage implements OnInit {
   async onLogin(loginForm: NgForm) {
     this.submitted = true;
     this.pgSet.setShowSideMenu(false);
+    console.log(loginForm.valid);
 
     if (loginForm.valid) {
       this.pgSet.setShowSideMenu(true);
+      console.log('1this.userLogin.username');
+      console.log(this.userLogin.username);
       Object.assign(currUser, {value: this.userLogin.username});
       await this.userData.login(this.userLogin.username).then(() => {
-        this.homePage = '/main/dashboard';
+        // this.homePage = '/main/dashboard';
+        return this.router.navigate(['/main/dashboard']);
       });
-    } else {
-      return this.homePage = '/login';
     }
   }
 
