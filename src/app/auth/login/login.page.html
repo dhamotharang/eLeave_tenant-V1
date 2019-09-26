@@ -1,61 +1,56 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-content>
+  <ion-item-group class="mainLayout">
+    <img class="sideimg" src="../../../assets/icon//signin/sign-in-abstract.svg"/>
+    <ion-item-group class="bodyStyle">
 
-<ion-content class="mainContent">  
-  <ion-item-group>
-    <ion-item-group>
+      <!-- Logo and welcome note -->
       <ion-avatar class="loginLogo">
-          <img src="../../../assets/icon/logo.PNG">
-          <!-- <img src="../assets/icon/logo.PNG"> -->
+          <img src="../../../assets/icon/logo.PNG"/>
       </ion-avatar>
-      <ion-note class="noteStyle">Welcome back! Please login to your account</ion-note>
-    </ion-item-group>
+      <ion-note class="noteStyle">Welcome back! Please login to your account</ion-note>      
   
-    <form class="formStyle" #loginForm="ngForm">
-      <ion-item>
-          <ion-input type="text" name="username" required placeholder="Username" [(ngModel)]="userLogin.username" #username="ngModel"></ion-input>
-          <!-- <ion-input type="text" name="username" required placeholder="Username" [(ngModel)]="userLogin.username" #username="ngModel" [ngModelOptions]="{standalone: true}"></ion-input> -->
-          <!-- <ion-input type="text" [(ngModel)]="userLogin.username" required placeholder="Username" ></ion-input> -->
-      </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          Username is required
-        </p>
-      </ion-text>
+      <form class="formStyle" #loginForm="ngForm">
+        <!-- Username -->
+        <ion-item>
+            <ion-input type="text" name="username" required placeholder="Username" [(ngModel)]="userLogin.username" #username="ngModel"></ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+            Username is required
+          </p>
+        </ion-text>
 
-      <ion-item>
-          <ion-input type="{{type}}" required placeholder="Password" name="password" [(ngModel)]="userLogin.password"  #password="ngModel"></ion-input>
-          <!-- <ion-input type="{{type}}" required placeholder="Password" name="password" [(ngModel)]="userLogin.password"  #password="ngModel" [ngModelOptions]="{standalone: true}"></ion-input> -->
-          <!-- <ion-input type="text" [(ngModel)]="userLogin.password" placeholder="Password"></ion-input> -->
-          <button *ngIf="!showPass" ion-button clear type="button" item-right (click)="showPassword()"> 
-             <ion-icon name="eye"></ion-icon>
-          </button>
-          <button *ngIf="showPass" ion-button clear type="button" item-right (click)="showPassword()"> 
-             <ion-icon name="eye-off"></ion-icon>
-          </button>
-      </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          Password is required
-        </p>
-      </ion-text>
+        <!-- Password -->
+        <ion-item>
+            <ion-input type="{{type}}" required placeholder="Password" name="password" [(ngModel)]="userLogin.password"  #password="ngModel"></ion-input>
+            <button *ngIf="!showPass" ion-button clear type="button" item-right (click)="showPassword()"> 
+              <ion-icon name="eye"></ion-icon>
+            </button>
+            <button *ngIf="showPass" ion-button clear type="button" item-right (click)="showPassword()"> 
+              <ion-icon name="eye-off"></ion-icon>
+            </button>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+            Password is required
+          </p>
+        </ion-text>
 
-      <ion-row>
-        <ion-item-group>
-          <ion-checkbox (ionChange)="rememberMe($event)"></ion-checkbox>
-          <ion-label>Remember Me</ion-label>
-        </ion-item-group>
-        <ion-label>Forgot Password</ion-label>
-      </ion-row>
+        <!-- Remember Me -->
+        <ion-row>
+          <ion-item-group>
+            <ion-checkbox (ionChange)="rememberMe($event)"></ion-checkbox>
+            <ion-label>Remember Me</ion-label>
+          </ion-item-group>
+          <ion-label [routerDirection]="'root'" [routerLink]="'/forgot-password'"
+          style="cursor: pointer;">Forgot Password</ion-label>
+        </ion-row>
 
-      <ion-item lines="none" style="display: inline-flex;">
-        <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)">Login</ion-button>
-      </ion-item>
-    </form>
-
+        <!-- Submit button -->
+        <ion-item lines="none">
+          <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)">Login</ion-button>
+        </ion-item>
+      </form>
+    </ion-item-group>
   </ion-item-group>
 </ion-content>
-   

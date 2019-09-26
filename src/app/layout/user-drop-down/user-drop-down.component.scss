@@ -1,0 +1,16 @@
+:host {
+    .popover-body {
+        padding: 0px 20px;
+        ion-item {
+            font-size: var(--eleave-body-size);
+            color: var(--eleave-body-color);
+            cursor: pointer;
+            display: table;
+            margin: auto;
+
+            ion-label {
+                max-width: fit-content;
+            }
+        }
+    }
+}

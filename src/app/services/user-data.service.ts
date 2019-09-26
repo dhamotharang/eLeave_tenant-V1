@@ -37,7 +37,8 @@ export class UserDataService {
 
   /**
    * To user login
-   * Set username to service
+   * Set username to storage service
+   * 
    * @param {string} username
    * @returns {Promise<any>}
    * @memberof UserDataService
@@ -46,6 +47,21 @@ export class UserDataService {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
       return this.events.publish('user:login');
+    });
+  }
+
+  /**
+   * To set user logout
+   * Remove username in storage servicd
+   *
+   * @returns {Promise<any>}
+   * @memberof UserDataService
+   */
+  logout(): Promise<any> {
+    return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
+      return this.storage.remove('username');
+    }).then(() => {
+      this.events.publish('user:logout');
     });
   }
 
@@ -62,13 +78,22 @@ export class UserDataService {
     return this.storage.set('username', username);
   }
 
-  async getUsername() {
-    console.log('getUsername');
+  getUsername() {
+    console.log('getUsernameval');
+    // return 'getUsername';
     return this.storage.get('username').then((value) => {
+      console.log(value);
       return value;
     });
-
   }
+
+  // getUsername() {
+  //   console.log('getUsername');
+  //   return this.storage.get('username').then((value) => {
+  //     return value;
+  //   });
+
+  // }
 
   setRememberMe(loginData) {
     console.log('setRememberMe');
@@ -82,5 +107,11 @@ export class UserDataService {
     // this.storage.remove('user_name');
     localStorage.removeItem('username');
     localStorage.removeItem('password');
+  }
+
+  forgetPassword(emailData) {
+    console.log('forgetPassword');
+    console.log(emailData);
+    console.log('need to notify superadmin');
   }
 }

@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
-import { Platform, PopoverController, MenuController } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
 
+import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
+import { UserMenuComponent } from './layout/user-menu/user-menu.component';
+
+import { PaginationServiceService } from './services/pagination-service.service';
 import { UserDataService } from './services/user-data.service';
 
 export let customersDummiesData;
 export let salesmanDummiesData;
 export let userDummiesData;
 
+export let currUser = { value: 'Chan Seng Long'};
+export let toolbarPopup;
 declare const require: any;
 
 /**
@@ -31,8 +36,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private popoverController: PopoverController,
-    private menuController: MenuController
-    // private userData: UserDataService
+    public settingPage: PaginationServiceService,
+    public userInfo: UserDataService
   ) {
     this.initializeApp();
   }
@@ -72,7 +77,7 @@ export class AppComponent {
 
   public selectedSidebar = 'Dashboard';
   public sideMenuStyle = 'fullMenu';
-  // private loggedUser = this.userData.getUsername();
+  public loggedUser;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -80,32 +85,42 @@ export class AppComponent {
       this.splashScreen.hide();
     });
 
-    // console.log('this.loggedUser');
-    // console.log(this.loggedUser);
     const json = require('./sample.json');
-    
+
     customersDummiesData = json.customerSample;
     salesmanDummiesData = json.salepersonList;
     userDummiesData = json.userDetails;
-
-
+    this.loggedUser = 'No user';
+    console.log('getLoggedUseraaa:' + this.userInfo.getUsername());
+    // this.loggedUser = this.userInfo.getUsername();
+    this.loggedUser = currUser;
+    console.log('loggedUser:' + this.loggedUser);
   }
 
   async openToolbarPopover(evt, compoName) {
-    console.log('sdsds');
-    const toolbarPopup = await this.popoverController.create({
+    console.log('openToolbarPopover');
+    toolbarPopup = await this.popoverController.create({
       component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
       componentProps: {
         viewType: this
       },
       event: evt,
-      // cssClass: 'pop-over-style'
+      cssClass: 'pop-over-user-style'
     });
 
     return await toolbarPopup.present();
   }
 
+  resetMenu() {
+    console.log('dddd');
+  }
+
   collapseMenu(boolCollapse) {
     this.sideMenuStyle = (boolCollapse === true) ? 'iconMenu' : 'fullMenu';
+  }
+
+  clickNotiBtn(event) {
+    console.log('clickNotiBtn');
+    console.log(event);
   }
 }

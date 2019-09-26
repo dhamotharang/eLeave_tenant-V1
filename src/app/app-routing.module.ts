@@ -5,17 +5,12 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    // redirectTo: 'main/home',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: './auth/login/login.module#LoginPageModule'
   },
-  // {
-  //   path: 'main/home',
-  //   loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule'
-  // },
   {
     path: 'main/dashboard',
     loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule'
@@ -47,7 +42,12 @@ const routes: Routes = [
   {
     path: 'main/settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: './auth/forgot-password/forgot-password.module#ForgotPasswordPageModule'
   }
+
 
 
 ];

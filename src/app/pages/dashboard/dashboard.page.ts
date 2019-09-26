@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginationServiceService } from '../../services/pagination-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private pgSett: PaginationServiceService
+  ) { }
   public subscribers = [
     {
       creationDate: '3 Jan 2018',
@@ -92,6 +95,7 @@ export class DashboardPage implements OnInit {
    */
   ngOnInit() {
     this.overviewSgmtOpt = 'all';
+    this.pgSett.setShowSideMenu(true);
   }
 
   segmentChanged(ev: any) {
