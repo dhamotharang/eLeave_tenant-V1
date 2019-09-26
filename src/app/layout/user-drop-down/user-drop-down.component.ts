@@ -9,7 +9,6 @@ import { toolbarPopup } from '../../app.component';
 /**
  * Component for User drop down menu in toolbar
  * This component is to show user status and logout button
- *
  * @export
  * @class UserDropDownComponent
  * @implements {OnInit}
@@ -22,9 +21,8 @@ import { toolbarPopup } from '../../app.component';
 
 export class UserDropDownComponent implements OnInit {
 
-
   /**
-   *Creates an instance of UserDropDownComponent.
+   * Creates an instance of UserDropDownComponent.
    * @param {UserDataService} userDataSvs
    * @param {PaginationServiceService} pggSvs
    * @param {Router} router
@@ -36,21 +34,22 @@ export class UserDropDownComponent implements OnInit {
     // private router: Router
   ) { }
 
+  /**
+   * This property will bind url link after user click logout
+   * @memberof UserDropDownComponent
+   */
   public logoutedLink = '/login';
 
   /**
-   * Initialization of UserDropDownComponent
-   *
+   * This method is to set propertie's initial value
    * @memberof UserDropDownComponent
    */
   ngOnInit() {}
 
-
   /**
-   * Executed when user click logut
-   * It will reset the current username in server's storage
+   * Executed when user click logut.
+   * It will reset the current username in server's storage.
    * And will navigate to login page
-   *
    * @memberof UserDropDownComponent
    */
   async onClickLogout() {

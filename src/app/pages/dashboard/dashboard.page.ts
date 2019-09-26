@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 
+/**
+ * This component is to set up the Dashboard page
+ * @export
+ * @class DashboardPage
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -8,9 +14,19 @@ import { PaginationServiceService } from '../../services/pagination-service.serv
 })
 export class DashboardPage implements OnInit {
 
+  /**
+   *Creates an instance of DashboardPage.
+   * @param {PaginationServiceService} pgSett
+   * @memberof DashboardPage
+   */
   constructor(
     private pgSett: PaginationServiceService
   ) { }
+
+  /**
+   * This properties is to set subscribers data
+   * @memberof DashboardPage
+   */
   public subscribers = [
     {
       creationDate: '3 Jan 2018',
@@ -86,11 +102,15 @@ export class DashboardPage implements OnInit {
     }
   ];
 
+  /**
+   * This properties is to set value of segment in dashboard
+   * @memberof DashboardPage
+   */
   public overviewSgmtOpt;
 
   /**
-   *
-   * Initial method
+   * This method is to set inital value of properties. It
+   * will be executed when Dashboard page being loaded.
    * @memberof DashboardPage
    */
   ngOnInit() {
@@ -98,15 +118,16 @@ export class DashboardPage implements OnInit {
     this.pgSett.setShowSideMenu(true);
   }
 
+
+  /**
+   * This method is to get changed value of segment
+   * @param {*} ev
+   * @memberof DashboardPage
+   */
   segmentChanged(ev: any) {
     // console.log('Segment changed:', ev);
     console.log('Segment changed:', ev.detail.value);
     console.log(this.overviewSgmtOpt);
-  }
-
-
-  tableContent() {
-
   }
 }
 

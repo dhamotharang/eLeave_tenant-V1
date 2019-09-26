@@ -43,41 +43,53 @@ export class LoginPage implements OnInit {
     private pgSet: PaginationServiceService
   ) { }
 
+
+  /**
+   * This property will bind username and password value
+   * @type {UserOptions}
+   * @memberof LoginPage
+   */
   public userLogin: UserOptions = { username: '', password: '' };
+
+
+  /**
+   * This property is a boolean to check if the login buttton is clicked or not
+   * @memberof LoginPage
+   */
   public submitted = false;
+
+  /**
+   * This property is to set text type on password input. It's either password or text
+   * @memberof LoginPage
+   */
   public type = 'password';
   public showPass = false;
   public homePage = '/main/dashboard';
 
   /**
-   * Function executed when initialize login page
-   *
+   * This method executed when initialize login page
    * @memberof LoginPage
    */
   ngOnInit() {
-    // sideMenuShow.value = false;
     this.pgSet.setShowSideMenu(false);
-    // console.log('logininti');
-    // console.log(this.pgSet.getSideMenuStatus());
 
   }
 
 
   /**
    * Function executed when click login button
-   *
    * @param {NgForm} loginForm
    * @memberof LoginPage
    */
   async onLogin(loginForm: NgForm) {
     this.submitted = true;
     this.pgSet.setShowSideMenu(false);
-    console.log(loginForm.valid);
+    // console.log(loginForm.valid);
 
     if (loginForm.valid) {
       this.pgSet.setShowSideMenu(true);
-      console.log('1this.userLogin.username');
-      console.log(this.userLogin.username);
+      // console.log('1this.userLogin.username');
+      // console.log(this.userLogin.username);
       Object.assign(currUser, {value: this.userLogin.username});
       await this.userData.login(this.userLogin.username).then(() => {
         // this.homePage = '/main/dashboard';
@@ -89,7 +101,6 @@ export class LoginPage implements OnInit {
 
   /**
    * Function executed when user click show password
-   *
    * @memberof LoginPage
    */
   showPassword() {
@@ -100,7 +111,6 @@ export class LoginPage implements OnInit {
   
   /**
    * Function executed when user set to remember their username & password
-   *
    * @param {*} evt
    * @memberof LoginPage
    */

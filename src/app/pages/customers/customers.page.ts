@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import {PopoverController} from '@ionic/angular';
 
 import { CustomerPopoverComponent } from './customer-popover/customer-popover.component';
 import { customersDummiesData, salesmanDummiesData } from '../../app.component';
@@ -13,6 +13,12 @@ export let selCustView;
 export let currCustPage;
 
 
+/**
+ * This component is for Customer page
+ * @export
+ * @class CustomersPage
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.page.html',
@@ -20,23 +26,47 @@ export let currCustPage;
 })
 export class CustomersPage implements OnInit {
 
+  /**
+   *Creates an instance of CustomersPage.
+   * @param {PopoverController} popoverController
+   * @param {PaginationServiceService} custPaging
+   * @memberof CustomersPage
+   */
   constructor(
-    public popoverController: PopoverController,
+    private popoverController: PopoverController,
     private custPaging: PaginationServiceService
-  ) {
-    // this.configPageCust = {
-    //   itemsPerPage: 9,
-    //   currentPage: 1,
-    //   totalItems: this.customerData.length
-    // };
-  }
+  ) { }
 
+
+  /**
+   * This property is to bind selected customer data
+   * @memberof CustomersPage
+   */
   public selectedVal;
-  public currentCustomer;
+
+  /**
+   * This property is to bind all customers data
+   * @memberof CustomersPage
+   */
   public customerData = customersDummiesData;
+
+  /**
+   * This property is to bind all salesperson list
+   * @memberof CustomersPage
+   */
   public salepersonData = salesmanDummiesData;
+
+  /**
+   * This property is to bind customer's pagination configurations
+   * @memberof CustomersPage
+   */
   public configPageCust;
 
+  /**
+   * This method will be executed during customer page's initilization.
+   * Any initial value will be set here.
+   * @memberof CustomersPage
+   */
   ngOnInit() {
     selCustView = {val: 'card'};
     this.selectedVal = 'card';
@@ -44,6 +74,12 @@ export class CustomersPage implements OnInit {
     // this.pageCustChanged(1);
   }
 
+  /**
+   * This method is to show popover component.
+   * @param {*} evt
+   * @returns
+   * @memberof CustomersPage
+   */
   async ngOnClickPophoverButton(evt: any) {
     const popover = await this.popoverController.create({
       component: CustomerPopoverComponent,
@@ -61,12 +97,25 @@ export class CustomersPage implements OnInit {
     return await popover.present();
   }
 
+
+  /**
+   * This method will be executed when user click on "View Details".
+   * It will redirect to Customer Details page.
+   * @param {*} item
+   * @memberof CustomersPage
+   */
   onClickCustomerViewDetails(item) {
     customerInfo = item;
     customerDummyData = this.customerData;
     salesPersonDummyData =  this.salepersonData;
   }
 
+  /**
+   * This funciton is to set pagination style.
+   * It will be executed when user change page.
+   * @param {*} event
+   * @memberof CustomersPage
+   */
   pageCustChanged(event) {
     // this.configPageCust.currentPage = event;
     this.configPageCust = this.custPaging.pageConfig(9, event, this.customerData.length);

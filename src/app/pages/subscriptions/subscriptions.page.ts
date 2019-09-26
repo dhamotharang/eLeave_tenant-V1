@@ -2,14 +2,13 @@ import { Component, OnInit} from '@angular/core';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 
-import {customerDummyData} from '../customers/customers.page';
 import {customersDummiesData} from '../../app.component';
 
 
 export let selectedSubscribersInfo, currSubsPage;
 
 /**
- * Component for subscriptions page
+ * This component is to set up Subscriptions page
  *
  * @export
  * @class SubscriptionsPage
@@ -23,16 +22,12 @@ export let selectedSubscribersInfo, currSubsPage;
 
 export class SubscriptionsPage implements OnInit {
 
-  public currentClient;
-  public subscribers = customersDummiesData;
-  configPageSubs: any;
-
   /**
-   *Creates an instance of SubscriptionsPage.
+   * Creates an instance of SubscriptionsPage.
    * @memberof SubscriptionsPage
    */
   constructor(
-    public subsPaging: PaginationServiceService
+    private subsPaging: PaginationServiceService
     ) {
       this.configPageSubs = {
         itemsPerPage: 10,
@@ -41,10 +36,29 @@ export class SubscriptionsPage implements OnInit {
     };
   }
 
+  /**
+   * This property is to set value of selected client
+   * @memberof SubscriptionsPage
+   */
+  public currentClient;
 
   /**
-   * Initilization of SubscriptionsPage
-   *
+   * This property is to bind values of subscribers data
+   * @memberof SubscriptionsPage
+   */
+  public subscribers = customersDummiesData;
+
+  /**
+   * This property is to set values of pagination configurations
+   * for Subscription page
+   * @memberof SubscriptionsPage
+   */
+  configPageSubs: any;
+
+
+  /**
+   * This method is to initial values of properties. It will be
+   * executed when Subscription page is being loaded
    * @memberof SubscriptionsPage
    */
   ngOnInit() {
@@ -53,8 +67,7 @@ export class SubscriptionsPage implements OnInit {
 
 
   /**
-   * Getting selected subscriber to view details
-   *
+   * This method is to get selected subscriber to view details
    * @param {*} subscribersData
    * @returns
    * @memberof SubscriptionsPage
@@ -65,8 +78,8 @@ export class SubscriptionsPage implements OnInit {
 
 
   /**
-   * Event for subscriber pagination changes
-   *
+   * This method is to update current pagination's configurations
+   * when user change to other page
    * @param {*} event
    * @memberof SubscriptionsPage
    */

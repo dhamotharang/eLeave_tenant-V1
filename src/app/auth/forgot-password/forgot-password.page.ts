@@ -6,10 +6,9 @@ import { UserDataService } from '../../services/user-data.service';
 
 
 /**
- * This component is for user forgot their password
- * Once email is inserted, the notification will be send to superadmin
- * Superadmin need to reset those user's password with their default password
- *
+ * This component is for user forgot their password.
+ * Once email is inserted, the notification will be send to superadmin.
+ * Superadmin need to reset those user's password with their default password.
  * @export
  * @class ForgotPasswordPage
  * @implements {OnInit}
@@ -22,7 +21,6 @@ import { UserDataService } from '../../services/user-data.service';
 
 export class ForgotPasswordPage implements OnInit {
 
-
   /**
    *Creates an instance of ForgotPasswordPage.
    * @param {UserDataService} userData
@@ -32,17 +30,26 @@ export class ForgotPasswordPage implements OnInit {
    */
   constructor(
     private userData: UserDataService,
-    public router: Router,
+    private router: Router,
     private pgSetting: PaginationServiceService
     ) { }
 
+  /**
+   * This property is to bind inserted email valie
+   * @memberof ForgotPasswordPage
+   */
   public userEmail;
+
+
+  /**
+   * This property is to set either to show side menu or hide it
+   * @memberof ForgotPasswordPage
+   */
   public sideMenuShow;
 
 
   /**
-   * Initialize forget password page
-   *
+   * This method is to initialize forget password page
    * @memberof ForgotPasswordPage
    */
   ngOnInit() {
@@ -51,9 +58,8 @@ export class ForgotPasswordPage implements OnInit {
 
 
   /**
-   * To set email from forgot password
-   * Will return to login page
-   *
+   * This method is to set email from forgot password.
+   * The returns will navigate to login page
    * @returns
    * @memberof ForgotPasswordPage
    */
