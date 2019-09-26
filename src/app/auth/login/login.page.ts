@@ -47,6 +47,7 @@ export class LoginPage implements OnInit {
   public submitted = false;
   public type = 'password';
   public showPass = false;
+  public homePage = '/main/dashboard';
 
   // public formGroupValidation = new FormGroup({
   //   email: new FormControl(null, [Validators.required, Validators.email]),
@@ -82,11 +83,10 @@ export class LoginPage implements OnInit {
       this.pgSet.setShowSideMenu(true);
       Object.assign(currUser, {value: this.userLogin.username});
       await this.userData.login(this.userLogin.username).then(() => {
-        return this.router.navigateByUrl('/main/dashboard');
+        this.homePage = '/main/dashboard';
       });
-      // this.router.navigateByUrl('/main/dashboard');
-
-
+    } else {
+      return this.homePage = '/login';
     }
   }
 

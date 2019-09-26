@@ -40,7 +40,7 @@
         <ion-row>
           <ion-item-group>
             <ion-checkbox (ionChange)="rememberMe($event)"></ion-checkbox>
-            <ion-label>Remember Me</ion-label>
+            <ion-label style="cursor: default;">Remember Me</ion-label>
           </ion-item-group>
           <ion-label [routerDirection]="'root'" [routerLink]="'/forgot-password'"
           style="cursor: pointer;">Forgot Password</ion-label>
@@ -48,7 +48,8 @@
 
         <!-- Submit button -->
         <ion-item lines="none">
-          <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)">Login</ion-button>
+          <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)" 
+          [routerDirection]="'root'" [routerLink]="homePage">Login</ion-button>
         </ion-item>
       </form>
     </ion-item-group>

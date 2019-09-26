@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 import { UserDataService } from '../../services/user-data.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
@@ -33,9 +33,10 @@ export class UserDropDownComponent implements OnInit {
   constructor(
     private userDataSvs: UserDataService,
     private pggSvs: PaginationServiceService,
-    private router: Router
+    // private router: Router
   ) { }
 
+  public logoutedLink = '/login';
 
   /**
    * Initialization of UserDropDownComponent
@@ -56,7 +57,7 @@ export class UserDropDownComponent implements OnInit {
     this.userDataSvs.logout().then(() => {
       toolbarPopup.dismiss();
       this.pggSvs.setShowSideMenu(false);
-      return this.router.navigateByUrl('/login');
+      // return this.router.navigateByUrl('/login');
     });
   }
 

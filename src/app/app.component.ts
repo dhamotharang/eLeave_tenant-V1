@@ -98,7 +98,6 @@ export class AppComponent {
   }
 
   async openToolbarPopover(evt, compoName) {
-    console.log('openToolbarPopover');
     toolbarPopup = await this.popoverController.create({
       component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
       componentProps: {
@@ -109,10 +108,6 @@ export class AppComponent {
     });
 
     return await toolbarPopup.present();
-  }
-
-  resetMenu() {
-    console.log('dddd');
   }
 
   collapseMenu(boolCollapse) {
