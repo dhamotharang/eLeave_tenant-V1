@@ -10,7 +10,18 @@ import { UpdateCustomerDetailsComponent } from './update-customer-details/update
 import { CustomerHistoryComponent } from './customer-history/customer-history.component';
 
 
+/**
+ * This variable is to store data of customer details
+ * @export
+ * @class CustomerDetailsPage
+ */
 export let customerUpdateInfo;
+
+/**
+ * This variable is to store data of popup in Customer Details page
+ * @export
+ * @class CustomerDetailsPage
+ */
 export let popovrCtrlr;
 
 /**

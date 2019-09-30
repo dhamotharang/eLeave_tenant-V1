@@ -14,20 +14,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./support.page.scss'],
 })
 
-
 export class SupportPage implements OnInit {
 
-
   /**
-   *Creates an instance of SupportPage.
+   * Creates an instance of SupportPage.
    * @memberof SupportPage
    */
   constructor() { }
 
 
   /**
-   *
-   *
+   * This method is to set initial value of properties. It will
+   * be executed when Support page is executed
    * @memberof SupportPage
    */
   ngOnInit() {

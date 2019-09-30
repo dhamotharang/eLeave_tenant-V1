@@ -9,9 +9,18 @@ import { userDummiesData } from '../../app.component';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 
-import {UserFilterRolesPipe} from './user-filter-roles/user-filter-roles.pipe';
-
+/**
+ * This variable is to store data of selected customer to be edited
+ * @export
+ * @class SettingsPage
+ */
 export let selectedEditUser;
+
+/**
+ * This variable is to store data of setting's popover configurations
+ * @export
+ * @class SettingsPage
+ */
 export let settingPopoverCtrlr;
 
 /**
@@ -29,7 +38,7 @@ export let settingPopoverCtrlr;
 export class SettingsPage implements OnInit {
 
   /**
-   *Creates an instance of SettingsPage.
+   * Creates an instance of SettingsPage.
    * @param {PopoverController} popoverController
    * @param {Events} event
    * @param {PaginationServiceService} settingPaging

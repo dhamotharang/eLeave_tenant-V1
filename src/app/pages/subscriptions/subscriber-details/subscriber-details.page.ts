@@ -11,7 +11,19 @@ import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-
 import { ChangeNextBillingDateComponent } from './change-next-billing-date/change-next-billing-date.component';
 
 
+
+/**
+ * This variable is to store updated data of subscriber info
+ * @export
+ * @class SubscriberDetailsPage
+ */
 export let subscriberUpdateInfo;
+
+/**
+ * This variable is to store data of subscriber detail's popup
+ * @export
+ * @class SubscriberDetailsPage
+ */
 export let subsDtlPopoverCtrlr;
 
 /**

@@ -9,12 +9,17 @@ import { UserDataService } from '../../services/user-data.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import {currUser} from '../../app.component';
 
+/**
+ * This variable is to store data of side menu either to show or hide it
+ * @export
+ * @class LoginPage
+ */
 export let sideMenuShow = {value: true};
 
 // export let isShowSideMenu = false;
+
 /**
  * This component is to setup a login page
- *
  * @export
  * @class LoginPage
  * @implements {OnInit}
@@ -24,7 +29,6 @@ export let sideMenuShow = {value: true};
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-
 
 export class LoginPage implements OnInit {
 
@@ -37,8 +41,8 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   constructor(
-    public userData: UserDataService,
-    public router: Router,
+    private userData: UserDataService,
+    private router: Router,
     private menuCtrl: MenuController,
     private pgSet: PaginationServiceService
   ) { }
@@ -63,7 +67,17 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   public type = 'password';
+
+  /**
+   * This property is to bind value of show password
+   * @memberof LoginPage
+   */
   public showPass = false;
+  
+  /**
+   * This property is to set home page url link
+   * @memberof LoginPage
+   */
   public homePage = '/main/dashboard';
 
   /**
@@ -74,8 +88,7 @@ export class LoginPage implements OnInit {
     this.pgSet.setShowSideMenu(false);
 
   }
-
-
+  
   /**
    * Function executed when click login button
    * @param {NgForm} loginForm

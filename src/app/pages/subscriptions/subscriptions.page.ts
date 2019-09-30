@@ -5,7 +5,20 @@ import { PaginationServiceService } from '../../services/pagination-service.serv
 import {customersDummiesData} from '../../app.component';
 
 
-export let selectedSubscribersInfo, currSubsPage;
+
+/**
+ * This variable is to store data of selected subscribers
+ * @export
+ * @class SubscriptionsPage
+ */
+export let selectedSubscribersInfo;
+
+/**
+ * This variable is to store data of current subscribers viewed
+ * @export
+ * @class SubscriptionsPage
+ */
+export let currSubsPage;
 
 /**
  * This component is to set up Subscriptions page

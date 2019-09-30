@@ -6,10 +6,41 @@ import { customersDummiesData, salesmanDummiesData } from '../../app.component';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 
+
+
+/**
+ * This variable is to store data of customer info
+ * @export
+ * @class CustomersPage
+ */
 export let customerInfo: any = {};
+
+/**
+ * This variable is to store data of customer data list from json
+ * @export
+ * @class CustomersPage
+ */
 export let customerDummyData: any = [];
+
+/**
+ * This variable is to store data of salesperson data list from json
+ * @export
+ * @class CustomersPage
+ */
 export let salesPersonDummyData: any = [];
+
+/**
+ * This variable is to store data of selected customer
+ * @export
+ * @class CustomersPage
+ */
 export let selCustView;
+
+/**
+ * This variable is to store data of current showed customer
+ * @export
+ * @class CustomersPage
+ */
 export let currCustPage;
 
 

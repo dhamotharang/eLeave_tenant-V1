@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 /**
  * This is a services to get page layout's settings
- *
  * @export
  * @class PaginationServiceService
  */
@@ -12,17 +11,33 @@ import { Injectable } from '@angular/core';
 
 export class PaginationServiceService {
 
-  config: any;
-  isShowingSideMenu: boolean;
-
+  /**
+   * Creates an instance of PaginationServiceService.
+   * @memberof PaginationServiceService
+   */
   constructor() { }
+
+  /**
+   * This property is for pagination's configurations
+   * @type {*}
+   * @memberof PaginationServiceService
+   */
+  config: any;
 
 
   /**
-   * Pagination settings
-   * To set number of items in 1 page
-   * To set current showing page number
-   * To set total number of items (for last page setting)
+   * This property is for hide or show side menu list
+   * @type {boolean}
+   * @memberof PaginationServiceService
+   */
+  isShowingSideMenu: boolean;
+
+
+  /**
+   * This method is to configure pagination settings.
+   * 1. To set number of items in 1 page
+   * 2. To set current showing page number
+   * 3. To set total number of items (for last page setting)
    *
    * @param {*} itmPg
    * @param {*} initPg
@@ -41,8 +56,7 @@ export class PaginationServiceService {
 
 
   /**
-   * To set value either hide or show the side menu
-   *
+   * This method is to set value either hide or show the side menu
    * @param {*} value
    * @returns
    * @memberof PaginationServiceService
@@ -53,8 +67,7 @@ export class PaginationServiceService {
 
 
   /**
-   * To get side menu's value either it should hidden or shown
-   *
+   * This method is to get side menu's value either it should hidden or shown
    * @returns
    * @memberof PaginationServiceService
    */

@@ -4,8 +4,7 @@ import { Events } from '@ionic/angular';
 
 
 /**
- * Service for user validation
- *
+ * This service is for user store or delete user's login, logout and validations
  * @export
  * @class UserDataService
  */
@@ -14,7 +13,6 @@ import { Events } from '@ionic/angular';
 })
 export class UserDataService {
 
-
   /**
    * Creates an instance of UserDataService.
    * @param {Events} events
@@ -22,23 +20,21 @@ export class UserDataService {
    * @memberof UserDataService
    */
   constructor(
-    public events: Events,
-    public storage: Storage
+    private events: Events,
+    private storage: Storage
   ) { }
 
   
   /**
-   * Variable decalration
-   *
+   * This property is a variable declarations for user loggin or not
    * @memberof UserDataService
    */
   HAS_LOGGED_IN = 'hasLoggedIn';
 
 
   /**
-   * To user login
-   * Set username to storage service
-   * 
+   * This method is to set user login.
+   * Then set username to storage service
    * @param {string} username
    * @returns {Promise<any>}
    * @memberof UserDataService
@@ -51,9 +47,8 @@ export class UserDataService {
   }
 
   /**
-   * To set user logout
-   * Remove username in storage servicd
-   *
+   * This method is to set user logout.
+   * This will remove username in storage service
    * @returns {Promise<any>}
    * @memberof UserDataService
    */
@@ -67,22 +62,25 @@ export class UserDataService {
 
 
   /**
-   * Function to set username to service
-   *
+   * This method is to set username to storage service
    * @param {string} username
    * @returns {Promise<any>}
    * @memberof UserDataService
    */
   setUsername(username: string): Promise<any> {
-    console.log('setUsername: ' + username);
+    // console.log('setUsername: ' + username);
     return this.storage.set('username', username);
   }
 
+  /**
+   * This method is to get username from storage
+   * @returns
+   * @memberof UserDataService
+   */
   getUsername() {
-    console.log('getUsernameval');
     // return 'getUsername';
     return this.storage.get('username').then((value) => {
-      console.log(value);
+      // console.log(value);
       return value;
     });
   }
@@ -95,20 +93,42 @@ export class UserDataService {
 
   // }
 
+  /**
+   * This method is to set remember me function. It will
+   * set username and password to session storage
+   * @param {*} loginData
+   * @memberof UserDataService
+   */
   setRememberMe(loginData) {
-    console.log('setRememberMe');
-    console.log(loginData);
-    localStorage.setItem('username', loginData.username);
-    localStorage.setItem('password', loginData.password);
+    // console.log('setRememberMe');
+    // console.log(loginData);
+    sessionStorage.setItem('username', loginData.username);
+    sessionStorage.setItem('password', loginData.password);
+    // localStorage.setItem('username', loginData.username);
+    // localStorage.setItem('password', loginData.password);
   }
 
+  /**
+   * This method is to remove save remember me's username and password
+   * from session storage
+   * @param {*} loginData
+   * @memberof UserDataService
+   */
   removeRememberMe(loginData) {
-    console.log('removeRememberMe');
+    // console.log('removeRememberMe');
     // this.storage.remove('user_name');
-    localStorage.removeItem('username');
-    localStorage.removeItem('password');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('password');
+    // localStorage.removeItem('username');
+    // localStorage.removeItem('password');
   }
 
+  /**
+   * This method is to set forget password. It will
+   * notify admin's to reset user's password
+   * @param {*} emailData
+   * @memberof UserDataService
+   */
   forgetPassword(emailData) {
     console.log('forgetPassword');
     console.log(emailData);
