@@ -1,152 +1,182 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>customers</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content> -->
 <ion-app style="padding-top: 55px; --ion-background-color: #f0f0f7;">
     <ion-content>
 
        <!----------- Customers Title/Searchbar/Drop Down/Add New Items ----------->
-      <!-- <ion-row>
-        <ion-col>
-          <ion-title class="customersTitleStyle">
-              Customers
-          </ion-title>
-        </ion-col>
-      </ion-row> -->
       <ion-row>
-        <ion-col>
+        <!-- <ion-col> -->
           <ion-title class="customerTitleStyle">
               Customers
           </ion-title>
-        </ion-col>
-        <ion-col>
-          <ion-row style="justify-content: flex-end; padding-right: 9px;">
+        <!-- </ion-col> -->
+        <!-- <ion-col> -->
+          <ion-item-group class="customerButtonsSetting">
+            
+              <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchCust($event)"></ion-searchbar>
+              <ion-button (click)="ngOnClickPophoverButton($event)" style="width: 40px;">
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
+              </ion-button>
+              <ion-button [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'">Add User</ion-button>
+          </ion-item-group>
+
+          <!-- <ion-item-group style="justify-content: flex-end; padding-right: 9px; display: flex;">
             <ion-searchbar class="customerSearchBar" placeholder="Search Name/Company..."></ion-searchbar>
             
-            <!-- <ion-button class="customerDropDownMenuButton" (click)="ngOnClickPophoverButton($event)" expand="block">  -->
             <ion-button class="customerDropDownMenuButton" (click)="ngOnClickPophoverButton($event)"> 
               <ion-icon slot="icon-only" name="menu"></ion-icon>
             </ion-button>
             
             <ion-button class="customerAddNewButton" [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'" block>
-            <!-- <ion-button class="customerAddNewButton" onclick="location.href='/main/customers/addnewcustomer'" block> -->
               <ion-icon name="add"></ion-icon> 
               <ion-text style="padding-left: 2px; ">Add New</ion-text>
             </ion-button>
 
-          </ion-row>
-        </ion-col>
+          </ion-item-group> -->
+        <!-- </ion-col> -->
       </ion-row>
       
       <!----------- Customers Details ----------->
-      <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px; height: -webkit-fill-available;">     
-        <ng-container *ngIf="selectedVal === 'card'; else elseTemplate">   
+      <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px; height: -webkit-fill-available; display: flex;">    
+          <ng-container *ngIf="selectedVal === 'card'; else elseTemplate">   
 
-          <!------- Customer Card View ------->
-          <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
-            <ion-item-divider style="background-color: #ffffff; padding: 0px;">
-              <ion-grid>
-                <ion-row>
-                  <!-- <ion-col style="width: fit-content;"> -->
+            <!------- Customer Card View ------->
+            <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
+                <ion-item-group>
+                  <!-- <ion-row> -->
                     <ion-avatar class="customerProfilePicture">
                       <img src="../assets/icon/layout/picture.png">
                     </ion-avatar>
-                  <!-- </ion-col> -->
-                  <ion-col>
-                    <ion-card-title class="customerCardTitleStyle">
-                      <!-- Amelia Hart -->
-                      {{cardData.clientName}}
-                    </ion-card-title>
-                    <ion-card-content class="customerCardBodyStyle">
-                        <ion-text>
-                            <!-- ABC Company Sdn Bhd -->
-                            {{cardData.companyName}}
-                        </ion-text>
-                        <ion-text>
-                            <!-- amelia@abccompany.com -->
-                            {{cardData.clientEmail}}
-                        </ion-text>
-                    </ion-card-content>
-                  </ion-col>
-                  <ion-col>
-                    <ion-label class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
+                    <ion-list>
+                      <ion-card-title class="customerCardTitleStyle">
+                        {{cardData.clientName}}
+                      </ion-card-title>
+                      <ion-card-content class="customerCardBodyStyle">
+                          <ion-text>
+                              {{cardData.companyName}}
+                          </ion-text>
+                          <ion-text>
+                              {{cardData.clientEmail}}
+                          </ion-text>
+                      </ion-card-content>
+                    </ion-list>
+                    <ion-label style="min-width: fit-content; height: fit-content;" class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
                       (click)="onClickCustomerViewDetails(cardData)">
                       View Details
-                    </ion-label>   
-                    
+                    </ion-label>
+                  <!-- </ion-row> -->
+                </ion-item-group>
+                <ion-col>
+                  <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
+                  <ion-text class="customerCardIconText">
+                    {{cardData.tenantNumber}}
+                  </ion-text>
+                </ion-col>
+                <ion-col>
+                  <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
+                  <ion-text class="customerCardIconText">
+                    {{cardData.employeeNumber}}
+                  </ion-text>
+                </ion-col>
+            </ion-card>
+
+            
+            <!-- <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
+                <ion-item-divider style="background-color: #ffffff; padding: 0px;">
+                  <ion-grid>
+                    <ion-row>
+                        <ion-avatar class="customerProfilePicture">
+                          <img src="../assets/icon/layout/picture.png">
+                        </ion-avatar>
+                      <ion-col>
+                        <ion-card-title class="customerCardTitleStyle">
+                          {{cardData.clientName}}
+                        </ion-card-title>
+                        <ion-card-content class="customerCardBodyStyle">
+                            <ion-text>
+                                {{cardData.companyName}}
+                            </ion-text>
+                            <ion-text>
+                                {{cardData.clientEmail}}
+                            </ion-text>
+                        </ion-card-content>
+                      </ion-col>
+                      <ion-col>
+                        <ion-label class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
+                          (click)="onClickCustomerViewDetails(cardData)">
+                          View Details
+                        </ion-label>   
+                        
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item-divider>
+                  <ion-col>
+                    <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
+                    <ion-text class="customerCardIconText">
+                      {{cardData.tenantNumber}}
+                    </ion-text>
                   </ion-col>
+                  <ion-col>
+                    <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
+                    <ion-text class="customerCardIconText">
+                      {{cardData.employeeNumber}}
+                    </ion-text>
+                  </ion-col>
+              </ion-card> -->
+  
+            <!-- Customer list's pagination -->
+            <ion-row style="margin: 0px 20px 0px auto; display: table;">        
+              <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+            </ion-row>
+          </ng-container>
+
+          <ng-template #elseTemplate>
+            <ion-row style="display: flow-root; width: -webkit-fill-available;">
+              <!------- Customer Table View ------->
+              <ion-grid class="customerTable">
+                <ion-row class="headerStyle">
+                  <ion-col size="3">CLIENT NAME</ion-col>
+                  <ion-col>COMPANY NAME</ion-col>
+                  <ion-col>EMAIL</ion-col>
+                  <ion-col size="1.5">PLAN NAME</ion-col>
+                  <ion-col size="1">STATUS</ion-col>
                 </ion-row>
-              </ion-grid>
-            </ion-item-divider>
-            <!-- <ion-item-group> -->
-              <ion-col>
-                <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
-                <!-- <ion-text style="align-content: center; text-align: center;  font-size: 17px; font-weight: bold; padding-left: 7px; -->         
-                <ion-text class="customerCardIconText">
-                  {{cardData.tenantNumber}}
-                </ion-text>
-              </ion-col>
-              <ion-col>
-                <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
-                <ion-text class="customerCardIconText">
-                  {{cardData.employeeNumber}}
-                </ion-text>
-              </ion-col>
-            <!-- </ion-item-group> -->
-          </ion-card>
-          
-        </ng-container>
-
-        <ng-template #elseTemplate>
-          <!------- Customer Table View ------->
-          <ion-grid class="customerTable">
-            <ion-row class="headerStyle">
-              <ion-col size="3">CLIENT NAME</ion-col>
-              <ion-col>COMPANY NAME</ion-col>
-              <ion-col>EMAIL</ion-col>
-              <ion-col size="1.5">PLAN NAME</ion-col>
-              <ion-col size="1">STATUS</ion-col>
+                <ion-row *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
+                [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
+                (click)="onClickCustomerViewDetails(tableData)">
+                  <ion-col size="3">{{tableData.clientName}}</ion-col>
+                  <ion-col>{{tableData.companyName}}</ion-col>
+                  <ion-col>{{tableData.clientEmail}}</ion-col>
+                  <ion-col size="1.5">{{tableData.plan}}</ion-col>
+                  <ion-col size="1.5"> 
+                    <!-- {{tableData.status}} -->
+                      <span [ngSwitch]="tableData.status">
+                        <p *ngSwitchCase="'LIVE'" style="color: #5ee2a0;">
+                            {{tableData.status}}
+                        </p>
+                        <p *ngSwitchCase="'TRIAL'" style="color: #3b86ff;">
+                            {{tableData.status}}                  
+                        </p>
+                        <p *ngSwitchCase="'PAST DUE'" style="color: #ff3b3b;">
+                            {{tableData.status}}                  
+                        </p>
+                        <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" style="color: #ff3b3b;">
+                            {{tableData.status}}                  
+                        </p>
+                      </span>
+    
+                  </ion-col>
+                  
+                </ion-row>
+              </ion-grid>      
+            
+              <!-- Customer list's pagination -->
+              <ion-row style="margin: 0px 20px 0px auto; display: table;">        
+                <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+              </ion-row>
             </ion-row>
-            <ion-row *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
-            [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
-            [class.highlight]="tableData.clientName === currentCustomer"
-            (click)="onClickCustomerViewDetails(tableData)">
-              <ion-col size="3">{{tableData.clientName}}</ion-col>
-              <ion-col>{{tableData.companyName}}</ion-col>
-              <ion-col>{{tableData.clientEmail}}</ion-col>
-              <ion-col size="1.5">{{tableData.plan}}</ion-col>
-              <ion-col size="1.5"> 
-                <!-- {{tableData.status}} -->
-                  <span [ngSwitch]="tableData.status">
-                    <p *ngSwitchCase="'LIVE'" style="color: #5ee2a0;">
-                        {{tableData.status}}
-                    </p>
-                    <p *ngSwitchCase="'TRIAL'" style="color: #3b86ff;">
-                        {{tableData.status}}                  
-                    </p>
-                    <p *ngSwitchCase="'PAST DUE'" style="color: #ff3b3b;">
-                        {{tableData.status}}                  
-                    </p>
-                    <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" style="color: #ff3b3b;">
-                        {{tableData.status}}                  
-                    </p>
-                  </span>
-
-              </ion-col>
-              
-            </ion-row>
-          </ion-grid>          
-        </ng-template>
-      </ion-row>
-
-      <!-- Customer list's pagination -->
-      <ion-row>        
-        <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+          </ng-template>
+        
+        
       </ion-row>
     </ion-content>
   </ion-app>

@@ -156,6 +156,7 @@ export class AppComponent {
     // console.log('getLoggedUseraaa:' + this.userInfo.getUsername());
     // this.loggedUser = this.userInfo.getUsername();
     this.loggedUser = currUser;
+    this.settingPage.setSideMenuType(this.sideMenuStyle);
     // console.log('loggedUser:' + this.loggedUser);
   }
 
@@ -186,6 +187,7 @@ export class AppComponent {
    */
   collapseMenu(boolCollapse) {
     this.sideMenuStyle = (boolCollapse === true) ? 'iconMenu' : 'fullMenu';
+    this.settingPage.setSideMenuType(this.sideMenuStyle);
   }
 
   /**

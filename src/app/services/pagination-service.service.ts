@@ -32,6 +32,13 @@ export class PaginationServiceService {
    */
   isShowingSideMenu: boolean;
 
+  /**
+   * This property is to declare type of side menu to be
+   * shown (full or icon view)
+   * @type {string}
+   * @memberof PaginationServiceService
+   */
+  sideMenuType: string;
 
   /**
    * This method is to configure pagination settings.
@@ -56,23 +63,44 @@ export class PaginationServiceService {
 
 
   /**
-   * This method is to set value either hide or show the side menu
+   * This method is to set value either hide or show the side menu and toolbar
    * @param {*} value
    * @returns
    * @memberof PaginationServiceService
    */
-  setShowSideMenu(value) {
+  setShowToolbarSideMenu(value) {
     return this.isShowingSideMenu = value;
   }
 
 
   /**
-   * This method is to get side menu's value either it should hidden or shown
+   * This method is to get value for hide/show side menu and toolbar
    * @returns
    * @memberof PaginationServiceService
    */
-  getSideMenuStatus() {
+  getToolbarSideMenuStatus() {
     return this.isShowingSideMenu;
   }
+
+  /**
+   * This method is to set type of side menu to be shown. It's either
+   * "fullMenu" or "iconMenu"
+   * @param {*} type
+   * @returns
+   * @memberof PaginationServiceService
+   */
+  setSideMenuType(type) {
+    return this.sideMenuType = type;
+  }
+
+  /**
+   * This method is to get type of side menu (fullMenu/iconMenu)
+   * @returns
+   * @memberof PaginationServiceService
+   */
+  getSideMenuType() {
+    return this.sideMenuType;
+  }
+
 
 }

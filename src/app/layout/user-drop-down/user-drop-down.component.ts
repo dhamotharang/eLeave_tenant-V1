@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 // import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
 
 import { UserDataService } from '../../services/user-data.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 
 import { toolbarPopup } from '../../app.component';
+import { ChangeProfilePhotoComponent } from './change-profile-photo/change-profile-photo.component';
 
 /**
  * Component for User drop down menu in toolbar
@@ -31,6 +33,7 @@ export class UserDropDownComponent implements OnInit {
   constructor(
     private userDataSvs: UserDataService,
     private pggSvs: PaginationServiceService,
+    private popovrController: PopoverController,
     // private router: Router
   ) { }
 
@@ -55,9 +58,33 @@ export class UserDropDownComponent implements OnInit {
   async onClickLogout() {
     this.userDataSvs.logout().then(() => {
       toolbarPopup.dismiss();
-      this.pggSvs.setShowSideMenu(false);
+      this.pggSvs.setShowToolbarSideMenu(false);
       // return this.router.navigateByUrl('/login');
     });
   }
 
+  /**
+   * This method is executed when user want to change profile picture.
+   * It will dismiss user's popup then will open the change profile picture popup
+   * @param {*} evt
+   * @returns
+   * @memberof UserDropDownComponent
+   */
+  async onChangeProfilePhoto(evt: any) {
+    toolbarPopup.dismiss();
+    const popover = await this.popovrController.create({
+      component: ChangeProfilePhotoComponent,
+      componentProps: {
+        viewType: this
+      },
+      event: evt,
+      cssClass: 'pop-over-style'
+    });
+
+    // popover.onDidDismiss().then((data) => {
+    //   this.selectedVal = selCustView.val;
+    // });
+
+    return await popover.present();
+  }
 }

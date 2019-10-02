@@ -48,7 +48,7 @@
 
         <!-- Submit button -->
         <ion-item lines="none">
-          <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)">
+          <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)" (keyup.enter)="onLogin(loginForm)">
           <!-- <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)" [routerDirection]="'root'" [routerLink]="homePage"> -->
             Login</ion-button>
         </ion-item>

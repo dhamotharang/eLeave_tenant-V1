@@ -31,6 +31,12 @@ export class UserDataService {
    */
   HAS_LOGGED_IN = 'hasLoggedIn';
 
+  /**
+   * This property is a variable declaration for user profile picture's
+   * url
+   * @memberof UserDataService
+   */
+  public userPicture;
 
   /**
    * This method is to set user login.
@@ -133,5 +139,24 @@ export class UserDataService {
     console.log('forgetPassword');
     console.log(emailData);
     console.log('need to notify superadmin');
+  }
+
+  /**
+   * This method is to bind value of pictureUrl to userPicture
+   * @param {*} pictureUrl
+   * @returns
+   * @memberof UserDataService
+   */
+  setUserProfilePicture(pictureUrl) {
+    return this.userPicture = pictureUrl;
+  }
+
+  /**
+   * This method is to get the value of userPicture
+   * @returns
+   * @memberof UserDataService
+   */
+  getUserProfilePicture() {
+    return this.userPicture;
   }
 }

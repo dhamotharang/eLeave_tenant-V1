@@ -10,12 +10,12 @@
         --ion-background-color: transparent;
         display: flex;
         justify-content: flex-end;
-
+  
         ion-button {
             text-transform: capitalize;
             width: 100px;
             height: 30px;
-            font-size: 10px;
+            font-size: var(--eleave-body-size9);
             margin: 10px 7px 0px 0px;
         }
     }

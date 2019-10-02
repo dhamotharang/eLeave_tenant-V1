@@ -35,6 +35,18 @@
         font-size: 13px;
     }
 
+    .customerButtonsSetting {
+        display: flex;
+        margin: 5px 20px;
+        ion-button {            
+            text-transform: capitalize;
+            width: 100px;
+            height: 30px;
+            font-size: var(--eleave-body-size9);
+            margin: 11px 3px 2px;
+        }
+    }
+
     .customerCardStyle {
         background-color: #ffffff;
         width: 31%;
@@ -43,6 +55,16 @@
         padding-left: 23px;
         padding-right: 11px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+        flex: auto;
+
+        ion-item-group {
+            display: flex;
+            border-bottom: 1px solid var(--eleave-border-color);
+        }
+
+        ion-list {
+            background-color: #ffffff;
+        }
     }
 
     .customerCardTitleStyle {
@@ -71,6 +93,7 @@
         padding: 0px;
         padding-top: 5px;
         padding-left: 5px;
+        display: grid;
     }
 
     .customerCardViewDetails {        

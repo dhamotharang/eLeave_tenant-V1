@@ -33,50 +33,48 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  this.createApp();
-  // it('should create the app', async () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app).toBeTruthy();
-  // });
+  // this.createApp();
+  it('should create the app', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  });
 
-  this.initApp();
-  // it('should initialize the app', async () => {
-  //   TestBed.createComponent(AppComponent);
-  //   expect(platformSpy.ready).toHaveBeenCalled();
-  //   await platformReadySpy;
-  //   expect(statusBarSpy.styleDefault).toHaveBeenCalled();
-  //   expect(splashScreenSpy.hide).toHaveBeenCalled();
-  // });
+  // this.initApp();
+  it('should initialize the app', async () => {
+    TestBed.createComponent(AppComponent);
+    expect(platformSpy.ready).toHaveBeenCalled();
+    await platformReadySpy;
+    expect(statusBarSpy.styleDefault).toHaveBeenCalled();
+    expect(splashScreenSpy.hide).toHaveBeenCalled();
+  });
 
-  this.createMenuLabels();
-  // it('should have menu labels', async () => {
-  //   const fixture = await TestBed.createComponent(AppComponent);
-  //   await fixture.detectChanges();
-  //   const app = fixture.nativeElement;
-  //   const menuItems = app.querySelectorAll('ion-label');
-  //   expect(menuItems.length).toEqual(6);
-  //   expect(menuItems[0].textContent).toContain('Home');
-  //   expect(menuItems[1].textContent).toContain('Dashboard');
-  //   expect(menuItems[2].textContent).toContain('Customers');
-  //   expect(menuItems[3].textContent).toContain('Subscriptions');
-  //   expect(menuItems[4].textContent).toContain('Support');
-  //   expect(menuItems[5].textContent).toContain('Settings');
-  // });
+  // this.createMenuLabels();
+  it('should have menu labels', async () => {
+    const fixture = await TestBed.createComponent(AppComponent);
+    await fixture.detectChanges();
+    const app = fixture.nativeElement;
+    const menuItems = app.querySelectorAll('ion-label');
+    expect(menuItems.length).toEqual(5);
+    expect(menuItems[0].textContent).toContain('Dashboard');
+    expect(menuItems[1].textContent).toContain('Customers');
+    expect(menuItems[2].textContent).toContain('Subscriptions');
+    expect(menuItems[3].textContent).toContain('Support');
+    expect(menuItems[4].textContent).toContain('Settings');
+  });
 
-  // it('should have urls', async () => {
-  //   const fixture = await TestBed.createComponent(AppComponent);
-  //   await fixture.detectChanges();
-  //   const app = fixture.nativeElement;
-  //   const menuItems = app.querySelectorAll('ion-item');
-  //   expect(menuItems.length).toEqual(6);
-  //   expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/main/dashboard');
-  //   expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/main/dashboard');
-  //   expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/main/customers');
-  //   expect(menuItems[3].getAttribute('ng-reflect-router-link')).toEqual('/main/subscriptions');
-  //   expect(menuItems[4].getAttribute('ng-reflect-router-link')).toEqual('/main/support');
-  //   expect(menuItems[5].getAttribute('ng-reflect-router-link')).toEqual('/main/settings');
-  // });
+  it('should have urls', async () => {
+    const fixture = await TestBed.createComponent(AppComponent);
+    await fixture.detectChanges();
+    const app = fixture.nativeElement;
+    const menuItems = app.querySelectorAll('ion-item');
+    expect(menuItems.length).toEqual(5);
+    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/main/dashboard');
+    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/main/customers');
+    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/main/subscriptions');
+    expect(menuItems[3].getAttribute('ng-reflect-router-link')).toEqual('/main/support');
+    expect(menuItems[4].getAttribute('ng-reflect-router-link')).toEqual('/main/settings');
+  });
 
 });
 

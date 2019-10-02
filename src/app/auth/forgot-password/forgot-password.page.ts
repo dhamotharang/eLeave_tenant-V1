@@ -53,7 +53,7 @@ export class ForgotPasswordPage implements OnInit {
    * @memberof ForgotPasswordPage
    */
   ngOnInit() {
-    this.pgSetting.setShowSideMenu(false);
+    this.pgSetting.setShowToolbarSideMenu(false);
   }
 
 

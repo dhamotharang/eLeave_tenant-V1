@@ -20,7 +20,11 @@ export class DashboardPage implements OnInit {
    * @memberof DashboardPage
    */
   constructor(
-    private pgSett: PaginationServiceService
+    /**
+     * This property is to get method/function from PaginationServiceService
+     * @memberof DashboardPage
+     */
+    public pgSett: PaginationServiceService,
   ) { }
 
   /**
@@ -115,7 +119,7 @@ export class DashboardPage implements OnInit {
    */
   ngOnInit() {
     this.overviewSgmtOpt = 'all';
-    this.pgSett.setShowSideMenu(true);
+    this.pgSett.setShowToolbarSideMenu(true);
   }
 
 

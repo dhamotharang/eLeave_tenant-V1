@@ -85,8 +85,7 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   ngOnInit() {
-    this.pgSet.setShowSideMenu(false);
-
+    this.pgSet.setShowToolbarSideMenu(false);
   }
   
   /**
@@ -96,11 +95,11 @@ export class LoginPage implements OnInit {
    */
   async onLogin(loginForm: NgForm) {
     this.submitted = true;
-    this.pgSet.setShowSideMenu(false);
+    this.pgSet.setShowToolbarSideMenu(false);
     // console.log(loginForm.valid);
 
     if (loginForm.valid) {
-      this.pgSet.setShowSideMenu(true);
+      this.pgSet.setShowToolbarSideMenu(true);
       // console.log('1this.userLogin.username');
       // console.log(this.userLogin.username);
       Object.assign(currUser, {value: this.userLogin.username});

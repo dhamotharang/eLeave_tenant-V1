@@ -1,0 +1,26 @@
+<ion-content style="padding:10px; margin: 10px;">
+  <ion-header>
+    <ion-item-group class="headerStyle">
+      <ion-label>
+        CHANGE PROFILE PICTURE
+      </ion-label>
+    </ion-item-group>
+  </ion-header>
+
+  <!-- History Body -->
+  <ion-list class="bodyStyle">
+    <ion-item-group>
+      <ion-avatar>
+        <img *ngIf="!userInfo.getUserProfilePicture()" src="../../../../assets/icon/layout/picture.png"/>
+        <img *ngIf="userInfo.getUserProfilePicture()" src="{{imgUrl}}"/>
+      </ion-avatar>
+      <ion-button fill="clear" (click)="onUploadPicture()">
+        New Profile Picture
+      </ion-button>
+      <ion-button fill="clear" (click)="onRemovePicture()">
+        Remove Profile Picture
+      </ion-button>
+    </ion-item-group>
+  </ion-list>
+  
+</ion-content>

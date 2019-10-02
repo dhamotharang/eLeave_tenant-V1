@@ -5,6 +5,7 @@ import { CustomerPopoverComponent } from './customer-popover/customer-popover.co
 import { customersDummiesData, salesmanDummiesData } from '../../app.component';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
+import { SearchDataService } from '../../services/search-data.service';
 
 
 
@@ -65,7 +66,8 @@ export class CustomersPage implements OnInit {
    */
   constructor(
     private popoverController: PopoverController,
-    private custPaging: PaginationServiceService
+    private custPaging: PaginationServiceService,
+    private custSearch: SearchDataService
   ) { }
 
 
@@ -152,6 +154,19 @@ export class CustomersPage implements OnInit {
     this.configPageCust = this.custPaging.pageConfig(9, event, this.customerData.length);
     currCustPage = event;
     // return this.configPageCust;
+  }
+
+
+  onSearchCust(event) {
+    // console.log(event);
+    
+    this.customerData = customersDummiesData;
+    // console.log(customersDummiesData);
+    this.customerData = (event.detail.value.length > 0 ) ?
+                      this.custSearch.filerSearch(event.detail.value, customersDummiesData, 'clientName') :
+                      customersDummiesData;
+    // console.log(this.customerData);
+    this.pageCustChanged(1);
   }
 }
 

@@ -173,137 +173,6 @@
           </div>
         </ion-card-content>
       </ion-card>
-        
-      
-      <!-- All Subscriptions -->
-      <!-- <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">All Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  246K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleDecr"  
-              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <ion-icon name="arrow-down"></ion-icon>
-              <ion-label>
-                  13.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" item-right src="../../../assets/icon/dashboard/icon-greet.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card> -->
-        
-      <!-- Active Subscriptions -->
-      <!-- <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Active Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  2453K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleIncr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <ion-icon name="arrow-up"></ion-icon>
-              <ion-label>
-                  13.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-binoculars.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card> -->
-        
-      <!-- Trial Subscriptions -->
-      <!-- <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Trial Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  4180K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleDecr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <ion-icon name="arrow-down"></ion-icon>
-              <ion-label>
-                  9.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-survey.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card> -->
-        
-      <!-- Past Due Subscriptions -->
-      <!-- <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Past Due Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  1980K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleDecr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <ion-icon name="arrow-down"></ion-icon>
-              <ion-label>
-                  12.8%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-past-due-subs.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card> -->
-        
-      <!-- Cancel Subscriptions -->
-      <!-- <ion-card class="cardStyle">
-        <ion-card-header>
-          <ion-card-title class="cardTitleStyle">Cancel Subscriptions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="cardColumn">
-            <div class="cardRow">
-              <ion-label class="cardValueStyle">
-                  3711K
-              </ion-label>
-            </div>
-            <div class="cardRow cardValueDiffStyleIncr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <ion-icon name="arrow-up"></ion-icon>
-              <ion-label>
-                  4.3%
-              </ion-label>
-            </div>
-          </div>
-          <div class="cardColumn">
-            <ion-icon class="cardIconStyle" src="../../../assets/icon/dashboard/icon-email-response.svg"></ion-icon>
-          </div>
-        </ion-card-content>
-      </ion-card> -->
     </ion-row>
     
     <div style="height: 15px;"></div>
@@ -320,109 +189,139 @@
                     Show More
                 <!-- </ion-label> -->
             </ion-item>
-            <!-- <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
-              <ion-label class="sidebarList">
-                {{p.title}}
-              </ion-label>
-            </ion-item> -->
           </ion-col>
         </ion-row>
-
         <div style="height: 5px;"></div>
-        <ion-row>
+        <ion-row [class]="(pgSett.getSideMenuType() === 'fullMenu') ? 'hide-md-down' : 'hide-sm-down'">
          
-        <ion-grid>
-          <!-- Table Header -->
-          <ion-row class="tableHeaderTheme">
-            <ion-col size="4">
-              <div>
-                CLIENT NAME
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                ACTIVATED ON
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                CREATED ON
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                PLAN NAME
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                STATUS
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                LAST BILLED ON
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                NEXT BILLED ON
-              </div>
-            </ion-col>
-          </ion-row>
+          <ion-grid>
+            <!-- Table Header -->
+            <ion-row class="tableHeaderTheme">
+              <!-- <ion-col size="4"> -->
+                <ion-label style="width:34%;">
+                  CLIENT NAME
+                </ion-label>
+              <!-- </ion-col> -->
+              <!-- <ion-col> -->
+                <ion-label style="width:10%;">
+                  ACTIVATED ON
+                </ion-label>
+              <!-- </ion-col> -->
+              <!-- <ion-col> -->
+                <ion-label style="width:12%;">
+                  CREATED ON
+                </ion-label>
+              <!-- </ion-col> -->
+              <!-- <ion-col> -->
+                <ion-label style="width:11%;">
+                  PLAN NAME
+                </ion-label>
+              <!-- </ion-col> -->
+              <!-- <ion-col> -->
+                <ion-label style="width:10%;">
+                  STATUS
+                </ion-label>
+              <!-- </ion-col> -->
+              <!-- <ion-col> -->
+                <ion-label style="width:12%;">
+                  LAST BILLED ON
+                </ion-label>
+              <!-- </ion-col>
+              <ion-col> -->
+                <ion-label style="width:11%;">
+                  NEXT BILLED ON
+                </ion-label>
+              <!-- </ion-col> -->
+            </ion-row>
 
-          <!-- Table body. NOTE: At this moment use dummy data only -->
-          <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers; let i=index">
-            <ion-col size="4" style="text-align: left; width:40%;">
-              <div>
-                {{table.companyName}}
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                {{table.activationDate}}
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                {{table.creationDate}}
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                {{table.plan}}
-              </div>
-            </ion-col>
-            <ion-col>
-              <span [ngSwitch]="table.status">
-                <p *ngSwitchCase="'LIVE'" class="columnStatusGreen">
-                    {{table.status}}
-                </p>
-                <p *ngSwitchCase="'TRIAL'" class="columnStatusBlue">
-                    {{table.status}}                  
-                </p>
-                <p *ngSwitchCase="'PAST DUE'" class="columnStatusRed">
-                    {{table.status}}                  
-                </p>
-                <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="columnStatusRed">
-                    {{table.status}}                  
-                </p>
-              </span>
-            </ion-col>
-            <ion-col>
-              <div>
-                {{table.lastBillingOn}}
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                {{table.nextBillingOn}}
-              </div>
-            </ion-col>
-          </ion-row> 
+            <!-- Table body. NOTE: At this moment use dummy data only -->
+            <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers; let i=index">
+              <ion-col size="4" style="text-align: left; width:40%;">
+                <div>
+                  {{table.companyName}}
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  {{table.activationDate}}
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  {{table.creationDate}}
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  {{table.plan}}
+                </div>
+              </ion-col>
+              <ion-col>
+                <span [ngSwitch]="table.status">
+                  <p *ngSwitchCase="'LIVE'" class="columnStatusGreen">
+                      {{table.status}}
+                  </p>
+                  <p *ngSwitchCase="'TRIAL'" class="columnStatusBlue">
+                      {{table.status}}                  
+                  </p>
+                  <p *ngSwitchCase="'PAST DUE'" class="columnStatusRed">
+                      {{table.status}}                  
+                  </p>
+                  <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="columnStatusRed">
+                      {{table.status}}                  
+                  </p>
+                </span>
+              </ion-col>
+              <ion-col>
+                <div>
+                  {{table.lastBillingOn}}
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  {{table.nextBillingOn}}
+                </div>
+              </ion-col>
+            </ion-row> 
           </ion-grid>
         
+        </ion-row>
+
+        <ion-row [class]="(pgSett.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
+          <ion-item-group class="subsCardStyles">
+            <ion-card *ngFor="let table of subscribers; let i=index">
+              <ion-card-content class="cardStyle cardStyles">
+                <ion-card-title>
+                    {{table.companyName}}
+                  <ion-card-subtitle>
+                    <span>
+                      {{table.plan}}
+                    </span>
+                    <span [ngSwitch]="table.status">
+                      <p *ngSwitchCase="'LIVE'" class="columnStatusGreen">
+                          {{table.status}}
+                      </p>
+                      <p *ngSwitchCase="'TRIAL'" class="columnStatusBlue">
+                          {{table.status}}                  
+                      </p>
+                      <p *ngSwitchCase="'PAST DUE'" class="columnStatusRed">
+                          {{table.status}}                  
+                      </p>
+                      <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="columnStatusRed">
+                          {{table.status}}                  
+                      </p>
+                    </span>
+                  </ion-card-subtitle>
+                </ion-card-title>
+                <ion-item-group style="padding-top: 10px;">
+                  <ion-label> Creation Date: {{table.creationDate}} </ion-label>
+                  <ion-label> Activatation Date: {{table.activationDate}} </ion-label>
+                  <ion-label> Last Billing Date: {{table.lastBillingOn}} </ion-label>
+                  <ion-label> Next Billing Date: {{table.nextBillingOn}} </ion-label>
+                </ion-item-group>
+              </ion-card-content>
+            </ion-card>
+          </ion-item-group>
         </ion-row>
       </ion-col>
     </ion-row>

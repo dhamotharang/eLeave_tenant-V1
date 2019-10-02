@@ -2,8 +2,9 @@
   
   
   <!-- <ion-header> -->
-    <ion-toolbar style="width: 82%; left: 269px;" [ngStyle]="{ 'display': (settingPage.getSideMenuStatus()) ? 'flex' : 'none'}">
-      <ion-item-group slot="end" style="display: inline-flex; height: fit-content; align-items: center; margin-right: 20px;">
+    <ion-toolbar style="width: auto; margin-left: auto; text-align: -webkit-right; height: 50px;" [ngStyle]="{ 'display': (settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none'}">
+    <!-- <ion-toolbar style="width: 82%; left: 269px;" [ngStyle]="{ 'display': (settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none'}"> -->
+      <ion-item-group slot="end" style="display: inline-flex; height: fit-content; align-items: center;">
         <ion-button slot="icon-only" fill="clear" (onclick)="clickNotiBtn($event)">
           <ion-icon class="toolbarIcon" src="../assets/icon/layout/icon-notification.svg"></ion-icon>
         </ion-button>
@@ -19,10 +20,12 @@
     </ion-toolbar>
   <!-- </ion-header> -->
     
-  <ion-split-pane *ngIf="sideMenuStyle === 'fullMenu'"  when="xs" >    
+  <ion-split-pane *ngIf="sideMenuStyle === 'fullMenu'"  when="xs">    
     <!-- Full menu -->    
     <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
-      [ngStyle]="{ 'display': (sideMenuStyle === 'fullMenu' && settingPage.getSideMenuStatus()) ? 'flex' : 'none'}">
+    [ngStyle]="{ 'display': (sideMenuStyle === 'fullMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none'}">
+    <!-- <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
+      [ngStyle]="{ 'display': (sideMenuStyle === 'fullMenu' && settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none'}"> -->
       <ion-header>
         <ion-toolbar>
           <ion-avatar class="sidebarLogo">
@@ -98,8 +101,11 @@
   <ion-split-pane *ngIf="sideMenuStyle === 'iconMenu'" when="xs">
     <!-- Icon menu only -->
     <ion-menu type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
-    [ngStyle]="{ 'display': (sideMenuStyle === 'iconMenu' && settingPage.getSideMenuStatus()) ? 'flex' : 'none' }" 
+    [ngStyle]="{ 'display': (sideMenuStyle === 'iconMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none' }" 
     style="min-width: fit-content;">
+    <!-- <ion-menu type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
+    [ngStyle]="{ 'display': (sideMenuStyle === 'iconMenu' && settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none' }" 
+    style="min-width: fit-content;"> -->
       <ion-header style="display: inline-table;">
         <ion-toolbar>
           <ion-icon class="collapse" slot="end" color="medium" name="menu"
@@ -120,7 +126,7 @@
     </ion-menu>
 
       <ion-router-outlet main>
-        <ion-header>
+        <!-- <ion-header>
             <ion-toolbar style="height: fit-content; display: flex;">
               <ion-buttons slot="secondary">
                 <ion-button style="width:fit-content; height:fit-content">
@@ -140,7 +146,7 @@
                 </ion-avatar>
               </ion-buttons>
             </ion-toolbar>
-        </ion-header>
+        </ion-header> -->
       </ion-router-outlet>
   </ion-split-pane>
 

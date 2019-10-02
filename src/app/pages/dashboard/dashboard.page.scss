@@ -65,10 +65,13 @@
     .tableMainLayout {
         padding-left: 15px;
         padding-right: 15px;
-    }
+        
+    }    
+
     .tableMainLayoutStyle {
         background-color: #ffffff;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+        min-width: fit-content;
     }
 
     .tableTitle {
@@ -110,13 +113,84 @@
 
     .columnStatusGreen {
         color: #5ee2a0; 
+        margin: unset;
     }
 
     .columnStatusBlue {
         color: #3b86ff;
+        margin: unset;
     }
 
     .columnStatusRed {
         color: red;
+        margin: unset;
+    }
+
+    .subsCardStyle {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+
+        ion-card-header {
+            text-align-last: justify;
+        }
+
+        ion-card-title {
+            font-size: var(--eleave-body-size);
+            font-weight: bold;
+        }
+        ion-card-subtitle {
+            font-size: var(--eleave-body-size);
+        }
+
+        ion-card-content {
+            font-size: var(--eleave-body-size);
+            padding: 16px;
+        }
+    }
+
+    .subsCardStyles {
+        display: flex;
+        flex-wrap: wrap;
+        width: -webkit-fill-available;
+
+        ion-card {
+            display: flex;
+            flex: auto;
+        }
+
+        ion-card-subtitle {
+            display: flex;
+            place-content: space-between; 
+            padding: 5px 0 10px;
+            border-bottom: 1px solid var(--eleave-border-color);
+        }
+    }
+    .cardStyles * {
+        font-size: var(--eleave-body-size);
+        min-width: fit-content;
     }
 }
+
+@media (max-width: 700px) {
+    .hidden-sm-down {
+        display: none !important;
+    }
+
+    .hidden-md-up {
+        display: flex !important;
+    }
+  }
+
+  
+
+@media (min-width: 701px) {
+    .hidden-sm-down {
+        display: flex !important;
+    }
+
+    .hidden-md-up {
+        display: none !important;
+    }
+  }
+
