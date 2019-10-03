@@ -39,43 +39,55 @@
           <ng-container *ngIf="selectedVal === 'card'; else elseTemplate">   
 
             <!------- Customer Card View ------->
-            <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
+            <ion-card class="customerCardStyle" style="min-width: fit-content;"
+             *ngFor="let cardData of customerData | paginate: configPageCust">
+              <ion-item-group class="cardBodyStyle" style="border-bottom: 1px solid var(--eleave-border-color);"> 
+                <!-- <ion-row> -->
+                <ion-avatar class="customerProfilePicture">
+                  <img src="../assets/icon/layout/picture.png">
+                </ion-avatar>
+                <ion-list style="min-width: fit-content; padding: 8px 8px 8px 0px;">
+                  <ion-card-title class="customerCardTitleStyle">
+                    {{cardData.clientName}}
+                  </ion-card-title>
+                  <ion-card-content class="customerCardBodyStyle">
+                      <ion-text>
+                          {{cardData.companyName}}
+                      </ion-text>
+                      <ion-text>
+                          {{cardData.clientEmail}}
+                      </ion-text>
+                  </ion-card-content>
+                </ion-list>
+                <ion-label style="min-width: fit-content; height: fit-content; padding-bottom: 10px;" class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
+                  (click)="onClickCustomerViewDetails(cardData)">
+                  View Details
+                </ion-label>
+                <!-- </ion-row> -->
+              </ion-item-group>
+              <ion-item-group class="cardFooterStyle">
                 <ion-item-group>
-                  <!-- <ion-row> -->
-                    <ion-avatar class="customerProfilePicture">
-                      <img src="../assets/icon/layout/picture.png">
-                    </ion-avatar>
-                    <ion-list>
-                      <ion-card-title class="customerCardTitleStyle">
-                        {{cardData.clientName}}
-                      </ion-card-title>
-                      <ion-card-content class="customerCardBodyStyle">
-                          <ion-text>
-                              {{cardData.companyName}}
-                          </ion-text>
-                          <ion-text>
-                              {{cardData.clientEmail}}
-                          </ion-text>
-                      </ion-card-content>
-                    </ion-list>
-                    <ion-label style="min-width: fit-content; height: fit-content;" class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
-                      (click)="onClickCustomerViewDetails(cardData)">
-                      View Details
-                    </ion-label>
-                  <!-- </ion-row> -->
+                  <ion-item lines="none">
+                    <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
+                    <ion-text class="customerCardIconText">
+                      {{cardData.tenantNumber}}
+                    </ion-text>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
+                    <ion-text class="customerCardIconText">
+                      {{cardData.employeeNumber}}
+                    </ion-text>
+                  </ion-item>
                 </ion-item-group>
-                <ion-col>
-                  <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
-                  <ion-text class="customerCardIconText">
-                    {{cardData.tenantNumber}}
-                  </ion-text>
-                </ion-col>
-                <ion-col>
-                  <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
-                  <ion-text class="customerCardIconText">
-                    {{cardData.employeeNumber}}
-                  </ion-text>
-                </ion-col>
+                <ion-button fill="clear" [ngStyle]="{'background-color': cardData.subsStatus === 'active' ? 
+                  '#5ee2a0' : '#a5a4bf'}">
+                  {{cardData.subsStatus}}
+                </ion-button>
+                <!-- <ion-item lines="none">
+                  <ion-label style="font-size: var(--eleave-body-size10);">{{cardData.status}}</ion-label>
+                </ion-item> -->
+              </ion-item-group>
             </ion-card>
 
             

@@ -56,13 +56,41 @@
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
         flex: auto;
 
-        ion-item-group {
-            display: flex;
-            border-bottom: 1px solid var(--eleave-border-color);
-        }
-
         ion-list {
             background-color: #ffffff;
+        }
+    }
+
+    .cardBodyStyle {
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-evenly;
+        padding-bottom: 5px;
+    }
+
+    .cardFooterStyle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ion-item-group {
+            display: flex;            
+        }
+
+        ion-item {
+            width: fit-content;
+            --ion-background-color: transparent;
+        }
+
+        ion-button {
+            border-radius: 25px;
+            font-size: var(--eleave-body-size9);
+            font-weight: bold;
+            color: white;
+            object-fit: contain;
+            height: fit-content;
+            padding: 5px;
+            margin: 5px;
         }
     }
 
