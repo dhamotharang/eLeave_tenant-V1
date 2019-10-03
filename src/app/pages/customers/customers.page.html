@@ -39,7 +39,7 @@
           <ng-container *ngIf="selectedVal === 'card'; else elseTemplate">   
 
             <!------- Customer Card View ------->
-            <ion-card class="customerCardStyle" style="min-width: fit-content;"
+            <ion-card class="customerCardStyle" style="min-width: fit-content; flex-grow: 1;"
              *ngFor="let cardData of customerData | paginate: configPageCust">
               <ion-item-group class="cardBodyStyle" style="border-bottom: 1px solid var(--eleave-border-color);"> 
                 <!-- <ion-row> -->
@@ -135,6 +135,7 @@
                   </ion-col>
               </ion-card> -->
   
+            <div style="width: -webkit-fill-available;"></div>
             <!-- Customer list's pagination -->
             <ion-row style="margin: 0px 20px 0px auto; display: table;">        
               <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
