@@ -41,22 +41,18 @@
 }
 
 .pop-over-dropdown-style .popover-content {
-    // left: 1134px;
     display: flex;
     width: 125px;
 }
 
 .pop-over-user-style .popover-content {
-    // top: 32.4132px;
     left: 1295px;
-    // transform-origin: right top;
     margin: 10px;
     padding: 10px;
 	width: 197px;
 }
 
 .pagination-style .ngx-pagination{
-// .pagination-style::ng-deep .ngx-pagination{
 	font-size: 11px;
 	padding-left: 20px;
 	
@@ -106,9 +102,6 @@
 		top: 5px;
 	}
 }
-
-
-  
 
 $screen-breakpoints: (
     xs: 0,

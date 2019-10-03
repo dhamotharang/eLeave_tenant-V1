@@ -118,10 +118,6 @@ export class SettingsPage implements OnInit {
   async openSettingPopover(evt, compName) {
     const setPopup = await this.popoverController.create({
       component:  (compName === 'EditUserComponent') ? EditUserComponent : AddNewUserComponent,
-      // componentProps: {
-      //   viewType: this
-      // },
-      // event: evt,
       cssClass: 'pop-over-style'
     });
 

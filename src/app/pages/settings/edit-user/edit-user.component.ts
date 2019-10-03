@@ -45,9 +45,7 @@ export class EditUserComponent implements OnInit {
    */
   ngOnInit() {
     this.initUser = selectedEditUser;
-    // Object.assign(this.userInfo, this.initUser);
     this.userInfo = {...this.initUser, password2: this.initUser.password};
-    // this.userInfo.password2 = this.userInfo.password;
     this.toggleVal = (this.userInfo.status === 'active') ? true : false;
   }
 

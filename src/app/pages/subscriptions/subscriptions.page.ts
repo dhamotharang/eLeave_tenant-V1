@@ -74,9 +74,7 @@ export class SubscriptionsPage implements OnInit {
    * executed when Subscription page is being loaded
    * @memberof SubscriptionsPage
    */
-  ngOnInit() {
-    // currSubsPage = this.subsPaging.pageConfig(10, 1, this.subscribers.length);
-  }
+  ngOnInit() { }
 
 
   /**
@@ -99,6 +97,5 @@ export class SubscriptionsPage implements OnInit {
   pageSubsChanged(event) {
     this.configPageSubs.currentPage = event;
     currSubsPage = this.configPageSubs.currentPage;
-    // currSubsPage = this.subsPaging.pageConfig(10, this.configPageSubs.currentPage, this.subscribers.length);
   }
 }

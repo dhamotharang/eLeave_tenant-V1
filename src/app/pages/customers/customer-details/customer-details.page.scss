@@ -33,7 +33,6 @@
     }
     .customerListContent {
         font-size: 10px;
-        // padding-right: 5px;
         color: #4d4f5c;
         background-color: #ffffff;
         padding: 1.5em;
@@ -41,7 +40,6 @@
         margin: 2px;
         cursor: pointer;
         display: flex;
-        // height: 10.4%;
         align-items: center;
     }
 
@@ -54,7 +52,6 @@
 
     .customerListContent {
         font-size: 10px;
-        // padding-right: 5px;
         color: #4d4f5c;
         background-color: #ffffff;
         padding: 1.5em;
@@ -95,7 +92,6 @@
         max-width: 100%;
         height: auto;
         margin: auto;
-        // margin-top: 50%;
     }
 
     .customerOverviewDetails {
@@ -111,10 +107,6 @@
     }
     
     .customerCard {
-        // object-fit: contain;
-        // background-color: white;
-        // flex: 0 1 29%;
-        // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.17);
         width: 29%;
         object-fit: contain;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.17);
@@ -123,21 +115,13 @@
     }
 
     .customerCardTitle {
-        // font-family: SourceSansPro;
         font-size: 10px;
         color: var(--dusk);
     }
 
-    .customerCardContents {
-        // font-size: 12px;
-        // font-weight: bold;
-        // line-height: 1.25;
-        // color: #4d4f5c;
-        // display: flex !important;
-        // align-items: flex-end !important;        
+    .customerCardContents {      
         height: 30px;
         object-fit: contain;
-        // font-family: SourceSansPro;
         font-size: 12px;
         font-weight: bold;
         color: #4d4f5c;
@@ -148,7 +132,6 @@
     .customerCardIcon {
         width: 30px;
         height: 30px;
-        // float: right;
     }
 
     .viewSubscriptionButton {

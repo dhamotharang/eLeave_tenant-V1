@@ -104,7 +104,6 @@ export class CustomersPage implements OnInit {
     selCustView = {val: 'card'};
     this.selectedVal = 'card';
     this.configPageCust = this.custPaging.pageConfig(9, 1, this.customerData.length);
-    // this.pageCustChanged(1);
   }
 
   /**
@@ -150,22 +149,16 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   pageCustChanged(event) {
-    // this.configPageCust.currentPage = event;
     this.configPageCust = this.custPaging.pageConfig(9, event, this.customerData.length);
     currCustPage = event;
-    // return this.configPageCust;
   }
 
 
   onSearchCust(event) {
-    // console.log(event);
-    
     this.customerData = customersDummiesData;
-    // console.log(customersDummiesData);
     this.customerData = (event.detail.value.length > 0 ) ?
                       this.custSearch.filerSearch(event.detail.value, customersDummiesData, 'clientName') :
                       customersDummiesData;
-    // console.log(this.customerData);
     this.pageCustChanged(1);
   }
 }

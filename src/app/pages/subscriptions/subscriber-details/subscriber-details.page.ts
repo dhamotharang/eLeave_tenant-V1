@@ -107,7 +107,6 @@ export class SubscriberDetailsPage implements OnInit {
     subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.lastBillingOn,
       this.subscriberInfo.nextBillingOn);
-    // this.subsProgressBarValue = this.subscriberInfo.employeeNumber / this.subscriberInfo.employeeQuota;
     this.updateProgressBar(this.subscriberInfo.employeeNumber, this.subscriberInfo.employeeQuota);
     subsDtlPopoverCtrlr = this.popoverController;
   }
@@ -168,10 +167,6 @@ export class SubscriberDetailsPage implements OnInit {
                   (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
                    (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
                     ReactiveSubscriptionComponent,
-      // componentProps: {
-      //   viewType: this
-      // },
-      // event: evtSubs,
       cssClass: 'pop-over-style'
     });
 
@@ -186,7 +181,6 @@ export class SubscriberDetailsPage implements OnInit {
     this.subscriberInfo = updateSubscriberInfo;
     subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(updateSubscriberInfo.lastBillingOn, updateSubscriberInfo.nextBillingOn);
-    // this.subsProgressBarValue = updateSubscriberInfo.employeeNumber / updateSubscriberInfo.employeeQuota;
     this.updateProgressBar(updateSubscriberInfo.employeeNumber, updateSubscriberInfo.employeeQuota);
   }
 

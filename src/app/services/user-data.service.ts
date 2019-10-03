@@ -74,7 +74,6 @@ export class UserDataService {
    * @memberof UserDataService
    */
   setUsername(username: string): Promise<any> {
-    // console.log('setUsername: ' + username);
     return this.storage.set('username', username);
   }
 
@@ -84,20 +83,10 @@ export class UserDataService {
    * @memberof UserDataService
    */
   getUsername() {
-    // return 'getUsername';
     return this.storage.get('username').then((value) => {
-      // console.log(value);
       return value;
     });
   }
-
-  // getUsername() {
-  //   console.log('getUsername');
-  //   return this.storage.get('username').then((value) => {
-  //     return value;
-  //   });
-
-  // }
 
   /**
    * This method is to set remember me function. It will
@@ -106,12 +95,8 @@ export class UserDataService {
    * @memberof UserDataService
    */
   setRememberMe(loginData) {
-    // console.log('setRememberMe');
-    // console.log(loginData);
     sessionStorage.setItem('username', loginData.username);
     sessionStorage.setItem('password', loginData.password);
-    // localStorage.setItem('username', loginData.username);
-    // localStorage.setItem('password', loginData.password);
   }
 
   /**
@@ -121,12 +106,8 @@ export class UserDataService {
    * @memberof UserDataService
    */
   removeRememberMe(loginData) {
-    // console.log('removeRememberMe');
-    // this.storage.remove('user_name');
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('password');
-    // localStorage.removeItem('username');
-    // localStorage.removeItem('password');
   }
 
   /**

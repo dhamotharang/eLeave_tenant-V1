@@ -45,7 +45,6 @@ export class UpdateUserNumbersComponent implements OnInit {
    */
   ngOnInit() {
     this.selectedSubscriberInfo = subscriberUpdateInfo;
-    // Object.assign(this.updateClientData, this.selectedSubscriberInfo);
     this.updateClientData = {...this.selectedSubscriberInfo, progressBarValue:
                       this.selectedSubscriberInfo.employeeNumber / this.selectedSubscriberInfo.employeeQuota};
     this.updateEmployeeQuota = this.selectedSubscriberInfo.employeeQuota;

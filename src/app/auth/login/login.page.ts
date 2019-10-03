@@ -16,8 +16,6 @@ import {currUser} from '../../app.component';
  */
 export let sideMenuShow = {value: true};
 
-// export let isShowSideMenu = false;
-
 /**
  * This component is to setup a login page
  * @export
@@ -96,15 +94,11 @@ export class LoginPage implements OnInit {
   async onLogin(loginForm: NgForm) {
     this.submitted = true;
     this.pgSet.setShowToolbarSideMenu(false);
-    // console.log(loginForm.valid);
 
     if (loginForm.valid) {
       this.pgSet.setShowToolbarSideMenu(true);
-      // console.log('1this.userLogin.username');
-      // console.log(this.userLogin.username);
       Object.assign(currUser, {value: this.userLogin.username});
       await this.userData.login(this.userLogin.username).then(() => {
-        // this.homePage = '/main/dashboard';
         return this.router.navigate(['/main/dashboard']);
       });
     }

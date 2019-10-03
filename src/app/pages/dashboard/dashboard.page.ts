@@ -129,7 +129,6 @@ export class DashboardPage implements OnInit {
    * @memberof DashboardPage
    */
   segmentChanged(ev: any) {
-    // console.log('Segment changed:', ev);
     console.log('Segment changed:', ev.detail.value);
     console.log(this.overviewSgmtOpt);
   }

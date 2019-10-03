@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 
 import { UserDataService } from '../../services/user-data.service';
@@ -33,8 +32,7 @@ export class UserDropDownComponent implements OnInit {
   constructor(
     private userDataSvs: UserDataService,
     private pggSvs: PaginationServiceService,
-    private popovrController: PopoverController,
-    // private router: Router
+    private popovrController: PopoverController
   ) { }
 
   /**
@@ -59,7 +57,6 @@ export class UserDropDownComponent implements OnInit {
     this.userDataSvs.logout().then(() => {
       toolbarPopup.dismiss();
       this.pggSvs.setShowToolbarSideMenu(false);
-      // return this.router.navigateByUrl('/login');
     });
   }
 
@@ -80,10 +77,6 @@ export class UserDropDownComponent implements OnInit {
       event: evt,
       cssClass: 'pop-over-style'
     });
-
-    // popover.onDidDismiss().then((data) => {
-    //   this.selectedVal = selCustView.val;
-    // });
 
     return await popover.present();
   }
