@@ -3,25 +3,21 @@
 
     <!----------- Subscriptions Title/Searchbar/Drop Down/Add New Items ----------->
     <ion-row>
-      <ion-col>
         <ion-title class="subscriptionTitleStyle">
           Subscriptions
         </ion-title>
-      </ion-col>
-      <ion-col>
-        <ion-row style="justify-content: flex-end; padding-right: 9px;">
-          <ion-searchbar class="subscriptionSearchBar" placeholder="Search Name/Company..."></ion-searchbar>
-          <ion-button class="subscriptionDropDownMenuButton"> 
+        <ion-item-group class="subscriptionButtonsSetting">
+          <ion-searchbar  class="customer-searchbar-style" placeholder="Search Name"></ion-searchbar>
+          <ion-button> 
             <ion-icon slot="icon-only" name="menu"></ion-icon>
           </ion-button>
-        </ion-row>
-      </ion-col>
+        </ion-item-group>
     </ion-row>
 
     <!-------------------------------- Table ----------------------------------->
-    <ion-row class="subscriptionLayout">
+    <ion-row class="subscriptionLayout" >
       <ion-col class="subscriptionBackgroundColor">
-          <ion-grid>
+          <ion-grid style="min-width: fit-content;" [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'">
             <!-- header -->
             <ion-row class="subscriptionTableHeaderTheme">
               <ion-col>
@@ -67,7 +63,7 @@
             </ion-row>
             
             <!-- body -->
-            <ion-row class="subscriptionTableBodyTheme subscriptionTableLine" ion-item 
+            <ion-row class="fitContent subscriptionTableBodyTheme subscriptionTableLine" ion-item 
               *ngFor="let table of subscribers  | paginate: configPageSubs"
               [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
               [class.highlight]="table.clientName === currentClient"
@@ -103,20 +99,12 @@
                 </div>
               </ion-col>
               <ion-col size="1.3">
-                <span [ngSwitch]="table.status">
-                  <p *ngSwitchCase="'LIVE'" class="subscriptionStatusGreen">
-                      {{table.status}}
+                <span [ngSwitch]="table.subsStatus">
+                  <p *ngSwitchCase="'active'" class="columnStatusActive">
+                      {{table.subsStatus}}
                   </p>
-                  <p *ngSwitchCase="'TRIAL'" class="subscriptionStatusBlue">
-                      {{table.status}}                  
-                  </p>
-                  <p *ngSwitchCase="'PAST DUE'" class="subscriptionStatusRed">
-                      {{table.status}}                  
-                  </p>
-                  <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="subscriptionStatusRed">
-                      {{table.status}}                  
-                  </p>
-                  <p *ngSwitchDefault class="subscriptionStatusDefault">
+                  <p *ngSwitchCase="'inactive'" class="columnStatusInactive">
+                      {{table.subsStatus}}                  
                   </p>
                 </span>
               </ion-col>
@@ -132,11 +120,48 @@
               </ion-col>
             </ion-row>
           </ion-grid>
+
+          <ion-row [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'">
+              <ion-item-group class="subscriptionCardStyles">
+                <ion-card *ngFor="let card of subscribers | paginate: configPageSubs">
+                  <ion-card-content class="cardStyle cardStyles">
+                    <ion-card-title>
+                      <ion-label style="font-weight: bold; margin: 3px 0px; color: var(--eleave-header-color);">
+                        {{card.clientName}}
+                      </ion-label>
+                      <ion-label style="color: var(--eleave-header-color);">{{card.clientEmail}}</ion-label>
+                      <ion-card-subtitle>
+                        <span>
+                          {{card.plan}} | {{card.subscription}}
+                        </span>
+                        <span [ngSwitch]="card.subsStatus" style="text-transform: capitalize;">
+                          <p *ngSwitchCase="'active'" class="columnStatusActive">
+                              {{card.subsStatus}}
+                          </p>
+                          <p *ngSwitchCase="'inactive'" class="columnStatusInactive">
+                              {{card.subsStatus}}                  
+                          </p>
+                        </span>
+                      </ion-card-subtitle>
+                    </ion-card-title>
+                    <ion-item-group style="padding-top: 10px;">
+                      <ion-label> Creation Date: {{card.creationDate}} </ion-label>
+                      <ion-label> Activatation Date: {{card.activationDate}} </ion-label>
+                      <ion-label> Last Billing Date: {{card.lastBillingOn}} </ion-label>
+                      <ion-label> Next Billing Date: {{card.nextBillingOn}} </ion-label>
+                    </ion-item-group>
+                    <ion-label style="color: #3b86ff; text-align: center; margin: 10px 0px 0px; cursor: pointer;"                    
+                      [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
+                      (click)="viewSubscriptionDetails(card)">View Details</ion-label>
+                  </ion-card-content>
+                </ion-card>
+              </ion-item-group>
+            </ion-row>
       </ion-col>
     </ion-row>
 
     <!-- Subscriber list's pagination -->
-    <ion-item-group>        
+    <ion-item-group style="text-align: end; margin: 0px 20px 0px auto;">        
       <pagination-controls (pageChange)="pageSubsChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
     </ion-item-group>
   </ion-content>

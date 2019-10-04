@@ -1,4 +1,8 @@
 :host{
+
+    .fitContent * {
+        min-width: fit-content;
+    }
     .subscriptionTitleStyle {
         padding-left: 22.5px;
         padding-top: 16px;
@@ -6,30 +10,24 @@
         color: #43425d;
     }
 
-    .subscriptionSearchBar {
-        width: 302px;
-        height: 45px;
-        padding-top: 17px;
-        --ion-background-color: #ffffff;
-        ::placeholder {
-            font-size: 6px; //sets placeholder font size
+    .subscriptionButtonsSetting {
+        display: flex;
+        margin: 5px 20px;
+        ion-button {  
+            width: 40px;
+            height: 30px;          
+            margin: 11px 3px 2px;
+            font-size: var(--eleave-body-size9);
         }
     }
 
-    .subscriptionDropDownMenuButton {
-        width: 51.5px;
-        height: 45px;
-        border-radius: 4px;
-        padding-right: 2px;
-        padding-top: 2px;
-    }
-    
     .subscriptionLayout {
         padding-left:20px;
         padding-right:20px;
         padding-top:15px;
         padding-bottom:20px;
         min-height: -webkit-fill-available;
+        *min-width: fit-content;
     }
 
     .subscriptionBackgroundColor {
@@ -37,13 +35,18 @@
     }
 
     .subscriptionTableHeaderTheme {
-        font-size: 11px;
-        font-weight: bold;
-        text-align: center;
-        align-content: center;
-        color: #a5a4bf;
-        background-color: #f5f6fa;
-        height: 40px;
+        ion-col {
+            font-size: var(--eleave-title-table);
+            font-weight: bold;
+            // text-align: center;
+            // align-content: center;
+            color: #a5a4bf;
+            background-color: #f5f6fa;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 15px 0px;
+        }
     }
 
     .subscriptionTableBodyTheme {
@@ -93,4 +96,48 @@
     .highlight {
         background-color: #FFFF33 !important;
     }
+
+    
+    .subscriptionCardStyles {
+        display: flex;
+        flex-wrap: wrap;
+        width: -webkit-fill-available; 
+
+        ion-card {
+            display: flex;
+            flex: auto;
+        }
+
+        ion-card-subtitle {
+            display: flex;
+            place-content: space-between; 
+            padding: 5px 0 10px;
+            border-bottom: 1px solid var(--eleave-border-color);
+        }
+    }
+    
+    .cardStyles * {
+        font-size: var(--eleave-body-size);
+        min-width: fit-content;
+    }
+
+    .cardStyle {
+        background-color: #ffffff;
+        display: inline-block;
+        flex: 1;
+        min-width: fit-content;
+        padding-bottom: 15px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .columnStatusActive {
+        color: var(--eleave-color-success); 
+        // margin: unset;
+    }
+
+    .columnStatusInactive {
+        color: var(--eleave-color-disable);
+        // margin: unset;
+    }
+
 }

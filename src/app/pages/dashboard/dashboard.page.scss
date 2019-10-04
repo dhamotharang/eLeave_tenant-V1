@@ -151,7 +151,7 @@
     .subsCardStyles {
         display: flex;
         flex-wrap: wrap;
-        width: -webkit-fill-available;
+        width: -webkit-fill-available; 
 
         ion-card {
             display: flex;
@@ -165,6 +165,7 @@
             border-bottom: 1px solid var(--eleave-border-color);
         }
     }
+    
     .cardStyles * {
         font-size: var(--eleave-body-size);
         min-width: fit-content;

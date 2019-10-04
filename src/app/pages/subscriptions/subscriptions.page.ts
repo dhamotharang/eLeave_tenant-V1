@@ -40,14 +40,12 @@ export class SubscriptionsPage implements OnInit {
    * @memberof SubscriptionsPage
    */
   constructor(
-    private subsPaging: PaginationServiceService
-    ) {
-      this.configPageSubs = {
-        itemsPerPage: 10,
-        currentPage: 1,
-        totalItems: this.subscribers.length
-    };
-  }
+    /**
+     * This property is to get method from PaginationServiceService
+     * @memberof SubscriptionsPage
+     */
+    public subsPaging: PaginationServiceService
+    ) {  }
 
   /**
    * This property is to set value of selected client
@@ -74,7 +72,10 @@ export class SubscriptionsPage implements OnInit {
    * executed when Subscription page is being loaded
    * @memberof SubscriptionsPage
    */
-  ngOnInit() { }
+  ngOnInit() {
+    this.configPageSubs = this.subsPaging.pageConfig(10, 1, this.subscribers.length);
+    console.log('init:' + this.subsPaging.getSideMenuType());
+  }
 
 
   /**
@@ -95,7 +96,7 @@ export class SubscriptionsPage implements OnInit {
    * @memberof SubscriptionsPage
    */
   pageSubsChanged(event) {
-    this.configPageSubs.currentPage = event;
     currSubsPage = this.configPageSubs.currentPage;
+    this.configPageSubs = this.subsPaging.pageConfig(10, event, this.subscribers.length);
   }
 }
