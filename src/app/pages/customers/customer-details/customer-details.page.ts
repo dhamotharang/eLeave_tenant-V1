@@ -46,11 +46,35 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   constructor(
+
+    /**
+     * This property is to get methods from PaginationServiceService
+     * @memberof CustomerDetailsPage
+     */
+    public custDtlsPaging: PaginationServiceService,
     private popoverController: PopoverController,
-    private custDtlsPaging: PaginationServiceService,
     private custListSearch: SearchDataService
   ) { }
 
+  // slideOpts = {
+  //   initialSlide: currCustPage,
+  //   centeredSlides: true,
+  // };
+  
+  slideOpts = {
+    slidesPerView: 3,
+    on: {
+      beforeInit() {
+        const swiper = this;
+  
+        swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
+        swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+  
+        swiper.params.watchSlidesProgress = true;
+        swiper.originalParams.watchSlidesProgress = true;
+      }
+    }
+  };
 
   /**
    * This property is to bind the list of all customer

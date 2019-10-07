@@ -136,7 +136,6 @@ $screen-breakpoints: (
         }
     }
 }
-
 // @each $keySize, $valueSize in $screen-breakpoints {
 //     [visible-block-#{$keySize}] {
 //         @media (min-width: $valueSize) {
