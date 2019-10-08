@@ -60,16 +60,20 @@ export class CustomerDetailsPage implements OnInit {
   //   initialSlide: currCustPage,
   //   centeredSlides: true,
   // };
-  
+
+  /**
+   * This property is to set slides configurations
+   * @memberof CustomerDetailsPage
+   */
   slideOpts = {
     slidesPerView: 3,
     on: {
       beforeInit() {
         const swiper = this;
-  
+
         swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
         swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
-  
+
         swiper.params.watchSlidesProgress = true;
         swiper.originalParams.watchSlidesProgress = true;
       }

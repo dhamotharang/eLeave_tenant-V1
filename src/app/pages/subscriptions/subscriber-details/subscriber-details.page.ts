@@ -1,6 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
+import { PaginationServiceService } from '../../../services/pagination-service.service';
+import { SearchDataService } from '../../../services/search-data.service';
+
 import {customersDummiesData} from '../../../app.component';
 
 import { selectedSubscribersInfo, currSubsPage } from '../subscriptions.page';
@@ -43,17 +46,19 @@ export class SubscriberDetailsPage implements OnInit {
   /**
    * Creates an instance of SubscriberDetailsPage.
    * @param {PopoverController} popoverController
+   * @param {SearchDataService} subsDtlsSearch
+   * @param {PaginationServiceService} subsDtlsPaging
    * @memberof SubscriberDetailsPage
    */
   constructor(
-    private popoverController: PopoverController
-  ) {
-    this.configPageSubDtls = {
-      itemsPerPage: 10,
-      currentPage: currSubsPage,
-      totalItems: this.subscribersDetails.length
-    };
-  }
+    private popoverController: PopoverController,
+    private subsDtlsSearch: SearchDataService,
+    /**
+     * This property is to get methods from PaginationServices
+     * @memberof SubscriberDetailsPage
+     */
+    public subsDtlsPaging: PaginationServiceService
+  ) { }
 
   /**
    * This property is to get list of subscribers details
@@ -98,6 +103,25 @@ export class SubscriberDetailsPage implements OnInit {
   configPageSubDtls: any;
 
   /**
+   * This property is to set slides configurations
+   * @memberof SubscriberDetailsPage
+   */
+  subsDtlsSlideOpts = {
+    slidesPerView: 3,
+    on: {
+      beforeInit() {
+        const swiper = this;
+
+        swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
+        swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+
+        swiper.params.watchSlidesProgress = true;
+        swiper.originalParams.watchSlidesProgress = true;
+      }
+    }
+  };
+
+  /**
    * This method is to set initial value of properties. And it will be
    * executed when subscriber details page is loaded
    * @memberof SubscriberDetailsPage
@@ -109,6 +133,7 @@ export class SubscriberDetailsPage implements OnInit {
       this.subscriberInfo.nextBillingOn);
     this.updateProgressBar(this.subscriberInfo.employeeNumber, this.subscriberInfo.employeeQuota);
     subsDtlPopoverCtrlr = this.popoverController;
+    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
   }
 
   /**
@@ -198,6 +223,20 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   pageChanged(event) {
-    this.configPageSubDtls.currentPage = event;
+    // this.configPageSubDtls.currentPage = event;
+    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, event, this.subscribersDetails.length);
+  }
+
+  /**
+   * This method is to get search result for subscriber list
+   * @param {*} event
+   * @memberof SubscriberDetailsPage
+   */
+  onSearchSubsDtls(event) {
+    this.subscribersDetails = customersDummiesData;
+    this.subscribersDetails = (event.detail.value.length > 0 ) ?
+                          this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'subscription') :
+                            this.subscribersDetails;
+    this.pageChanged(1);
   }
 }

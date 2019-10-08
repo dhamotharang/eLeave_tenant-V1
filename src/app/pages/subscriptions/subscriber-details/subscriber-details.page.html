@@ -9,35 +9,62 @@
           </ion-title>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col class="subscriberLayout">
-          <ion-row>
+      <ion-row  class="subscriberLayout subscriberFlexDisplay">
+        <!-- <ion-col>
+          <ion-row> -->
             
             <!------------------------ Client's List  -------------------------------> 
-            <ion-col size="2" style="padding: 0px;">
+            <!-- Clinet list if width < md(fullMenu)/sm(iconMenu) -->
+
+            <ion-col [class]="(subsDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
+              <!-- Header -->
+              <ion-title text-wrap class="subsctiberTitleStyle">
+                  SUBSCRIBER LIST
+              </ion-title>
+
+              <!-- Body -->
+              <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSubsDtls($event)"></ion-searchbar>
+              <ion-slides [options]="subsDtlsSlideOpts">
+              <!-- <ion-slides pager="true" [options]="slideOpts"> -->
+                <ion-slide *ngFor="let subscribersList of subscribersDetails | paginate : configPageSubDtls"
+                style="width: auto;">
+                  <ion-item-group class="subsDtlsListHorizontalContent subscriberListStyle" style="display: flex; height: auto; white-space: nowrap;">
+                    <!-- <ion-item lines="none"> -->
+                      <ion-list (click)="selectedClient(subscribersList)"
+                      [ngStyle]="{'color': subscribersList.clientName === subscriberInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
+                        <ion-label>{{subscribersList.subscription}}</ion-label>
+                        <ion-label>{{subscribersList.companyName}}</ion-label>
+                      </ion-list>
+                    <!-- </ion-item> -->
+                  </ion-item-group>
+                </ion-slide>
+              </ion-slides>
+            </ion-col>
+
+            <!-- Clinet list if width > md(fullMenu)/sm(iconMenu) -->
+            <ion-col size="2" style="padding:0; min-width: fit-content;"
+            [class]="(subsDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-down' : 'hide-sm-down'">
               <!-- Header -->
               <ion-title text-wrap class="subsctiberTitleStyle">
                 SUBSCRIBER LIST
               </ion-title>
               <ion-list style="padding: 0; background: #ffffff;">
+                <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSubsDtls($event)"></ion-searchbar>
                 <ion-item-group  *ngFor="let subscribersList of subscribersDetails  | paginate: configPageSubDtls">
                   <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)"
-                  [ngStyle]="{'color': subscribersList.clientName === subscriberInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
-                  <!-- <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)" > -->
-                    <!-- <ion-text> -->
-                      <!-- {{subscribersList.clientName}} -->
-                      <ion-list>
-                        <ion-label>{{subscribersList.subscription}}</ion-label>
-                        <ion-label>{{subscribersList.companyName}}</ion-label>
-                      </ion-list>
-                    <!-- </ion-text> -->
+                    [ngStyle]="{'color': subscribersList.clientName === subscriberInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
+                    <ion-list>
+                      <ion-label>{{subscribersList.subscription}}</ion-label>
+                      <ion-label>{{subscribersList.companyName}}</ion-label>
+                    </ion-list>
                   </ion-item>
                 </ion-item-group>
               </ion-list>
             </ion-col>
 
             <!---------------------- Client's Overview  ----------------------------->
-            <ion-col size="3"  style="padding: 0px; background-color: #fcfcfc;">
+            <ion-col style="padding: 0; background-color: #fcfcfc; min-width: fit-content; margin-bottom: 5px;">
+            <!-- <ion-col size="3" style="padding:0; background-color: #fcfcfc; min-width: fit-content; margin-bottom: 5px;"> -->
               <!-- Header -->
               <ion-title class="subsctiberTitleStyle">
                 OVERVIEW
@@ -128,7 +155,7 @@
             </ion-col>
 
             <!-------------------- Client's Description  ---------------------------->
-            <ion-col style="padding: 0px;">
+            <ion-col style="padding:0; min-width: fit-content;">
               <!-- Header -->
               <ion-row>
                   <!-- <ion-row style="background-color: #f5f6fa; height: 45px;"> -->
@@ -144,7 +171,10 @@
                 </ion-col>
               </ion-row>
 
-              <ion-row  style="justify-content: center; padding:0px;">
+              <ion-row  style="justify-content: center; padding:0px;
+              display: flex;
+              justify-content: space-between;
+              flex-grow: 1;">
                 <!-- Last billing date -->
                 <ion-card class="subscriberDescriptionCardLayout">
                   <ion-card-content style="padding-bottom: 0px;">
@@ -210,7 +240,59 @@
               </ion-row>
 
               <!-- Plan details new -->
+              
               <ion-label>
+                  <ion-card class="detailsCard">
+                    <ion-card-content  style="display: flex; flex-grow: inherit; flex-wrap: wrap;">
+                        <ion-col>
+                            <ion-item-group>
+                              <ion-label>
+                                TOTAL USERS: {{subscriberInfo.employeeNumber}}/{{subscriberInfo.employeeQuota}}
+                              </ion-label>
+                              <ion-progress-bar id="subdtlPrgssBar" [value]="subscriberInfo.progressBarValue"></ion-progress-bar>
+                              <!-- <ion-progress-bar id="subdtlPrgssBar" [value]="subsProgressBarValue"></ion-progress-bar> -->
+                              <ion-button (click)="openSubsPopover($event, 'UpdateUserNumbersComponent')">
+                                Update User Quota
+                              </ion-button>
+                            </ion-item-group>
+                        </ion-col>
+                        <ion-col style="min-width: fit-content;">
+                          <ion-item-group>
+                            <ion-label>SUBSCRIPTION PLAN : {{subscriberInfo.plan}} </ion-label>
+                            <ion-label>SUBSCRIPTION# : {{subscriberInfo.subscription}}</ion-label>
+                            <!-- <ion-label>STATUS : {{subscriberInfo.status}} </ion-label> -->
+                            <ion-row [ngSwitch]="subscriberInfo.status">
+                              <ion-label >
+                                STATUS: 
+                              </ion-label>
+                              <ion-label *ngSwitchCase="'LIVE'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #5ee2a0">
+                                {{subscriberInfo.status}}
+                              </ion-label>
+                              <ion-label *ngSwitchCase="'TRIAL'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #3b86ff">
+                                {{subscriberInfo.status}}
+                              </ion-label>
+                              <ion-label *ngSwitchCase="'PAST DUE'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: red">
+                                {{subscriberInfo.status}}
+                              </ion-label>
+                              <ion-label *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: red">
+                                {{subscriberInfo.status}}
+                              </ion-label>
+                            </ion-row>
+                            <ion-label>REPEAT EVERY : {{subscriberInfo.repeatEvery}} </ion-label>
+                            <ion-label>ACTIVATION DATE : {{subscriberInfo.activationDate}} </ion-label>
+                            <ion-label>BILLING CYCLE : {{subscriberInfo.billingCycle}} </ion-label>
+                          </ion-item-group>
+                        </ion-col>
+                        <ion-col size="1.5" style="align-self: start;">
+                            <ion-icon style="display: contents;" src="../../../../assets/icon/customer/icon-total-user.svg"></ion-icon>
+                        </ion-col>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-label>
+
+
+
+              <!-- <ion-label>
                 <ion-card class="detailsCard">
                   <ion-col>
                       <ion-item-group>
@@ -218,7 +300,6 @@
                           TOTAL USERS: {{subscriberInfo.employeeNumber}}/{{subscriberInfo.employeeQuota}}
                         </ion-label>
                         <ion-progress-bar id="subdtlPrgssBar" [value]="subscriberInfo.progressBarValue"></ion-progress-bar>
-                        <!-- <ion-progress-bar id="subdtlPrgssBar" [value]="subsProgressBarValue"></ion-progress-bar> -->
                         <ion-button (click)="openSubsPopover($event, 'UpdateUserNumbersComponent')">
                           Update User Quota
                         </ion-button>
@@ -228,11 +309,10 @@
                     <ion-item-group>
                       <ion-label>SUBSCRIPTION PLAN : {{subscriberInfo.plan}} </ion-label>
                       <ion-label>SUBSCRIPTION# : {{subscriberInfo.subscription}}</ion-label>
-                      <!-- <ion-label>STATUS : {{subscriberInfo.status}} </ion-label> -->
                       <ion-row [ngSwitch]="subscriberInfo.status">
                         <ion-label >
                           STATUS: 
-                        </ion-label>
+                        </!--
                         <ion-label *ngSwitchCase="'LIVE'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #5ee2a0">
                           {{subscriberInfo.status}}
                         </ion-label>
@@ -255,10 +335,10 @@
                       <ion-icon style="display: contents;" src="../../../../assets/icon/customer/icon-total-user.svg"></ion-icon>
                   </ion-col>
                 </ion-card>
-              </ion-label>
+              </ion-label> -->
             </ion-col>
-          </ion-row>
-        </ion-col>
+          <!-- </ion-row>
+        </ion-col> -->
       </ion-row>
       
       <!-- Subscriber list's pagination -->

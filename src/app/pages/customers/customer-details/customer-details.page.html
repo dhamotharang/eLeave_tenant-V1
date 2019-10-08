@@ -12,6 +12,9 @@
 
     <ion-row class="contentLayout contentFlexDisplay">
 
+
+      <!------------------------ Client's List  ------------------------------->  
+      
       <ion-col [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
         <!-- Header -->
         <ion-title class="custDtlTitleStyle">
@@ -35,17 +38,8 @@
             </ion-item-group>
           </ion-slide>
         </ion-slides>
-
-        <!-- <ion-item-group style="display: flex; height: auto; white-space: nowrap; overflow-x: scroll;">
-          <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
-            <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
-                {{cL.clientName}}
-            </ion-label>
-          </ion-list>
-        </ion-item-group> -->
       </ion-col>
 
-      <!------------------------ Client's List  ------------------------------->  
       <!-- [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-down' : 'hide-sm-down'" -->
       <ion-col size="2" style="padding:0; min-width: fit-content;"
       [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-down' : 'hide-sm-down'">
@@ -223,7 +217,7 @@
         </ion-row>
 
         <ion-card class="viewSubscriptionDetailsCard">
-          <ion-card-content  style="display: flow-root;flex-grow: inherit;">
+          <ion-card-content  style="display: flow-root;flex-grow: inherit; flex-wrap: wrap;">
             <ion-row>
               <ion-col style="margin: 0 5px 0 5px;">
                 <ion-item-group class="viewSubscriptionDetailsTextFormat">
@@ -239,7 +233,7 @@
                   </ion-progress-bar>
                 </ion-item-group>
               </ion-col>
-              <ion-col size="4" style="margin: 0 5px 0 5px;">
+              <ion-col size="4" style="margin: 0 5px 0 5px; min-width: fit-content;">
                 <ion-item-group class="viewSubscriptionDetailsTextFormat">
                   <ion-label>SUBSCRIPTION PLAN: {{selectedCustomerInfo.plan}}</ion-label>
                   <ion-row [ngSwitch]="selectedCustomerInfo.status">
