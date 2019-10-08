@@ -4,8 +4,8 @@ import { PopoverController } from '@ionic/angular';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
 
-import {customerInfo, customerDummyData, currCustPage} from '../customers.page';
-import {SubscriberDetailsPage} from '../../subscriptions/subscriber-details/subscriber-details.page';
+import { customerInfo, customerDummyData, currCustPage } from '../customers.page';
+import { SubscriberDetailsPage } from '../../subscriptions/subscriber-details/subscriber-details.page';
 import { UpdateCustomerDetailsComponent } from './update-customer-details/update-customer-details.component';
 import { CustomerHistoryComponent } from './customer-history/customer-history.component';
 
@@ -57,28 +57,25 @@ export class CustomerDetailsPage implements OnInit {
   ) { }
 
   // slideOpts = {
-  //   initialSlide: currCustPage,
-  //   centeredSlides: true,
+  //   slidesPerView: 3,
+  //   on: {
+  //     beforeInit() {
+  //       const swiper = this;
+
+  //       swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
+  //       swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+
+  //       swiper.params.watchSlidesProgress = true;
+  //       swiper.originalParams.watchSlidesProgress = true;
+  //     }
+  //   }
   // };
 
   /**
-   * This property is to set slides configurations
+   * This property is to bind configurations for slides
    * @memberof CustomerDetailsPage
    */
-  slideOpts = {
-    slidesPerView: 3,
-    on: {
-      beforeInit() {
-        const swiper = this;
-
-        swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
-        swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
-
-        swiper.params.watchSlidesProgress = true;
-        swiper.originalParams.watchSlidesProgress = true;
-      }
-    }
-  };
+  slideOpts;
 
   /**
    * This property is to bind the list of all customer
@@ -91,13 +88,13 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   public selectedCustomerInfo;
-  
+
   /**
    * This property is to bind the value of date difference between last billing date and next billing date
    * @memberof CustomerDetailsPage
    */
   public calcDays: number;
-  
+
   /**
    * This property is to set value of current employee number over subscription's qouta
    * @memberof CustomerDetailsPage
@@ -109,13 +106,25 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   public comp;
+
+  /**
+   * This property is to decalre the constructor from subscriber details page
+   * @memberof CustomerDetailsPage
+   */
+  public subsDtlsCompSearch;
+
+  /**
+   * This property is to decalre the constructor from subscriber details page
+   * @memberof CustomerDetailsPage
+   */
+  public subsDtlsCompPaging;
   
   /**
    * This property is to set value for toggle the subscriptions status
    * @memberof CustomerDetailsPage
    */
   public custToggle = false;
-  
+
   /**
    * This property is to get the previous value of subscription status
    * @memberof CustomerDetailsPage
@@ -127,14 +136,14 @@ export class CustomerDetailsPage implements OnInit {
    * and next billing date
    * @memberof CustomerDetailsPage
    */
-  public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp);
+  public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp, this.subsDtlsCompSearch, this.subsDtlsCompPaging);
   
   /**
    * This property is to set customer page's pagination configurations
    * @memberof CustomerDetailsPage
    */
   public configPageCustDtls;
-  
+
   /**
    * This property is to bind value in searchbar
    * @memberof CustomerDetailsPage
@@ -148,6 +157,7 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   ngOnInit() {
+    this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
     this.selectedCustomerInfo = customerInfo;
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
