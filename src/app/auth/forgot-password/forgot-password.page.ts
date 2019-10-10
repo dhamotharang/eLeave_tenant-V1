@@ -31,7 +31,12 @@ export class ForgotPasswordPage implements OnInit {
   constructor(
     private userData: UserDataService,
     private router: Router,
-    private pgSetting: PaginationServiceService
+
+    /**
+     * This property is to get methods from PaginationServiceService
+     * @memberof ForgotPasswordPage
+     */
+    public pgSetting: PaginationServiceService
     ) { }
 
   /**

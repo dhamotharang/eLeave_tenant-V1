@@ -13,14 +13,33 @@
         object-fit: cover;
     }
 
+    .sideimg-sm {
+        position: absolute;
+        min-width: -webkit-fill-available;
+        min-height: -webkit-fill-available;
+        object-fit: cover;
+    }
+
     .bodyStyle {
         position: inherit;
         margin: auto;
     }
 
+    .bodyStyle-sm {
+        position: relative;
+        margin: auto;
+        color: var(--ion-color-light)
+    }
+
     .noteStyle {
         opacity: 0.5;
         font-size: 13px;
+    }
+
+    .note-sm-format {
+        color: var(--ion-color-light);
+        margin: 25px 25px 60px;
+        text-align: center;
     }
     
     .loginLogo {
@@ -76,6 +95,16 @@
                     margin: 0px 3px;
                 }
             }
+        }
+    }
+
+    .formStyle-sm {
+        ion-item {
+            color: var(--ion-color-light);
+        }
+
+        ion-icon {
+            color: var(--ion-color-light);
         }
     }
 }
