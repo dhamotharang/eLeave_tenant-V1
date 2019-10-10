@@ -41,6 +41,14 @@ export class PaginationServiceService {
   sideMenuType: string;
 
   /**
+   * This property is to declare the type of view in customer page
+   * (either card or table)
+   * @type {string}
+   * @memberof PaginationServiceService
+   */
+  custViewType: string;
+
+  /**
    * This method is to configure pagination settings.
    * 1. To set number of items in 1 page
    * 2. To set current showing page number
@@ -102,5 +110,24 @@ export class PaginationServiceService {
     return this.sideMenuType;
   }
 
+  /**
+   * This method is to set the view type to be shown in customer page.
+   * It's etither "card" or "table"
+   * @param {*} type
+   * @returns
+   * @memberof PaginationServiceService
+   */
+  setCustomerViewType(type) {
+    return this.custViewType = type;
+  }
 
+  /**
+   * This method is to get the view type to be shown in customer page.
+   * It's etither "card" or "table"
+   * @returns
+   * @memberof PaginationServiceService
+   */
+  getCustomerViewType() {
+    return this.custViewType;
+  }
 }

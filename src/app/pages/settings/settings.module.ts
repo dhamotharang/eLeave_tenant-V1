@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { AddNewUserComponent } from './add-new-user/add-new-user.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
 
 import { IonicModule } from '@ionic/angular';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+
+import { AddNewUserComponent } from './add-new-user/add-new-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { RolesDropDownComponent } from './roles-drop-down/roles-drop-down.component';
 
 import { SettingsPage } from './settings.page';
 import { UserFilterRolesPipe } from './user-filter-roles/user-filter-roles.pipe';
@@ -27,7 +29,7 @@ const routes: Routes = [
     NgxPaginationModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [AddNewUserComponent, EditUserComponent],
-  declarations: [SettingsPage, AddNewUserComponent, EditUserComponent, UserFilterRolesPipe]
+  entryComponents: [AddNewUserComponent, EditUserComponent, RolesDropDownComponent],
+  declarations: [SettingsPage, AddNewUserComponent, EditUserComponent, UserFilterRolesPipe, RolesDropDownComponent]
 })
 export class SettingsPageModule {}

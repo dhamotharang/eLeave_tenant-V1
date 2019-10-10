@@ -1,0 +1,13 @@
+<ion-list class="popoverStyle">  
+    <!-- Users by Role -->  
+    <ion-title>
+      Users by Role
+    </ion-title>
+    <ion-item-group>
+        <ion-row  *ngFor="let list of rolesList" (click)="onClickRoles($event)">
+          <ion-label>
+            {{list.role}}
+          </ion-label>
+        </ion-row>
+    </ion-item-group>
+  </ion-list>

@@ -8,6 +8,7 @@ import { userDummiesData } from '../../app.component';
 
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { RolesDropDownComponent, selRolePopup } from './roles-drop-down/roles-drop-down.component';
 
 /**
  * This variable is to store data of selected customer to be edited
@@ -22,6 +23,13 @@ export let selectedEditUser;
  * @class SettingsPage
  */
 export let settingPopoverCtrlr;
+
+/**
+ * This variable is to bind value for roles
+ * @export
+ * @class SettingsPage
+ */
+export let userRolesList;
 
 /**
  * This component is to set up Settings page
@@ -48,16 +56,21 @@ export class SettingsPage implements OnInit {
   constructor(
       private popoverController: PopoverController,
       private event: Events,
-      private settingPaging: PaginationServiceService,
-      private settingSearch: SearchDataService
+      private settingSearch: SearchDataService,
+
+      /**
+       * This property is to get methods from PaginationServiceService
+       * @memberof SettingsPage
+       */
+      public settingPaging: PaginationServiceService,
     ) {
-    event.subscribe('newUserAdded', (data) => {
-      const nvar  = {srcElement: {innerText : this.selectedRole}};
-      if (nvar.srcElement.innerText !== 'All roles') {
-        this.clickRoles(nvar);
-      }
-    });
-  }
+      // event.subscribe('newUserAdded', (data) => {
+      // const nvar  = {srcElement: {innerText : this.selectedRole}};
+      // if (nvar.srcElement.innerText !== 'All roles') {
+      //     this.clickRoles(nvar);
+      //   }
+      // });
+    }
 
 
   /**
@@ -106,6 +119,7 @@ export class SettingsPage implements OnInit {
       },
     ];
 
+    userRolesList = this.settingMenuList;
     this.userData = userDummiesData;
     settingPopoverCtrlr = this.popoverController;
     this.configPageSetting = this.settingPaging.pageConfig(10, 1, this.userData.length);
@@ -117,11 +131,36 @@ export class SettingsPage implements OnInit {
    */
   async openSettingPopover(evt, compName) {
     const setPopup = await this.popoverController.create({
-      component:  (compName === 'EditUserComponent') ? EditUserComponent : AddNewUserComponent,
-      cssClass: 'pop-over-style'
+      component:  (compName === 'EditUserComponent') ? EditUserComponent :
+                   (compName === 'RolesDropDownComponent') ? RolesDropDownComponent :
+                    AddNewUserComponent,
+      // event: evt,
+      // componentProps: { viewType: this },
+      cssClass: (compName === 'RolesDropDownComponent') ? 'pop-over-dropdown-style' : 'pop-over-style '
     });
 
     return await setPopup.present();
+  }
+  
+  /**
+   * This method is to open popover component for select user by roles
+   * @param {*} evt
+   * @returns
+   * @memberof SettingsPage
+   */
+  async openRolesPopover(evt) {
+    const popup = await this.popoverController.create({
+      component:  RolesDropDownComponent,
+      componentProps: { viewType: this },
+      event: evt,
+      cssClass: 'pop-over-dropdown-style'
+    });
+
+    await popup.present();
+
+    return await popup.onWillDismiss().then(data => {
+      this.clickRoles(selRolePopup);
+    });
   }
 
   /**
