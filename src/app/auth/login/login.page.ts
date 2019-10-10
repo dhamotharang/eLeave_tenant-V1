@@ -42,7 +42,12 @@ export class LoginPage implements OnInit {
     private userData: UserDataService,
     private router: Router,
     private menuCtrl: MenuController,
-    private pgSet: PaginationServiceService
+
+    /**
+     * This property is to get methods from PaginationServiceService
+     * @memberof LoginPage
+     */
+    public pgSet: PaginationServiceService
   ) { }
 
 
