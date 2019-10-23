@@ -1,5 +1,7 @@
 {
   "name": "eLeave-v1-tenant",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

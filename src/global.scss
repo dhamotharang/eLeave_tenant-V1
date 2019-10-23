@@ -27,6 +27,7 @@
 
 
 .pop-over-style .popover-content {
+	transition: .5s ease;
     --min-width: 300px !important;
 	bottom: 0 !important;
 	top: 0 !important;
@@ -39,6 +40,20 @@
 	  opacity: 0.33 !important;
 	}
 }
+
+// .pop-over-style .popover-content {
+//  --min-width: 300px !important;
+// 	bottom: 0 !important;
+// 	top: 0 !important;
+// 	right: 0 !important;
+// 	left: unset !important;
+// 	transform-origin: initial !important;
+// 	max-height: fit-content !important;
+	
+// 	ion-backdrop {
+// 	  opacity: 0.33 !important;
+// 	}
+// }
 
 .pop-over-dropdown-style .popover-content {
     display: flex;
@@ -134,7 +149,36 @@ $screen-breakpoints: (
         @media (min-width: $valueSize) {
             display: flex;
         }
-    }
+	}
+
+	.update-size#{$keySize}-fullScreen {
+        @media (max-width: $valueSize) {
+			min-width: -webkit-fill-available;
+        }
+	}
+
+	.update-size#{$keySize}-auto {
+        @media (max-width: $valueSize) {
+			min-width: auto;
+        }
+	}
+
+	
+	.update-login-#{$keySize}-bg {
+        @media (max-width: $valueSize) {
+			position: absolute;
+			min-width: -webkit-fill-available;
+        }
+	}
+	
+	.update-login-#{$keySize}-body {
+        @media (max-width: $valueSize) {
+			position: relative;
+			background-color: var(--ion-color-primary-contrast);
+			padding: 25px;
+        }
+	}
+
 }
 // @each $keySize, $valueSize in $screen-breakpoints {
 //     [visible-block-#{$keySize}] {

@@ -148,7 +148,8 @@
       </ion-col>
 
       <!-------------------- Client's Description  ---------------------------->
-      <ion-col style="padding:0; min-width: fit-content;">
+      <ion-col style="padding:0; min-width: fit-content;"
+      [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'update-size-lg-fullScreen' : 'update-size-md-fullScreen'">
         <!-- Header -->
         <ion-title class="custDtlTitleStyle">
           DESCRIPTION

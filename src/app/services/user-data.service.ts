@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from '@ionic/angular';
 
+// import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+// import { map } from 'rxjs/operators';
+
 
 /**
  * This service is for user store or delete user's login, logout and validations
@@ -21,10 +24,10 @@ export class UserDataService {
    */
   constructor(
     private events: Events,
-    private storage: Storage
+    private storage: Storage,
+    // private http: HttpClient
   ) { }
 
-  
   /**
    * This property is a variable declarations for user loggin or not
    * @memberof UserDataService
@@ -38,33 +41,45 @@ export class UserDataService {
    */
   public userPicture;
 
-  /**
-   * This method is to set user login.
-   * Then set username to storage service
-   * @param {string} username
-   * @returns {Promise<any>}
-   * @memberof UserDataService
-   */
-  login(username: string): Promise<any> {
-    return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
-      return this.events.publish('user:login');
-    });
-  }
+  // public ROOT_URL = 'http://zencore.zen.com.my:3000';
+  // /**
+  //  * This method is to set user login.
+  //  * Then set username to storage service
+  //  * @param {string} username
+  //  * @returns {Promise<any>}
+  //  * @memberof UserDataService
+  //  */
+  // login(email: string, password: string): Promise<any> {
+  //   return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
+  //     this.setUsername(email);
+  //     return this.events.publish('user:login');
+  //   });
+  // }
 
-  /**
-   * This method is to set user logout.
-   * This will remove username in storage service
-   * @returns {Promise<any>}
-   * @memberof UserDataService
-   */
-  logout(): Promise<any> {
-    return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
-      return this.storage.remove('username');
-    }).then(() => {
-      this.events.publish('user:logout');
-    });
-  }
+  // loginDummy(email: string, password: string) {
+  //   return this.http.post<any>(this.ROOT_URL + '/api/auth/login', {email, password}).pipe(
+  //     map(data => {
+  //       if (data && data.access_token) {
+  //         localStorage.setItem('access_token', JSON.stringify(data.access_token));
+  //       }
+  //       return data;
+  //     })
+  //   );
+  // }
+
+  // /**
+  //  * This method is to set user logout.
+  //  * This will remove username in storage service
+  //  * @returns {Promise<any>}
+  //  * @memberof UserDataService
+  //  */
+  // logout(): Promise<any> {
+  //   return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
+  //     return this.storage.remove('username');
+  //   }).then(() => {
+  //     this.events.publish('user:logout');
+  //   });
+  // }
 
 
   /**
@@ -88,27 +103,27 @@ export class UserDataService {
     });
   }
 
-  /**
-   * This method is to set remember me function. It will
-   * set username and password to session storage
-   * @param {*} loginData
-   * @memberof UserDataService
-   */
-  setRememberMe(loginData) {
-    sessionStorage.setItem('username', loginData.username);
-    sessionStorage.setItem('password', loginData.password);
-  }
+  // /**
+  //  * This method is to set remember me function. It will
+  //  * set username and password to session storage
+  //  * @param {*} loginData
+  //  * @memberof UserDataService
+  //  */
+  // setRememberMe(loginData) {
+  //   localStorage.setItem('username', loginData.username);
+  //   localStorage.setItem('password', loginData.password);
+  // }
 
-  /**
-   * This method is to remove save remember me's username and password
-   * from session storage
-   * @param {*} loginData
-   * @memberof UserDataService
-   */
-  removeRememberMe(loginData) {
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('password');
-  }
+  // /**
+  //  * This method is to remove save remember me's username and password
+  //  * from session storage
+  //  * @param {*} loginData
+  //  * @memberof UserDataService
+  //  */
+  // removeRememberMe(loginData) {
+  //   localStorage.removeItem('username');
+  //   localStorage.removeItem('password');
+  // }
 
   /**
    * This method is to set forget password. It will

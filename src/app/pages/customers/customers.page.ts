@@ -35,7 +35,7 @@ export let salesPersonDummyData: any = [];
  * @export
  * @class CustomersPage
  */
-export let selCustView;
+export let selCustView =  {val: 'card'};
 
 /**
  * This variable is to store data of current showed customer
@@ -59,14 +59,18 @@ export let currCustPage;
 export class CustomersPage implements OnInit {
 
   /**
-   *Creates an instance of CustomersPage.
+   * Creates an instance of CustomersPage.
    * @param {PopoverController} popoverController
    * @param {PaginationServiceService} custPaging
    * @memberof CustomersPage
    */
   constructor(
+    /**
+    * This property is to bind method from PaginationServiceService
+    * @memberof CustomersPage
+    */
+    public custPaging: PaginationServiceService,
     private popoverController: PopoverController,
-    private custPaging: PaginationServiceService,
     private custSearch: SearchDataService
   ) { }
 
@@ -75,7 +79,7 @@ export class CustomersPage implements OnInit {
    * This property is to bind selected customer data
    * @memberof CustomersPage
    */
-  public selectedVal;
+  public selectedVal = 'card';
 
   /**
    * This property is to bind all customers data
@@ -101,9 +105,14 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   ngOnInit() {
-    selCustView = {val: 'card'};
-    this.selectedVal = 'card';
+    // selCustView = {val: 'card'};
+    // this.selectedVal = 'card';
     this.configPageCust = this.custPaging.pageConfig(9, 1, this.customerData.length);
+    console.log(this.custPaging.getSideMenuType());
+    this.custPaging.setCustomerViewType('card');
+    console.log(this.custPaging.getCustomerViewType());
+    console.log(this.selectedVal);
+    console.log(selCustView);
   }
 
   /**
@@ -123,7 +132,9 @@ export class CustomersPage implements OnInit {
     });
 
     popover.onDidDismiss().then((data) => {
-      this.selectedVal = selCustView.val;
+      console.log('dismisdsd');
+      console.log(this.custPaging.getCustomerViewType());
+      this.selectedVal = this.custPaging.getCustomerViewType();
     });
 
     return await popover.present();
@@ -161,5 +172,7 @@ export class CustomersPage implements OnInit {
                       customersDummiesData;
     this.pageCustChanged(1);
   }
+
+
 }
 

@@ -56,21 +56,6 @@ export class CustomerDetailsPage implements OnInit {
     private custListSearch: SearchDataService
   ) { }
 
-  // slideOpts = {
-  //   slidesPerView: 3,
-  //   on: {
-  //     beforeInit() {
-  //       const swiper = this;
-
-  //       swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
-  //       swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
-
-  //       swiper.params.watchSlidesProgress = true;
-  //       swiper.originalParams.watchSlidesProgress = true;
-  //     }
-  //   }
-  // };
-
   /**
    * This property is to bind configurations for slides
    * @memberof CustomerDetailsPage

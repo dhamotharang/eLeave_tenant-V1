@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import {UserOptions} from '../../interfaces/user-options';
 
-import { UserDataService } from '../../services/user-data.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
+import { AuthService } from '../../services/shared-service/auth.service';
+import { APIService } from '../../services/shared-service/api.service';
 import {currUser} from '../../app.component';
 
 /**
@@ -30,24 +32,31 @@ export let sideMenuShow = {value: true};
 
 export class LoginPage implements OnInit {
 
-
   /**
-   * Creates an instance of LoginPage.
-   * @param {UserDataService} userData
+   *Creates an instance of LoginPage.
    * @param {Router} router
-   * @param {MenuController} menuCtrl
+   * @param {NgxSpinnerService} spinner
+   * @param {AuthService} authService
+   * @param {PaginationServiceService} pgSet
    * @memberof LoginPage
    */
   constructor(
-    private userData: UserDataService,
     private router: Router,
-    private menuCtrl: MenuController,
+    private spinner: NgxSpinnerService,
+    private api: APIService,
+
+    /**
+     * This property is to get methods from AuthService
+     * @memberof LoginPage
+     */
+    public authService: AuthService,
 
     /**
      * This property is to get methods from PaginationServiceService
      * @memberof LoginPage
      */
     public pgSet: PaginationServiceService
+
   ) { }
 
 
@@ -57,7 +66,6 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   public userLogin: UserOptions = { username: '', password: '' };
-
 
   /**
    * This property is a boolean to check if the login buttton is clicked or not
@@ -76,7 +84,7 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   public showPass = false;
-  
+
   /**
    * This property is to set home page url link
    * @memberof LoginPage
@@ -89,8 +97,13 @@ export class LoginPage implements OnInit {
    */
   ngOnInit() {
     this.pgSet.setShowToolbarSideMenu(false);
+    if ( localStorage.getItem('username') !== null && localStorage.getItem('password') !== null) {
+      this.userLogin.username = localStorage.getItem('username');
+      this.userLogin.password = localStorage.getItem('password');
+    }
+    this.authService.logout();
   }
-  
+
   /**
    * Function executed when click login button
    * @param {NgForm} loginForm
@@ -103,12 +116,23 @@ export class LoginPage implements OnInit {
     if (loginForm.valid) {
       this.pgSet.setShowToolbarSideMenu(true);
       Object.assign(currUser, {value: this.userLogin.username});
-      await this.userData.login(this.userLogin.username).then(() => {
-        return this.router.navigate(['/main/dashboard']);
-      });
+      this.spinner.show();
+      await this.authService.login(this.userLogin.username, this.userLogin.password).subscribe(
+        data => {
+          // console.log('subs1 data');
+          console.log(data);
+          this.spinner.hide();
+          // this.api.getApi('/api/admin/leavetype').subscribe(
+          //   datas => {
+          //     console.log('apiii');
+          //     console.log(datas);
+          //   }
+          // );
+          return this.router.navigate(['/main/dashboard']);
+        }
+      );
     }
   }
-
 
   /**
    * Function executed when user click show password
@@ -119,7 +143,6 @@ export class LoginPage implements OnInit {
     this.type = (this.showPass) ? this.type = 'text' : this.type = 'password';
   }
 
-  
   /**
    * Function executed when user set to remember their username & password
    * @param {*} evt
@@ -127,9 +150,9 @@ export class LoginPage implements OnInit {
    */
   rememberMe(evt) {
     if (evt.target.checked === true) {
-      this.userData.setRememberMe(this.userLogin);
+      this.authService.setRememberMe(this.userLogin);
     } else {
-      this.userData.removeRememberMe(this.userLogin);
+      this.authService.removeRememberMe(this.userLogin);
     }
   }
 

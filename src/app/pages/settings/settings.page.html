@@ -69,12 +69,15 @@
 
         <!-- User Lists Table View -->
         <ion-grid id="userconfiglist" style="background-color: #ffffff; padding: 1%;"
-        [class]="(settingPaging.getSideMenuType() === 'iconMenu') ? 'hide-sm-down' : 'hide-xs-down'">
+        [class]="(settingPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'">
           <ion-row class="userTableHeader">
-            <ion-col>
+            <ion-col size="4.9">
               USER DETAILS
             </ion-col>
-            <ion-col size="7.45" class="role">
+            <ion-col size="2" style="text-align: -webkit-center;">
+              STATUS
+            </ion-col>
+            <ion-col size="2.8" class="role">
               ROLES
             </ion-col>
           </ion-row>
@@ -107,7 +110,7 @@
         </ion-grid>  
 
         <!-- User Lists Card View -->
-        <ion-row [class]="(settingPaging.getSideMenuType() === 'iconMenu') ? 'hide-sm-up' : 'hide-xs-up'">
+        <ion-row [class]="(settingPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'">
           <ion-item-group class="settingCardStyles">
             <ion-card *ngFor="let userCards of userData | paginate: configPageSetting" >
               <ion-card-content>
@@ -119,7 +122,8 @@
                     <ion-label style="font-weight: bold;">{{userCards.username}}</ion-label>
                     <ion-label>{{userCards.email}}</ion-label>
                   </ion-list>
-                  <ion-label style="cursor: pointer; color: #3b86ff; align-self: start; padding: 2px; margin-left: auto;">Edit</ion-label>
+                  <ion-label style="cursor: pointer; color: #3b86ff; align-self: start; padding: 2px; margin-left: auto;"
+                  (click)="initEditUserPopup(user, $event, 'EditUserComponent')">Edit</ion-label>
                 </ion-item-group>
                 <ion-item-group style="justify-content: space-between; margin-top: 10px;">
                   <ion-label>{{userCards.role}}</ion-label>

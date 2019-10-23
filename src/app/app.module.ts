@@ -9,6 +9,10 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
 import { ChangeProfilePhotoComponent } from './layout/user-drop-down/change-profile-photo/change-profile-photo.component';
@@ -18,14 +22,17 @@ import { ChangeProfilePhotoComponent } from './layout/user-drop-down/change-prof
   entryComponents: [UserDropDownComponent, ChangeProfilePhotoComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    HttpModule,
+    NgxSpinnerModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

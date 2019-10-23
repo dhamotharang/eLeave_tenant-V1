@@ -3,46 +3,26 @@
 
        <!----------- Customers Title/Searchbar/Drop Down/Add New Items ----------->
       <ion-row>
-        <!-- <ion-col> -->
           <ion-title class="customerTitleStyle">
               Customers
           </ion-title>
-        <!-- </ion-col> -->
-        <!-- <ion-col> -->
           <ion-item-group class="customerButtonsSetting">
             
-              <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchCust($event)"></ion-searchbar>
+              <ion-searchbar class="customer-searchbar-style" placeholder="Search Name" (ionChange)="onSearchCust($event)"></ion-searchbar>
               <ion-button (click)="ngOnClickPophoverButton($event)" style="width: 40px;">
                 <ion-icon slot="icon-only" name="menu"></ion-icon>
-              </ion-button>
+              </ion-button> 
               <ion-button [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'">Add User</ion-button>
           </ion-item-group>
-
-          <!-- <ion-item-group style="justify-content: flex-end; padding-right: 9px; display: flex;">
-            <ion-searchbar class="customerSearchBar" placeholder="Search Name/Company..."></ion-searchbar>
-            
-            <ion-button class="customerDropDownMenuButton" (click)="ngOnClickPophoverButton($event)"> 
-              <ion-icon slot="icon-only" name="menu"></ion-icon>
-            </ion-button>
-            
-            <ion-button class="customerAddNewButton" [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'" block>
-              <ion-icon name="add"></ion-icon> 
-              <ion-text style="padding-left: 2px; ">Add New</ion-text>
-            </ion-button>
-
-          </ion-item-group> -->
-        <!-- </ion-col> -->
       </ion-row>
       
       <!----------- Customers Details ----------->
       <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px; height: -webkit-fill-available; display: flex;">    
-          <ng-container *ngIf="selectedVal === 'card'; else elseTemplate">   
+          <ng-container *ngIf="selectedVal === 'card';" >   
 
             <!------- Customer Card View ------->
-            <ion-card class="customerCardStyle" style="min-width: fit-content; flex-grow: 1;"
-             *ngFor="let cardData of customerData | paginate: configPageCust">
+            <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
               <ion-item-group class="cardBodyStyle" style="border-bottom: 1px solid var(--eleave-border-color);"> 
-                <!-- <ion-row> -->
                 <ion-avatar class="customerProfilePicture">
                   <img src="../assets/icon/layout/picture.png">
                 </ion-avatar>
@@ -63,7 +43,6 @@
                   (click)="onClickCustomerViewDetails(cardData)">
                   View Details
                 </ion-label>
-                <!-- </ion-row> -->
               </ion-item-group>
               <ion-item-group class="cardFooterStyle">
                 <ion-item-group>
@@ -84,57 +63,8 @@
                   '#5ee2a0' : '#a5a4bf'}">
                   {{cardData.subsStatus}}
                 </ion-button>
-                <!-- <ion-item lines="none">
-                  <ion-label style="font-size: var(--eleave-body-size10);">{{cardData.status}}</ion-label>
-                </ion-item> -->
               </ion-item-group>
-            </ion-card>
-
-            
-            <!-- <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
-                <ion-item-divider style="background-color: #ffffff; padding: 0px;">
-                  <ion-grid>
-                    <ion-row>
-                        <ion-avatar class="customerProfilePicture">
-                          <img src="../assets/icon/layout/picture.png">
-                        </ion-avatar>
-                      <ion-col>
-                        <ion-card-title class="customerCardTitleStyle">
-                          {{cardData.clientName}}
-                        </ion-card-title>
-                        <ion-card-content class="customerCardBodyStyle">
-                            <ion-text>
-                                {{cardData.companyName}}
-                            </ion-text>
-                            <ion-text>
-                                {{cardData.clientEmail}}
-                            </ion-text>
-                        </ion-card-content>
-                      </ion-col>
-                      <ion-col>
-                        <ion-label class="customerCardViewDetails" lines="none" [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
-                          (click)="onClickCustomerViewDetails(cardData)">
-                          View Details
-                        </ion-label>   
-                        
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </ion-item-divider>
-                  <ion-col>
-                    <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
-                    <ion-text class="customerCardIconText">
-                      {{cardData.tenantNumber}}
-                    </ion-text>
-                  </ion-col>
-                  <ion-col>
-                    <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
-                    <ion-text class="customerCardIconText">
-                      {{cardData.employeeNumber}}
-                    </ion-text>
-                  </ion-col>
-              </ion-card> -->
-  
+            </ion-card>  
             <div style="width: -webkit-fill-available;"></div>
             <!-- Customer list's pagination -->
             <ion-row style="margin: 0px 20px 0px auto; display: table;">        
@@ -142,52 +72,56 @@
             </ion-row>
           </ng-container>
 
-          <ng-template #elseTemplate>
-            <ion-row style="display: flow-root; width: -webkit-fill-available;">
+          <ng-container *ngIf="selectedVal === 'table';">
+            <ion-row style="display: flow-root; width: -webkit-fill-available; 
+            min-width: fit-content;">
               <!------- Customer Table View ------->
-              <ion-grid class="customerTable">
-                <ion-row class="headerStyle">
-                  <ion-col size="3">CLIENT NAME</ion-col>
-                  <ion-col>COMPANY NAME</ion-col>
-                  <ion-col>EMAIL</ion-col>
-                  <ion-col size="1.5">PLAN NAME</ion-col>
-                  <ion-col size="1">STATUS</ion-col>
-                </ion-row>
-                <ion-row *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
-                [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
-                (click)="onClickCustomerViewDetails(tableData)">
-                  <ion-col size="3">{{tableData.clientName}}</ion-col>
-                  <ion-col>{{tableData.companyName}}</ion-col>
-                  <ion-col>{{tableData.clientEmail}}</ion-col>
-                  <ion-col size="1.5">{{tableData.plan}}</ion-col>
-                  <ion-col size="1.5"> 
-                    <!-- {{tableData.status}} -->
-                      <span [ngSwitch]="tableData.status">
-                        <p *ngSwitchCase="'LIVE'" style="color: #5ee2a0;">
-                            {{tableData.status}}
-                        </p>
-                        <p *ngSwitchCase="'TRIAL'" style="color: #3b86ff;">
-                            {{tableData.status}}                  
-                        </p>
-                        <p *ngSwitchCase="'PAST DUE'" style="color: #ff3b3b;">
-                            {{tableData.status}}                  
-                        </p>
-                        <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" style="color: #ff3b3b;">
-                            {{tableData.status}}                  
-                        </p>
-                      </span>
-    
-                  </ion-col>
-                  
-                </ion-row>
-              </ion-grid>      
-            
-              <!-- Customer list's pagination -->
-              <ion-row style="margin: 0px 20px 0px auto; display: table;">        
-                <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+              <ion-row style="height: -webkit-fill-available; 
+              min-width: fit-content;">
+                <ion-grid class="customerTable" style="min-width: fit-content;">
+                  <ion-row class="headerStyle" style="min-width: fit-content;">
+                    <ion-col size="3">CLIENT NAME</ion-col>
+                    <ion-col>COMPANY NAME</ion-col>
+                    <ion-col>EMAIL</ion-col>
+                    <ion-col size="1.5">PLAN NAME</ion-col>
+                    <ion-col size="1.5">STATUS</ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
+                  [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
+                  (click)="onClickCustomerViewDetails(tableData)"
+                  style="height: 10%; min-width: fit-content;">
+                    <ion-col size="3" style="min-width: fit-content;">{{tableData.clientName}}</ion-col>
+                    <ion-col style="min-width: fit-content;">{{tableData.companyName}}</ion-col>
+                    <ion-col style="min-width: fit-content;">{{tableData.clientEmail}}</ion-col>
+                    <ion-col style="min-width: fit-content;" size="1.5">{{tableData.plan}}</ion-col>
+                    <ion-col style="min-width: fit-content;" size="1.5"> 
+                      <!-- {{tableData.status}} -->
+                        <span [ngSwitch]="tableData.status">
+                          <p *ngSwitchCase="'LIVE'" style="color: #5ee2a0;">
+                              {{tableData.status}}
+                          </p>
+                          <p *ngSwitchCase="'TRIAL'" style="color: #3b86ff;">
+                              {{tableData.status}}                  
+                          </p>
+                          <p *ngSwitchCase="'PAST DUE'" style="color: #ff3b3b;">
+                              {{tableData.status}}                  
+                          </p>
+                          <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" style="color: #ff3b3b;">
+                              {{tableData.status}}                  
+                          </p>
+                        </span>
+                    </ion-col>                    
+                  </ion-row>
+                </ion-grid>      
               </ion-row>
+              
+              <div style="width: -webkit-fill-available;"></div>
+              <!-- Customer list's pagination -->
+              <ion-item-group style="margin: 0px 20px 0px auto; display: table;">        
+                <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+              </ion-item-group>
             </ion-row>
-          </ng-template>
+          </ng-container>
         
         
       </ion-row>

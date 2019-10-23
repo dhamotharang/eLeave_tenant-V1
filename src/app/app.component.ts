@@ -5,8 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { UserDropDownComponent } from './layout/user-drop-down/user-drop-down.component';
-// import { UserMenuComponent } from '../layout/user-menu/user-menu.component';
-// import { UserMenuComponent } from './layout/user-drop-down/user-drop-down.component';
 
 import { PaginationServiceService } from './services/pagination-service.service';
 import { UserDataService } from './services/user-data.service';
@@ -67,7 +65,6 @@ export class AppComponent {
    * @param {StatusBar} statusBar
    * @param {PopoverController} popoverController
    * @param {PaginationServiceService} settingPage
-   * @param {UserDataService} userInfo
    * @memberof AppComponent
    */
   constructor(
@@ -75,22 +72,27 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private popoverController: PopoverController,
-    private settingPage: PaginationServiceService,
-    private userInfo: UserDataService
+
+    /**
+     * This property is to set/get methods from PaginationServiceService
+     * @memberof AppComponent
+     */
+    public settingPage: PaginationServiceService,
+
+    /**
+     * This property is to set/get methods from UserDataService
+     * @memberof AppComponent
+     */
+    public userDataSvs: UserDataService
   ) {
     this.initializeApp();
   }
-
+  
   /**
    * This property is to set side menu's title, url and icon
    * @memberof AppComponent
    */
   public appPages = [
-    // {
-    //   title: 'Home',
-    //   url: '/main/dashboard',
-    //   icon: 'icon_home.svg'
-    // },
     {
       title: 'Dashboard',
       url: '/main/dashboard',
@@ -136,12 +138,13 @@ export class AppComponent {
    */
   public loggedUser;
 
+  public windowWidth: any = window.innerWidth;
   /**
    * This method is initialize value of properties. It will be
    * executed when this page is loaded
    * @memberof AppComponent
    */
-  initializeApp() {
+initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -153,11 +156,10 @@ export class AppComponent {
     salesmanDummiesData = json.salepersonList;
     userDummiesData = json.userDetails;
     this.loggedUser = 'No user';
-    // console.log('getLoggedUseraaa:' + this.userInfo.getUsername());
-    // this.loggedUser = this.userInfo.getUsername();
     this.loggedUser = currUser;
     this.settingPage.setSideMenuType(this.sideMenuStyle);
-    // console.log('loggedUser:' + this.loggedUser);
+    this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan');
+    console.log(this.userDataSvs.getUserProfilePicture());
   }
 
   /**
@@ -185,7 +187,7 @@ export class AppComponent {
    * @param {*} boolCollapse
    * @memberof AppComponent
    */
-  collapseMenu(boolCollapse) {
+collapseMenu(boolCollapse) {
     this.sideMenuStyle = (boolCollapse === true) ? 'iconMenu' : 'fullMenu';
     this.settingPage.setSideMenuType(this.sideMenuStyle);
   }
@@ -195,7 +197,7 @@ export class AppComponent {
    * @param {*} event
    * @memberof AppComponent
    */
-  clickNotiBtn(event) {
+clickNotiBtn(event) {
     console.log('clickNotiBtn');
     console.log(event);
   }

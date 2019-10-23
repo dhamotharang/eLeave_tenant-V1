@@ -47,6 +47,8 @@
     }
 
     .customerCardStyle {
+        flex-grow: 1;
+        min-width: fit-content;
         background-color: #ffffff;
         width: 31%;
         padding-top: 15px;

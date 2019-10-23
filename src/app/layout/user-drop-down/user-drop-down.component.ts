@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
-import { UserDataService } from '../../services/user-data.service';
+// import { UserDataService } from '../../services/user-data.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
+import { AuthService } from '../../services/shared-service/auth.service';
 
 import { toolbarPopup } from '../../app.component';
 import { ChangeProfilePhotoComponent } from './change-profile-photo/change-profile-photo.component';
@@ -24,28 +25,22 @@ export class UserDropDownComponent implements OnInit {
 
   /**
    * Creates an instance of UserDropDownComponent.
-   * @param {UserDataService} userDataSvs
    * @param {PaginationServiceService} pggSvs
    * @param {Router} router
    * @memberof UserDropDownComponent
    */
   constructor(
-    private userDataSvs: UserDataService,
+    // private userDataSvs: UserDataService,
     private pggSvs: PaginationServiceService,
-    private popovrController: PopoverController
+    private popovrController: PopoverController,
+    private auth: AuthService
   ) { }
-
-  /**
-   * This property will bind url link after user click logout
-   * @memberof UserDropDownComponent
-   */
-  public logoutedLink = '/login';
 
   /**
    * This method is to set propertie's initial value
    * @memberof UserDropDownComponent
    */
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * Executed when user click logut.
@@ -54,10 +49,9 @@ export class UserDropDownComponent implements OnInit {
    * @memberof UserDropDownComponent
    */
   async onClickLogout() {
-    this.userDataSvs.logout().then(() => {
-      toolbarPopup.dismiss();
-      this.pggSvs.setShowToolbarSideMenu(false);
-    });
+    this.auth.logout();
+    toolbarPopup.dismiss();
+    this.pggSvs.setShowToolbarSideMenu(false);
   }
 
   /**

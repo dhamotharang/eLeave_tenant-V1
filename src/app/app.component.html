@@ -5,6 +5,8 @@
     <ion-toolbar style="width: auto; margin-left: auto; text-align: -webkit-right; height: 50px;" [ngStyle]="{ 'display': (settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none'}">
     <!-- <ion-toolbar style="width: 82%; left: 269px;" [ngStyle]="{ 'display': (settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none'}"> -->
       <ion-item-group slot="end" style="display: inline-flex; height: fit-content; align-items: center;">
+  
+
         <ion-button slot="icon-only" fill="clear" (onclick)="clickNotiBtn($event)">
           <ion-icon class="toolbarIcon" src="../assets/icon/layout/icon-notification.svg"></ion-icon>
         </ion-button>
@@ -14,141 +16,126 @@
           <ion-icon src="../assets/icon/layout/icon-arrow-down.svg" style="padding: 5px;"></ion-icon>
         </ion-button>
         <ion-avatar class="userProfile">
-          <img src="../assets/icon/signin/zlatan"/>
+            <img *ngIf="userDataSvs.getUserProfilePicture() === null" src="../assets/icon/layout/picture.png"/> 
+          <img *ngIf="userDataSvs.getUserProfilePicture() !== null" src="../assets/icon/signin/zlatan"/> 
+          <!-- <img src="../assets/icon/signin/zlatan"/>  -->
         </ion-avatar>
       </ion-item-group>
     </ion-toolbar>
   <!-- </ion-header> -->
+  
     
-  <ion-split-pane *ngIf="sideMenuStyle === 'fullMenu'"  when="xs">    
-    <!-- Full menu -->    
-    <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
-    [ngStyle]="{ 'display': (sideMenuStyle === 'fullMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none'}">
-    <!-- <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
-      [ngStyle]="{ 'display': (sideMenuStyle === 'fullMenu' && settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none'}"> -->
-      <ion-header>
-        <ion-toolbar>
-          <ion-avatar class="sidebarLogo">
-            <img src="../assets/icon/logo.PNG">
-          </ion-avatar>
-          <ion-icon class="collapse" slot="end" color="medium" name="arrow-dropleft"
-            style="cursor:pointer; font-size: 30px; padding: 10px; " (click)="collapseMenu(true)">
-          </ion-icon>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
-              lines="none" [ngStyle]="{'--ion-background-color:': 'darkgrey'}" class='highlight-focus'>
-              <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
-              <ion-label class="sidebarList">{{p.title}}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
+      <ion-split-pane when="xs"  *ngIf="settingPage.getSideMenuType() === 'fullMenu'" >    
+        <!-- Full menu -->    
+        <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
+        [ngStyle]="{ 'display': (settingPage.getSideMenuType() === 'fullMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none'}">
+        <!-- <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
+          [ngStyle]="{ 'display': (sideMenuStyle === 'fullMenu' && settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none'}"> -->
+          <ion-header>
+            <ion-toolbar>
+              <ion-avatar class="sidebarLogo">
+                <img src="../assets/icon/logo.PNG">
+              </ion-avatar>
+              <ion-icon class="collapse" slot="end" color="medium" name="arrow-dropleft"
+                style="cursor:pointer; font-size: 30px; padding: 10px; " (click)="collapseMenu(true)">
+              </ion-icon>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-list>
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
+                  lines="none" [ngStyle]="{'--ion-background-color:': 'darkgrey'}" class='highlight-focus'>
+                  <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
+                  <ion-label class="sidebarList">{{p.title}}</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+          </ion-content>
+        </ion-menu>
+        <ion-router-outlet main></ion-router-outlet>
+      </ion-split-pane>
+    
 
-    <ion-router-outlet main>
-<!--       
+
+      
+      <!-- <ion-split-pane when="xs" [class]="(settingPage.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
+        
+        <ion-menu type="overlay" menuId="fullMenu"  class="sidebarBackgroundIconView"
+        [ngStyle]="{ 'display': (settingPage.getSideMenuType() === 'fullMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none' }" 
+        style="min-width: fit-content;">
+          <ion-header style="display: inline-table;">
+            <ion-toolbar>
+              <ion-icon class="collapse" slot="end" color="medium" name="menu"
+                style="cursor:pointer; font-size: 30px; padding: 10px;" (click)="collapseMenu(false)">
+              </ion-icon>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content style="min-width: fit-content;">
+            <ion-list style="min-width: fit-content;">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
+                  lines="none" [ngStyle]="{'--ion-background-color': 'blue' }" class='highlight-focus' style="min-width: fit-content;">
+                  <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]" style="min-width: fit-content;"></ion-icon>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+          </ion-content>
+        </ion-menu>
+        <ion-router-outlet main></ion-router-outlet>
+      </ion-split-pane> -->
+    <!-- <ion-split-pane when="xs">    
+      <ion-menu type="overlay" menuId="fullMen" class="sidebarBackground"
+      [ngStyle]="{ 'display': (settingPage.getSideMenuType() === 'fullMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none'}">
         <ion-header>
           <ion-toolbar>
-            <ion-item-group slot="end" style="display: inline-flex; height: fit-content; align-items: center;">
-              <ion-button slot="icon-only" fill="clear" (onclick)="clickNotiBtn($event)">
-                <ion-icon class="toolbarIcon" src="../assets/icon/layout/icon-notification.svg"></ion-icon>
-              </ion-button>
-              <div class="verticalLine"></div>
-              <ion-button fill="clear" style="font-size: 9px; color: #4d4f5c; text-transform: capitalize; " (click)="clickUserBtn($event)">
-                <ion-label>{{loggedUser}}</ion-label>
-                <ion-icon src="../assets/icon/layout/icon-arrow-down.svg" style="padding: 5px;"></ion-icon>
-              </ion-button>
-              <ion-avatar class="userProfile">
-                <img src="../assets/icon/layout/picture.png"/>
-              </ion-avatar>
-            </ion-item-group>
+            <ion-avatar class="sidebarLogo">
+              <img src="../assets/icon/logo.PNG">
+            </ion-avatar>
+            <ion-icon class="collapse" slot="end" color="medium" name="arrow-dropleft"
+              style="cursor:pointer; font-size: 30px; padding: 10px; " (click)="collapseMenu(true)">
+            </ion-icon>
           </ion-toolbar>
-        </ion-header> -->
-
-    </ion-router-outlet>
-
-    <!-- BAKKK -->
-    <!-- <ion-router-outlet main></ion-router-outlet> -->
-      <!-- <ion-router-outlet main>
-        <ion-header>
-            <ion-toolbar style="height: fit-content; display: flex;">
-              <ion-buttons slot="secondary">
-                <ion-button style="width:fit-content; height:fit-content">
-                  <ion-icon slot="icon-only" class="toolbarIcon" src="../assets/icon/layout/icon-notification.svg"></ion-icon>
-                </ion-button>
-                <div class="verticalLine"></div>
-                <ion-button style="font-size: 9px;
-                  color: #4d4f5c;
-                  text-transform: capitalize;" (click) = "test()">
-                  <ion-label>
-                    John Doe
-                  </ion-label>
-                  <ion-icon src="../assets/icon/layout/icon-arrow-down.svg" style="padding: 5px;"></ion-icon>
-                </ion-button>
-                <ion-avatar class="userProfile">
-                  <img src="../assets/icon/layout/picture.png">
-                </ion-avatar>
-              </ion-buttons>
-            </ion-toolbar>
         </ion-header>
-      </ion-router-outlet> -->
-  </ion-split-pane>
-
-  <ion-split-pane *ngIf="sideMenuStyle === 'iconMenu'" when="xs">
-    <!-- Icon menu only -->
-    <ion-menu type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
-    [ngStyle]="{ 'display': (sideMenuStyle === 'iconMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none' }" 
-    style="min-width: fit-content;">
-    <!-- <ion-menu type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
-    [ngStyle]="{ 'display': (sideMenuStyle === 'iconMenu' && settingPage.getToolbarSideMenuStatus()) ? 'flex' : 'none' }" 
-    style="min-width: fit-content;"> -->
-      <ion-header style="display: inline-table;">
-        <ion-toolbar>
-          <ion-icon class="collapse" slot="end" color="medium" name="menu"
-            style="cursor:pointer; font-size: 30px; padding: 10px;" (click)="collapseMenu(false)">
-          </ion-icon>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content style="min-width: fit-content;">
-        <ion-list style="min-width: fit-content;">
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
-              lines="none" [ngStyle]="{'--ion-background-color': 'blue' }" class='highlight-focus' style="min-width: fit-content;">
-              <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]" style="min-width: fit-content;"></ion-icon>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-
-      <ion-router-outlet main>
-        <!-- <ion-header>
-            <ion-toolbar style="height: fit-content; display: flex;">
-              <ion-buttons slot="secondary">
-                <ion-button style="width:fit-content; height:fit-content">
-                  <ion-icon slot="icon-only" class="toolbarIcon" src="../assets/icon/layout/icon-notification.svg"></ion-icon>
-                </ion-button>
-                <div class="verticalLine"></div>
-                <ion-button style="font-size: 9px;
-                  color: #4d4f5c;
-                  text-transform: capitalize;">
-                  <ion-label>
-                    John Doe
-                  </ion-label>
-                  <ion-icon src="../assets/icon/layout/icon-arrow-down.svg" style="padding: 5px;"></ion-icon>
-                </ion-button>
-                <ion-avatar class="userProfile">
-                  <img src="../assets/icon/layout/picture.png">
-                </ion-avatar>
-              </ion-buttons>
-            </ion-toolbar>
-        </ion-header> -->
-      </ion-router-outlet>
-  </ion-split-pane>
+        <ion-content>
+          <ion-list>
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
+                lines="none" [ngStyle]="{'--ion-background-color:': 'darkgrey'}" class='highlight-focus'>
+                <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]"></ion-icon>
+                <ion-label class="sidebarList">{{p.title}}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+      <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane> -->
+    <ion-split-pane when="xs"  *ngIf="settingPage.getSideMenuType() === 'iconMenu'">
+      <!-- Icon menu only -->
+      <ion-menu type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
+      [ngStyle]="{ 'display': (settingPage.getSideMenuType() === 'iconMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none' }" 
+      style="min-width: fit-content;">
+        <ion-header style="display: inline-table;">
+          <ion-toolbar>
+            <ion-icon class="collapse" slot="end" color="medium" name="menu"
+              style="cursor:pointer; font-size: 30px; padding: 10px;" (click)="collapseMenu(false)">
+            </ion-icon>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content style="min-width: fit-content;">
+          <ion-list style="min-width: fit-content;">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
+                lines="none" [ngStyle]="{'--ion-background-color': 'blue' }" class='highlight-focus' style="min-width: fit-content;">
+                <ion-icon slot="start" class="sidebarIcon" [src]="'../assets/icon/sidebar/' + [p.icon]" style="min-width: fit-content;"></ion-icon>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+      <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane>
 
       
   <!-- <ion-header>

@@ -16,8 +16,8 @@
 
     <!-------------------------------- Table ----------------------------------->
     <ion-row class="subscriptionLayout" >
-      <ion-col class="subscriptionBackgroundColor">
-          <ion-grid style="min-width: fit-content;" [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'">
+      <ion-col style="background-color: #ffffff;" [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'">
+          <ion-grid style="min-width: fit-content;">
             <!-- header -->
             <ion-row class="subscriptionTableHeaderTheme">
               <ion-col>
@@ -120,8 +120,9 @@
               </ion-col>
             </ion-row>
           </ion-grid>
-
-          <ion-row [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'">
+        </ion-col>
+        <ion-col [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'">
+          <ion-row>
               <ion-item-group class="subscriptionCardStyles">
                 <ion-card *ngFor="let card of subscribers | paginate: configPageSubs">
                   <ion-card-content class="cardStyle cardStyles">

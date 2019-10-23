@@ -112,6 +112,7 @@ export class DashboardPage implements OnInit {
    */
   public overviewSgmtOpt;
 
+
   /**
    * This method is to set inital value of properties. It
    * will be executed when Dashboard page being loaded.

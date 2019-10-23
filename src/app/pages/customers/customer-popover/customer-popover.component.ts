@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { selCustView } from '../customers.page';
 
+import { PaginationServiceService } from '../../../services/pagination-service.service';
 
 /**
  * This component is to set up the Customer popovers
@@ -23,7 +24,8 @@ export class CustomerPopoverComponent implements OnInit {
    * @memberof CustomerPopoverComponent
    */
   constructor(
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private pggSvs: PaginationServiceService
   ) { }
 
   /**
@@ -38,7 +40,8 @@ export class CustomerPopoverComponent implements OnInit {
    * @memberof CustomerPopoverComponent
    */
   ngOnInit() {
-    this.popoverCustObj = selCustView;
+    console.log(this.pggSvs.getCustomerViewType());
+    this.popoverCustObj = { val: this.pggSvs.getCustomerViewType() };
   }
 
   /**
@@ -55,6 +58,9 @@ export class CustomerPopoverComponent implements OnInit {
    * @memberof CustomerPopoverComponent
    */
   viewOption(evt, viewType) {
+    console.log(viewType);
+    this.pggSvs.setCustomerViewType(viewType);
+    console.log(this.pggSvs.getCustomerViewType());
     this.popoverCustObj.val = viewType;
     this.popoverController.dismiss();
   }
