@@ -29,10 +29,10 @@ export let salesmanDummiesData;
 export let userDummiesData;
 
 /**
- * This variable is to store value of logged user's username
+ * This variable is to store value of logged user's email
  * @memberof AppComponent
  */
-export let currUser = { value: 'Chan Seng Long'};
+export let currUser = { value: 'senglong@zen.com.my'};
 
 /**
  * This variable is to store value for popup in toolbar
@@ -59,12 +59,13 @@ declare const require: any;
 export class AppComponent {
 
   /**
-   * Creates an instance of AppComponent.
-   * @param {Platform} platform
-   * @param {SplashScreen} splashScreen
-   * @param {StatusBar} statusBar
-   * @param {PopoverController} popoverController
-   * @param {PaginationServiceService} settingPage
+   *Creates an instance of AppComponent.
+   * @param {Platform} platform This property is to get method from Platform
+   * @param {SplashScreen} splashScreen This property is to get method from SplashScreen
+   * @param {StatusBar} statusBar This property is to get method from StatusBar
+   * @param {PopoverController} popoverController This property is to get method from PopoverController
+   * @param {PaginationServiceService} settingPage This property is to set/get methods from PaginationServiceService
+   * @param {UserDataService} userDataSvs This property is to set/get methods from UserDataService
    * @memberof AppComponent
    */
   constructor(
@@ -72,22 +73,12 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private popoverController: PopoverController,
-
-    /**
-     * This property is to set/get methods from PaginationServiceService
-     * @memberof AppComponent
-     */
     public settingPage: PaginationServiceService,
-
-    /**
-     * This property is to set/get methods from UserDataService
-     * @memberof AppComponent
-     */
     public userDataSvs: UserDataService
   ) {
     this.initializeApp();
   }
-  
+
   /**
    * This property is to set side menu's title, url and icon
    * @memberof AppComponent
@@ -138,65 +129,65 @@ export class AppComponent {
    */
   public loggedUser;
 
-  public windowWidth: any = window.innerWidth;
+  // public windowWidth: any = window.innerWidth;
   /**
    * This method is initialize value of properties. It will be
    * executed when this page is loaded
    * @memberof AppComponent
    */
 initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  this.platform.ready().then(() => {
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+  });
 
-    const json = require('./sample.json');
+  const json = require('./sample.json');
 
-    customersDummiesData = json.customerSample;
-    salesmanDummiesData = json.salepersonList;
-    userDummiesData = json.userDetails;
-    this.loggedUser = 'No user';
-    this.loggedUser = currUser;
-    this.settingPage.setSideMenuType(this.sideMenuStyle);
-    this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan');
-    console.log(this.userDataSvs.getUserProfilePicture());
-  }
+  customersDummiesData = json.customerSample;
+  salesmanDummiesData = json.salepersonList;
+  userDummiesData = json.userDetails;
+  this.loggedUser = 'No user';
+  this.loggedUser = currUser;
+  this.settingPage.setSideMenuType(this.sideMenuStyle);
+  this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan');
+  console.log(this.userDataSvs.getUserProfilePicture());
+}
 
-  /**
-   * This method is to set popup in app components
-   * @param {*} evt
-   * @param {*} compoName
-   * @returns
-   * @memberof AppComponent
-   */
-  async openToolbarPopover(evt, compoName) {
-    toolbarPopup = await this.popoverController.create({
-      component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
-      componentProps: {
-        viewType: this
-      },
-      event: evt,
-      cssClass: 'pop-over-user-style'
-    });
+/**
+ * This method is to set popup in app components
+ * @param {*} evt This property will bind event values from html
+ * @param {*} compoName This property will bind component name from html
+ * @returns
+ * @memberof AppComponent
+ */
+async openToolbarPopover(evt, compoName) {
+  toolbarPopup = await this.popoverController.create({
+    component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
+    componentProps: {
+      viewType: this
+    },
+    event: evt,
+    cssClass: 'pop-over-user-style'
+  });
 
-    return await toolbarPopup.present();
-  }
+  return await toolbarPopup.present();
+}
 
-  /**
-   * This method is to set side menu is collapsed or extended
-   * @param {*} boolCollapse
-   * @memberof AppComponent
-   */
+/**
+ * This method is to set side menu is collapsed or extended
+ * @param {*} boolCollapse This property is to pass value of side menu in full menu view or side menu view
+ * @memberof AppComponent
+ */
 collapseMenu(boolCollapse) {
-    this.sideMenuStyle = (boolCollapse === true) ? 'iconMenu' : 'fullMenu';
-    this.settingPage.setSideMenuType(this.sideMenuStyle);
-  }
+  this.sideMenuStyle = (boolCollapse === true) ? 'iconMenu' : 'fullMenu';
+  this.settingPage.setSideMenuType(this.sideMenuStyle);
+}
 
-  /**
-   * This method is to get event when notification button is clicked
-   * @param {*} event
-   * @memberof AppComponent
-   */
+/**
+ * This method is to get event when notification button is clicked
+ * @param {*} event
+ * @memberof AppComponent
+ */
 clickNotiBtn(event) {
     console.log('clickNotiBtn');
     console.log(event);

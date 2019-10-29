@@ -59,21 +59,17 @@ export let currCustPage;
 export class CustomersPage implements OnInit {
 
   /**
-   * Creates an instance of CustomersPage.
-   * @param {PopoverController} popoverController
-   * @param {PaginationServiceService} custPaging
+   *Creates an instance of CustomersPage.
+   * @param {PaginationServiceService} custPaging This property is to bind method from PaginationServiceService
+   * @param {PopoverController} popoverController This property is to bind method from PopOverController
+   * @param {SearchDataService} custSearch This property is to bind method from SearchDataService
    * @memberof CustomersPage
    */
   constructor(
-    /**
-    * This property is to bind method from PaginationServiceService
-    * @memberof CustomersPage
-    */
     public custPaging: PaginationServiceService,
     private popoverController: PopoverController,
     private custSearch: SearchDataService
   ) { }
-
 
   /**
    * This property is to bind selected customer data
@@ -164,7 +160,11 @@ export class CustomersPage implements OnInit {
     currCustPage = event;
   }
 
-
+  /**
+   * This method is to set search function for this componenet
+   * @param {*} event
+   * @memberof CustomersPage
+   */
   onSearchCust(event) {
     this.customerData = customersDummiesData;
     this.customerData = (event.detail.value.length > 0 ) ?

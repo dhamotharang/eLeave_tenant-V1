@@ -34,6 +34,7 @@ export class RolesDropDownComponent implements OnInit {
    */
   public rolesList;
 
+  public selectedRole;
   /**
    * This method is to set initial value of property. It will be
    * executed when this component is loaded
@@ -50,7 +51,9 @@ export class RolesDropDownComponent implements OnInit {
    * @memberof RolesDropDownComponent
    */
   onClickRoles(evt) {
+    console.log('onClickRoles evt: ' + evt);
     selRolePopup = evt;
+    console.log('selected roles: ' + selRolePopup);
     this.dismissRolesPopup();
   }
 

@@ -18,8 +18,8 @@ export class UserDataService {
 
   /**
    * Creates an instance of UserDataService.
-   * @param {Events} events
-   * @param {Storage} storage
+   * @param {Events} events This property is to get methods from Events
+   * @param {Storage} storage This property is to get methods from Storage
    * @memberof UserDataService
    */
   constructor(
@@ -44,8 +44,8 @@ export class UserDataService {
   // public ROOT_URL = 'http://zencore.zen.com.my:3000';
   // /**
   //  * This method is to set user login.
-  //  * Then set username to storage service
-  //  * @param {string} username
+  //  * Then set email to storage service
+  //  * @param {string} email
   //  * @returns {Promise<any>}
   //  * @memberof UserDataService
   //  */
@@ -83,22 +83,22 @@ export class UserDataService {
 
 
   /**
-   * This method is to set username to storage service
-   * @param {string} username
+   * This method is to set email to storage service
+   * @param {string} email
    * @returns {Promise<any>}
    * @memberof UserDataService
    */
-  setUsername(username: string): Promise<any> {
-    return this.storage.set('username', username);
+  setName(email: string): Promise<any> {
+    return this.storage.set('email', email);
   }
 
   /**
-   * This method is to get username from storage
+   * This method is to get email from storage
    * @returns
    * @memberof UserDataService
    */
-  getUsername() {
-    return this.storage.get('username').then((value) => {
+  getName() {
+    return this.storage.get('email').then((value) => {
       return value;
     });
   }

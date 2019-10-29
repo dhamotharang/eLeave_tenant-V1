@@ -8,266 +8,266 @@
     ],
     "userDetails": [
         {
-          "username": "Wan Fathurrahman",
+          "name": "Wan Fathurrahman",
           "email": "fathurrahman@zen.com.my",
           "status": "active",
           "role": "Super Admin",
           "password": "P@ssword1"
         },
         {
-          "username": "Lee Chong Weng",
+          "name": "Lee Chong Weng",
           "email": "chongweng@zen.com.my",
           "status": "inactive",
           "role": "Super Admin",
           "password": "P@ssword2"
         },
         {
-          "username": "Maisarah Mansor",
+          "name": "Maisarah Mansor",
           "email": "maisarah@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword3"
         },
         {
-          "username": "Sarra Bella",
+          "name": "Sarra Bella",
           "email": "sarra@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword4"
         },
         {
-          "username": "Alan Walker",
+          "name": "Alan Walker",
           "email": "alan@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword5"
         },
         {
-          "username": "Bea Miller",
+          "name": "Bea Miller",
           "email": "miller@zen.com.my",
           "status": "inactive",
           "role": "Super Admin",
           "password": "P@ssword6"
         },
         {
-          "username": "Faizal Tahir",
+          "name": "Faizal Tahir",
           "email": "faizal@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword7"
         },
         {
-          "username": "Tom Miller",
+          "name": "Tom Miller",
           "email": "tom@zen.com.my",
           "status": "inactive",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Adam Chong",
+          "name": "Adam Chong",
           "email": "adam@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Adam1 Chong",
+          "name": "Adam1 Chong",
           "email": "adam1@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Adam2 Chong",
+          "name": "Adam2 Chong",
           "email": "adam2@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Adam3 Chong",
+          "name": "Adam3 Chong",
           "email": "adam3@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Adam4 Chong",
+          "name": "Adam4 Chong",
           "email": "adam4@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Adam5 Chong",
+          "name": "Adam5 Chong",
           "email": "adam5@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Goku",
+          "name": "Goku",
           "email": "goku@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Goku1",
+          "name": "Goku1",
           "email": "goku@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Goku2",
+          "name": "Goku2",
           "email": "goku@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Goku3",
+          "name": "Goku3",
           "email": "goku@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Hanani",
+          "name": "Hanani",
           "email": "hanani@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Hanani1",
+          "name": "Hanani1",
           "email": "hanani1@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Hanani2",
+          "name": "Hanani2",
           "email": "hanani2@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Hanani3",
+          "name": "Hanani3",
           "email": "hanani3@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "David Tan",
+          "name": "David Tan",
           "email": "david@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "David Tan1",
+          "name": "David Tan1",
           "email": "david1@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "David Tan2",
+          "name": "David Tan2",
           "email": "david2@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "David Tan3",
+          "name": "David Tan3",
           "email": "david3@zen.com.my",
           "status": "active",
           "role": "Salesperson",
           "password": "P@ssword8"
         },
         {
-          "username": "Kristopher Leverich",
+          "name": "Kristopher Leverich",
           "email": "kristopher@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Catina Tessman",
+          "name": "Catina Tessman",
           "email": "catina@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Nigel Cammack",
+          "name": "Nigel Cammack",
           "email": "nigel@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Jasper Winkles",
+          "name": "Jasper Winkles",
           "email": "jasper@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Lorine Metzler",
+          "name": "Lorine Metzler",
           "email": "lorine@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Scotty Southall",
+          "name": "Scotty Southall",
           "email": "scotty@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Scott Beil",
+          "name": "Scott Beil",
           "email": "scott@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "April Wedding",
+          "name": "April Wedding",
           "email": "April@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Lucretia Haskin",
+          "name": "Lucretia Haskin",
           "email": "Lucretia@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Buena Mcculler",
+          "name": "Buena Mcculler",
           "email": "Buena@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Claretta Elliot",
+          "name": "Claretta Elliot",
           "email": "Claretta@zen.com.my",
           "status": "active",
           "role": "Support",
           "password": "P@ssword8"
         },
         {
-          "username": "Tanna Ewert",
+          "name": "Tanna Ewert",
           "email": "Tanna@zen.com.my",
           "status": "active",
           "role": "Support",

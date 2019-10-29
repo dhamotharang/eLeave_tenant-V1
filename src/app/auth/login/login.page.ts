@@ -8,7 +8,6 @@ import {UserOptions} from '../../interfaces/user-options';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { AuthService } from '../../services/shared-service/auth.service';
-import { APIService } from '../../services/shared-service/api.service';
 import {currUser} from '../../app.component';
 
 /**
@@ -32,40 +31,29 @@ export let sideMenuShow = {value: true};
 
 export class LoginPage implements OnInit {
 
+
   /**
-   *Creates an instance of LoginPage.
-   * @param {Router} router
-   * @param {NgxSpinnerService} spinner
-   * @param {AuthService} authService
-   * @param {PaginationServiceService} pgSet
+   * Creates an instance of LoginPage.
+   * @param {Router} router This property is to get methods from Router
+   * @param {NgxSpinnerService} spinner This property is to get methods from NgxSpinnerService
+   * @param {AuthService} authService This property is to get methods from AuthService
+   * @param {PaginationServiceService} pgSet This property is to get methods from PaginationServiceService
    * @memberof LoginPage
    */
   constructor(
     private router: Router,
     private spinner: NgxSpinnerService,
-    private api: APIService,
-
-    /**
-     * This property is to get methods from AuthService
-     * @memberof LoginPage
-     */
     public authService: AuthService,
-
-    /**
-     * This property is to get methods from PaginationServiceService
-     * @memberof LoginPage
-     */
     public pgSet: PaginationServiceService
 
   ) { }
 
-
   /**
-   * This property will bind username and password value
+   * This property will bind email and password value
    * @type {UserOptions}
    * @memberof LoginPage
    */
-  public userLogin: UserOptions = { username: '', password: '' };
+  public userLogin: UserOptions = { email: '', password: '' };
 
   /**
    * This property is a boolean to check if the login buttton is clicked or not
@@ -92,14 +80,23 @@ export class LoginPage implements OnInit {
   public homePage = '/main/dashboard';
 
   /**
+   * This property is to bind methods from cryptoJS
+   * @memberof LoginPage
+   */
+  crypto = require('crypto-js');
+  /**
    * This method executed when initialize login page
    * @memberof LoginPage
    */
   ngOnInit() {
     this.pgSet.setShowToolbarSideMenu(false);
-    if ( localStorage.getItem('username') !== null && localStorage.getItem('password') !== null) {
-      this.userLogin.username = localStorage.getItem('username');
+    if ( localStorage.getItem('email') !== null && localStorage.getItem('password') !== null) {
+      this.userLogin.email = localStorage.getItem('email');
+      // console.log('losgin: ' + (this.crypto.AES.decrypt(localStorage.getItem('password').toString(), 
+      //       'secret key 123')).toString(this.crypto.enc.Utf8));
       this.userLogin.password = localStorage.getItem('password');
+      // this.userLogin.password = (this.crypto.AES.decrypt(localStorage.getItem('password').toString(), 
+      // 'secret key 123')).toString(this.crypto.enc.Utf8);
     }
     this.authService.logout();
   }
@@ -115,19 +112,14 @@ export class LoginPage implements OnInit {
 
     if (loginForm.valid) {
       this.pgSet.setShowToolbarSideMenu(true);
-      Object.assign(currUser, {value: this.userLogin.username});
-      this.spinner.show();
-      await this.authService.login(this.userLogin.username, this.userLogin.password).subscribe(
+      Object.assign(currUser, {value: this.userLogin.email});
+      await this.authService.login(this.userLogin.email, this.userLogin.password).subscribe(
         data => {
-          // console.log('subs1 data');
-          console.log(data);
-          this.spinner.hide();
-          // this.api.getApi('/api/admin/leavetype').subscribe(
-          //   datas => {
-          //     console.log('apiii');
-          //     console.log(datas);
-          //   }
-          // );
+          console.log('apopooop: ' + JSON.stringify(data));
+          if (data.access_token) {
+          // if (data && data.access_token) {
+            localStorage.setItem('access_token', JSON.stringify(data.access_token));
+          }
           return this.router.navigate(['/main/dashboard']);
         }
       );
@@ -144,7 +136,7 @@ export class LoginPage implements OnInit {
   }
 
   /**
-   * Function executed when user set to remember their username & password
+   * Function executed when user set to remember their email & password
    * @param {*} evt
    * @memberof LoginPage
    */

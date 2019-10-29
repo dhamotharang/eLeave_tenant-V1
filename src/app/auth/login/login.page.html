@@ -10,13 +10,13 @@
       <ion-note class="noteStyle">Welcome back! Please login to your account</ion-note>      
   
       <form class="formStyle" #loginForm="ngForm">
-        <!-- Username -->
+        <!-- Email -->
         <ion-item>
-            <ion-input type="text" name="username" required placeholder="Username" [(ngModel)]="userLogin.username" #username="ngModel"></ion-input>
+            <ion-input type="text" name="emai" required placeholder="Email" [(ngModel)]="userLogin.email" #email="ngModel"></ion-input>
         </ion-item>
         <ion-text color="danger">
-          <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-            Username is required
+          <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
+            Email is required
           </p>
         </ion-text>
 
@@ -69,13 +69,13 @@
         <ion-label class="noteStyle note-sm-format">Please login to your account.</ion-label>      
     
         <form class="formStyle" #loginForm="ngForm">
-          <!-- Username -->
+          <!-- Email -->
           <ion-item  color="transparent" style="color: var(--ion-color-light);">
-              <ion-input type="text" name="username" required placeholder="Username" [(ngModel)]="userLogin.username" #username="ngModel"></ion-input>
+              <ion-input type="text" name="email" required placeholder="Email" [(ngModel)]="userLogin.email" #email="ngModel"></ion-input>
           </ion-item>
           <ion-text color="danger">
-            <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-              Username is required
+            <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
+              Email is required
             </p>
           </ion-text>
   

@@ -37,13 +37,10 @@ export class SubscriptionsPage implements OnInit {
 
   /**
    * Creates an instance of SubscriptionsPage.
+   * @param {PaginationServiceService} subsPaging This property is to get method from PaginationServiceService
    * @memberof SubscriptionsPage
    */
   constructor(
-    /**
-     * This property is to get method from PaginationServiceService
-     * @memberof SubscriptionsPage
-     */
     public subsPaging: PaginationServiceService
     ) {  }
 

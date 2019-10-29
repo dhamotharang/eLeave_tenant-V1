@@ -15,7 +15,7 @@ export class AddnewcustomerPage implements OnInit {
 
 
   /**
-   *Creates an instance of AddnewcustomerPage.
+   * Creates an instance of AddnewcustomerPage.
    * @memberof AddnewcustomerPage
    */
   constructor() { }

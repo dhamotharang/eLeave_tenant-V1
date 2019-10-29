@@ -50,13 +50,9 @@ export class PaginationServiceService {
 
   /**
    * This method is to configure pagination settings.
-   * 1. To set number of items in 1 page
-   * 2. To set current showing page number
-   * 3. To set total number of items (for last page setting)
-   *
-   * @param {*} itmPg
-   * @param {*} initPg
-   * @param {*} mxItm
+   * @param {*} itmPg To set number of items in 1 page
+   * @param {*} initPg To set current showing page number
+   * @param {*} mxItm To set total number of items (for last page setting)
    * @returns
    * @memberof PaginationServiceService
    */

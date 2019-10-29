@@ -22,20 +22,15 @@ import { UserDataService } from '../../services/user-data.service';
 export class ForgotPasswordPage implements OnInit {
 
   /**
-   *Creates an instance of ForgotPasswordPage.
-   * @param {UserDataService} userData
-   * @param {Router} router
-   * @param {PaginationServiceService} pgSetting
+   * Creates an instance of ForgotPasswordPage.
+   * @param {UserDataService} userData This property is to get methods from UserDataService
+   * @param {Router} router This property is to get methods from Router
+   * @param {PaginationServiceService} pgSetting This property is to get methods from PaginationServiceService
    * @memberof ForgotPasswordPage
    */
   constructor(
     private userData: UserDataService,
     private router: Router,
-
-    /**
-     * This property is to get methods from PaginationServiceService
-     * @memberof ForgotPasswordPage
-     */
     public pgSetting: PaginationServiceService
     ) { }
 

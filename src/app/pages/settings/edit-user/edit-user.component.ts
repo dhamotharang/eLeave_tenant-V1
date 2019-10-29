@@ -15,7 +15,7 @@ import { selectedEditUser, settingPopoverCtrlr } from '../settings.page';
 export class EditUserComponent implements OnInit {
 
   /**
-   *Creates an instance of EditUserComponent.
+   * Creates an instance of EditUserComponent.
    * @memberof EditUserComponent
    */
   constructor() { }

@@ -16,14 +16,10 @@ export class DashboardPage implements OnInit {
 
   /**
    *Creates an instance of DashboardPage.
-   * @param {PaginationServiceService} pgSett
+   * @param {PaginationServiceService} pgSett This property is to get method/function from PaginationServiceService
    * @memberof DashboardPage
    */
   constructor(
-    /**
-     * This property is to get method/function from PaginationServiceService
-     * @memberof DashboardPage
-     */
     public pgSett: PaginationServiceService,
   ) { }
 

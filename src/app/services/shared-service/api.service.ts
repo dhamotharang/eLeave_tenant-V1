@@ -15,18 +15,18 @@ export class APIService {
 
   /**
    * Creates an instance of APIService.
-   * @param {Http} http
+   * @param {Http} http This property is to bind methods from Http service
    * @memberof APIService
    */
   constructor(
-    public http: Http,
+    public http: Http
   ) { }
 
   /**
    * This property is to declare base url to http request API
    * @memberof APIService
    */
-  public ROOT_URL = 'http://zencore.zen.com.my:3000';
+  public ROOT_URL = 'http://zencore.zen.com.my:3001';
 
 
   /**
@@ -41,14 +41,13 @@ export class APIService {
    * @memberof APIService
    */
   headerAuthorization() {
-    console.log('headerAuthorization');
     if ((this.headers as any)._headers.size !== 1) {
       (this.headers as any).append('Authorization', 'JWT ' + JSON.parse(localStorage.getItem('access_token')));
     }
   }
 
   /**
-   * This method is to get endpoint with assigned path
+   * This method is to set http request (get) with assigned path
    * @param {string} address
    * @returns
    * @memberof APIService
@@ -57,5 +56,46 @@ export class APIService {
     this.headerAuthorization();
     return this.http.get(this.ROOT_URL + address, { headers: this.headers })
      .pipe(map((res: Response) => res.json()));
+  }
+
+  // getApiById(data: any, address: string) {
+  //   this.headerAuthorization();
+  //   return this.http.get(this.ROOT_URL + address, data, { headers: this.headers })
+  //       .pipe(map((res: Response) => res.json()
+  //       ));
+  //   }
+  // }
+  
+  // postApi(address: string, data: any) {
+  //   return this.http.post(this.ROOT_URL + address, data, { headers: this.headers })
+  //   .pipe(map((res: Response) => res.json()));
+  // }
+  
+  /**
+   * This method is to set http request (post) for login authenctication with
+   * assigned path
+   * @param {*} data
+   * @param {string} address
+   * @returns
+   * @memberof APIService
+   */
+  postApiLogin(data: any, address: string) {
+    return this.http.post(this.ROOT_URL + address, data)
+        .pipe(map((res: Response) => res.json()));
+  }
+
+  /**
+   * This method is to set http request (post) with assigned path
+   * and parameters
+   * @param {*} data
+   * @param {string} address
+   * @returns
+   * @memberof APIService
+   */
+  postApi(data: any, address: string) {
+    this.headerAuthorization();
+    return this.http.post(this.ROOT_URL + address, data, { headers: this.headers })
+        .pipe(map((res: Response) => res.json()
+        ));
   }
 }

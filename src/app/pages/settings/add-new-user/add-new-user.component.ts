@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+
 import { settingPopoverCtrlr } from '../settings.page';
 import { userDummiesData } from '../../../app.component';
 
+
 import { Validators } from '@angular/forms';
 import { Events } from '@ionic/angular';
+
+import { APIService } from '../../../services/shared-service/api.service';
+
+import { SnackBarComponent } from '../../../layout/notificationPopup/snack-bar/snack-bar.component';
 
 /**
  * This component is to set up Add New User popover from Settings page
@@ -19,12 +26,16 @@ import { Events } from '@ionic/angular';
 export class AddNewUserComponent implements OnInit {
 
   /**
-   *Creates an instance of AddNewUserComponent.
-   * @param {Events} events
+   * Creates an instance of AddNewUserComponent.
+   * @param {Events} events This property is to get methods from Events
+   * @param {APIService} addUserApiService This property is to get methods from APIService
+   * @param {MatSnackBar} snackbar This property is to get methods from MatSnackBar
    * @memberof AddNewUserComponent
    */
   constructor(
-    private events: Events
+    private events: Events,
+    private addUserApiService: APIService,
+    private snackbar: MatSnackBar
   ) { }
 
   /**
@@ -46,20 +57,24 @@ export class AddNewUserComponent implements OnInit {
   public errMsg: any[];
 
   /**
+   * This property is get methods from CryptoJS
+   * @memberof AddNewUserComponent
+   */
+  cryptoJS = require('crypto-js');
+
+  /**
    * This method is to set initial value of properties. It will be
    * executed when Add New User popover is being loaded
    * @memberof AddNewUserComponent
    */
   ngOnInit() {
     this.newUser = {
-        username: '',
+        name: '',
         email: '',
         role: '',
-        status: 'active',
         password: '',
         password2: ''
       };
-
   }
 
   /**
@@ -69,11 +84,42 @@ export class AddNewUserComponent implements OnInit {
    */
   saveNewUser() {
     this.passValidation(this.newUser.password, this.newUser.password2);
-    userDummiesData.push(this.newUser);
-    this.events.publish('newUserAdded', userDummiesData);
-    if (this.errPass === false) {
+    if (!this.passValidation(this.newUser.password, this.newUser.password2)) {
+
+      const newUserData = {
+        name: this.newUser.name,
+        email: this.newUser.email,
+        loginId: this.newUser.email,
+        password:  (this.cryptoJS.SHA256(this.newUser.password)).toString(this.cryptoJS.enc.Hex),
+        role: this.newUser.role
+      };
+      // {
+      //   "name": "Lewis Johnson",
+      //   "email": "lewis@zen.com.my",
+      //   "loginId": "lewis@zen.com.my",
+      //   "password": "1f86c446121a0219e5eae8c531981ee550b0844384f1603bc0c9eb625b2c3d91",
+      //   "role": "salesperson"
+      // }
+      this.addUserApiService.postApi(newUserData, '/api/admin/user-manage/sign-up').subscribe(
+        data => {
+          console.log('useradd data:' + JSON.stringify(data));
+          this.snackbar.openFromComponent(SnackBarComponent, {
+            duration: 2500,
+            horizontalPosition: 'end',
+            data: 'successfully create user'
+          });
+          // this.snackbar.open('', 'User successfully created!', {duration: 2000, horizontalPosition: 'center'});
+          // this.snackbar.open('User was successfully created!', 'Info', {duration: 2000});
+        }
+      );
+
+      userDummiesData.push(this.newUser);
+      this.events.publish('newUserAdded', userDummiesData);
       this.cancelAddNew();
     }
+    // if (this.errPass === false) {
+      // this.cancelAddNew();
+    // }
 
   }
 
@@ -85,11 +131,11 @@ export class AddNewUserComponent implements OnInit {
    */
   passValidation(p1, p2) {
     if (p1 === p2) {
-      this.errPass = false;
-      return this.newUser.password = p1;
+      this.newUser.password = p1;
+      return this.errPass = false;
     } else {
       this.errMsg = [{val: 'Password Mismatch'}];
-      this.errPass = true;
+      return this.errPass = true;
     }
   }
 

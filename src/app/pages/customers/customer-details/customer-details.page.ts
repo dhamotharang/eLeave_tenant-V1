@@ -40,17 +40,12 @@ export class CustomerDetailsPage implements OnInit {
 
   /**
    * Creates an instance of CustomerDetailsPage.
-   * @param {PopoverController} popoverController
-   * @param {PaginationServiceService} custDtlsPaging
-   * @param {SearchDataService} custListSearch
+   * @param {PaginationServiceService} custDtlsPaging This property is to get methods from PaginationServiceService
+   * @param {PopoverController} popoverController  This property is to get methods from PopoverController
+   * @param {SearchDataService} custListSearch  This property is to get methods from SearchDataService
    * @memberof CustomerDetailsPage
    */
   constructor(
-
-    /**
-     * This property is to get methods from PaginationServiceService
-     * @memberof CustomerDetailsPage
-     */
     public custDtlsPaging: PaginationServiceService,
     private popoverController: PopoverController,
     private custListSearch: SearchDataService

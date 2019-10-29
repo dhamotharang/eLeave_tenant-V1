@@ -45,18 +45,14 @@ export class SubscriberDetailsPage implements OnInit {
 
   /**
    * Creates an instance of SubscriberDetailsPage.
-   * @param {PopoverController} popoverController
-   * @param {SearchDataService} subsDtlsSearch
-   * @param {PaginationServiceService} subsDtlsPaging
+   * @param {PopoverController} popoverController This property is to get methods from PopoverController
+   * @param {SearchDataService} subsDtlsSearch This property is to get methods from SearchDataService
+   * @param {PaginationServiceService} subsDtlsPaging This property is to get methods from PaginationServices
    * @memberof SubscriberDetailsPage
    */
   constructor(
     private popoverController: PopoverController,
     private subsDtlsSearch: SearchDataService,
-    /**
-     * This property is to get methods from PaginationServices
-     * @memberof SubscriberDetailsPage
-     */
     public subsDtlsPaging: PaginationServiceService
   ) { }
 

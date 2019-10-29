@@ -19,8 +19,9 @@ import { PaginationServiceService } from '../../../services/pagination-service.s
 export class CustomerPopoverComponent implements OnInit {
 
   /**
-   *Creates an instance of CustomerPopoverComponent.
-   * @param {PopoverController} popoverController
+   * Creates an instance of CustomerPopoverComponent.
+   * @param {PopoverController} popoverController This property is to get methods from PopoverController
+   * @param {PaginationServiceService} pggSvs This property is to get methods from PaginationServiceService
    * @memberof CustomerPopoverComponent
    */
   constructor(

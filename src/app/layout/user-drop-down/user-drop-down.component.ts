@@ -24,9 +24,10 @@ import { ChangeProfilePhotoComponent } from './change-profile-photo/change-profi
 export class UserDropDownComponent implements OnInit {
 
   /**
-   * Creates an instance of UserDropDownComponent.
-   * @param {PaginationServiceService} pggSvs
-   * @param {Router} router
+   *Creates an instance of UserDropDownComponent.
+   * @param {PaginationServiceService} pggSvs This property is to get methods from PaginationServiceService
+   * @param {PopoverController} popovrController This property is to get methods from PopoverController
+   * @param {AuthService} auth This property is to get methods from AuthService
    * @memberof UserDropDownComponent
    */
   constructor(
@@ -44,7 +45,7 @@ export class UserDropDownComponent implements OnInit {
 
   /**
    * Executed when user click logut.
-   * It will reset the current username in server's storage.
+   * It will reset the current email in server's storage.
    * And will navigate to login page
    * @memberof UserDropDownComponent
    */

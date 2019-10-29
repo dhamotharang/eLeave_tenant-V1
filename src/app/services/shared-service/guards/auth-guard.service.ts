@@ -15,8 +15,9 @@ import { AuthService } from '../auth.service';
 export class AuthGuardService implements CanActivate {
 
   /**
-   * Creates an instance of AuthGuardService.
-   * @param {JwtHelperService} jwtHelper
+   *Creates an instance of AuthGuardService.
+   * @param {AuthService} authService This property is to bind methods from AuthService
+   * @param {Router} authRouter This property is to bind methods from Router
    * @memberof AuthGuardService
    */
   constructor(
@@ -24,6 +25,12 @@ export class AuthGuardService implements CanActivate {
     public authRouter: Router
   ) { }
 
+  /**
+   * This method is to check if the login page is authenticated then
+   * only it can redirect to home page
+   * @returns {boolean}
+   * @memberof AuthGuardService
+   */
   canActivate(): boolean {
     if (!this.authService.isAuthenticated()) {
       this.authRouter.navigate(['login']);
