@@ -118,6 +118,7 @@
         .userRoleSetting {
             display: flex;
             justify-content: center;
+            text-transform: capitalize;
         }
 
     }
@@ -155,4 +156,10 @@
         }
     }
 
+    .emptyUser {
+        display: grid;
+        justify-items: center;
+        margin: 30px;
+        color: #808495;
+    }
 }

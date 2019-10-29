@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, Events } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+
+import { Observable } from 'rxjs';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { SearchDataService } from '../../services/search-data.service';
@@ -9,6 +11,8 @@ import { userDummiesData } from '../../app.component';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { RolesDropDownComponent, selRolePopup } from './roles-drop-down/roles-drop-down.component';
+
+import { APIService } from '../../services/shared-service/api.service';
 
 /**
  * This variable is to store data of selected customer to be edited
@@ -47,31 +51,18 @@ export class SettingsPage implements OnInit {
 
   /**
    * Creates an instance of SettingsPage.
-   * @param {PopoverController} popoverController
-   * @param {Events} event
-   * @param {PaginationServiceService} settingPaging
-   * @param {SearchDataService} settingSearch
+   * @param {PopoverController} popoverController This property is to get methods from PopoverController
+   * @param {SearchDataService} settingSearch This property is to get methods from SearchDataService
+   * @param {APIService} settingApiService This property is to get methods from APIService
+   * @param {PaginationServiceService} settingPaging This property is to get methods from PaginationServiceService
    * @memberof SettingsPage
    */
   constructor(
       private popoverController: PopoverController,
-      private event: Events,
       private settingSearch: SearchDataService,
-
-      /**
-       * This property is to get methods from PaginationServiceService
-       * @memberof SettingsPage
-       */
+      private settingApiService: APIService,
       public settingPaging: PaginationServiceService,
-    ) {
-      // event.subscribe('newUserAdded', (data) => {
-      // const nvar  = {srcElement: {innerText : this.selectedRole}};
-      // if (nvar.srcElement.innerText !== 'All roles') {
-      //     this.clickRoles(nvar);
-      //   }
-      // });
-    }
-
+    ) { }
 
   /**
    * This property is to set roles list of user
@@ -86,6 +77,13 @@ export class SettingsPage implements OnInit {
   public userData;
 
   /**
+   * This property is to bind the length of array for user data
+   * returned from API
+   * @memberof SettingsPage
+   */
+  public userDataLength;
+
+  /**
    * This property is to set selected role. By default is "All roles"
    * @memberof SettingsPage
    */
@@ -97,6 +95,12 @@ export class SettingsPage implements OnInit {
    */
   public configPageSetting;
 
+  /**
+   * This property is to bind initial data of user's data
+   * @private
+   * @memberof SettingsPage
+   */
+  private initUserData;
 
   /**
    * This method is to set initial value of properties. It will
@@ -106,23 +110,45 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
     this.settingMenuList = [
       {
-        role: 'All roles'
+        ROLE_TITLE: 'All roles',
+        role: 'all'
       },
       {
-        role: 'Super Admin'
+        ROLE_TITLE: 'Super Admin',
+        role: 'superadmin'
       },
       {
-        role: 'Salesperson'
+        ROLE_TITLE: 'Salesperson',
+        role: 'salesperson'
       },
       {
-        role: 'Support'
+        ROLE_TITLE: 'Support',
+        role: 'support'
       },
     ];
 
     userRolesList = this.settingMenuList;
-    this.userData = userDummiesData;
+    // this.userData = userDummiesData;
     settingPopoverCtrlr = this.popoverController;
-    this.configPageSetting = this.settingPaging.pageConfig(10, 1, this.userData.length);
+    this.getUserList('all').subscribe(
+      userListData => {
+        this.initUserData = userListData;
+        this.userData = userListData;
+        this.userDataLength = userListData.length;
+      }
+    );
+
+    this.configPageSetting = this.settingPaging.pageConfig(10, 1, this.userDataLength);
+  }
+
+  /**
+   * This method is to get user user list from endpoint
+   * @param {*} param
+   * @returns {Observable<any>}
+   * @memberof SettingsPage
+   */
+  getUserList(param): Observable<any> {
+    return this.settingApiService.getApi('/api/admin/user-manage/{role}?role=' + param);
   }
 
   /**
@@ -177,10 +203,32 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   clickRoles(evt) {
-    this.selectedRole = evt.srcElement.innerText;
-    this.userData = (evt.srcElement.innerText === 'All roles') ? userDummiesData :
-                      userDummiesData.filter(userObj => userObj.role === evt.srcElement.innerText);
-    this.pageSettingChanged(1);
+    // this.selectedRole = (evt === 'allroles') ? 'allroles' : evt.srcElement.innerText;
+    // this.selectedRole = evt.srcElement.innerText;
+    this.selectedRole = this.initSelectedRoles(evt);
+    const selParam = this.settingMenuList.filter( roleList => roleList.ROLE_TITLE === evt.srcElement.innerText);
+
+    this.getUserList(selParam[0].role).subscribe( userListData => {
+      this.userData = userListData;
+      this.initUserData = userListData;
+      this.userDataLength = userListData.length;
+      this.pageSettingChanged(1);
+    });
+
+    // }
+    // this.userData = (evt.srcElement.innerText === 'All roles') ? userDummiesData :
+    //                   userDummiesData.filter(userObj => userObj.ROLE_TITLE === evt.srcElement.innerText);
+    // this.pageSettingChanged(1);
+  }
+
+  /**
+   * This method is to set selected role value
+   * @param {*} evtValue
+   * @returns
+   * @memberof SettingsPage
+   */
+  initSelectedRoles(evtValue) {
+    return (evtValue === 'all') ? 'all' : evtValue.srcElement.innerText;
   }
 
   /**
@@ -188,7 +236,7 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   pageSettingChanged(event) {
-    this.configPageSetting = this.settingPaging.pageConfig(10, event, this.userData.length);
+    this.configPageSetting = this.settingPaging.pageConfig(10, event, this.userDataLength);
   }
 
   /**
@@ -196,10 +244,14 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   onSearchSettings(event) {
-    this.userData = userDummiesData;
+    // this.userData = userDummiesData;
+    console.log('search1111212');
+    console.log(this.initUserData);
+    console.log(this.userData);
+    this.userData = this.initUserData;
     this.userData = (event.detail.value.length > 0 ) ?
-                      this.settingSearch.filerSearch(event.detail.value, userDummiesData, 'username') :
-                        userDummiesData;
+                      this.settingSearch.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
+                      this.initUserData;
     this.pageSettingChanged(1);
   }
 }
