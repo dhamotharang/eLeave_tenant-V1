@@ -219,7 +219,6 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   pageChanged(event) {
-    // this.configPageSubDtls.currentPage = event;
     this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, event, this.subscribersDetails.length);
   }
 

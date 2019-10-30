@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
-// import { UserDataService } from '../../services/user-data.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { AuthService } from '../../services/shared-service/auth.service';
 
@@ -31,7 +30,6 @@ export class UserDropDownComponent implements OnInit {
    * @memberof UserDropDownComponent
    */
   constructor(
-    // private userDataSvs: UserDataService,
     private pggSvs: PaginationServiceService,
     private popovrController: PopoverController,
     private auth: AuthService

@@ -101,8 +101,6 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   ngOnInit() {
-    // selCustView = {val: 'card'};
-    // this.selectedVal = 'card';
     this.configPageCust = this.custPaging.pageConfig(9, 1, this.customerData.length);
     console.log(this.custPaging.getSideMenuType());
     this.custPaging.setCustomerViewType('card');

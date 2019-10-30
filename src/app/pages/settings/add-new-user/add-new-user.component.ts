@@ -85,42 +85,34 @@ export class AddNewUserComponent implements OnInit {
   saveNewUser() {
     this.passValidation(this.newUser.password, this.newUser.password2);
     if (!this.passValidation(this.newUser.password, this.newUser.password2)) {
-
-      const newUserData = {
-        name: this.newUser.name,
-        email: this.newUser.email,
-        loginId: this.newUser.email,
-        password:  (this.cryptoJS.SHA256(this.newUser.password)).toString(this.cryptoJS.enc.Hex),
-        role: this.newUser.role
-      };
-      // {
-      //   "name": "Lewis Johnson",
-      //   "email": "lewis@zen.com.my",
-      //   "loginId": "lewis@zen.com.my",
-      //   "password": "1f86c446121a0219e5eae8c531981ee550b0844384f1603bc0c9eb625b2c3d91",
-      //   "role": "salesperson"
-      // }
-      this.addUserApiService.postApi(newUserData, '/api/admin/user-manage/sign-up').subscribe(
-        data => {
-          console.log('useradd data:' + JSON.stringify(data));
-          this.snackbar.openFromComponent(SnackBarComponent, {
-            duration: 2500,
-            horizontalPosition: 'end',
-            data: 'successfully create user'
-          });
-          // this.snackbar.open('', 'User successfully created!', {duration: 2000, horizontalPosition: 'center'});
-          // this.snackbar.open('User was successfully created!', 'Info', {duration: 2000});
-        }
-      );
-
-      userDummiesData.push(this.newUser);
-      this.events.publish('newUserAdded', userDummiesData);
+      this.postNewUser();
       this.cancelAddNew();
     }
-    // if (this.errPass === false) {
-      // this.cancelAddNew();
-    // }
 
+  }
+
+  /**
+   * This method is to post user data into database
+   * @memberof AddNewUserComponent
+   */
+  postNewUser() {
+    const newUserData = {
+      name: this.newUser.name,
+      email: this.newUser.email,
+      loginId: this.newUser.email,
+      password:  (this.cryptoJS.SHA256(this.newUser.password)).toString(this.cryptoJS.enc.Hex),
+      role: this.newUser.role
+    };
+    this.addUserApiService.postApi(newUserData, '/api/admin/user-manage/sign-up').subscribe(
+      data => {
+        console.log('useradd data:' + JSON.stringify(data));
+        this.snackbar.openFromComponent(SnackBarComponent, {
+          duration: 2500,
+          horizontalPosition: 'end',
+          data: 'successfully create user'
+        });
+      }
+    );
   }
 
   /**

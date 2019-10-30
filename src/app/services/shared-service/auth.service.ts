@@ -62,13 +62,9 @@ export class AuthService {
    * @memberof AuthService
    */
   login(emailValue: string, passwordValue: string) {
-    // const encryptPass = (this.CryptoJS.AES.encrypt(passwordValue, 'secret key 122')).toString();
     const encryptPass = (this.CryptoJS.SHA256(passwordValue)).toString(this.CryptoJS.enc.Hex);
     return this.authApiService.postApiLogin({ loginId: emailValue,  password: encryptPass }, '/api/auth/login/local').pipe(
       map(data => {
-        // if (data && data.access_token) {
-        //   localStorage.setItem('access_token', JSON.stringify(data.access_token));
-        // }
         return data;
       })
     );
@@ -80,7 +76,6 @@ export class AuthService {
    * @memberof AuthService
    */
   isAuthenticated(): boolean {
-    // return localStorage.getItem('access_token') != null && !this.isTokenExpired();
     return !this.jwtHelper.isTokenExpired( localStorage.getItem('access_token'));
   }
 
@@ -103,9 +98,6 @@ export class AuthService {
    */
   setRememberMe(loginData) {
     localStorage.setItem('email', loginData.email);
-    // const tempPass = this.CryptoJS.AES.encrypt(loginData.password, 'secret key 123');
-    // console.log('remember me password: ' + tempPass);
-    // localStorage.setItem('password', tempPass);
     localStorage.setItem('password', loginData.password);
   }
 

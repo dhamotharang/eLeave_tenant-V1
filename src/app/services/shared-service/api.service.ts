@@ -58,19 +58,6 @@ export class APIService {
      .pipe(map((res: Response) => res.json()));
   }
 
-  // getApiById(data: any, address: string) {
-  //   this.headerAuthorization();
-  //   return this.http.get(this.ROOT_URL + address, data, { headers: this.headers })
-  //       .pipe(map((res: Response) => res.json()
-  //       ));
-  //   }
-  // }
-  
-  // postApi(address: string, data: any) {
-  //   return this.http.post(this.ROOT_URL + address, data, { headers: this.headers })
-  //   .pipe(map((res: Response) => res.json()));
-  // }
-  
   /**
    * This method is to set http request (post) for login authenctication with
    * assigned path

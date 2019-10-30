@@ -38,8 +38,6 @@
         ion-col {
             font-size: var(--eleave-title-table);
             font-weight: bold;
-            // text-align: center;
-            // align-content: center;
             color: #a5a4bf;
             background-color: #f5f6fa;
             height: 40px;
@@ -136,12 +134,10 @@
 
     .columnStatusActive {
         color: var(--eleave-color-success); 
-        // margin: unset;
     }
 
     .columnStatusInactive {
         color: var(--eleave-color-disable);
-        // margin: unset;
     }
 
     .cardStatus {

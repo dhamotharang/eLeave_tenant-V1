@@ -92,11 +92,7 @@ export class LoginPage implements OnInit {
     this.pgSet.setShowToolbarSideMenu(false);
     if ( localStorage.getItem('email') !== null && localStorage.getItem('password') !== null) {
       this.userLogin.email = localStorage.getItem('email');
-      // console.log('losgin: ' + (this.crypto.AES.decrypt(localStorage.getItem('password').toString(), 
-      //       'secret key 123')).toString(this.crypto.enc.Utf8));
       this.userLogin.password = localStorage.getItem('password');
-      // this.userLogin.password = (this.crypto.AES.decrypt(localStorage.getItem('password').toString(), 
-      // 'secret key 123')).toString(this.crypto.enc.Utf8);
     }
     this.authService.logout();
   }

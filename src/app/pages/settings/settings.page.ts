@@ -128,8 +128,17 @@ export class SettingsPage implements OnInit {
     ];
 
     userRolesList = this.settingMenuList;
-    // this.userData = userDummiesData;
     settingPopoverCtrlr = this.popoverController;
+    this.initGetUserList();
+
+    this.configPageSetting = this.settingPaging.pageConfig(10, 1, this.userDataLength);
+  }
+
+  /**
+   * This method is to get user list when the page is being initialized
+   * @memberof SettingsPage
+   */
+  initGetUserList() {
     this.getUserList('all').subscribe(
       userListData => {
         this.initUserData = userListData;
@@ -137,8 +146,6 @@ export class SettingsPage implements OnInit {
         this.userDataLength = userListData.length;
       }
     );
-
-    this.configPageSetting = this.settingPaging.pageConfig(10, 1, this.userDataLength);
   }
 
   /**
@@ -160,8 +167,6 @@ export class SettingsPage implements OnInit {
       component:  (compName === 'EditUserComponent') ? EditUserComponent :
                    (compName === 'RolesDropDownComponent') ? RolesDropDownComponent :
                     AddNewUserComponent,
-      // event: evt,
-      // componentProps: { viewType: this },
       cssClass: (compName === 'RolesDropDownComponent') ? 'pop-over-dropdown-style' : 'pop-over-style '
     });
 
@@ -203,8 +208,6 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   clickRoles(evt) {
-    // this.selectedRole = (evt === 'allroles') ? 'allroles' : evt.srcElement.innerText;
-    // this.selectedRole = evt.srcElement.innerText;
     this.selectedRole = this.initSelectedRoles(evt);
     const selParam = this.settingMenuList.filter( roleList => roleList.ROLE_TITLE === evt.srcElement.innerText);
 
@@ -214,11 +217,6 @@ export class SettingsPage implements OnInit {
       this.userDataLength = userListData.length;
       this.pageSettingChanged(1);
     });
-
-    // }
-    // this.userData = (evt.srcElement.innerText === 'All roles') ? userDummiesData :
-    //                   userDummiesData.filter(userObj => userObj.ROLE_TITLE === evt.srcElement.innerText);
-    // this.pageSettingChanged(1);
   }
 
   /**
@@ -244,10 +242,6 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   onSearchSettings(event) {
-    // this.userData = userDummiesData;
-    console.log('search1111212');
-    console.log(this.initUserData);
-    console.log(this.userData);
     this.userData = this.initUserData;
     this.userData = (event.detail.value.length > 0 ) ?
                       this.settingSearch.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
