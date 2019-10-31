@@ -8,16 +8,24 @@ Installation
 Running the app
 --------------
 
-In developement mode
+#### In developement mode
 > $ ionic serve
+
+#### In developement mode (for ios)
+> $ ionic capacitor run ios -l --address=0.0.0.0
+
 
 Documentation
 -------------
 
 #### Build documentation
-
 > $ npm run doc:build
 
 #### Build and server documentation on http://localhost:8080
-
 > $ npm run doc:serve
+
+
+NOTES
+-----
+
+For more info on how to build ios with ionic cli, please visit [here](https://ionicframework.com/docs/building/ios)
