@@ -21,7 +21,7 @@
         </ion-text>
 
         <!-- Password -->
-        <ion-item>
+        <ion-item class="nopadding">
             <ion-input type="{{type}}" required placeholder="Password" name="password" [(ngModel)]="userLogin.password"  #password="ngModel"></ion-input>
             <button *ngIf="!showPass" ion-button clear type="button" item-right (click)="showPassword()"> 
               <ion-icon name="eye"></ion-icon>
@@ -47,7 +47,7 @@
         </ion-row>
 
         <!-- Submit button -->
-        <ion-item lines="none">
+        <ion-item class="submit-button" lines="none">
           <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)" (keyup.enter)="onLogin(loginForm)">
           <!-- <ion-button fill="clear" type="submit" (click)="onLogin(loginForm)" [routerDirection]="'root'" [routerLink]="homePage"> -->
             Login</ion-button>

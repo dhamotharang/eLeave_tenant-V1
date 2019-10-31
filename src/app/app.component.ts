@@ -32,7 +32,7 @@ export let userDummiesData;
  * This variable is to store value of logged user's email
  * @memberof AppComponent
  */
-export let currUser = { value: 'senglong@zen.com.my'};
+export let currUser = { value: 'senglong@zen.com.my' };
 
 /**
  * This variable is to store value for popup in toolbar
@@ -147,9 +147,21 @@ export class AppComponent {
     userDummiesData = json.userDetails;
     this.loggedUser = 'No user';
     this.loggedUser = currUser;
-    this.settingPage.setSideMenuType(this.sideMenuStyle);
+    this.checkWindowWidth();
+    // this.settingPage.setSideMenuType(this.sideMenuStyle);
     this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan');
     console.log(this.userDataSvs.getUserProfilePicture());
+  }
+
+  checkWindowWidth() {
+    console.log('checkWindowWidth:');
+    console.log(window.innerWidth);
+    if (window.innerWidth < 500) {
+      this.settingPage.setSideMenuType('iconMenu');
+    } else {
+      this.settingPage.setSideMenuType('fullMenu');
+    }
+
   }
 
   /**
@@ -161,7 +173,7 @@ export class AppComponent {
    */
   async openToolbarPopover(evt, compoName) {
     toolbarPopup = await this.popoverController.create({
-      component:  (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
+      component: (compoName === 'UserDropDownComponent') ? UserDropDownComponent : UserDropDownComponent,
       componentProps: {
         viewType: this
       },
