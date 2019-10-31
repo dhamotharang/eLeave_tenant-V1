@@ -1,15 +1,22 @@
 :host {
     .dashboardTitleStyle {
-        padding-left: 22.5px;
+        // padding-left: 22.5px;
+        left: -10px;
         padding-top: 16px;
         font-size: 17px;
         color: #43425d;
+        width: auto;
     }
 
     .overviewSegment {
         font-size: 10px; 
         text-transform: capitalize;
-        width:10px;
+        // width: 15px;
+        // width: 7em;
+        --margin-bottom: -5px;
+        --margin-start: unset;
+        --margin-end: unset;
+        min-width: 73px;
     }
 
     .cardStyle {
@@ -42,6 +49,7 @@
         font-size: 16px;
         font-weight: bold;
         color: #4d4f5c;
+        white-space: nowrap;
     } 
 
     .cardValueDiffStyleIncr {

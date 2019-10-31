@@ -13,15 +13,43 @@
   <ion-content>
     <ion-row>
       <ion-col>
+        <ion-item lines="none"  class="dashboardTitleStyle">
+          Overview
+        </ion-item>
+        <!-- <ion-title class="dashboardTitleStyle">
+          Overview
+        </ion-title> -->
+      </ion-col>
+      <ion-col>
+        <!-------------------------- Segment Section -------------------------->
+        <!-- ------ Dashboard record's period (All/week/month/quarter) ------- -->
+        <ion-segment mode="md" value="all" [(ngModel)]="overviewSgmtOpt" (ionChange)="segmentChanged($event)">
+        <!-- <ion-segment (ionchange)=segmentChanged($event) value="all"> -->
+          <ion-segment-button mode="md" class="overviewSegment" value="all">
+            <ion-label>All</ion-label>
+          </ion-segment-button>
+          <ion-segment-button mode="md" class="overviewSegment" value="week">
+            <ion-label>Week</ion-label>
+          </ion-segment-button>
+          <ion-segment-button mode="md" class="overviewSegment" value="month">
+            <ion-label>Month</ion-label>
+          </ion-segment-button>
+          <ion-segment-button mode="md" class="overviewSegment" value="quarter">
+            <ion-label>Quarter</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+
+
+    <!-- <ion-row>
+      <ion-col>
         <ion-title class="dashboardTitleStyle">
           Overview
         </ion-title>
       </ion-col>
       <ion-col>
-        <!-------------------------- Segment Section -------------------------->
-        <!-------- Dashboard record's period (All/week/month/quarter) --------->
         <ion-segment value="all" [(ngModel)]="overviewSgmtOpt" (ionChange)="segmentChanged($event)">
-        <!-- <ion-segment (ionchange)=segmentChanged($event) value="all"> -->
           <ion-segment-button class="overviewSegment" value="all">
             <ion-label>All</ion-label>
           </ion-segment-button>
@@ -36,16 +64,16 @@
           </ion-segment-button>
         </ion-segment>
       </ion-col>
-    </ion-row>
+    </!--> 
 
     <!--------------------------- Card Section --------------------------------->
     <ion-row style="display: flex; flex-wrap: wrap;">      
       <!-- All Customers -->
-      <ion-card class="cardStyle">
+      <ion-card mode="md" class="cardStyle">
         <ion-card-header>
           <ion-card-title class="cardTitleStyle">All Customers</ion-card-title>
         </ion-card-header>
-          <ion-card-content>
+          <ion-card-content mode="md">
             <div class="cardColumn">
               <div class="cardRow">
                 <ion-label class="cardValueStyle">
@@ -68,11 +96,11 @@
       </ion-card>
         
       <!-- Active Customers -->
-      <ion-card class="cardStyle">
+      <ion-card mode="md" class="cardStyle">
         <ion-card-header>
           <ion-card-title class="cardTitleStyle">Active Customers</ion-card-title>
         </ion-card-header>
-          <ion-card-content>
+          <ion-card-content mode="md">
             <div class="cardColumn">
               <div class="cardRow">
                 <ion-label class="cardValueStyle">
@@ -95,11 +123,11 @@
       </ion-card>
         
       <!-- Inactive Customers -->
-      <ion-card class="cardStyle">
+      <ion-card mode="md" class="cardStyle">
         <ion-card-header>
           <ion-card-title class="cardTitleStyle">Inactive Customers</ion-card-title>
         </ion-card-header>
-          <ion-card-content>
+          <ion-card-content mode="md">
             <div class="cardColumn">
               <div class="cardRow">
                 <ion-label class="cardValueStyle">
@@ -122,11 +150,11 @@
       </ion-card>
 
       <!-- Company Number -->
-      <ion-card class="cardStyle">
+      <ion-card mode="md" class="cardStyle">
         <ion-card-header>
           <ion-card-title class="cardTitleStyle">Company Numbers</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content mode="md">
           <div class="cardColumn">
             <div class="cardRow">
               <ion-label class="cardValueStyle">
@@ -149,11 +177,11 @@
       </ion-card>
 
       <!-- Employee Numbers -->
-      <ion-card class="cardStyle">
+      <ion-card mode="md" class="cardStyle">
         <ion-card-header>
           <ion-card-title class="cardTitleStyle">Employee Numbers</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content mode="md">
           <div class="cardColumn">
             <div class="cardRow">
               <ion-label class="cardValueStyle">
@@ -289,8 +317,8 @@
 
         <ion-row [class]="(pgSett.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
           <ion-item-group class="subsCardStyles">
-            <ion-card *ngFor="let table of subscribers; let i=index">
-              <ion-card-content class="cardStyle cardStyles">
+            <ion-card  mode="md" *ngFor="let table of subscribers; let i=index">
+              <ion-card-content mode="md" class="cardStyle cardStyles">
                 <ion-card-title>
                     {{table.companyName}}
                   <ion-card-subtitle>
