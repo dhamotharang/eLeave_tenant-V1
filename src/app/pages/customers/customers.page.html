@@ -1,27 +1,30 @@
 <ion-app style="padding-top: 55px; --ion-background-color: #f0f0f7;">
     <ion-content>
 
-       <!----------- Customers Title/Searchbar/Drop Down/Add New Items ----------->
-      <ion-row>
-          <ion-title class="customerTitleStyle">
+       <!-- --------- Customers Title/Searchbar/Drop Down/Add New Items --------- -->
+      <ion-row style="justify-content: space-between;">
+          <!-- <ion-title class="customerTitleStyle">
               Customers
-          </ion-title>
+          </ion-title> -->
+          <ion-item lines="none" class="customerTitleStyle">
+              Customers
+          </ion-item>
           <ion-item-group class="customerButtonsSetting">
             
-              <ion-searchbar class="customer-searchbar-style" placeholder="Search Name" (ionChange)="onSearchCust($event)"></ion-searchbar>
-              <ion-button (click)="ngOnClickPophoverButton($event)" style="width: 40px;">
-                <ion-icon slot="icon-only" name="menu"></ion-icon>
+              <ion-searchbar mode="md" class="customer-searchbar-style" placeholder="Search Name" (ionChange)="onSearchCust($event)"></ion-searchbar>
+              <ion-button mode="md" (click)="ngOnClickPophoverButton($event)" style="width: 40px;">
+                <ion-icon  mode="md" slot="icon-only" name="menu"></ion-icon>
               </ion-button> 
-              <ion-button [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'">Add User</ion-button>
+              <ion-button  mode="md" [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'">Add User</ion-button>
           </ion-item-group>
       </ion-row>
       
-      <!----------- Customers Details ----------->
+      <!----------- Customers Details --------- -->
       <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px; height: -webkit-fill-available; display: flex;">    
           <ng-container *ngIf="selectedVal === 'card';" >   
 
-            <!------- Customer Card View ------->
-            <ion-card class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
+            <!------- Customer Card View ----- -->
+            <ion-card mode="md" class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
               <ion-item-group class="cardBodyStyle" style="border-bottom: 1px solid var(--eleave-border-color);"> 
                 <ion-avatar class="customerProfilePicture">
                   <img src="../assets/icon/layout/picture.png">
@@ -70,12 +73,22 @@
             <ion-row style="margin: 0px 20px 0px auto; display: table;">        
               <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
             </ion-row>
+
+            <!-- hide when max width 576
+            <ion-row  [class]="'hide-sm-up'" style="margin: 0px 20px 0px auto; display: table;">        
+              <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+            </ion-row>
+
+            - hide when min width 576px -
+            <ion-row [class]="'hide-sm-down'" style="margin: 0px 20px 0px auto; display: table;">
+              <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+            </ion-row> -->
           </ng-container>
 
           <ng-container *ngIf="selectedVal === 'table';">
             <ion-row style="display: flow-root; width: -webkit-fill-available; 
             min-width: fit-content;">
-              <!------- Customer Table View ------->
+              <!------- Customer Table View ----- -->
               <ion-row style="height: -webkit-fill-available; 
               min-width: fit-content;">
                 <ion-grid class="customerTable" style="min-width: fit-content;">
@@ -120,6 +133,7 @@
               <ion-item-group style="margin: 0px 20px 0px auto; display: table;">        
                 <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
               </ion-item-group>
+
             </ion-row>
           </ng-container>
         
