@@ -52,16 +52,19 @@
  
       <ion-col style="padding:10px;">
         <ion-row style="margin: 0% 0% 1% 0%;">
-          <ion-title class="settingsTitleStyle">
+          <ion-item lines="none" class="settingsTitleStyle">
             Users & Roles
-          </ion-title>
+          </ion-item>
+          <!-- <ion-title class="settingsTitleStyle">
+            Users & Roles
+          </ion-title> -->
           <ion-item-group lines="none" class="settingAddUser">
-            <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSettings($event)"></ion-searchbar>
-            <ion-button [class]="(settingPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'"
+            <ion-searchbar mode="md" class="customer-searchbar-style" (ionChange)="onSearchSettings($event)"></ion-searchbar>
+            <ion-button mode="md" [class]="(settingPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'"
              (click)="openRolesPopover($event)">
               <ion-icon style="display: flex; margin: auto; font-size: large;" slot="start" name="people"></ion-icon>
             </ion-button>
-            <ion-button (click)="openSettingPopover($event, 'AddNewUserComponent')">
+            <ion-button mode="md" (click)="openSettingPopover($event, 'AddNewUserComponent')">
               Add User
             </ion-button>            
           </ion-item-group>
@@ -124,7 +127,7 @@
         <!-- User Lists Card View -->
         <ion-row [class]="(settingPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'">
           <ion-item-group class="settingCardStyles">
-            <ion-card  *ngIf="userDataLength < 1;else userNotEmpty">
+            <ion-card mode="md" *ngIf="userDataLength < 1;else userNotEmpty">
               <ion-card-content style="text-align: center;">
                 <ion-label style="font-size: 11px;">
                   <ion-text>You don't have any user for </ion-text>
@@ -134,7 +137,7 @@
                 <ion-label style="font-size: 9px;">Create one now</ion-label>
               </ion-card-content>
             </ion-card>
-            <ion-card #userNotEmpty *ngFor="let userCards of userData | paginate: configPageSetting" >
+            <ion-card mode="md" #userNotEmpty *ngFor="let userCards of userData | paginate: configPageSetting" >
               <ion-card-content>
                 <ion-item-group style=" padding-bottom: 10px; border-bottom: 1px solid var(--eleave-border-color); align-items: center;">
                   <ion-avatar>
