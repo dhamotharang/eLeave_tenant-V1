@@ -54,9 +54,9 @@
       <ion-router-outlet main></ion-router-outlet>
     </ion-split-pane>
   
-    <ion-split-pane when="xs"  *ngIf="settingPage.getSideMenuType() === 'iconMenu'">
+    <ion-split-pane when="xs"  mode="md" *ngIf="settingPage.getSideMenuType() === 'iconMenu'">
       <!-- Icon menu only -->
-      <ion-menu type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
+      <ion-menu  mode="md" type="overlay" menuId="iconMen"  class="sidebarBackgroundIconView"
       [ngStyle]="{ 'display': (settingPage.getSideMenuType() === 'iconMenu' && settingPage.getToolbarSideMenuStatus() === true) ? 'flex' : 'none' }" 
       style="min-width: fit-content;">
         <ion-header style="display: inline-table;">
@@ -66,8 +66,8 @@
             </ion-icon>
           </ion-toolbar>
         </ion-header>
-        <ion-content style="min-width: fit-content;">
-          <ion-list style="min-width: fit-content;">
+        <ion-content  mode="md" style="min-width: fit-content;" no-bounce>
+          <ion-list  mode="md" style="min-width: fit-content;">
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
               <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-link" 
                 lines="none" [ngStyle]="{'--ion-background-color': 'blue' }" class='highlight-focus' style="min-width: fit-content;">

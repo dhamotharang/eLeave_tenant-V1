@@ -155,7 +155,7 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   getUserList(param): Observable<any> {
-    return this.settingApiService.getApi('/api/admin/user-manage/{role}?role=' + param);
+    return this.settingApiService.getApi('/api/admin/user-manage/' + param);
   }
 
   /**
