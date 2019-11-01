@@ -1,27 +1,27 @@
 <ion-app style="padding-top: 55px; --ion-background-color: #f0f0f7;">
   <ion-content>
 
-    <!--------------------------- Title  ----------------------------------->
+    <!-- ------------------------- Title  --------------------------------- -->
     <ion-row>
       <ion-col>
-        <ion-title class="custDtlMainTitleStyle">
+        <ion-item lines="none" class="custDtlMainTitleStyle">
           Customer Details
-        </ion-title>
+        </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row class="contentLayout contentFlexDisplay">
 
 
-      <!------------------------ Client's List  ------------------------------->  
+      <!-- ---------------------- Client's List  ----------------------------- -->  
       
       <ion-col [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
         <!-- Header -->
-        <ion-title class="custDtlTitleStyle">
+        <ion-title mode="md" class="custDtlTitleStyle">
           CLIENT NAME
         </ion-title>
         <!-- Body -->
-        <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
+        <ion-searchbar mode="md" class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
         
 
         <ion-slides [options]="slideOpts">
@@ -44,13 +44,13 @@
       <ion-col size="2" style="padding:0; min-width: fit-content;"
       [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'hide-md-down' : 'hide-sm-down'">
         <!-- Header -->
-        <ion-title class="custDtlTitleStyle">
+        <ion-title mode="md" class="custDtlTitleStyle">
           CLIENT NAME
         </ion-title>
         
         <!-- Body -->
         <ion-item-group style="height: 94%">
-          <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
+          <ion-searchbar mode="md" class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
           <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
             <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
                 {{cL.clientName}}
@@ -65,11 +65,11 @@
 
       </ion-col>
 
-      <!---------------------- Client's Overview  ----------------------------->
+      <!-- -------------------- Client's Overview  --------------------------- -->
       <ion-col style="padding:0; background-color: #fcfcfc; min-width: fit-content; margin-bottom: 5px;">
       <!-- <ion-col size="3" style="padding:0; background-color: #fcfcfc; min-width: fit-content;"> -->
         <!-- Header -->
-        <ion-title class="custDtlTitleStyle">
+        <ion-title mode="md" class="custDtlTitleStyle">
           OVERVIEW
         </ion-title>
 
@@ -147,11 +147,11 @@
         </ion-item-group>
       </ion-col>
 
-      <!-------------------- Client's Description  ---------------------------->
+      <!-- ------------------ Client's Description  -------------------------- -->
       <ion-col style="padding:0; min-width: fit-content;"
       [class]="(custDtlsPaging.getSideMenuType() === 'fullMenu') ? 'update-size-lg-fullScreen' : 'update-size-md-fullScreen'">
         <!-- Header -->
-        <ion-title class="custDtlTitleStyle">
+        <ion-title mode="md" class="custDtlTitleStyle">
           DESCRIPTION
         </ion-title>
 
@@ -162,7 +162,7 @@
         justify-content: space-between;
         flex-grow: 1;">
           <!-- Last billing date -->
-          <ion-card class="customerCard">
+          <ion-card mode="md" class="customerCard">
             <ion-card-content style="padding-bottom: 0px;">
               <ion-row>
                 <ion-card-title class="customerCardTitle">Last Billing Date</ion-card-title>
@@ -181,7 +181,7 @@
           </ion-card>
 
           <!-- Next billing date -->
-          <ion-card class="customerCard">
+          <ion-card mode="md" class="customerCard">
             <ion-card-content style="padding-bottom: 0px;">
               <ion-row>
                 <ion-card-title class="customerCardTitle">Next Billing Date</ion-card-title>
@@ -200,7 +200,7 @@
           </ion-card>
 
           <!-- Days left -->
-          <ion-card class="customerCard">
+          <ion-card mode="md" class="customerCard">
             <ion-card-content style="padding-bottom: 0px;">
                 <ion-row>
                   <ion-card-title class="customerCardTitle">Day Left</ion-card-title>
@@ -217,7 +217,7 @@
           </ion-card>
         </ion-row>
 
-        <ion-card class="viewSubscriptionDetailsCard">
+        <ion-card mode="md" class="viewSubscriptionDetailsCard">
           <ion-card-content  style="display: flow-root;flex-grow: inherit; flex-wrap: wrap;">
             <ion-row>
               <ion-col style="margin: 0 5px 0 5px;">
@@ -274,7 +274,7 @@
 
         <!-- Company Details -->
         <!-- Header -->
-        <ion-title class="custDtlTitleStyle" style="margin: 4% 0% 1.5% 1.5%;">
+        <ion-title mode="md" class="custDtlTitleStyle" style="margin: 4% 0% 1.5% 1.5%;">
           COMPANY DETAILS
         </ion-title>
         <ion-content [scrollEvents]="true" 

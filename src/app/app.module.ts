@@ -31,7 +31,7 @@ import { SnackBarComponent } from './layout/notificationPopup/snack-bar/snack-ba
     NgxSpinnerModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({mode: 'md'}),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
   ],
