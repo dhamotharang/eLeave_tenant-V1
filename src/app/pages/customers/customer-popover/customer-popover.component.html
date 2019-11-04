@@ -19,16 +19,17 @@
     </ion-label>
   </ion-row>
 
+
   <!-- View by part -->  
-  <ion-title>
+  <ion-title [class]="'hide-sm-down'">
     VIEW BY
   </ion-title>
-  <ion-row>
+  <ion-row [class]="'hide-sm-down'">
     <ion-text (click)="viewOption($event, 'card')">
       Card
     </ion-text>
   </ion-row>
-  <ion-row>
+  <ion-row [class]="'hide-sm-down'">
     <ion-text (click)="viewOption($event, 'table')">
       Table
     </ion-text>
