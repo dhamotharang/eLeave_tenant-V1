@@ -34,7 +34,12 @@ export class RolesDropDownComponent implements OnInit {
    */
   public rolesList;
 
+  /**
+   * This method is to bind selected role value
+   * @memberof RolesDropDownComponent
+   */
   public selectedRole;
+
   /**
    * This method is to set initial value of property. It will be
    * executed when this component is loaded

@@ -1,12 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>addnewcustomer</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content> -->
 
 <ion-app style="padding-top: 55px; --ion-background-color: #f0f0f7;">
   <ion-content>
@@ -25,7 +16,7 @@
           <ion-col style="padding: 0px;">
             <ion-row style="padding-left: 14px; padding-top:17px; padding-right: 14px;">
               <ion-col style="padding: 0px;">
-                  <!------------------------ Contact Details ------------------------->
+                  <!-- ---------------------- Contact Details ----------------------- -->
                   <ion-row class="addCustomerSubTitleLayoutStyle">
                     <ion-title class="addCustomerSubTitleStyle">
                       CONTACT DETAILS
@@ -37,15 +28,14 @@
                       <ion-label>Primary Contact</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input type="text" placeholder="Full Name"></ion-input>
-                      <!-- <ion-input type="text"  [(ngModel)]="newFullName" placeholder="Full Name"></ion-input> -->
+                      <ion-input type="text" required placeholder="Full Name" [(ngModel)]="newCustForm.fullname"></ion-input>
                     </ion-row>
 
                     <ion-row>
                       <ion-label>Company Name</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input></ion-input>
+                      <ion-input type="text" required placeholder="Company name" [(ngModel)]="newCustForm.companyName"></ion-input>
                     </ion-row>
 
                     <!-- need to handle cannot blank -->
@@ -53,7 +43,7 @@
                       <ion-label style="color: #ff6768;">Customer Email*</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input></ion-input>
+                      <ion-input type="email" required placeholder="Email address (Eg: abc@example.com)" [(ngModel)]="newCustForm.email"></ion-input>
                     </ion-row>
 
                     <!-- need to handle cannot blank -->
@@ -61,21 +51,21 @@
                       <ion-label style="color: #ff6768;">Phone Number*</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input></ion-input>
+                      <ion-input type="tel" required placeholder="Contact no (Eg: +6012-3455678)" [(ngModel)]="newCustForm.contactNo"></ion-input>
                     </ion-row>
 
                     <ion-row>
                       <ion-label>Display Name</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input></ion-input>
+                      <ion-input type="text" required placeholder="Display name/Username" [(ngModel)]="newCustForm.nickname"></ion-input>
                     </ion-row>
 
                   </ion-item-group>
                 </ion-col>
 
                 <ion-col style="padding: 0px;">
-                  <!----------------------- Subscription Plan ------------------------>
+                  <!-- --------------------- Subscription Plan ---------------------- -->
                   <ion-row class="addCustomerSubTitleLayoutStyle">
                     <ion-title class="addCustomerSubTitleStyle">
                       SUBSCRIPTION PLAN
@@ -88,40 +78,68 @@
                     </ion-row>
 
                     <ion-row style="padding-top: 12px;">
-                      <ion-label style="color: #ff6768;">Subscription#</ion-label>
-                    </ion-row>
-                    <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input></ion-input>
-                    </ion-row>
-
-                    <ion-row>
-                      <ion-label>Subscription Duration</ion-label>
-                    </ion-row>
-                    <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-col>
-                        <!-- <ion-input placeholder="Start On"></ion-input> -->
-                        <ion-datetime class="addCustomerCalenderBoxStyle" 
-                          displayFormat="D MMMM YYYY" max="2100" placeholder="Start On"></ion-datetime>
-                      </ion-col>
-                      <ion-col>
-                        <!-- <ion-input placeholder="End On"></ion-input> -->
-                        <ion-datetime class="addCustomerCalenderBoxStyle" 
-                          displayFormat="D MMMM YYYY" max="2100"  placeholder="End On"></ion-datetime>
-                      </ion-col>
+                      <!-- <ion-item-group style="margin-right: auto;">
+                        <ion-label style="color: #ff6768;">Subscription#</ion-label>
+                        <ion-label class="addCustomerInputDatetimeBackgroundStyle">SUB-0000011</ion-label>
+                      </ion-item-group> -->
+                      <ion-item-group style="margin-right: auto;">
+                        <ion-label>Subscription Start On</ion-label>
+                        <ion-input class="addCustomerInputDatetimeBackgroundStyle" 
+                        type="date" placeholder="Insert start date" 
+                        [(ngModel)]="custStartSubsDate" (change)="newStartSubs($event)"></ion-input>
+                      </ion-item-group>
                     </ion-row>
 
+                    <ion-row style="display: flow-root;">
+                      <ion-label>Bill Every: </ion-label>
+                      <ion-item-group class="addCustomerInputDatetimeBackgroundStyle" style="display: flex;">
+                        <ion-input type="number" style="margin-right: 5px;" 
+                        placeholder="Insert cycle" [(ngModel)]="custCycleNo" (ionChange)="setNextBillingDate()"></ion-input>
+
+                        <ion-select [(ngModel)]="custCycleEvery" (ionChange)="setNextBillingDate()" 
+                        style="border-radius: 3px !important;
+                          border: solid 0.5px #a5a4bf;
+                          align-items: center;
+                          margin: auto 0px;
+                          padding: 6px;">
+                          <ion-select-option selected value="Week(s)">Week(s)</ion-select-option>
+                          <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+                          <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+                        </ion-select>
+                      </ion-item-group>
+                    </ion-row>
+
+                    <ion-row style="display: flow-root;">
+                      <ion-label>Subscription Expiry On: </ion-label>
+                      <ion-label class="addCustomerInputDatetimeBackgroundStyle">{{custEndSubsDate}}</ion-label>
+                    </ion-row>
                     <ion-row>
-                      <ion-label>No. of User</ion-label>
+                      <ion-label>Subscriptions quota</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input></ion-input>
+                      <ion-input type="number" required placeholder="Quota number" [(ngModel)]="newSubsForm.subscriptionQuota"></ion-input>
+                    </ion-row>
+
+                    <ion-row style="display: block;">
+                      <ion-label>
+                        Sales Person:
+                      </ion-label>
+                      <!-- <ion-select [(ngModel)]="selSalesperson" (ionChange)="selectedSalesperson()" -->
+                      <ion-select [(ngModel)]="newCustForm.salesperson"
+                        placeholder="Select a salesperson" style="border-radius: 3px !important;
+                        border: solid 0.5px #a5a4bf;
+                        align-items: center;
+                        margin: 5px 0px;
+                        padding: 6px;">
+                        <ion-select-option *ngFor="let sp of salepersonList" [value]=sp.FULLNAME>{{sp.FULLNAME}}</ion-select-option>
+                      </ion-select>
                     </ion-row>
 
                   </ion-item-group>
               </ion-col>
             </ion-row>
             <ion-row  style="padding-left: 14px; padding-top:17px; padding-right: 14px;">
-                      <!----------------------- Billing Address -------------------------->
+                      <!-- --------------------- Billing Address ------------------------ -->
               <ion-col style="padding: 0px;">
                 <ion-row class="addCustomerSubTitleLayoutStyle">
                   <ion-title class="addCustomerSubTitleStyle">
@@ -135,31 +153,37 @@
                   </ion-row>
                   <ion-row class="addCustomerInputBackgroundStyle" style="padding-bottom: 0px;">
                     <ion-col>
-                      <ion-input placeholder="Streets"></ion-input>
+                      <ion-input type="text" required placeholder="Streets 1" [(ngModel)]="newCustForm.address1"></ion-input>
                     </ion-col>
                     <ion-col>
-                      <ion-input placeholder="Village / Township"></ion-input>
+                      <ion-input type="text" placeholder="Streets 2 (Optional)" [(ngModel)]="newCustForm.address2"></ion-input>
                     </ion-col>
                     <!-- <ion-input></ion-input> -->
                   </ion-row>
+                  <ion-row class="addCustomerInputBackgroundStyle" style="padding-bottom: 0px;">
+                    <ion-col>
+                      <ion-input type="text" required placeholder="Postal code" [(ngModel)]="newCustForm.postcode"></ion-input>
+                    </ion-col>
+                    <ion-col>
+                      <ion-input type="text" required placeholder="Village/Township" [(ngModel)]="newCustForm.city"></ion-input>
+                    </ion-col>
+                  </ion-row>
                   <ion-row class="addCustomerInputBackgroundStyle">
                     <ion-col>
-                      <ion-input placeholder="State"></ion-input>
+                      <ion-input type="text" required placeholder="State" [(ngModel)]="newCustForm.state"></ion-input>
                     </ion-col>
                     <ion-col>
-                        <ion-input placeholder="Postal code"></ion-input>                    
-                    </ion-col>
-                    <ion-col>
-                        <ion-input placeholder="Country"></ion-input>                    
+                        <ion-input type="text" required placeholder="Country" [(ngModel)]="newCustForm.country"></ion-input>                    
                     </ion-col>
                   </ion-row>
                 </ion-item-group>
               </ion-col>
             </ion-row>
           </ion-col>
-          <!-- <ion-col style="background-color: #fcfcfc;"> -->
-          <ion-col size="4" style="background-color: #fcfcfc;">
-            <!------------------- New customer Info Preview -------------------->
+            <!-- <ion-col [class]="(addCustPggSvs.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'" -->
+          <ion-col [class]="(addCustPggSvs.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'"
+           size="4" style="background-color: #fcfcfc;">
+            <!-- ----------------- New customer Info Preview ------------------ -->
 
             <!-- Contact Details -->
             <ion-item-group class="addCustomerDetailsBody">
@@ -168,24 +192,41 @@
               </ion-row>
             </ion-item-group>
 
-            <ion-row style="padding-top:12px;">
+            <!-- <ion-row style="padding-top:12px;">
+              <ion-item-group style="display: flex;">
+                <ion-avatar style="max-width: 100%; height: auto; margin: auto;">
+                  <img src="../../../../assets/icon/layout/picture.png">
+                </ion-avatar>
+                <ion-list>
+                  <ion-text>Full name</ion-text>
+                  <ion-text>username</ion-text>
+                  <ion-text>email</ion-text>
+                  <ion-text>contact no</ion-text>
+                </ion-list>
+              </ion-item-group>
+            </ion-row> -->
+            <ion-row style="padding-top:12px; padding-left: 23px;">
               <ion-col size="2" justify-content-center align-items-center style="display: flex; align-items: center;">
                 <ion-avatar class="addCustomerPreviewProfile">
-                <!-- <ion-avatar style=" width: 32px; height: 32px; float: right;"> -->
                   <img src="../../../../assets/icon/layout/picture.png">
                 </ion-avatar>
               </ion-col>
               <ion-col class="addCustomerPreviewBody">
                 <ion-row style="padding-bottom: 5px;">
                   <ion-text>
-                    Hanna Montana
+                    {{newCustForm.fullname}}
                   </ion-text>
                 </ion-row>
                 <ion-row style="padding-bottom: 5px;">
-                  hanna@zen.com.my
+                  <ion-text>
+                    {{newCustForm.nickname}}
+                  </ion-text>
                 </ion-row>
                 <ion-row style="padding-bottom: 5px;">
-                  013-5433232
+                    {{newCustForm.email}}
+                </ion-row>
+                <ion-row style="padding-bottom: 5px;">
+                    {{newCustForm.contactNo}}
                 </ion-row>
               </ion-col>
             </ion-row>
@@ -203,13 +244,19 @@
                   Billing Address
                 </ion-row>
                 <ion-row style="padding-top:10px;">
-                  C-15-08, KL Gateway Residence 2
+                    {{newCustForm.address1}}
                 </ion-row>
                 <ion-row style="padding-top:10px;">
-                  Jalan Kerinchi, Pantai Dalam, Kuala Lumpur
+                    {{newCustForm.address2}}
                 </ion-row>
                 <ion-row style="padding-top:10px;">
-                  59200, Wilayah Persekutuan, Malaysia
+                    {{newCustForm.postcode}}, {{newCustForm.city}}
+                </ion-row>
+                <ion-row style="padding-top:10px;">
+                    {{newCustForm.state}}
+                </ion-row>
+                <ion-row style="padding-top:10px;">
+                    {{newCustForm.country}}
                 </ion-row>
               </ion-col>
             </ion-row>
@@ -227,23 +274,27 @@
                   <ion-text>Type: </ion-text>
                   <ion-text style="font-weight: bold;"> Standard</ion-text>
                 </ion-row>
-                <ion-row style="padding-top:10px;">
+                <!-- <ion-row style="padding-top:10px;">
                   <ion-text>Subscription#:</ion-text>
                   <ion-text style="font-weight: bold;"> SUB-0003</ion-text>
-                </ion-row>
+                </ion-row> -->
                 <ion-row style="padding-top:10px;">
                   <ion-col style="padding-left:0px;">
                     <ion-text>Start at: </ion-text>
-                    <ion-text style="font-weight: bold;"> 2 August 2019</ion-text>
+                    <ion-text style="font-weight: bold;">{{custStartSubsDate}}</ion-text>
                   </ion-col>
                   <ion-col>
                     <ion-text>End at: </ion-text>
-                    <ion-text style="font-weight: bold;"> 2 September 2019</ion-text>
+                    <ion-text style="font-weight: bold;">{{custEndSubsDate}}</ion-text>
                   </ion-col>
                 </ion-row>
                 <ion-row style="padding-top:10px;">
-                  <ion-text>No of User:</ion-text>
-                  <ion-text style="font-weight: bold;"> 21</ion-text>
+                  <ion-text>Subscription quota:</ion-text>
+                  <ion-text style="font-weight: bold;">{{newSubsForm.subscriptionQuota}}</ion-text>
+                </ion-row>
+                <ion-row style="padding-top:10px;">
+                  <ion-text>Salesperson:</ion-text>
+                  <ion-text style="font-weight: bold;">{{newCustForm.salesperson}}</ion-text>
                 </ion-row>
               </ion-col>
             </ion-row>
@@ -251,10 +302,10 @@
             <!-- Save/Cancel -->
             <ion-row style="justify-content:center; padding-top:65px;">
             <!-- <ion-row style="justify-content:center; align-items: flex-end;"> -->
-              <ion-button class="addCustomerSaveButton" fill="clear">
+              <ion-button  class="addCustomerSaveButton" fill="clear" (click)="saveAddCustomer()">
                 Save
               </ion-button>
-              <ion-button class="addCustomerCancelButton" fill="clear">
+              <ion-button  class="addCustomerCancelButton" fill="clear" (click)="cancelSaveAddingCustomer()">
                 Cancel
               </ion-button>
             </ion-row>

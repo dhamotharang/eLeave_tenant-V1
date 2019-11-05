@@ -163,6 +163,13 @@ $screen-breakpoints: (
         }
 	}
 
+	.update-inline-size#{$keySize}-max-content {
+        @media (max-width: $valueSize) {
+			inline-size: max-content;
+        }
+	}
+
+
 	
 	.update-login-#{$keySize}-bg {
         @media (max-width: $valueSize) {

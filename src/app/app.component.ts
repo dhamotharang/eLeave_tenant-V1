@@ -153,6 +153,11 @@ export class AppComponent {
     console.log(this.userDataSvs.getUserProfilePicture());
   }
 
+  /**
+   * This method is to check the window width. If the width < 500, set side menu as
+   * icon menu view. Else, set as full menu view
+   * @memberof AppComponent
+   */
   checkWindowWidth() {
     console.log('checkWindowWidth:');
     console.log(window.innerWidth);

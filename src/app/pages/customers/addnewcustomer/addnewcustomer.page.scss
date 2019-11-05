@@ -45,6 +45,12 @@
         padding-bottom: 12px;
     }
 
+    .addCustomerInputDatetimeBackgroundStyle {
+        margin: 7px;
+        margin-left: 0px;
+        margin-bottom: 12px;
+    }
+
     .addCustomerSubscriptionLayoutStyle {
         padding: 10px;
     }
@@ -71,8 +77,10 @@
     }
 
     .addCustomerPreviewProfile {
-        width: 35px;
-        height: 35px;
+        // width: 35px;
+        // height: 35px;
+        max-width: 100%;
+        height: auto;margin: auto;
     }
 
     .addCustomerPreviewBody {
