@@ -150,7 +150,6 @@ export class AppComponent {
     this.checkWindowWidth();
     // this.settingPage.setSideMenuType(this.sideMenuStyle);
     this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan');
-    console.log(this.userDataSvs.getUserProfilePicture());
   }
 
   /**
@@ -159,8 +158,6 @@ export class AppComponent {
    * @memberof AppComponent
    */
   checkWindowWidth() {
-    console.log('checkWindowWidth:');
-    console.log(window.innerWidth);
     if (window.innerWidth < 500) {
       this.settingPage.setSideMenuType('iconMenu');
     } else {
