@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 import { Observable } from 'rxjs';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { APIService } from '../../../services/shared-service/api.service';
+
+import { SnackBarComponent } from '../../../layout/notificationPopup/snack-bar/snack-bar.component';
 /**
  * This component is for adding a new customer
  * @export
@@ -26,7 +29,8 @@ export class AddnewcustomerPage implements OnInit {
    */
   constructor(
     public addCustPggSvs: PaginationServiceService,
-    private addCustAPISvs: APIService
+    private addCustAPISvs: APIService,
+    private addCustSnack: MatSnackBar
   ) { }
   
   /**
@@ -187,6 +191,11 @@ export class AddnewcustomerPage implements OnInit {
           data => {
             console.log('postNewSubs');
             console.log(JSON.stringify(data));
+            this.addCustSnack.openFromComponent(SnackBarComponent, {
+              duration: 2500,
+              horizontalPosition: 'end',
+              data: 'successfully create customer'
+            });
           }
         );
       }
