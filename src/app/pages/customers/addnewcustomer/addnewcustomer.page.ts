@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { AlertController } from '@ionic/angular';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { APIService } from '../../../services/shared-service/api.service';
 
-import { SnackBarComponent } from '../../../layout/notificationPopup/snack-bar/snack-bar.component';
+// import { SnackBarComponent } from '../../../layout/notificationPopup/snack-bar/snack-bar.component';
 /**
  * This component is for adding a new customer
  * @export
@@ -30,7 +32,9 @@ export class AddnewcustomerPage implements OnInit {
   constructor(
     public addCustPggSvs: PaginationServiceService,
     private addCustAPISvs: APIService,
-    private addCustSnack: MatSnackBar
+    private addCustAlertPopup: AlertController,
+    // public addCustForm: FormGroup,
+    // private formBuilder: FormBuilder
   ) { }
   
   /**
@@ -92,6 +96,23 @@ export class AddnewcustomerPage implements OnInit {
    */
   public newSubsForm = {};
 
+  public addCustValidationForm;
+
+  public addCustValidationMessages = {
+    'fullname': [
+      { type: 'required', message: 'Name is required.' },
+    ],
+    'companyName': [
+      { type: 'required', message: 'Company name is required.' }
+    ],
+    'email': [
+      { type: 'required', message: 'Email is required.' }
+    ],
+    'contactNo': [
+      { type: 'required', message: 'Contact no is required.' }
+    ]
+  }
+
   /**
    * This method is to set inital properties value.
    * It will be executed when add new page is being loaded
@@ -100,6 +121,39 @@ export class AddnewcustomerPage implements OnInit {
   ngOnInit() {
     this.custEndSubsDate = '-';
     this.getInitList();
+  }
+
+  // initFormValidators() {
+
+  //   this.addCustValidationForm = this.formBuilder.group({
+  //     fullname: new FormControl('', Validators.required),
+  //     companyName: new FormControl('', Validators.required), 
+  //     email: new FormControl('', Validators.compose([
+  //       Validators.required,
+  //       Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+  //     ])),
+  //     contactNo: new FormControl('', Validators.required)
+  //   });
+  // }
+
+  /**
+   * This method is to set popup notification when the customer is
+   * successfully created
+   * @memberof AddnewcustomerPage
+   */
+  async presentAlertSucceed() {
+    const alert = await this.addCustAlertPopup.create({
+      // header: 'Alert',
+      // subHeader: 'Subtitle',
+      message: 'You have successfully create customer!',
+      cssClass: 'alert-success'
+      // buttons: ['OK']
+    });
+
+    await alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2500);
   }
 
   /**
@@ -171,8 +225,6 @@ export class AddnewcustomerPage implements OnInit {
   postCustInfo() {
     this.postNewCust().subscribe(
       data => {
-        console.log('donePostCust');
-        console.log(JSON.stringify(data));
         Object.assign(this.newSubsForm,
           {
             customerGuid: data[0].CUSTOMER_GUID,
@@ -189,13 +241,7 @@ export class AddnewcustomerPage implements OnInit {
 
         this.postNewSubs().subscribe(
           data => {
-            console.log('postNewSubs');
-            console.log(JSON.stringify(data));
-            this.addCustSnack.openFromComponent(SnackBarComponent, {
-              duration: 2500,
-              horizontalPosition: 'end',
-              data: 'successfully create customer'
-            });
+            this.presentAlertSucceed();
           }
         );
       }

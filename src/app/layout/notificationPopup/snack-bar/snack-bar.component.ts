@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from '@angular/material';
+import { AlertController } from '@ionic/angular';
 
 
 /**
@@ -21,7 +22,8 @@ export class SnackBarComponent implements OnInit {
    * @memberof SnackBarComponent
    */
   constructor(
-    @Inject(MAT_SNACK_BAR_DATA) public data: any
+    @Inject(MAT_SNACK_BAR_DATA) public data: any,
+    public alertCtrlr: AlertController
   ) { }
 
   /**
@@ -30,4 +32,42 @@ export class SnackBarComponent implements OnInit {
    */
   ngOnInit() {}
 
+  async infoAlertSuccess(msg) {
+    const alert = await this.alertCtrlr.create({
+      // header: 'Alert',
+      // subHeader: 'Subtitle',
+      message: msg,
+      cssClass: 'alert-success'
+      // buttons: ['OK']
+    });
+
+    await alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2500);
+  }
+
+  async infoAlertWarning(msg) {
+    const alert = await this.alertCtrlr.create({
+      message: msg,
+      cssClass: 'alert-warning'
+    });
+
+    await alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2500);
+  }
+
+  async infoAlertDanger(msg) {
+    const alert = await this.alertCtrlr.create({
+      message: msg,
+      cssClass: 'alert-danger'
+    });
+
+    await alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2500);
+  }
 }
