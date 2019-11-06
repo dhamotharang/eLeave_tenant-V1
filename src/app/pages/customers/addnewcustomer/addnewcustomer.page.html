@@ -93,7 +93,7 @@
                     <ion-row style="display: flow-root;">
                       <ion-label>Bill Every: </ion-label>
                       <ion-item-group class="addCustomerInputDatetimeBackgroundStyle" style="display: flex;">
-                        <ion-input type="number" style="margin-right: 5px;" 
+                        <ion-input type="number" mode="md" style="margin-right: 5px;" 
                         placeholder="Insert cycle" [(ngModel)]="custCycleNo" (ionChange)="setNextBillingDate()"></ion-input>
 
                         <ion-select [(ngModel)]="custCycleEvery" (ionChange)="setNextBillingDate()" 
@@ -117,7 +117,7 @@
                       <ion-label>Subscriptions quota</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-input type="number" required placeholder="Quota number" [(ngModel)]="newSubsForm.subscriptionQuota"></ion-input>
+                      <ion-input type="number" required placeholder="Quota number" mode="md" [(ngModel)]="newSubsForm.subscriptionQuota"></ion-input>
                     </ion-row>
 
                     <ion-row style="display: block;">
@@ -290,9 +290,18 @@
               </ion-button>
             </ion-row>
           </ion-col>
-          <ion-col [class]="(addCustPggSvs.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'"
+          <ion-col [class]="(addCustPggSvs.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'" size="12" style="background-color: #fcfcfc;">
+            <ion-row style="justify-content:center; padding: 20px 0px;">
+              <ion-button class="addCustomerSaveButton" fill="clear" (click)="saveAddCustomer()">
+                Save
+              </ion-button>
+              <ion-button class="addCustomerCancelButton" fill="clear" (click)="cancelSaveAddingCustomer()">
+                Cancel
+              </ion-button>
+            </ion-row>
+          </ion-col>
+          <!-- <ion-col [class]="(addCustPggSvs.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'"
           style="display: flex; justify-content: space-evenly; background-color: #fcfcfc;" size="12">
-            <!-- <ion-row>col2</ion-row> -->
             <ion-item-group>
               <ion-item-group class="addCustomerDetailsBody">
               <ion-row class="addCustomerPreviewTitle">
@@ -389,7 +398,7 @@
                 </ion-col>
               </ion-row>
             </ion-item-group>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ion-col>
     </ion-row>
