@@ -15,13 +15,18 @@ export class AlertPopupComponent implements OnInit {
   ngOnInit() {}
 
 
-  async alertSuccess(msg) {
+  async alertPopup(msg, cssTitle) {
     const alert = await this.alertCtrlr.create({
       // header: 'Alert',
       // subHeader: 'Subtitle',
       message: msg,
-      cssClass: 'alert-success'
+      cssClass: cssTitle// 'alert-success' / 'alert-warning' / 'alert-danger'
       // buttons: ['OK']
     });
+
+    await alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2500);
   }
 }

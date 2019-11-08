@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { APIService } from '../../../services/shared-service/api.service';
 
-// import { SnackBarComponent } from '../../../layout/notificationPopup/snack-bar/snack-bar.component';
 /**
  * This component is for adding a new customer
  * @export
@@ -154,7 +153,11 @@ export class AddnewcustomerPage implements OnInit {
     setTimeout(() => {
       alert.dismiss();
     }, 2500);
-  }
+    }
+    // presentAlertSucceed() {
+    //   return this.addCustNotiPopup.alertPopup('You have successfully create customer!', 'alert-success');
+
+    // }
 
   /**
    * This method is to get salesperson list from database
@@ -215,7 +218,8 @@ export class AddnewcustomerPage implements OnInit {
     }
 
     const endSubDD = (this.custEndSubsDatetime.getDate() < 10) ? '0' + this.custEndSubsDatetime.getDate() : this.custEndSubsDatetime.getDate();
-    this.custEndSubsDate = (this.custEndSubsDatetime.getMonth() +1 ) + '/' + endSubDD + '/' + this.custEndSubsDatetime.getFullYear();
+    this.custEndSubsDate = this.custEndSubsDatetime.getFullYear() + '-'+(this.custEndSubsDatetime.getMonth() + 1) + '-' + endSubDD;
+    // this.custEndSubsDate = (this.custEndSubsDatetime.getMonth() +1 ) + '/' + endSubDD + '/' + this.custEndSubsDatetime.getFullYear();
   }
 
   /**
@@ -225,6 +229,8 @@ export class AddnewcustomerPage implements OnInit {
   postCustInfo() {
     this.postNewCust().subscribe(
       data => {
+        console.log('custStartSubsDate: ' + this.custStartSubsDate);
+        console.log('custEndSubsDate: ' + this.custEndSubsDate);
         Object.assign(this.newSubsForm,
           {
             customerGuid: data[0].CUSTOMER_GUID,
@@ -233,9 +239,12 @@ export class AddnewcustomerPage implements OnInit {
             usedQuota: 0,
             recurrInterval: this.custCycleEvery,
             recurrIntervalVal: this.custCycleNo,
-            activationDate: Date.parse(this.custStartSubsDatetime).toString(),
-            lastBillingDate: Date.parse(this.custStartSubsDatetime).toString(),
-            nextBillingDate: Date.parse(this.custEndSubsDatetime).toString(),
+            activationDate: this.custStartSubsDate,
+            lastBillingDate: this.custStartSubsDate,
+            nextBillingDate: this.custEndSubsDate,
+            // activationDate: Date.parse(this.custStartSubsDatetime).toString(),
+            // lastBillingDate: Date.parse(this.custStartSubsDatetime).toString(),
+            // nextBillingDate: Date.parse(this.custEndSubsDatetime).toString(),
             billingCycle: 0
           });
 
