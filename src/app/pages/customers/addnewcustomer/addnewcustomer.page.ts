@@ -153,7 +153,7 @@ export class AddnewcustomerPage implements OnInit {
     setTimeout(() => {
       alert.dismiss();
     }, 2500);
-    }
+  }
     // presentAlertSucceed() {
     //   return this.addCustNotiPopup.alertPopup('You have successfully create customer!', 'alert-success');
 

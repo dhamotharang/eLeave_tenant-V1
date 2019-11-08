@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { Validators } from '@angular/forms';
+
+import { Events } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 import { settingPopoverCtrlr } from '../settings.page';
 import { userDummiesData } from '../../../app.component';
 
 
-import { Validators } from '@angular/forms';
-import { Events } from '@ionic/angular';
 
 import { APIService } from '../../../services/shared-service/api.service';
 
@@ -33,7 +35,8 @@ export class AddNewUserComponent implements OnInit {
   constructor(
     private events: Events,
     private addUserApiService: APIService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private addUserAlertPopup: AlertController,
   ) { }
 
   /**
@@ -104,13 +107,27 @@ export class AddNewUserComponent implements OnInit {
     this.addUserApiService.postApi(newUserData, '/api/admin/user-manage/sign-up').subscribe(
       data => {
         console.log('useradd data:' + JSON.stringify(data));
-        this.snackbar.openFromComponent(SnackBarComponent, {
-          duration: 2500,
-          horizontalPosition: 'end',
-          data: 'successfully create user'
-        });
+        this.presentAlertSucceed();
+        // this.snackbar.openFromComponent(SnackBarComponent, {
+        //   duration: 2500,
+        //   horizontalPosition: 'end',
+        //   data: 'successfully create user'
+        // });
       }
     );
+  }
+
+
+  async presentAlertSucceed() {
+    const alert = await this.addUserAlertPopup.create({
+      message: 'You have successfully create user!',
+      cssClass: 'alert-success'
+    });
+
+    await alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2500);
   }
 
   /**
