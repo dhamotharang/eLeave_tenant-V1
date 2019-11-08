@@ -10,8 +10,6 @@ import { Events } from '@ionic/angular';
 
 import { APIService } from '../../../services/shared-service/api.service';
 
-import { SnackBarComponent } from '../../../layout/notificationPopup/snack-bar/snack-bar.component';
-
 /**
  * This component is to set up Add New User popover from Settings page
  * @export
