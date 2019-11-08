@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { AlertController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
@@ -8,6 +6,7 @@ import { Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { APIService } from '../../../services/shared-service/api.service';
 
+import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.service';
 /**
  * This component is for adding a new customer
  * @export
@@ -31,7 +30,7 @@ export class AddnewcustomerPage implements OnInit {
   constructor(
     public addCustPggSvs: PaginationServiceService,
     private addCustAPISvs: APIService,
-    private addCustAlertPopup: AlertController,
+    private addCustInfoPopup: InfoPopupService,
     // public addCustForm: FormGroup,
     // private formBuilder: FormBuilder
   ) { }
@@ -136,30 +135,6 @@ export class AddnewcustomerPage implements OnInit {
   // }
 
   /**
-   * This method is to set popup notification when the customer is
-   * successfully created
-   * @memberof AddnewcustomerPage
-   */
-  async presentAlertSucceed() {
-    const alert = await this.addCustAlertPopup.create({
-      // header: 'Alert',
-      // subHeader: 'Subtitle',
-      message: 'You have successfully create customer!',
-      cssClass: 'alert-success'
-      // buttons: ['OK']
-    });
-
-    await alert.present();
-    setTimeout(() => {
-      alert.dismiss();
-    }, 2500);
-  }
-    // presentAlertSucceed() {
-    //   return this.addCustNotiPopup.alertPopup('You have successfully create customer!', 'alert-success');
-
-    // }
-
-  /**
    * This method is to get salesperson list from database
    * @memberof AddnewcustomerPage
    */
@@ -250,7 +225,7 @@ export class AddnewcustomerPage implements OnInit {
 
         this.postNewSubs().subscribe(
           data => {
-            this.presentAlertSucceed();
+            this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');
           }
         );
       }
@@ -280,11 +255,8 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   async saveAddCustomer() {
-    console.log('saveAddCustomer');
     Object.assign(this.newCustForm, { currency: 'MYR' });
     await this.postCustInfo();
-    // console.log('newCustForm: ' + JSON.stringify(this.newCustForm));
-    // console.log('newSubsForm: ' + JSON.stringify(this.newSubsForm));
 
   }
 
