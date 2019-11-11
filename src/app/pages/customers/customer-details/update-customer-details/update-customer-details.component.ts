@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { APIService } from '../../../../services/shared-service/api.service';
+import { InfoPopupService } from '../../../../layout/notificationPopup/info-popup.service';
 
 import { customerUpdateInfo, popovrCtrlr } from '../customer-details.page';
 
@@ -25,6 +26,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
    */
   constructor(
     private updateCustAPI: APIService,
+    private updateCustInfoPopup: InfoPopupService
   ) {}
 
 
@@ -88,7 +90,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
   setUpdateCustomer(obj: any) {
     this.patchUpdateCustomerEndpoint(obj).subscribe(
       data => {
-        console.log('setUpdateCustomer: ' + JSON.stringify(data, null, " "));
+        this.updateCustInfoPopup.alertPopup('You have successfully edited customer profile!', 'alert-success');
       }
     );
   }
@@ -102,7 +104,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
   patchUpdateCustomerEndpoint(obj: any): Observable<any> {
     return this.updateCustAPI.patchApi(obj, '/api/admin/customer');
   }
-  
+
   /**
    * This method is to bind values of updated customer details then 
    * it will dismiss the popup
@@ -110,7 +112,23 @@ export class UpdateCustomerDetailsComponent implements OnInit {
    */
   saveChanges() {
     Object.assign(this.selectedUpdateCustomerInfo, this.updateCustomerInfo);
-    this.setUpdateCustomer(this.selectedUpdateCustomerInfo);
+    const custObj = {
+      'fullname': this.selectedUpdateCustomerInfo['FULLNAME'],
+      'nickname': this.selectedUpdateCustomerInfo['NICKNAME'],
+      'email': this.selectedUpdateCustomerInfo['EMAIL'],
+      'contactNo': this.selectedUpdateCustomerInfo['CONTACT_NO'],
+      'companyName': this.selectedUpdateCustomerInfo['COMPANY_NAME'],
+      'address1': this.selectedUpdateCustomerInfo['ADDRESS1'],
+      'address2': this.selectedUpdateCustomerInfo['ADDRESS2'],
+      'postcode': this.selectedUpdateCustomerInfo['POSTCODE'],
+      'city': this.selectedUpdateCustomerInfo['CITY'],
+      'state': this.selectedUpdateCustomerInfo['STATE'],
+      'country': this.selectedUpdateCustomerInfo['COUNTRY'],
+      'currency': this.selectedUpdateCustomerInfo['CURRENCY'],
+      'salesperson': this.selectedUpdateCustomerInfo['SALESPERSON'],
+      'customerGuid': this.selectedUpdateCustomerInfo['CUSTOMER_GUID'],
+    }
+    this.setUpdateCustomer(custObj);
     this.dissmissPopup();
   }
 
