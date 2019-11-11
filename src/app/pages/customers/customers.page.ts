@@ -170,26 +170,10 @@ export class CustomersPage implements OnInit {
     this.pageCustChanged(1);
   }
 
-  // getCustList() {
-  //   this.getCustListAPI().subscribe(
-  //     dataCust => {
-  //       this.getSubsListAPI().subscribe(
-  //         dataSubs => {
-  //           dataCust.forEach(itemCust => {
-  //             dataSubs.forEach(itemSubs => {
-  //               if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
-  //                 itemCust = Object.assign(itemCust, itemSubs);
-  //               }
-  //             });
-  //           });
-  //           this.customerData = dataCust;
-  //           this.customerDataLength = this.customerData.length;
-  //           this.customerGlobalData = dataCust;
-  //         }
-  //       );
-  //     }
-  //   );
-  // }
+  /**
+   * This method is to get customer list from API
+   * @memberof CustomersPage
+   */
   getCustList() {
     this.getCustListAPI().subscribe(
       dataCust => {
@@ -198,6 +182,11 @@ export class CustomersPage implements OnInit {
     );
   }
 
+  /**
+   * This method is to get subscriptions list from API
+   * @param {*} custData This property is to bind customer object returned from getCustList()
+   * @memberof CustomersPage
+   */
   subList(custData) {
     this.getSubsListAPI().subscribe(
       dataSubs => {
@@ -206,6 +195,13 @@ export class CustomersPage implements OnInit {
     );
   }
 
+  /**
+   * This method is to merge objects between customer and subscribers
+   * based on CUSTOMER_GUID
+   * @param {*} subsObj This property is to bind subsriptions object 
+   * @param {*} custObj This property is to bind customers object
+   * @memberof CustomersPage
+   */
   mergeCustWithSubs(subsObj, custObj) {
     custObj.forEach(itemCust => {
       subsObj.forEach(itemSubs => {
@@ -220,10 +216,20 @@ export class CustomersPage implements OnInit {
 
   }
 
+  /**
+   * This method is to send get request to API to get customers list
+   * @returns {Observable<any>}
+   * @memberof CustomersPage
+   */
   getCustListAPI(): Observable<any> {
     return this.custApiSvs.getApi('/api/admin/customer');
   }
 
+  /**
+   * This method is to send get request to API to get subscriptions list
+   * @returns {Observable<any>}
+   * @memberof CustomersPage
+   */
   getSubsListAPI(): Observable<any> {
     return this.custApiSvs.getApi('/api/admin/subscription');
   }

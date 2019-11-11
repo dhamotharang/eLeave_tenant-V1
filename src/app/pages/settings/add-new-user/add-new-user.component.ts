@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { Events } from '@ionic/angular';
 
 import { settingPopoverCtrlr } from '../settings.page';
-import { userDummiesData } from '../../../app.component';
 
 import { APIService } from '../../../services/shared-service/api.service';
 

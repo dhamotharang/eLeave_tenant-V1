@@ -20,11 +20,11 @@ import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.s
 })
 export class AddnewcustomerPage implements OnInit {
 
-
   /**
-   * Creates an instance of AddnewcustomerPage.
+   *Creates an instance of AddnewcustomerPage.
    * @param {PaginationServiceService} addCustPggSvs This property is to get methods from PaginationServiceService
    * @param {APIService} addCustAPISvs This property is to get methods from APIService
+   * @param {InfoPopupService} addCustInfoPopup This property is to get methods from InfoPopupService
    * @memberof AddnewcustomerPage
    */
   constructor(
@@ -92,22 +92,20 @@ export class AddnewcustomerPage implements OnInit {
    */
   public newSubsForm = {};
 
-  public addCustValidationForm;
-
-  public addCustValidationMessages = {
-    'fullname': [
-      { type: 'required', message: 'Name is required.' },
-    ],
-    'companyName': [
-      { type: 'required', message: 'Company name is required.' }
-    ],
-    'email': [
-      { type: 'required', message: 'Email is required.' }
-    ],
-    'contactNo': [
-      { type: 'required', message: 'Contact no is required.' }
-    ]
-  }
+  // public addCustValidationMessages = {
+  //   'fullname': [
+  //     { type: 'required', message: 'Name is required.' },
+  //   ],
+  //   'companyName': [
+  //     { type: 'required', message: 'Company name is required.' }
+  //   ],
+  //   'email': [
+  //     { type: 'required', message: 'Email is required.' }
+  //   ],
+  //   'contactNo': [
+  //     { type: 'required', message: 'Contact no is required.' }
+  //   ]
+  // }
 
   /**
    * This method is to set inital properties value.
@@ -118,7 +116,6 @@ export class AddnewcustomerPage implements OnInit {
     this.custEndSubsDate = '-';
     this.getInitList();
   }
-
 
   /**
    * This method is to get salesperson list from database
