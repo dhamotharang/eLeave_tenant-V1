@@ -22,7 +22,7 @@ export class AddnewcustomerPage implements OnInit {
 
 
   /**
-   *Creates an instance of AddnewcustomerPage.
+   * Creates an instance of AddnewcustomerPage.
    * @param {PaginationServiceService} addCustPggSvs This property is to get methods from PaginationServiceService
    * @param {APIService} addCustAPISvs This property is to get methods from APIService
    * @memberof AddnewcustomerPage
@@ -31,8 +31,6 @@ export class AddnewcustomerPage implements OnInit {
     public addCustPggSvs: PaginationServiceService,
     private addCustAPISvs: APIService,
     private addCustInfoPopup: InfoPopupService,
-    // public addCustForm: FormGroup,
-    // private formBuilder: FormBuilder
   ) { }
   
   /**
@@ -121,18 +119,6 @@ export class AddnewcustomerPage implements OnInit {
     this.getInitList();
   }
 
-  // initFormValidators() {
-
-  //   this.addCustValidationForm = this.formBuilder.group({
-  //     fullname: new FormControl('', Validators.required),
-  //     companyName: new FormControl('', Validators.required), 
-  //     email: new FormControl('', Validators.compose([
-  //       Validators.required,
-  //       Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-  //     ])),
-  //     contactNo: new FormControl('', Validators.required)
-  //   });
-  // }
 
   /**
    * This method is to get salesperson list from database
@@ -194,7 +180,6 @@ export class AddnewcustomerPage implements OnInit {
 
     const endSubDD = (this.custEndSubsDatetime.getDate() < 10) ? '0' + this.custEndSubsDatetime.getDate() : this.custEndSubsDatetime.getDate();
     this.custEndSubsDate = this.custEndSubsDatetime.getFullYear() + '-'+(this.custEndSubsDatetime.getMonth() + 1) + '-' + endSubDD;
-    // this.custEndSubsDate = (this.custEndSubsDatetime.getMonth() +1 ) + '/' + endSubDD + '/' + this.custEndSubsDatetime.getFullYear();
   }
 
   /**
@@ -217,9 +202,6 @@ export class AddnewcustomerPage implements OnInit {
             activationDate: this.custStartSubsDate,
             lastBillingDate: this.custStartSubsDate,
             nextBillingDate: this.custEndSubsDate,
-            // activationDate: Date.parse(this.custStartSubsDatetime).toString(),
-            // lastBillingDate: Date.parse(this.custStartSubsDatetime).toString(),
-            // nextBillingDate: Date.parse(this.custEndSubsDatetime).toString(),
             billingCycle: 0
           });
 

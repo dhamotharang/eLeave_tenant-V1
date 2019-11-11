@@ -68,8 +68,7 @@ export class APIService {
    */
   patchApi(data: any, address: string) {
     this.headerAuthorization();
-    return this.http.patch(this.ROOT_URL + address, data, { headers: this.headers })
-      .pipe(map((res: Response) => res.json()));
+    return this.http.patch(this.ROOT_URL + address, data, { headers: this.headers }).pipe(map((res: Response) => res.json()));
   }
 
   /**

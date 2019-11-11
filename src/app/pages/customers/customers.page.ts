@@ -25,13 +25,6 @@ export let customerInfo: any = {};
  */
 export let customerDataList: any = [];
 
-// /**
-//  * This variable is to store data of salesperson data list from json
-//  * @export
-//  * @class CustomersPage
-//  */
-// export let salesPersonDummyData: any = [];
-
 /**
  * This variable is to store data of selected customer
  * @export
@@ -85,15 +78,18 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   public customerData;
-  // public customerData = customersDummiesData;
 
-  public customerDataLength;
+  /**
+   * This property is to bind all customers data
+   * @memberof CustomersPage
+   */
   public customerGlobalData;
-  // /**
-  //  * This property is to bind all salesperson list
-  //  * @memberof CustomersPage
-  //  */
-  // public salepersonData = salesmanDummiesData;
+
+  /**
+   * This property is to bind customer's number
+   * @memberof CustomersPage
+   */
+  public customerDataLength;
 
   /**
    * This property is to bind customer's pagination configurations
@@ -111,7 +107,6 @@ export class CustomersPage implements OnInit {
     this.custPaging.setCustomerViewType('card');
     this.getCustList();
     this.configPageCust = this.custPaging.pageConfig(9, 1, 10);
-    // this.configPageCust = this.custPaging.pageConfig(9, 1, this.customerData.length);
   }
 
   /**
@@ -147,13 +142,8 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   onClickCustomerViewDetails(item) {
-    // console.log('itemitem');
-    // console.log(item);
-    // console.log('his.customerData');
-    // console.log(JSON.stringify(this.customerData));
     customerInfo = item;
     customerDataList = this.customerData;
-    // salesPersonDummyData =  this.salepersonData;
   }
 
   /**
@@ -174,13 +164,9 @@ export class CustomersPage implements OnInit {
    */
   onSearchCust(event) {
     this.customerData = this.customerGlobalData;
-    // this.customerData = customersDummiesData;
-    // this.getCustList();
     this.customerData = (event.detail.value.length > 0 ) ?
       this.custSearch.filerSearch(event.detail.value, this.customerData, 'FULLNAME') :
         this.customerData;
-
-    console.log('custData: ' + JSON.stringify(this.customerData));
     this.pageCustChanged(1);
   }
 
@@ -196,21 +182,6 @@ export class CustomersPage implements OnInit {
                 }
               });
             });
-            // dataCust.map((item, i) => {
-            //   console.log('i:dsssd:  ' + i);
-            //   dataSubs.forEach(itemSubs => {
-            //     if (item.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
-            //       console.log('item: ' + JSON.stringify(item));
-            //       console.log('itemSubs: ' + JSON.stringify(itemSubs));
-            //       // // Object.assign(item, itemSubs);
-            //       // console.log('3333:' + JSON.stringify(Object.assign(item,itemSubs)));
-            //       item = Object.assign(item, itemSubs);
-            //     }
-
-            //     console.log('item2: ' + JSON.stringify(item));
-            //   });
-              
-            // });
             this.customerData = dataCust;
             this.customerDataLength = this.customerData.length;
             this.customerGlobalData = dataCust;

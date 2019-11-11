@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { APIService } from '../../../../services/shared-service/api.service';
 
-// import { salesPersonDummyData } from '../../customers.page';
 import { customerUpdateInfo, popovrCtrlr } from '../customer-details.page';
 
 /**
@@ -21,6 +20,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
 
   /**
    *Creates an instance of UpdateCustomerDetailsComponent.
+   * @param {APIService} updateCustAPI This property is to get methods from APIService
    * @memberof UpdateCustomerDetailsComponent
    */
   constructor(
@@ -58,10 +58,13 @@ export class UpdateCustomerDetailsComponent implements OnInit {
     console.log('customerUpdateInfo: ' + JSON.stringify(customerUpdateInfo, null, " "));
     Object.assign(this.updateCustomerInfo, this.selectedUpdateCustomerInfo);
     console.log('updateCustomerInfo: ' + JSON.stringify(this.updateCustomerInfo, null, " "));
-    // this.salesmanList = salesPersonDummyData;
     this.initGetSalesmanList();
   }
 
+  /**
+   * This method is to get salesman list from API
+   * @memberof UpdateCustomerDetailsComponent
+   */
   initGetSalesmanList() {
     this.getSalesmanList().subscribe(data => {
       return this.salesmanList = data;
@@ -77,6 +80,11 @@ export class UpdateCustomerDetailsComponent implements OnInit {
     return this.updateCustAPI.getApi('/api/admin/user-manage/salesperson');
   }
 
+  /**
+   * This method is to get update customer from API
+   * @param {*} obj
+   * @memberof UpdateCustomerDetailsComponent
+   */
   setUpdateCustomer(obj: any) {
     this.patchUpdateCustomerEndpoint(obj).subscribe(
       data => {
@@ -85,9 +93,16 @@ export class UpdateCustomerDetailsComponent implements OnInit {
     );
   }
 
+  /**
+   * This method is to patch updates to API
+   * @param {*} obj
+   * @returns {Observable<any>}
+   * @memberof UpdateCustomerDetailsComponent
+   */
   patchUpdateCustomerEndpoint(obj: any): Observable<any> {
     return this.updateCustAPI.patchApi(obj, '/api/admin/customer');
   }
+  
   /**
    * This method is to bind values of updated customer details then 
    * it will dismiss the popup
