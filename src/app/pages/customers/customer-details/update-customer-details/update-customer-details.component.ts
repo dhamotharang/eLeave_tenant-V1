@@ -1,5 +1,9 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { salesPersonDummyData } from '../../customers.page';
+
+import { APIService } from '../../../../services/shared-service/api.service';
+
+// import { salesPersonDummyData } from '../../customers.page';
 import { customerUpdateInfo, popovrCtrlr } from '../customer-details.page';
 
 /**
@@ -19,7 +23,9 @@ export class UpdateCustomerDetailsComponent implements OnInit {
    *Creates an instance of UpdateCustomerDetailsComponent.
    * @memberof UpdateCustomerDetailsComponent
    */
-  constructor() {}
+  constructor(
+    private updateCustAPI: APIService,
+  ) {}
 
 
   /**
@@ -49,10 +55,39 @@ export class UpdateCustomerDetailsComponent implements OnInit {
    */
   ngOnInit() {
     this.selectedUpdateCustomerInfo = customerUpdateInfo;
+    console.log('customerUpdateInfo: ' + JSON.stringify(customerUpdateInfo, null, " "));
     Object.assign(this.updateCustomerInfo, this.selectedUpdateCustomerInfo);
-    this.salesmanList = salesPersonDummyData;
+    console.log('updateCustomerInfo: ' + JSON.stringify(this.updateCustomerInfo, null, " "));
+    // this.salesmanList = salesPersonDummyData;
+    this.initGetSalesmanList();
   }
 
+  initGetSalesmanList() {
+    this.getSalesmanList().subscribe(data => {
+      return this.salesmanList = data;
+    });
+  }
+
+  /**
+   * This method is to implement get API to get salesperson list from endpoint
+   * @returns {Observable<any>}
+   * @memberof AddnewcustomerPage
+   */
+  getSalesmanList(): Observable<any> {
+    return this.updateCustAPI.getApi('/api/admin/user-manage/salesperson');
+  }
+
+  setUpdateCustomer(obj: any) {
+    this.patchUpdateCustomerEndpoint(obj).subscribe(
+      data => {
+        console.log('setUpdateCustomer: ' + JSON.stringify(data, null, " "));
+      }
+    );
+  }
+
+  patchUpdateCustomerEndpoint(obj: any): Observable<any> {
+    return this.updateCustAPI.patchApi(obj, '/api/admin/customer');
+  }
   /**
    * This method is to bind values of updated customer details then 
    * it will dismiss the popup
@@ -60,6 +95,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
    */
   saveChanges() {
     Object.assign(this.selectedUpdateCustomerInfo, this.updateCustomerInfo);
+    this.setUpdateCustomer(this.selectedUpdateCustomerInfo);
     this.dissmissPopup();
   }
 

@@ -4,7 +4,7 @@ import { PopoverController } from '@ionic/angular';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
 
-import { customerInfo, customerDummyData, currCustPage } from '../customers.page';
+import { customerInfo, customerDataList, currCustPage } from '../customers.page';
 import { SubscriberDetailsPage } from '../../subscriptions/subscriber-details/subscriber-details.page';
 import { UpdateCustomerDetailsComponent } from './update-customer-details/update-customer-details.component';
 import { CustomerHistoryComponent } from './customer-history/customer-history.component';
@@ -61,7 +61,7 @@ export class CustomerDetailsPage implements OnInit {
    * This property is to bind the list of all customer
    * @memberof CustomerDetailsPage
    */
-  public customerList = customerDummyData;
+  public customerList = customerDataList;
 
   /**
    * This property is to bind the value to selected customer name
@@ -137,12 +137,14 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   ngOnInit() {
+    console.log('customerList: ' + JSON.stringify(this.customerList, null, " "));
     this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
     this.selectedCustomerInfo = customerInfo;
+    console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
     customerUpdateInfo = this.selectedCustomerInfo;
-    this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
+    this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
-    this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
+    this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
     popovrCtrlr = this.popoverController;
     this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, currCustPage, this.customerList.length);
   }
@@ -155,9 +157,9 @@ export class CustomerDetailsPage implements OnInit {
   onChangeSelectedCustomer(changedCustomerItem) {
     this.selectedCustomerInfo = changedCustomerItem;
     customerUpdateInfo = this.selectedCustomerInfo;
-    this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.lastBillingOn, this.selectedCustomerInfo.nextBillingOn);
+    this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
-    this.progressBarValue = this.selectedCustomerInfo.employeeNumber / this.selectedCustomerInfo.employeeQuota;
+    this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
   }
 
   /**
@@ -186,9 +188,9 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   onSearchCustDtls(event) {
-    this.customerList = customerDummyData;
+    this.customerList = customerDataList;
     this.customerList = (event.detail.value.length > 0 ) ?
-                          this.custListSearch.filerSearch(event.detail.value, this.customerList, 'clientName') :
+      this.custListSearch.filerSearch(event.detail.value, this.customerList, 'FULLNAME') :
                             this.customerList;
     this.pageCustDtlsChanged(1);
   }

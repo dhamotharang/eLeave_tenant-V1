@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 
+import { Observable } from 'rxjs';
+
 import { CustomerPopoverComponent } from './customer-popover/customer-popover.component';
-import { customersDummiesData, salesmanDummiesData } from '../../app.component';
+// import { customersDummiesData, salesmanDummiesData } from '../../app.component';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { SearchDataService } from '../../services/search-data.service';
-
+import { APIService } from '../../services/shared-service/api.service';
 
 
 /**
@@ -21,14 +23,14 @@ export let customerInfo: any = {};
  * @export
  * @class CustomersPage
  */
-export let customerDummyData: any = [];
+export let customerDataList: any = [];
 
-/**
- * This variable is to store data of salesperson data list from json
- * @export
- * @class CustomersPage
- */
-export let salesPersonDummyData: any = [];
+// /**
+//  * This variable is to store data of salesperson data list from json
+//  * @export
+//  * @class CustomersPage
+//  */
+// export let salesPersonDummyData: any = [];
 
 /**
  * This variable is to store data of selected customer
@@ -54,7 +56,7 @@ export let currCustPage;
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.page.html',
-  styleUrls: ['./customers.page.scss'],
+  styleUrls: ['./customers.page.scss'], 
 })
 export class CustomersPage implements OnInit {
 
@@ -68,7 +70,8 @@ export class CustomersPage implements OnInit {
   constructor(
     public custPaging: PaginationServiceService,
     private popoverController: PopoverController,
-    private custSearch: SearchDataService
+    private custSearch: SearchDataService,
+    private custApiSvs: APIService
   ) { }
 
   /**
@@ -81,13 +84,16 @@ export class CustomersPage implements OnInit {
    * This property is to bind all customers data
    * @memberof CustomersPage
    */
-  public customerData = customersDummiesData;
+  public customerData;
+  // public customerData = customersDummiesData;
 
-  /**
-   * This property is to bind all salesperson list
-   * @memberof CustomersPage
-   */
-  public salepersonData = salesmanDummiesData;
+  public customerDataLength;
+  public customerGlobalData;
+  // /**
+  //  * This property is to bind all salesperson list
+  //  * @memberof CustomersPage
+  //  */
+  // public salepersonData = salesmanDummiesData;
 
   /**
    * This property is to bind customer's pagination configurations
@@ -101,12 +107,11 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   ngOnInit() {
-    this.configPageCust = this.custPaging.pageConfig(9, 1, this.customerData.length);
-    console.log(this.custPaging.getSideMenuType());
+    // console.log(this.custPaging.getSideMenuType());
     this.custPaging.setCustomerViewType('card');
-    console.log(this.custPaging.getCustomerViewType());
-    console.log(this.selectedVal);
-    console.log(selCustView);
+    this.getCustList();
+    this.configPageCust = this.custPaging.pageConfig(9, 1, 10);
+    // this.configPageCust = this.custPaging.pageConfig(9, 1, this.customerData.length);
   }
 
   /**
@@ -142,9 +147,13 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   onClickCustomerViewDetails(item) {
+    // console.log('itemitem');
+    // console.log(item);
+    // console.log('his.customerData');
+    // console.log(JSON.stringify(this.customerData));
     customerInfo = item;
-    customerDummyData = this.customerData;
-    salesPersonDummyData =  this.salepersonData;
+    customerDataList = this.customerData;
+    // salesPersonDummyData =  this.salepersonData;
   }
 
   /**
@@ -164,11 +173,59 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   onSearchCust(event) {
-    this.customerData = customersDummiesData;
+    this.customerData = this.customerGlobalData;
+    // this.customerData = customersDummiesData;
+    // this.getCustList();
     this.customerData = (event.detail.value.length > 0 ) ?
-                      this.custSearch.filerSearch(event.detail.value, customersDummiesData, 'clientName') :
-                      customersDummiesData;
+      this.custSearch.filerSearch(event.detail.value, this.customerData, 'FULLNAME') :
+        this.customerData;
+
+    console.log('custData: ' + JSON.stringify(this.customerData));
     this.pageCustChanged(1);
+  }
+
+  getCustList() {
+    this.getCustListAPI().subscribe(
+      dataCust => {
+        this.getSubsListAPI().subscribe(
+          dataSubs => {
+            dataCust.forEach(itemCust => {
+              dataSubs.forEach(itemSubs => {
+                if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
+                  itemCust = Object.assign(itemCust, itemSubs);
+                }
+              });
+            });
+            // dataCust.map((item, i) => {
+            //   console.log('i:dsssd:  ' + i);
+            //   dataSubs.forEach(itemSubs => {
+            //     if (item.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
+            //       console.log('item: ' + JSON.stringify(item));
+            //       console.log('itemSubs: ' + JSON.stringify(itemSubs));
+            //       // // Object.assign(item, itemSubs);
+            //       // console.log('3333:' + JSON.stringify(Object.assign(item,itemSubs)));
+            //       item = Object.assign(item, itemSubs);
+            //     }
+
+            //     console.log('item2: ' + JSON.stringify(item));
+            //   });
+              
+            // });
+            this.customerData = dataCust;
+            this.customerDataLength = this.customerData.length;
+            this.customerGlobalData = dataCust;
+          }
+        );
+      }
+    );
+  }
+
+  getCustListAPI(): Observable<any> {
+    return this.custApiSvs.getApi('/api/admin/customer');
+  }
+
+  getSubsListAPI(): Observable<any> {
+    return this.custApiSvs.getApi('/api/admin/subscription');
   }
 
 

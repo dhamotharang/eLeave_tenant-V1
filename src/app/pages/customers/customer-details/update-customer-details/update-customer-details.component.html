@@ -17,20 +17,24 @@
   <ion-item-group class="contentStyle">
     <ion-item>
       <ion-label position="stacked">Primary Contact</ion-label>
-      <ion-input type="text" placeholder="Insert Name" [(ngModel)]="updateCustomerInfo.clientName"></ion-input>    
+      <ion-input requred type="text" placeholder="Insert Full Name" [(ngModel)]="updateCustomerInfo.FULLNAME"></ion-input>    
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Display Name</ion-label>
+      <ion-input requred type="text" placeholder="Insert Name" [(ngModel)]="updateCustomerInfo.NICKNAME"></ion-input>    
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Company Name</ion-label>
-      <ion-input type="text" placeholder="Insert Company Name" [(ngModel)]="updateCustomerInfo.companyName"></ion-input>
+      <ion-input requred type="text" placeholder="Insert Company Name" [(ngModel)]="updateCustomerInfo.COMPANY_NAME"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Customer Email*</ion-label>
-      <ion-input type="email" inputmode="email" placeholder="Email" [(ngModel)]="updateCustomerInfo.clientEmail"
+      <ion-input requred type="email" inputmode="email" placeholder="Email" [(ngModel)]="updateCustomerInfo.EMAIL"
                   required="true" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Phone No.*</ion-label>
-      <ion-input type="tel" inputmode="tel" placeholder="Phone no." [(ngModel)]="updateCustomerInfo.clientContactNo"
+      <ion-input requred type="tel" inputmode="tel" placeholder="Phone no." [(ngModel)]="updateCustomerInfo.CONTACT_NO"
                   required="true" ></ion-input>
     </ion-item>
   </ion-item-group>
@@ -42,22 +46,22 @@
   <ion-item-group class="contentStyle">
     <ion-item>
       <ion-label position="stacked">Customer Address</ion-label>
-      <ion-input type="text" placeholder="Insert Street address" [(ngModel)]="updateCustomerInfo.addressLine1"></ion-input>
-      <ion-input type="text" placeholder="Insert Village/Township Name" [(ngModel)]="updateCustomerInfo.addressLine2"></ion-input>
+      <ion-input requred type="text" placeholder="Insert Street address" [(ngModel)]="updateCustomerInfo.ADDRESS1"></ion-input>
+      <ion-input requred type="text" placeholder="Insert Village/Township Name" [(ngModel)]="updateCustomerInfo.ADDRESS2"></ion-input>
       <ion-row>
-        <ion-input style="max-width: 40%;" type="text" placeholder="Insert Postal code" [(ngModel)]="updateCustomerInfo.addressZip"></ion-input>
-        <ion-input type="text" placeholder="Insert City Name" [(ngModel)]="updateCustomerInfo.addressCity"></ion-input>
+        <ion-input requred style="max-width: 40%;" type="text" placeholder="Insert Postal code" [(ngModel)]="updateCustomerInfo.POSTCODE"></ion-input>
+        <ion-input requred type="text" placeholder="Insert City Name" [(ngModel)]="updateCustomerInfo.CITY"></ion-input>
       </ion-row>
-      <ion-input type="text" placeholder="Insert State Name" [(ngModel)]="updateCustomerInfo.addressState"></ion-input>
-      <ion-input type="text" placeholder="Insert Country/Region Name" [(ngModel)]="updateCustomerInfo.addressCountry"></ion-input>
+      <ion-input requred type="text" placeholder="Insert State Name" [(ngModel)]="updateCustomerInfo.STATE"></ion-input>
+      <ion-input requred type="text" placeholder="Insert Country/Region Name" [(ngModel)]="updateCustomerInfo.COUNTRY"></ion-input>
     </ion-item>
     <ion-list>
       <ion-item lines="none">
         <ion-label position="stacked">Sales Person</ion-label>
-        <ion-select placeholder="Select Sales Person" [(ngModel)]="updateCustomerInfo.salesPerson">
+        <ion-select placeholder="Select Sales Person" [(ngModel)]="updateCustomerInfo.SALESPERSON">
           <ion-select-option *ngFor="let salesman of salesmanList" 
-            [value]=salesman.name name=salesman.name>
-              {{salesman.name}}
+            [value]=salesman.FULLNAME name=salesman.FULLNAME>
+              {{salesman.FULLNAME}}
           </ion-select-option>
         </ion-select>
       </ion-item>

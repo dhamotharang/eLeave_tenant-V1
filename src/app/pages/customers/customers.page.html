@@ -22,23 +22,34 @@
       <!----------- Customers Details --------- -->
       <ion-row style="justify-content: center; padding-left: 10px; padding-right: 10px; height: -webkit-fill-available; display: flex;">    
           <ng-container *ngIf="selectedVal === 'card';" >   
-
+            
+            <ion-card mode="md" *ngIf="customerDataLength < 1; else customerNotEmpty" class="customerCardStyle" 
+             style="height: -webkit-fill-available;">
+              <ion-item-group class="cardBodyStyle emptyCustomer"> 
+                <ion-label style="font-size: 11px;">You don't have any customer yet.</ion-label>
+                <ion-label style="font-size: 9px;">Add one now</ion-label>
+              </ion-item-group>
+            </ion-card>
+            
             <!------- Customer Card View ----- -->
-            <ion-card mode="md" class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
+            <ion-card mode="md" #customerNotEmpty class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
               <ion-item-group class="cardBodyStyle" style="border-bottom: 1px solid var(--eleave-border-color);"> 
                 <ion-avatar class="customerProfilePicture">
                   <img src="../assets/icon/layout/picture.png">
                 </ion-avatar>
                 <ion-list style="min-width: fit-content; padding: 8px 8px 8px 0px;">
                   <ion-card-title class="customerCardTitleStyle">
-                    {{cardData.clientName}}
+                    <!-- {{cardData.clientName}} -->
+                    {{cardData.FULLNAME}}
                   </ion-card-title>
                   <ion-card-content class="customerCardBodyStyle">
                       <ion-text>
-                          {{cardData.companyName}}
+                          <!-- {{cardData.companyName}} -->
+                          {{cardData.COMPANY_NAME}}
                       </ion-text>
                       <ion-text>
-                          {{cardData.clientEmail}}
+                          <!-- {{cardData.clientEmail}} -->
+                          {{cardData.EMAIL}}
                       </ion-text>
                   </ion-card-content>
                 </ion-list>
@@ -52,20 +63,37 @@
                   <ion-item lines="none">
                     <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
                     <ion-text class="customerCardIconText">
-                      {{cardData.tenantNumber}}
+                      <!-- {{cardData.tenantNumber}} SUBCOMPANY NUMBERS -->
+                      10
                     </ion-text>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
                     <ion-text class="customerCardIconText">
-                      {{cardData.employeeNumber}}
+                      <!-- {{cardData.employeeNumber}} USED_EMPLOYEE_QUOTA-->
+                      3000
                     </ion-text>
                   </ion-item>
                 </ion-item-group>
-                <ion-button fill="clear" [ngStyle]="{'background-color': cardData.subsStatus === 'active' ? 
+                
+                <span [ngSwitch]="cardData.STATUS">
+                  <ion-button fill="clear" *ngSwitchCase="0" [ngStyle]="{'background-color': '#5ee2a0'}">active</ion-button>
+                  <ion-button fill="clear" *ngSwitchCase="1" [ngStyle]="{'background-color': '#808495'}">inactive</ion-button>
+                </span>
+                <!-- <ion-button fill="clear" [ngStyle]="{'background-color': cardData.subsStatus === 'active' ? 
                   '#5ee2a0' : '#a5a4bf'}">
-                  {{cardData.subsStatus}}
-                </ion-button>
+                  {{cardData.STATUS}}
+                  <! -- SUB.STATUS == 1/0 -->
+                  <!-- {{cardData.subsStatus}} -->
+
+                  <!-- <ion-col class="userStatusSetting" [ngSwitch]="user.ACTIVATION_FLAG"> -->
+                  <!-- <ion-label [ngStyle]="{'color': (user.ACTIVATION_FLAG === 1)? '#5ee2a0' : '#808495'}" *ngSwitchCase="1">
+                    (Active)
+                  </ion-label>
+                  <ion-label [ngStyle]="{'color': (user.ACTIVATION_FLAG === 0)? '#5ee2a0' : '#808495'}" *ngSwitchCase="0">
+                    (Inactive)
+                  </ion-label> --
+                </ion-button> -->
               </ion-item-group>
             </ion-card>  
             <div style="width: -webkit-fill-available;"></div>
@@ -99,14 +127,25 @@
                     <ion-col size="1.5">PLAN NAME</ion-col>
                     <ion-col size="1.5">STATUS</ion-col>
                   </ion-row>
-                  <ion-row *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
+
+                  <ion-row *ngIf="customerDataLength < 1; else customerNotEmpty" class="bodyStyle emptyCustomer"
+                  style="height: -webkit-fill-available;">
+                    <ion-label style="font-size: 11px;">You don't have any customer yet.</ion-label>
+                    <ion-label style="font-size: 9px;">Add one now</ion-label>
+                  </ion-row>
+          
+                  <ion-row #customerNotEmpty *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
                   [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
                   (click)="onClickCustomerViewDetails(tableData)"
                   style="height: 10%; min-width: fit-content;">
-                    <ion-col size="3" style="min-width: fit-content;">{{tableData.clientName}}</ion-col>
-                    <ion-col style="min-width: fit-content;">{{tableData.companyName}}</ion-col>
-                    <ion-col style="min-width: fit-content;">{{tableData.clientEmail}}</ion-col>
-                    <ion-col style="min-width: fit-content;" size="1.5">{{tableData.plan}}</ion-col>
+                    <ion-col size="3" style="min-width: fit-content;">{{tableData.FULLNAME}}</ion-col>
+                    <!-- <ion-col size="3" style="min-width: fit-content;">{{tableData.clientName}}</ion-col> -->
+                    <ion-col style="min-width: fit-content;">{{tableData.COMPANY_NAME}}</ion-col>
+                    <!-- <ion-col style="min-width: fit-content;">{{tableData.companyName}}</ion-col> -->
+                    <ion-col style="min-width: fit-content;">{{tableData.EMAIL}}</ion-col>
+                    <!-- <ion-col style="min-width: fit-content;">{{tableData.clientEmail}}</ion-col> -->
+                    <ion-col style="min-width: fit-content;" size="1.5">Standard</ion-col> 
+                    <!-- <ion-col style="min-width: fit-content;" size="1.5">{{tableData.plan}}</ion-col> subs.PLAN -->
                     <ion-col style="min-width: fit-content;" size="1.5"> 
                       <!-- {{tableData.status}} -->
                         <span [ngSwitch]="tableData.status">
