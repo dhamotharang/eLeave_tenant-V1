@@ -61,14 +61,14 @@ export class APIService {
 
   /**
    * This method is to set http request (patch) with assigned path and body
-   * @param {*} data input array to be passed
-   * @param {string} address url to be passed 
+   * @param {*} patchData input array to be passed
+   * @param {string} urlAddress url to be passed
    * @returns
    * @memberof APIService
    */
-  patchApi(data: any, address: string) {
+  patchApi(patchData: any, urlAddress: string) {
     this.headerAuthorization();
-    return this.http.patch(this.ROOT_URL + address, data, { headers: this.headers }).pipe(map((res: Response) => res.json()));
+    return this.http.patch(this.ROOT_URL + urlAddress, patchData, { headers: this.headers }).pipe(map((res: Response) => res.json()));
   }
 
   /**
