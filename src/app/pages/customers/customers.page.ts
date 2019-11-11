@@ -204,15 +204,25 @@ export class CustomersPage implements OnInit {
    */
   mergeCustWithSubs(subsObj, custObj) {
     custObj.forEach(itemCust => {
-      subsObj.forEach(itemSubs => {
-        if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
-          itemCust = Object.assign(itemCust, itemSubs);
-        }
-      });
+      this.mergeCustWithSubsByFor(itemCust, subsObj);
     });
     this.customerData = custObj;
     this.customerDataLength = this.customerData.length;
     this.customerGlobalData = custObj;
+  }
+
+  /**
+   * This method is to merge objects between customer and subscribers
+   * @param {*} itemCust This property is customer object
+   * @param {*} subsObj This property is subscriptions object array
+   * @memberof CustomersPage
+   */
+  mergeCustWithSubsByFor(itemCust, subsObj) {
+    subsObj.forEach(itemSubs => {
+      if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
+        itemCust = Object.assign(itemCust, itemSubs);
+      }
+    });
 
   }
 
