@@ -189,27 +189,12 @@ export class AddnewcustomerPage implements OnInit {
   postCustInfo() {
     this.postNewCust().subscribe(
       data => {
-        console.log('custStartSubsDate: ' + this.custStartSubsDate);
-        console.log('custEndSubsDate: ' + this.custEndSubsDate);
-        Object.assign(this.newSubsForm,
-          {
-            customerGuid: data[0].CUSTOMER_GUID,
-            subscriptionPlan: 'Standard',
-            subscriptionStatus: 1,
-            usedQuota: 0,
-            recurrInterval: this.custCycleEvery,
-            recurrIntervalVal: this.custCycleNo,
-            activationDate: this.custStartSubsDate,
-            lastBillingDate: this.custStartSubsDate,
-            nextBillingDate: this.custEndSubsDate,
-            billingCycle: 0
-          });
+        Object.assign(this.newSubsForm, { customerGuid: data[0].CUSTOMER_GUID, subscriptionPlan: 'Standard',
+            subscriptionStatus: 1, usedQuota: 0,  recurrInterval: this.custCycleEvery,
+            recurrIntervalVal: this.custCycleNo, activationDate: this.custStartSubsDate, lastBillingDate: this.custStartSubsDate,
+            nextBillingDate: this.custEndSubsDate,billingCycle: 0});
 
-        this.postNewSubs().subscribe(
-          data => {
-            this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');
-          }
-        );
+        this.postNewSubs().subscribe(data => {this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');});
       }
     );
   }

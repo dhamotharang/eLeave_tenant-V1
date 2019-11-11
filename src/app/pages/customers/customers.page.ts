@@ -170,25 +170,54 @@ export class CustomersPage implements OnInit {
     this.pageCustChanged(1);
   }
 
+  // getCustList() {
+  //   this.getCustListAPI().subscribe(
+  //     dataCust => {
+  //       this.getSubsListAPI().subscribe(
+  //         dataSubs => {
+  //           dataCust.forEach(itemCust => {
+  //             dataSubs.forEach(itemSubs => {
+  //               if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
+  //                 itemCust = Object.assign(itemCust, itemSubs);
+  //               }
+  //             });
+  //           });
+  //           this.customerData = dataCust;
+  //           this.customerDataLength = this.customerData.length;
+  //           this.customerGlobalData = dataCust;
+  //         }
+  //       );
+  //     }
+  //   );
+  // }
   getCustList() {
     this.getCustListAPI().subscribe(
       dataCust => {
-        this.getSubsListAPI().subscribe(
-          dataSubs => {
-            dataCust.forEach(itemCust => {
-              dataSubs.forEach(itemSubs => {
-                if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
-                  itemCust = Object.assign(itemCust, itemSubs);
-                }
-              });
-            });
-            this.customerData = dataCust;
-            this.customerDataLength = this.customerData.length;
-            this.customerGlobalData = dataCust;
-          }
-        );
+        this.subList(dataCust);
       }
     );
+  }
+
+  subList(custData) {
+    this.getSubsListAPI().subscribe(
+      dataSubs => {
+        this.mergeCustWithSubs(dataSubs, custData);
+      }
+    );
+  }
+
+  mergeCustWithSubs(subsObj, custObj) {
+    custObj.forEach(itemCust => {
+      subsObj.forEach(itemSubs => {
+        if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
+          itemCust = Object.assign(itemCust, itemSubs);
+        }
+      });
+    });
+    this.customerData = custObj;
+    this.customerDataLength = this.customerData.length;
+    this.customerGlobalData = custObj;
+
   }
 
   getCustListAPI(): Observable<any> {
