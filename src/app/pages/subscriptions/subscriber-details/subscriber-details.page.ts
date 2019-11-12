@@ -4,15 +4,12 @@ import { PopoverController } from '@ionic/angular';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
 
-import {customersDummiesData} from '../../../app.component';
-
 import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
 import { ChangeNextBillingDateComponent } from './change-next-billing-date/change-next-billing-date.component';
-
 
 
 /**
@@ -124,9 +121,7 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   ngOnInit() {
-    console.log('subscribersDetails: ' + JSON.stringify(this.subscribersDetails, null, " "));
     this.subscriberInfo = selectedSubscribersInfo;
-    console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     subscriberUpdateInfo = this.subscriberInfo;
     this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.LAST_BILLING_DATE,
       this.subscriberInfo.NEXT_BILLING_DATE);
