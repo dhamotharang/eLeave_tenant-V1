@@ -10,7 +10,7 @@
           Subscriptions
         </ion-title> -->
         <ion-item-group class="subscriptionButtonsSetting">
-          <ion-searchbar mode="md" class="customer-searchbar-style" placeholder="Search Name"></ion-searchbar>
+          <ion-searchbar mode="md" class="customer-searchbar-style" placeholder="Search Name" (ionChange)="onSearchSubs($event)"></ion-searchbar>
           <ion-button mode="md"> 
             <ion-icon slot="icon-only" name="menu"></ion-icon>
           </ion-button>
@@ -20,7 +20,18 @@
     <ion-row class="subscriptionLayout" >
       <!-- ------------------------------ Table --------------------------------- -->
       <ion-col style="background-color: #ffffff;" [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-down' : 'hide-md-down'">
-        <ion-grid style="min-width: fit-content;">
+        <ion-grid *ngIf="subscribersObjLength < 1;">
+          <ion-row class="emptySubscriptions cardStyle cardStyles" style="box-shadow: none;">
+            <ion-label style="font-size: 11px;">You don't have any subscriptions yet.</ion-label>
+            <ion-label style="font-size: 9px;">Create your customer and subscription now</ion-label>
+            <ion-button  mode="md" [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'"
+              class="emptyButtonsSetting">
+              Add Customer
+            </ion-button>
+
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="subscribersObjLength > 0; "style="min-width: fit-content;">
           <!-- header -->
           <ion-row class="subscriptionTableHeaderTheme">
             <ion-col>
@@ -64,61 +75,71 @@
               </div>
             </ion-col>
           </ion-row>
-          
           <!-- body -->
           <ion-row class="fitContent subscriptionTableBodyTheme subscriptionTableLine" ion-item 
             *ngFor="let table of subscribers  | paginate: configPageSubs"
             [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
-            [class.highlight]="table.clientName === currentClient"
+            [class.highlight]="table.FULLNAME === currentClient"
             (click)="viewSubscriptionDetails(table)"> 
               <!-- ondblclick="location.href='/main/subscriptions/subscriber-details'"> 
             class.highlight="table.clientName"  -->
             <ion-col>
               <div>
-                {{table.creationDate}}
+                {{table.SIMPLE_CREATION_TS}}
+                <!-- {{table.creationDate}} -->
               </div>
             </ion-col>
             <ion-col>
               <div>
-                {{table.activationDate}}
+                {{table.SIMPLE_ACTIVATION_DATE}}
+                <!-- {{table.activationDate}} -->
               </div>
             </ion-col>
             <ion-col style="text-align: left;">
               <div>
-                {{table.subscription}}
+                SUB-000000001
+                <!-- {{table.subscription}} -->
               </div>
             </ion-col>
             <ion-col size="3" style="text-align: left;">
               <div style="color: #3b86ff;">
-                {{table.clientName}}
+                {{table.FULLNAME}}
+                <!-- {{table.clientName}} -->
               </div>
               <div>
-                {{table.clientEmail}}
+                {{table.EMAIL}}
+                <!-- {{table.clientEmail}} -->
               </div>
             </ion-col>
             <ion-col size="1">
               <div>
-                {{table.plan}}
+                {{table.PLAN}}
+                <!-- {{table.plan}} -->
               </div>
             </ion-col>
             <ion-col size="1.3">
-              <span [ngSwitch]="table.subsStatus" style="text-transform: capitalize;">
-                <p *ngSwitchCase="'active'" class="columnStatusActive">
-                    {{table.subsStatus}}
+              <span [ngSwitch]="table.STATUS" style="text-transform: capitalize;">
+              <!-- <span [ngSwitch]="table.subsStatus" style="text-transform: capitalize;"> -->
+                <p *ngSwitchCase="1" class="columnStatusActive">
+                    active
+                    <!-- {{table.subsStatus}} -->
                 </p>
-                <p *ngSwitchCase="'inactive'" class="columnStatusInactive">
-                    {{table.subsStatus}}                  
+                <p *ngSwitchCase="0" class="columnStatusInactive">
+                    inactive
+                    <!-- {{table.subsStatus}}                   -->
                 </p>
               </span>
             </ion-col>
             <ion-col>
               <div>
-                {{table.lastBillingOn}}
+                {{table.SIMPLE_LAST_BILLING_DATE}}
+                <!-- {{table.lastBillingOn}} -->
               </div>
             </ion-col>
             <ion-col>
               <div>
-                {{table.nextBillingOn}}
+                {{table.SIMPLE_NEXT_BILLING_DATE}}
+                <!-- {{table.nextBillingOn}} -->
               </div>
             </ion-col>
           </ion-row>
@@ -129,32 +150,42 @@
       <ion-col [class]="(subsPaging.getSideMenuType() === 'fullMenu') ? 'hide-lg-up' : 'hide-md-up'">
         <ion-row>
           <ion-item-group class="subscriptionCardStyles">
-            <ion-card mode="md" *ngFor="let card of subscribers | paginate: configPageSubs">
+            <ion-card mode="md" *ngIf="subscribersObjLength < 1; else subscribersNotEmpty"
+             style="height: -webkit-fill-available; background-color: #ffffff;">
+              <ion-card-content class="cardStyle cardStyles emptySubscriptions" style="box-shadow: none;">
+                <ion-label style="font-size: 11px;">You don't have any subscriptions yet.</ion-label>
+                <ion-label style="font-size: 9px;">Create your customer and subscription now</ion-label>
+                <ion-button  mode="md" [routerDirection]="'root'" [routerLink]="'/main/customers/addnewcustomer'"
+                  class="emptyButtonsSetting">
+                  Add Customer
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+            <ion-card mode="md" #subscribersNotEmpty *ngFor="let card of subscribers | paginate: configPageSubs">
               <ion-card-content class="cardStyle cardStyles">
                 <ion-card-title>
                   <ion-label style="font-weight: bold; margin: 3px 0px; color: var(--eleave-header-color);">
-                    {{card.clientName}}
+                    {{card.FULLNAME}}
                   </ion-label>
-                  <ion-label style="color: var(--eleave-header-color);">{{card.clientEmail}}</ion-label>
+                  <ion-label style="color: var(--eleave-header-color);">{{card.EMAIL}}</ion-label>
                   <ion-card-subtitle>
-                    <span>{{card.plan}} | {{card.subscription}}</span>
-                    <!-- <ion-button class="cardStatus" fill="clear" [ngStyle]="{'background-color': card.subsStatus === 'active' ? 
-                    '#5ee2a0' : '#a5a4bf'}">{{card.subsStatus}}</ion-button> -->
-                    <span [ngSwitch]="card.subsStatus" style="text-transform: capitalize;">
-                      <p *ngSwitchCase="'active'" class="columnStatusActive">
-                          {{card.subsStatus}}
+                    <span>{{card.PLAN}} | {{card.subscription}}</span>
+                    <!-- <span [ngSwitch]="card.subsStatus" style="text-transform: capitalize;"> -->
+                    <span [ngSwitch]="card.STATUS" style="text-transform: capitalize;">
+                      <p *ngSwitchCase="1" class="columnStatusActive">
+                          active
                       </p>
-                      <p *ngSwitchCase="'inactive'" class="columnStatusInactive">
-                          {{card.subsStatus}}                  
+                      <p *ngSwitchCase="0" class="columnStatusInactive">
+                          inactive 
                       </p>
                     </span> 
                   </ion-card-subtitle>
                 </ion-card-title>
                 <ion-item-group style="padding-top: 10px;">
-                  <ion-label> Creation Date: {{card.creationDate}} </ion-label>
-                  <ion-label> Activatation Date: {{card.activationDate}} </ion-label>
-                  <ion-label> Last Billing Date: {{card.lastBillingOn}} </ion-label>
-                  <ion-label> Next Billing Date: {{card.nextBillingOn}} </ion-label>
+                  <ion-label> Creation Date: {{card.SIMPLE_CREATION_TS}} </ion-label>
+                  <ion-label> Activatation Date: {{card.SIMPLE_ACTIVATION_DATE}} </ion-label>
+                  <ion-label> Last Billing Date: {{card.SIMPLE_LAST_BILLING_DATE}} </ion-label>
+                  <ion-label> Next Billing Date: {{card.SIMPLE_NEXT_BILLING_DATE}} </ion-label>
                 </ion-item-group>
                 <ion-label style="color: #3b86ff; text-align: center; margin: 10px 0px 0px; cursor: pointer;"                    
                   [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"

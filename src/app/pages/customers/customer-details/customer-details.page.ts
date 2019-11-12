@@ -3,6 +3,7 @@ import { PopoverController } from '@ionic/angular';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
+import { GlobalFunctionService } from '../../../services/global-function.service';
 
 import { customerInfo, customerDataList, currCustPage } from '../customers.page';
 import { SubscriberDetailsPage } from '../../subscriptions/subscriber-details/subscriber-details.page';
@@ -137,10 +138,10 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   ngOnInit() {
-    console.log('customerList: ' + JSON.stringify(this.customerList, null, " "));
     this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
     this.selectedCustomerInfo = customerInfo;
-    console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
+    // console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
+    this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
@@ -150,11 +151,26 @@ export class CustomerDetailsPage implements OnInit {
   }
 
   /**
+   * This method is to append element into object that contain formatted date time
+   * @param {*} obj This property will pass the customer details data into method
+   * @returns
+   * @memberof CustomerDetailsPage
+   */
+  addDateFormat(obj) {
+    const addDateFormat = {
+      'FULL_LAST_BILLING_DATE': new GlobalFunctionService().changeDateFormatFull(this.selectedCustomerInfo.LAST_BILLING_DATE),
+      'FULL_NEXT_BILLING_DATE': new GlobalFunctionService().changeDateFormatFull(this.selectedCustomerInfo.NEXT_BILLING_DATE),
+    };
+    return Object.assign(obj, addDateFormat);
+  }
+
+  /**
    * This method is to set the value of selected customer details in the property.
    * And it will be executed when user select customer in client list
    * @memberof CustomerDetailsPage
    */
   onChangeSelectedCustomer(changedCustomerItem) {
+    changedCustomerItem = this.addDateFormat(changedCustomerItem);
     this.selectedCustomerInfo = changedCustomerItem;
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);

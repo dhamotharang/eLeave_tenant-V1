@@ -132,6 +132,25 @@
         }
     }
 
+    .emptyButtonsSetting {
+        // display: flex;
+        // margin: 5px 20px;
+        // ion-button {            
+            text-transform: capitalize;
+            width: 100px;
+            height: 30px;
+            font-size: var(--eleave-body-size9);
+            margin: 11px 3px 2px;
+        // }
+    }
+
+    .emptySubscriptions {
+        display: grid;
+        justify-items: center;
+        margin: 30px;
+        color: #808495;
+    }
+
     .columnStatusActive {
         color: var(--eleave-color-success); 
     }
