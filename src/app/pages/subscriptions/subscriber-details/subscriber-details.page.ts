@@ -6,7 +6,7 @@ import { SearchDataService } from '../../../services/search-data.service';
 
 import {customersDummiesData} from '../../../app.component';
 
-import { selectedSubscribersInfo, currSubsPage } from '../subscriptions.page';
+import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
@@ -60,8 +60,9 @@ export class SubscriberDetailsPage implements OnInit {
    * This property is to get list of subscribers details
    * @memberof SubscriberDetailsPage
    */
-  public subscribersDetails = customersDummiesData;
-
+  // public subscribersDetails = customersDummiesData;
+  public subscribersDetails = subscribersObjGlobal;
+  
   /**
    * This property is to get selected subscriber data
    * @memberof SubscriberDetailsPage
@@ -123,13 +124,16 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   ngOnInit() {
+    console.log('subscribersDetails: ' + JSON.stringify(this.subscribersDetails, null, " "));
     this.subscriberInfo = selectedSubscribersInfo;
+    console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     subscriberUpdateInfo = this.subscriberInfo;
-    this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.lastBillingOn,
-      this.subscriberInfo.nextBillingOn);
-    this.updateProgressBar(this.subscriberInfo.employeeNumber, this.subscriberInfo.employeeQuota);
+    this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.LAST_BILLING_DATE,
+      this.subscriberInfo.NEXT_BILLING_DATE);
+    this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
     subsDtlPopoverCtrlr = this.popoverController;
-    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
+    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, 10);
+    // this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
   }
 
   /**
@@ -201,8 +205,8 @@ export class SubscriberDetailsPage implements OnInit {
   selectedClient(updateSubscriberInfo) {
     this.subscriberInfo = updateSubscriberInfo;
     subscriberUpdateInfo = this.subscriberInfo;
-    this.subscriberDetailsDaysLeft = this.dateDifference(updateSubscriberInfo.lastBillingOn, updateSubscriberInfo.nextBillingOn);
-    this.updateProgressBar(updateSubscriberInfo.employeeNumber, updateSubscriberInfo.employeeQuota);
+    this.subscriberDetailsDaysLeft = this.dateDifference(updateSubscriberInfo.LAST_BILLING_DATE, updateSubscriberInfo.NEXT_BILLING_DATE);
+    this.updateProgressBar(updateSubscriberInfo.USED_QUOTA, updateSubscriberInfo.QUOTA);
   }
 
   /**
@@ -228,10 +232,10 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   onSearchSubsDtls(event) {
-    this.subscribersDetails = customersDummiesData;
+    this.subscribersDetails = subscribersObjGlobal;
     this.subscribersDetails = (event.detail.value.length > 0 ) ?
-                          this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'subscription') :
-                            this.subscribersDetails;
+      this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'COMPANY_NAME') :
+        this.subscribersDetails;
     this.pageChanged(1);
   }
 }

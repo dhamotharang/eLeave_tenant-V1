@@ -169,7 +169,8 @@
                   </ion-label>
                   <ion-label style="color: var(--eleave-header-color);">{{card.EMAIL}}</ion-label>
                   <ion-card-subtitle>
-                    <span>{{card.PLAN}} | {{card.subscription}}</span>
+                    <span>{{card.PLAN}}</span>
+                    <!-- <span>{{card.PLAN}} | {{card.subscription}}</span> -->
                     <!-- <span [ngSwitch]="card.subsStatus" style="text-transform: capitalize;"> -->
                     <span [ngSwitch]="card.STATUS" style="text-transform: capitalize;">
                       <p *ngSwitchCase="1" class="columnStatusActive">

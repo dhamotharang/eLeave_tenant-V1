@@ -3,7 +3,7 @@ import { Component, OnInit} from '@angular/core';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 
-import {customersDummiesData} from '../../app.component';
+// import {customersDummiesData} from '../../app.component';
 
 import { APIService } from '../../services/shared-service/api.service';
 import { SearchDataService } from '../../services/search-data.service';
@@ -22,6 +22,9 @@ export let selectedSubscribersInfo;
  * @class SubscriptionsPage
  */
 export let currSubsPage;
+
+
+export let subscribersObjGlobal;
 
 /**
  * This component is to set up Subscriptions page
@@ -60,7 +63,7 @@ export class SubscriptionsPage implements OnInit {
    * @memberof SubscriptionsPage
    */
   // public subscribers = customersDummiesData;
-  public subscribers = customersDummiesData;
+  public subscribers;
 
   /**
    * This property is to set values of pagination configurations
@@ -70,7 +73,7 @@ export class SubscriptionsPage implements OnInit {
   configPageSubs: any;
 
   public subscribersObj;
-  private subscribersObjGlobal;
+  // private subscribersObjGlobal;
   public subscribersObjLength;
   public activationDateDisplay;
   public globalFn = new GlobalFunctionService();
@@ -106,7 +109,7 @@ export class SubscriptionsPage implements OnInit {
         // this.subscribers = [];
         this.subscribers = custObj;
         this.subscribersObjLength = this.subscribers.length;
-        this.subscribersObjGlobal = custObj;
+        subscribersObjGlobal = custObj;
         console.log('dataaa: ' + JSON.stringify(this.subscribers, null, " "));
         // this.activationDateDisplay = new GlobalFunctionService().changeDateFormat(this.subscribers.CREATION_TS); 
         // const dt1 = new GlobalFunctionService().changeDateFormat(this.subscribers.ACTIVATION_DATE); 
@@ -171,7 +174,7 @@ export class SubscriptionsPage implements OnInit {
    * @memberof SubscriptionsPage
    */
   onSearchSubs(event) {
-    this.subscribers = this.subscribersObjGlobal;
+    this.subscribers = subscribersObjGlobal;
     this.subscribers = (event.detail.value.length > 0) ?
       this.subsSearch.filerSearch(event.detail.value, this.subscribers, 'FULLNAME') :
       this.subscribers;
