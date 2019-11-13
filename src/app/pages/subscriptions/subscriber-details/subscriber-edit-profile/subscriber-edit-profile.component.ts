@@ -104,6 +104,7 @@ export class SubscriberEditProfileComponent implements OnInit {
       'currency': this.selectedClientInfo['CURRENCY'],
       'salesperson': this.selectedClientInfo['SALESPERSON'],
       'customerGuid': this.selectedClientInfo['CUSTOMER_GUID'],
+      'customerLabel': this.selectedClientInfo['CUSTOMER_LABEL'],
     };
     this.saveUpdate(reqSaveObj);
     this.dissmissPopup();

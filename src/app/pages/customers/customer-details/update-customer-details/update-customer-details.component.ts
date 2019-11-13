@@ -127,6 +127,8 @@ export class UpdateCustomerDetailsComponent implements OnInit {
       'currency': this.selectedUpdateCustomerInfo['CURRENCY'],
       'salesperson': this.selectedUpdateCustomerInfo['SALESPERSON'],
       'customerGuid': this.selectedUpdateCustomerInfo['CUSTOMER_GUID'],
+      'customerLabel': this.selectedUpdateCustomerInfo['CUSTOMER_LABEL'],
+      
     }
     this.setUpdateCustomer(custObj);
     this.dissmissPopup();

@@ -79,7 +79,8 @@ export class UpdateUserNumbersComponent implements OnInit {
       'recurrInterval': this.selectedSubscriberInfo['RECURR_INTERVAL'],
       'recurrIntervalVal': this.selectedSubscriberInfo['RECURR_INTERVAL_VAL'],
       'billingCycle': this.selectedSubscriberInfo['BILLING_CYCLE'],
-      'subscriptionGuid': this.selectedSubscriberInfo['SUBSCRIPTION_GUID']
+      'subscriptionGuid': this.selectedSubscriberInfo['SUBSCRIPTION_GUID'],
+      'subscriptionLabel': this.selectedSubscriberInfo['SUBSCRIPTION_LABEL'],
     };
 
     this.updateUserQuota(reqUpdate);
