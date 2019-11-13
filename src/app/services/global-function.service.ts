@@ -51,6 +51,13 @@ export class GlobalFunctionService {
     return dateVal.getDate() + ' ' + monthValSimple[dateVal.getMonth()] + ' ' + dateVal.getFullYear(); 
   }
 
+  changeDateFormatSimpleDDMMYYYY(dateValue) {
+    const dateVal = new Date(dateValue);
+    const ddVal = (dateVal.getDate() < 10) ? '0' + dateVal.getDate() : dateVal.getDate();
+    const monthValSimple = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return ddVal + ' ' + monthValSimple[dateVal.getMonth()] + ' ' + dateVal.getFullYear();
+  }
+
   changeDateFormatYYYYMMDD(dateValue) {
     const dateVal = new Date(dateValue); // 2019 - 12 - 02
     const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;

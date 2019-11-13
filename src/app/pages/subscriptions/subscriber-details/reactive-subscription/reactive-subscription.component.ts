@@ -188,13 +188,8 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   dateFormatOnCard(activatedOn, expiredOn) {
-    const ddStart = (activatedOn.getDate() < 10) ? '0' + activatedOn.getDate() : activatedOn.getDate();
-    const ddEnd = (expiredOn.getDate() < 10) ? '0' + expiredOn.getDate() : expiredOn.getDate();
-    const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-
-    this.subsActivatedDate = ddStart + ' ' + months[activatedOn.getMonth()] + ' ' + activatedOn.getFullYear();
-    this.subsExpDate = ddEnd + ' ' + months[expiredOn.getMonth()] + ' ' + expiredOn.getFullYear();
-
+    this.subsActivatedDate = this.reactiveGlobalFn.changeDateFormatSimpleDDMMYYYY(activatedOn);
+    this.subsExpDate = this.reactiveGlobalFn.changeDateFormatSimpleDDMMYYYY(expiredOn);
   }
 
   /**
@@ -262,6 +257,10 @@ export class ReactiveSubscriptionComponent implements OnInit {
     this.sendReqPatchUpdateSubs(obj).subscribe(
       respondData => {
         this.reactiveInfoPopup.alertPopup('You have successfully reactive subscription!', 'alert-success');
+      }, 
+      error => {
+        console.log('error: ' + JSON.stringify(error, null, " "));
+        console.log('error _body: ' + JSON.stringify(error._body, null, " "));
       }
     );
   }
