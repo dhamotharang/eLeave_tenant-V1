@@ -21,7 +21,9 @@ import {subscriberUpdateInfo, subsDtlPopoverCtrlr } from '../subscriber-details.
 export class ReactiveSubscriptionComponent implements OnInit {
 
   /**
-   * Creates an instance of ReactiveSubscriptionComponent.
+   *Creates an instance of ReactiveSubscriptionComponent.
+   * @param {APIService} reactiveAPISvs This property is to get methods from APIService
+   * @param {InfoPopupService} reactiveInfoPopup This property is to get methods from InfoPopupService
    * @memberof ReactiveSubscriptionComponent
    */
   constructor(
@@ -92,8 +94,16 @@ export class ReactiveSubscriptionComponent implements OnInit {
    */
   public currUser;
 
+  /**
+   * This property is to bind reactive subscriptions object
+   * @memberof ReactiveSubscriptionComponent
+   */
   public reactiveSubsData;
 
+  /**
+   * This property is to get methods from GlobalFunctionService
+   * @memberof ReactiveSubscriptionComponent
+   */
   public reactiveGlobalFn = new GlobalFunctionService;
 
   /**
@@ -106,9 +116,6 @@ export class ReactiveSubscriptionComponent implements OnInit {
     this.cycleNo = subscriberUpdateInfo.RECURR_INTERVAL_VAL;
     this.cycleEvery = subscriberUpdateInfo.RECURR_INTERVAL; 
     this.reactiveSubsData = subscriberUpdateInfo;
-    console.log('reactiveSubsData: ' + JSON.stringify(this.reactiveSubsData, null, " "));
-    // this.cycleNo = this.reactiveSubsData.RECURR_INTERVAL_VAL;
-    // this.cycleEvery = this.reactiveSubsData.RECURR_INTERVAL; 
   }
 
   /**
@@ -195,21 +202,37 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   saveReactiveSubsChanges() {
+    this.processData();
+    // check if quota is < employee quota then notify user error
+    this.patchUpdateSubs(this.prepareObj());
+    document.getElementById('reactivesubsnotice').hidden = true;
+    this.dissmissReactiveSubsPopup();
+  }
+
+  /**
+   * This method is to assign updated data to UI elements
+   * @memberof ReactiveSubscriptionComponent
+   */
+  processData() {
     this.dateFormatOnCard(this.subsActivatedDate, this.subsNextBillDate);
     subscriberUpdateInfo.FULL_ACTIVATION_DATE = this.getReactiveDate();
     subscriberUpdateInfo.FULL_LAST_BILLING_DATE = this.reactiveGlobalFn.changeDateFormatFull(this.subsActivatedDate);
     subscriberUpdateInfo.FULL_NEXT_BILLING_DATE = this.reactiveGlobalFn.changeDateFormatFull(this.subsExpDate);
-    subscriberUpdateInfo.RECURR_INTERVAL_VAL = this.cycleNo,
-    subscriberUpdateInfo.RECURR_INTERVAL = this.cycleEvery,
+    subscriberUpdateInfo.RECURR_INTERVAL_VAL = this.cycleNo;
+    subscriberUpdateInfo.RECURR_INTERVAL = this.cycleEvery;
     subscriberUpdateInfo.QUOTA = this.currUser;
-    console.log('saveReactiveSubsChanges subscriberUpdateInfo: ' + JSON.stringify(subscriberUpdateInfo, null, " "));
-    console.log('saveReactiveSubsChanges reactiveSubsData: ' + JSON.stringify(this.reactiveSubsData, null, " "));
-    // check if quota is < employee quota then notify user error
-    const saveData = {
+  }
+
+  /**
+   * This method is to assign data to object to be passed in API
+   * @returns
+   * @memberof ReactiveSubscriptionComponent
+   */
+  prepareObj() {
+    return {
       'customerGuid': this.reactiveSubsData['CUSTOMER_GUID'],
       'subscriptionPlan': this.reactiveSubsData['PLAN'],
       'subscriptionStatus': this.reactiveSubsData['STATUS'],
-      // 'subscriptionQuota': this.reactiveSubsData['QUOTA'],
       'subscriptionQuota': this.currUser,
       'usedQuota': this.reactiveSubsData['USED_QUOTA'],
       'activationDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate),
@@ -220,28 +243,39 @@ export class ReactiveSubscriptionComponent implements OnInit {
       'billingCycle': this.reactiveSubsData['BILLING_CYCLE'],
       'subscriptionGuid': this.reactiveSubsData['SUBSCRIPTION_GUID'],
     };
-    console.log('saveReactiveSubsChanges saveData: ' + JSON.stringify(saveData, null, " "));
-    this.patchUpdateSubs(saveData);
-    document.getElementById('reactivesubsnotice').hidden = true;
-    this.dissmissReactiveSubsPopup();
   }
-
+  /**
+   * This method is to get current date
+   * @returns
+   * @memberof ReactiveSubscriptionComponent
+   */
   getReactiveDate() {
     return this.reactiveGlobalFn.changeDateFormatFull(new Date());
-    
   }
+
+  /**
+   * This method is to get returned object from API then processthe output
+   * @param {*} obj This parameter is to pass request object to API
+   * @memberof ReactiveSubscriptionComponent
+   */
   patchUpdateSubs(obj) {
     this.sendReqPatchUpdateSubs(obj).subscribe(
       respondData => {
-        console.log('sendReqPatchUpdateSubs: ' + JSON.stringify(respondData, null, " "));
         this.reactiveInfoPopup.alertPopup('You have successfully reactive subscription!', 'alert-success');
       }
     );
   }
 
+  /**
+   * This method is send request to API for update reactive subscriptions
+   * @param {*} obj This parameter is to pass request object to API
+   * @returns {Observable<any>}
+   * @memberof ReactiveSubscriptionComponent
+   */
   sendReqPatchUpdateSubs(obj): Observable<any> {
     return this.reactiveAPISvs.patchApi(obj, '/api/admin/subscription');
   }
+
   /**
    * This method is to close this popup
    * @memberof ReactiveSubscriptionComponent
