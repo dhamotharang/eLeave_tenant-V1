@@ -31,8 +31,8 @@
                   <ion-item-group class="subsDtlsListHorizontalContent subscriberListStyle" style="display: flex; height: auto; white-space: nowrap;">
                     <!-- <ion-item lines="none"> -->
                       <ion-list (click)="selectedClient(subscribersList)"
-                      [ngStyle]="{'color': subscribersList.NICKNAME === subscriberInfo.NICKNAME ? '#3b86ff' : '#4d4f5c'}">
-                        <!-- <ion-label>{{subscribersList.subscription}}</ion-label> -->
+                      [ngStyle]="{'color': subscribersList.SUBSCRIPTION_LABEL === subscriberInfo.SUBSCRIPTION_LABEL ? '#3b86ff' : '#4d4f5c'}">
+                        <ion-label>{{subscribersList.SUBSCRIPTION_LABEL}}</ion-label>
                         <ion-label>{{subscribersList.COMPANY_NAME}}</ion-label>
                       </ion-list>
                     <!-- </ion-item> -->
@@ -126,7 +126,7 @@
                   </ion-label>
                 </ion-item>
                 <ion-item-group class="subscriberOverviewStyle adminLabelStyle">
-                  <ion-label>Customer ID: {{subscriberInfo.clientID}}</ion-label>            
+                  <ion-label>Customer ID: {{subscriberInfo.CUSTOMER_LABEL}}</ion-label>            
                   <ion-label>Currency: {{subscriberInfo.CURRENCY}}</ion-label>             
                 </ion-item-group>
               

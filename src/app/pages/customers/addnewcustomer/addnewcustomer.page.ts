@@ -92,20 +92,8 @@ export class AddnewcustomerPage implements OnInit {
    */
   public newSubsForm = {};
 
-  // public addCustValidationMessages = {
-  //   'fullname': [
-  //     { type: 'required', message: 'Name is required.' },
-  //   ],
-  //   'companyName': [
-  //     { type: 'required', message: 'Company name is required.' }
-  //   ],
-  //   'email': [
-  //     { type: 'required', message: 'Email is required.' }
-  //   ],
-  //   'contactNo': [
-  //     { type: 'required', message: 'Contact no is required.' }
-  //   ]
-  // }
+  public custLabelId = 'CUS-' + Date.now();
+  public subLabelId = 'SUB-' + Date.now();
 
   /**
    * This method is to set inital properties value.
@@ -186,10 +174,11 @@ export class AddnewcustomerPage implements OnInit {
   postCustInfo() {
     this.postNewCust().subscribe(
       data => {
-        Object.assign(this.newSubsForm, { customerGuid: data[0].CUSTOMER_GUID, subscriptionPlan: 'Standard',
-            subscriptionStatus: 1, usedQuota: 0,  recurrInterval: this.custCycleEvery,
-            recurrIntervalVal: this.custCycleNo, activationDate: this.custStartSubsDate, lastBillingDate: this.custStartSubsDate,
-            nextBillingDate: this.custEndSubsDate,billingCycle: 0});
+        Object.assign(this.newSubsForm, {
+          subscriptionLabel: this.subLabelId, customerGuid: data[0].CUSTOMER_GUID,
+          subscriptionPlan: 'Standard', subscriptionStatus: 1, usedQuota: 0,  recurrInterval: this.custCycleEvery,
+          recurrIntervalVal: this.custCycleNo, activationDate: this.custStartSubsDate,
+          lastBillingDate: this.custStartSubsDate, nextBillingDate: this.custEndSubsDate, billingCycle: 0});
 
         this.postNewSubs().subscribe(data => {this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');});
       }
@@ -219,7 +208,7 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   async saveAddCustomer() {
-    Object.assign(this.newCustForm, { currency: 'MYR' });
+    Object.assign(this.newCustForm, { currency: 'MYR', customerLabel: this.custLabelId});
     await this.postCustInfo();
 
   }

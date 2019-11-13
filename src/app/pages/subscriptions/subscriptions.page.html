@@ -97,8 +97,8 @@
             </ion-col>
             <ion-col style="text-align: left;">
               <div>
-                SUB-000000001
-                <!-- {{table.subscription}} -->
+                <!-- SUB-000000001 -->
+                {{table.SUBSCRIPTION_LABEL}}
               </div>
             </ion-col>
             <ion-col size="3" style="text-align: left;">
@@ -169,7 +169,7 @@
                   </ion-label>
                   <ion-label style="color: var(--eleave-header-color);">{{card.EMAIL}}</ion-label>
                   <ion-card-subtitle>
-                    <span>{{card.PLAN}}</span>
+                    <span>{{card.PLAN}} | {{card.SUBSCRIPTION_LABEL}}</span>
                     <!-- <span>{{card.PLAN}} | {{card.subscription}}</span> -->
                     <!-- <span [ngSwitch]="card.subsStatus" style="text-transform: capitalize;"> -->
                     <span [ngSwitch]="card.STATUS" style="text-transform: capitalize;">
