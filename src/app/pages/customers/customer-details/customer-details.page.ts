@@ -176,7 +176,7 @@ export class CustomerDetailsPage implements OnInit {
     this.selectedCustomerInfo = changedCustomerItem;
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
-    this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
+    // this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
   }
