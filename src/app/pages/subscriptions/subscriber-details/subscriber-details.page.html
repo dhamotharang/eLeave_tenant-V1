@@ -148,9 +148,18 @@
 
                 <ion-item-group id="reactivesubsnotice" hidden class="subscriberOverviewStyle subsReactivationNotice">
                   <ion-icon name="warning"></ion-icon>
-                  <ion-text>
-                      Please fill in the subscription details upon reactivation of your subscriptions.
-                  </ion-text>
+                  <ion-list style="display: grid;">
+                    <ion-text>
+                      {{inactiveMsg}}
+                    </ion-text>
+                    <ion-text id="reasonTextId">
+                      Reason: {{inactiveReason}}
+                    </ion-text>
+                    <ion-text>
+                      Please fill in the subscription details upon reactivation of this subscription.
+                    </ion-text>
+
+                  </ion-list>
                 </ion-item-group>
               </ion-item-group>
             </ion-col>

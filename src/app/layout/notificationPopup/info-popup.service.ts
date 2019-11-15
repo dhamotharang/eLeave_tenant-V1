@@ -38,4 +38,31 @@ export class InfoPopupService {
       alert.dismiss();
     }, 2500);
   }
+
+  async confirmationPopup(msg, cssTitle) {
+    const confirm = await this.alertController.create({
+      header: 'Confirm!',
+      cssClass: cssTitle,
+      message: msg,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Confirm Cancel');
+            return false;
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            // confirm.dismiss();
+            return true;
+          }
+        }
+      ]
+    });
+
+    await confirm.present();
+  }
 }

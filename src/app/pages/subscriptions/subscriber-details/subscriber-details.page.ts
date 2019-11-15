@@ -1,8 +1,10 @@
 import { Component, OnInit, } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
+import { GlobalFunctionService } from '../../../services/global-function.service';
 
 import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
@@ -50,9 +52,11 @@ export class SubscriberDetailsPage implements OnInit {
   constructor(
     private popoverController: PopoverController,
     private subsDtlsSearch: SearchDataService,
-    public subsDtlsPaging: PaginationServiceService
+    public subsDtlsPaging: PaginationServiceService,
+    // private subsDtlsInfoPopup: InfoPopupService
   ) { }
 
+  private subsDtlsAlert = new AlertController;
   /**
    * This property is to get list of subscribers details
    * @memberof SubscriberDetailsPage
@@ -82,19 +86,27 @@ export class SubscriberDetailsPage implements OnInit {
    * This property is to set the subscriptions status of subscriber
    * @memberof SubscriberDetailsPage
    */
-  public subsToggle = false;
+  public subsToggle;
 
   /**
    * This property is to get previous status of subscriptions
    * @memberof SubscriberDetailsPage
    */
-  public prevToggleVal = true;
+  public prevToggleVal;
 
   /**
    * This property is to set values of pagination's configurations
    * @memberof SubscriberDetailsPage
    */
   configPageSubDtls: any;
+
+  private confirmOpt;
+
+  private subDtlsGlobalFn = new GlobalFunctionService;
+
+  public inactiveMsg = '';
+
+  public inactiveReason = '';
 
   /**
    * This property is to set slides configurations
@@ -122,13 +134,31 @@ export class SubscriberDetailsPage implements OnInit {
    */
   ngOnInit() {
     this.subscriberInfo = selectedSubscribersInfo;
+    this.subsToggle = (this.subscriberInfo.STATUS === 1) ? true : false;
+    this.prevToggleVal = !this.subsToggle;
     subscriberUpdateInfo = this.subscriberInfo;
-    this.subscriberDetailsDaysLeft = this.dateDifference(this.subscriberInfo.LAST_BILLING_DATE,
-      this.subscriberInfo.NEXT_BILLING_DATE);
+    this.checkDayLeft();
     this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
     subsDtlPopoverCtrlr = this.popoverController;
     this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, 10);
     // this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
+  }
+
+
+  checkDayLeft() {
+    this.subscriberDetailsDaysLeft = this.subDtlsGlobalFn.dateDiff(this.subscriberInfo.NEXT_BILLING_DATE);
+    if (this.subscriberDetailsDaysLeft < 1) {
+      this.prevToggleVal = true;
+      this.subsToggle = false;
+      document.getElementById('reasonTextId').hidden = true;
+      this.inactiveMsg = 'This subscription was inactivated by system due to expired subscription. ';
+      // this.inactiveReason = 'Expired subscription';
+      document.getElementById('reactivesubsnotice').hidden = false;
+    } else {
+      this.prevToggleVal = false;
+      this.subsToggle = true;
+      document.getElementById('reactivesubsnotice').hidden = true;
+    }
   }
 
   /**
@@ -138,29 +168,14 @@ export class SubscriberDetailsPage implements OnInit {
    */
   checkToggle() {
     if (this.subsToggle !== this.prevToggleVal) {
-      if ((this.prevToggleVal === true) && (this.subsToggle === false)) {
-        document.getElementById('reactivesubsnotice').hidden = false;
-        this.openSubsPopover(Event, 'ReactiveSubscriptionComponent');
+      if ((this.prevToggleVal === false) && (this.subsToggle === true)) {
+        this.confirmDeactive();
       } else {
         document.getElementById('reactivesubsnotice').hidden = true;
+        this.openSubsPopover(Event, 'ReactiveSubscriptionComponent');
       }
       this.prevToggleVal = this.subsToggle;
     }
-  }
-
-  /**
-   * This method is to calcualte date difference between last billing date
-   * and next billing date. If the value is < 0 then set subsription's
-   * status to inactive
-   * @memberof SubscriberDetailsPage
-   */
-  dateDifference(startdt, enddt) {
-    const dropdt: number = Number(new Date(enddt));
-    const pickdt: number = Number(new Date(startdt));
-    let daysleft: number = (dropdt - pickdt) / (24 * 3600 * 1000);
-    daysleft = isNaN(daysleft) ? daysleft = 0 : daysleft ;
-    this.subsToggle = (daysleft < 0) ? false : true;
-    return daysleft;
   }
 
   /**
@@ -200,7 +215,7 @@ export class SubscriberDetailsPage implements OnInit {
   selectedClient(updateSubscriberInfo) {
     this.subscriberInfo = updateSubscriberInfo;
     subscriberUpdateInfo = this.subscriberInfo;
-    this.subscriberDetailsDaysLeft = this.dateDifference(updateSubscriberInfo.LAST_BILLING_DATE, updateSubscriberInfo.NEXT_BILLING_DATE);
+    this.subscriberDetailsDaysLeft = this.checkDayLeft();
     this.updateProgressBar(updateSubscriberInfo.USED_QUOTA, updateSubscriberInfo.QUOTA);
   }
 
@@ -219,6 +234,51 @@ export class SubscriberDetailsPage implements OnInit {
    */
   pageChanged(event) {
     this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, event, this.subscribersDetails.length);
+  }
+
+  async confirmDeactive() {
+    // this.subsDtlsInfoPopup.confirmationPopup('Are you sure want to deactive this subscription?', 'alert-warning').finally();
+    const confirmAlert = await this.subsDtlsAlert.create({
+      header: 'Confirmation',
+      // cssClass: 'al',
+      message: 'Are you sure want to deactive this subscription? Please fill in your reason',
+      inputs: [
+        {
+          name: 'inactiveSubscription',
+          type: 'text',
+          placeholder: 'Reason...'
+
+        }
+      ],
+      cssClass: 'alert-warning-confirm',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Confirm Cancel');
+            this.prevToggleVal = false;
+            this.subsToggle = true;
+            this.confirmOpt = false;
+
+          }
+        }, {
+          text: 'Okay',
+          handler: (data) => {
+            console.log('Confirm Okay: ' + JSON.stringify(data, null, " "));
+            console.log('inactiveSubscription: ' + JSON.stringify(data.inactiveSubscription, null, " "));
+            this.inactiveMsg = 'This subscription was inactivated by user. ';
+            this.inactiveReason = data.inactiveSubscription;
+            document.getElementById('reasonTextId').hidden = false;
+            document.getElementById('reactivesubsnotice').hidden = false;
+            this.confirmOpt = true;
+          }
+        }
+      ]
+    });
+
+    await confirmAlert.present();
+
   }
 
   /**

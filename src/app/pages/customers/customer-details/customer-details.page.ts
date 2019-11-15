@@ -131,6 +131,7 @@ export class CustomerDetailsPage implements OnInit {
    */
   public searchCust = '';
 
+  private custDtlsGlobalFn = new GlobalFunctionService();
 
   /**
    * This method is to set initial value of properties.
@@ -143,7 +144,8 @@ export class CustomerDetailsPage implements OnInit {
     // console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
     this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
     customerUpdateInfo = this.selectedCustomerInfo;
-    this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
+    this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
+    // this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
     popovrCtrlr = this.popoverController;
@@ -158,8 +160,8 @@ export class CustomerDetailsPage implements OnInit {
    */
   addDateFormat(obj) {
     const addDateFormat = {
-      'FULL_LAST_BILLING_DATE': new GlobalFunctionService().changeDateFormatFull(this.selectedCustomerInfo.LAST_BILLING_DATE),
-      'FULL_NEXT_BILLING_DATE': new GlobalFunctionService().changeDateFormatFull(this.selectedCustomerInfo.NEXT_BILLING_DATE),
+      'FULL_LAST_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.LAST_BILLING_DATE),
+      'FULL_NEXT_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.NEXT_BILLING_DATE),
     };
     return Object.assign(obj, addDateFormat);
   }
@@ -173,6 +175,7 @@ export class CustomerDetailsPage implements OnInit {
     changedCustomerItem = this.addDateFormat(changedCustomerItem);
     this.selectedCustomerInfo = changedCustomerItem;
     customerUpdateInfo = this.selectedCustomerInfo;
+    this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
