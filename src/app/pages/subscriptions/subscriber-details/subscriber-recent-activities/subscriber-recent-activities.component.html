@@ -9,26 +9,33 @@
   </ion-header>
 
   <!-- History Body -->
-  <ion-list class="bodyStyle">
-    <ion-item-group *ngFor="let subscriberHistory of subscriberData">
+  <ion-list class="bodyStyle" *ngIf="subscriberHistoryDataLength > 0">
+    <ion-item-group *ngFor="let subscriberHistory of subscriberHistoryData">
       <!-- <ion-item-group *ngFor="let customerHistory of customerData"> -->
       <ion-item lines="none">
-        <ion-col>
+        <ion-item-group class="iconStyle">
           <ion-icon src="../../../../../assets/icon/customer/icon-small-down.svg"></ion-icon>
-        </ion-col>
-        <ion-col>
+        </ion-item-group>
+        <ion-item-group>
           <ion-label>
-            {{subscriberHistory.date}} - {{subscriberHistory.time}}
+            <!-- {{subscriberHistory.date}} - {{subscriberHistory.time}} -->
+             {{subscriberHistory.HIST_TIME}}
           </ion-label>
           <ion-label>
-            {{subscriberHistory.description}}
+            {{subscriberHistory.MESSAGE}}
+            <!-- {{subscriberHistory.description}} -->
           </ion-label>
           <ion-label style="font-weight: normal;">
-            by {{subscriberHistory.pic}}
+            by {{subscriberHistory.CREATOR_DATA.FULLNAME}}
+            <!-- by {{subscriberHistory.pic}} -->
           </ion-label>
-        </ion-col>
+        </ion-item-group>
       </ion-item>
     </ion-item-group>
+  </ion-list>
+  <ion-list class="bodyStyle" *ngIf="subscriberHistoryDataLength < 1"
+   style=" font-size: 11px; white-space: pre-wrap; color: var(--eleave-body-empty-color); display: flex; justify-content: center;">
+    No recent activities
   </ion-list>
 
 </ion-content>

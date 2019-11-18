@@ -1,4 +1,10 @@
+import { Observable } from '../../../../../../node_modules/rxjs';
+
 import { Component, OnInit } from '@angular/core';
+
+import { APIService } from '../../../../services/shared-service/api.service';
+import { GlobalFunctionService } from '../../../../services/global-function.service';
+
 import { customerUpdateInfo } from './../customer-details.page';
 
 /**
@@ -18,7 +24,9 @@ export class CustomerHistoryComponent implements OnInit {
    * Creates an instance of CustomerHistoryComponent.
    * @memberof CustomerHistoryComponent
    */
-  constructor() { }
+  constructor(
+    private custHistAPISvs: APIService,
+  ) { }
 
   /**
    * This property is to bind customer data's history
@@ -26,6 +34,7 @@ export class CustomerHistoryComponent implements OnInit {
    */
   public customerData;
 
+  public customerDataLength;
 
   /**
    * This method is to set initial value of the properties.
@@ -33,7 +42,35 @@ export class CustomerHistoryComponent implements OnInit {
    * @memberof CustomerHistoryComponent
    */
   ngOnInit() {
-    this.customerData = customerUpdateInfo.history;
+    console.log('customerUpdateInfo: ' + JSON.stringify(customerUpdateInfo, null, " "));
+    // this.customerData = customerUpdateInfo.history;
+    this.getCustHistoryList();
   }
 
+  getCustHistoryList() {
+    this.reqAPICustHistoryList().subscribe(
+      dataCustHist => {
+        // console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
+        // dataCustHist = new GlobalFunctionService().appendArrayChangedDateFormat(dataCustHist);
+        // console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
+
+        this.customerData = dataCustHist;
+        this.customerDataLength = dataCustHist.length;
+        dataCustHist.map(this.convertCustHistDataFormat);
+        console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
+
+      }
+    );
+  }
+
+  convertCustHistDataFormat(obj) {
+    // const testDate = new GlobalFunctionService().changeDateFormatFull(obj.CREATION_TS);
+    // const testTime = new GlobalFunctionService().getHoursFormatAMPM(obj.CREATION_TS);
+    // return Object.assign(obj, { 'HIST_TIME': testDate + ' - ' + testTime });
+    return new GlobalFunctionService().appendArrayChangedDateFormat(obj);
+  }
+
+  reqAPICustHistoryList(): Observable<any> {
+    return this.custHistAPISvs.getApi('/api/admin/activity-log/' + customerUpdateInfo.SUBSCRIPTION_GUID);
+  }
 }

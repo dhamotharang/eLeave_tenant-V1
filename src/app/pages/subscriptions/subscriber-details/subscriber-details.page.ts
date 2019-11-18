@@ -134,6 +134,7 @@ export class SubscriberDetailsPage implements OnInit {
    */
   ngOnInit() {
     this.subscriberInfo = selectedSubscribersInfo;
+    console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     this.subsToggle = (this.subscriberInfo.STATUS === 1) ? true : false;
     this.prevToggleVal = !this.subsToggle;
     subscriberUpdateInfo = this.subscriberInfo;
@@ -151,7 +152,7 @@ export class SubscriberDetailsPage implements OnInit {
       this.prevToggleVal = true;
       this.subsToggle = false;
       document.getElementById('reasonTextId').hidden = true;
-      this.inactiveMsg = 'This subscription was inactivated by system due to expired subscription. ';
+      this.inactiveMsg = 'This subscription was deactivated by system due to expired subscription. ';
       // this.inactiveReason = 'Expired subscription';
       document.getElementById('reactivesubsnotice').hidden = false;
     } else {
@@ -203,6 +204,24 @@ export class SubscriberDetailsPage implements OnInit {
                    (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
                     ReactiveSubscriptionComponent,
       cssClass: 'pop-over-style'
+    });
+
+
+    popover.onDidDismiss().then((data) => {
+      if (compName === 'ReactiveSubscriptionComponent') {
+        console.log('onDidDismiss data: ' + JSON.stringify(data, null, " "));
+        // this.prevToggleVal = !data;
+        // this.subsToggle = data;
+        // this.confirmOpt = !data;
+        this.prevToggleVal = true;
+        this.subsToggle = false;
+        this.confirmOpt = true;
+        
+        
+
+      } else {
+        console.log('onDidDismiss no need data');
+      }
     });
 
     return await popover.present();
@@ -267,7 +286,7 @@ export class SubscriberDetailsPage implements OnInit {
           handler: (data) => {
             console.log('Confirm Okay: ' + JSON.stringify(data, null, " "));
             console.log('inactiveSubscription: ' + JSON.stringify(data.inactiveSubscription, null, " "));
-            this.inactiveMsg = 'This subscription was inactivated by user. ';
+            this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
             this.inactiveReason = data.inactiveSubscription;
             document.getElementById('reasonTextId').hidden = false;
             document.getElementById('reactivesubsnotice').hidden = false;

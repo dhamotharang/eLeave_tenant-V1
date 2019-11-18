@@ -76,6 +76,18 @@ export class GlobalFunctionService {
     return dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00";
   }
 
+  getHoursFormatAMPM(dateValue) {
+    const dateVal = new Date(dateValue);
+    return dateVal.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+  }
+
+  appendArrayChangedDateFormat(obj) {
+    return Object.assign(obj, { 
+      'HIST_TIME': this.changeDateFormatYYYYMMDD(obj.CREATION_TS) +
+        ' - ' + this.getHoursFormatAMPM(obj.CREATION_TS) 
+    });
+  }
+  
   /**
    * This method is to get days difference between next billing date and current date
    * @param {*} nextBillDate This parameter is a next billing date to be passed

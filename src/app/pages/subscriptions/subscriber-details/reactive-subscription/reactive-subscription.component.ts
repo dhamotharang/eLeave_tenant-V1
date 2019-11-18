@@ -283,4 +283,8 @@ export class ReactiveSubscriptionComponent implements OnInit {
     return await subsDtlPopoverCtrlr.dismiss();
   }
 
+  async cancelReactiveSubsPopup() {
+    return await subsDtlPopoverCtrlr.dismiss(false);
+  }
+
 }

@@ -1,4 +1,4 @@
-<ion-content style="padding:10px; margin: 10px;">
+<!-- <ion-content style="padding:10px; margin: 10px;">
   <ion-header>
     <ion-item-group  class="headerStyle">
       <ion-icon src="../../../../../assets/icon/customer/icon_history.svg"></ion-icon>
@@ -8,8 +8,7 @@
     </ion-item-group>
   </ion-header>
 
-  <!-- History Body -->
-  <ion-list class="bodyStyle">
+  <ion-list *ngIf="customerDataLength > 0;"  class="bodyStyle">
     <ion-item-group *ngFor="let customerHistory of customerData">
       <ion-item lines="none">
         <ion-col>
@@ -17,17 +16,61 @@
         </ion-col>
         <ion-col>
           <ion-label>
-            {{customerHistory.date}} - {{customerHistory.time}}
+            {{customerHistory.HIST_TIME}}
           </ion-label>
           <ion-label>
-            {{customerHistory.description}}
+            {{customerHistory.MESSAGE}}
           </ion-label>
           <ion-label style="font-weight: normal;">
-            by {{customerHistory.pic}}
+            by {{customerHistory.CREATOR_DATA.FULLNAME}}
           </ion-label>
         </ion-col>
       </ion-item>
     </ion-item-group>
+  </ion-list>
+  <ion-list *ngIf="customerDataLength <1;" class="bodyStyle">
+    No History Recorded
+  </ion-list>
+
+</ion-content> -->
+
+<ion-content style="padding:10px; margin: 10px;">
+  <ion-header>
+    <ion-item-group class="headerStyle">
+      <ion-icon src="../../../../../assets/icon/customer/icon_history.svg"></ion-icon>
+      <ion-label>
+        HISTORY
+      </ion-label>
+    </ion-item-group>
+  </ion-header>
+
+  <!-- History Body -->
+  <ion-list class="bodyStyle" *ngIf="customerDataLength > 0">
+    <ion-item-group *ngFor="let customerHistory of customerData">
+      <ion-item lines="none">
+        <ion-item-group class="iconStyle">
+          <ion-icon src="../../../../../assets/icon/customer/icon-small-down.svg"></ion-icon>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-label>
+            {{customerHistory.HIST_TIME}}
+          </ion-label>
+          <ion-label>
+            {{customerHistory.MESSAGE}}
+          </ion-label>
+          <ion-label style="font-weight: normal;">
+            by {{customerHistory.CREATOR_DATA.FULLNAME}}
+          </ion-label>
+        </ion-item-group>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+  <ion-list class="bodyStyle" *ngIf="customerDataLength < 1" 
+   style=" font-size: 11px; white-space: pre-wrap; 
+    color: var(--eleave-body-empty-color);
+    display: flex;
+    justify-content: center;">
+    No history recorded
   </ion-list>
 
 </ion-content>
