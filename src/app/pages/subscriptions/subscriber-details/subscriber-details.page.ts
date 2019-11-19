@@ -54,10 +54,7 @@ export class SubscriberDetailsPage implements OnInit {
    */
   constructor(
     private popoverController: PopoverController,
-    // private subsDtlsSearch: SearchDataService,
     public subsDtlsPaging: PaginationServiceService,
-    // private subsDtlsInfoPopup: InfoPopupService
-    // private subsDtlApiSvs: APIService
   ) { }
 
   private subsDtlsAlert = new AlertController;
@@ -65,7 +62,6 @@ export class SubscriberDetailsPage implements OnInit {
    * This property is to get list of subscribers details
    * @memberof SubscriberDetailsPage
    */
-  // public subscribersDetails = customersDummiesData;
   public subscribersDetails = subscribersObjGlobal;
   
   /**
@@ -169,19 +165,19 @@ export class SubscriberDetailsPage implements OnInit {
     }
   }
 
-  /**
-   * This method is to execute pop over to change next billing date
-   * @memberof SubscriberDetailsPage
-   */
-  async openChangeDatePopup(evt) {
-    const popup = await this.popoverController.create({
-      component: ChangeNextBillingDateComponent,
-      componentProps: { viewType: this},
-      event: evt
-    });
+  // /**
+  //  * This method is to execute pop over to change next billing date
+  //  * @memberof SubscriberDetailsPage
+  //  */
+  // async openChangeDatePopup(evt) {
+  //   const popup = await this.popoverController.create({
+  //     component: ChangeNextBillingDateComponent,
+  //     componentProps: { viewType: this},
+  //     event: evt
+  //   });
 
-    return await popup.present();
-  }
+  //   return await popup.present();
+  // }
 
   /**
    * This method is to execute popover components based on it's Componet's name
@@ -278,25 +274,31 @@ export class SubscriberDetailsPage implements OnInit {
       {
         text: 'Okay',
         handler: (data) => {
-          this.confirmDeactiveHandlerOkay(data);
+          // this.confirmDeactiveHandlerOkay(data);
+          this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+          this.inactiveReason = data.inactiveSubscription;
+          document.getElementById('reasonTextId').hidden = false;
+          document.getElementById('reactivesubsnotice').hidden = false;
+          this.confirmOpt = true;
+          this.statusLog('Subscriptions has been deactivated');
         }
       }
     ]
   }
 
-  /**
-   * This method is to process the handler when user click Okay button
-   * @param {*} data This parameter is to pass value from okay button handler
-   * @memberof SubscriberDetailsPage
-   */
-  confirmDeactiveHandlerOkay(data) {
-    this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
-    this.inactiveReason = data.inactiveSubscription;
-    document.getElementById('reasonTextId').hidden = false;
-    document.getElementById('reactivesubsnotice').hidden = false;
-    this.confirmOpt = true;
-    this.statusLog('Subscriptions has been deactivated');
-  }
+  // /**
+  //  * This method is to process the handler when user click Okay button
+  //  * @param {*} data This parameter is to pass value from okay button handler
+  //  * @memberof SubscriberDetailsPage
+  //  */
+  // confirmDeactiveHandlerOkay(data) {
+  //   this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+  //   this.inactiveReason = data.inactiveSubscription;
+  //   document.getElementById('reasonTextId').hidden = false;
+  //   document.getElementById('reactivesubsnotice').hidden = false;
+  //   this.confirmOpt = true;
+  //   this.statusLog('Subscriptions has been deactivated');
+  // }
 
   /**
    * This method is to get search result for subscriber list
@@ -324,6 +326,7 @@ export class SubscriberDetailsPage implements OnInit {
       console.log('statusLog: ' + JSON.stringify(data));
     });
   }
+  
   reqStatusLog(reqObj): Observable<any> {
     return APIService.prototype.postApi(reqObj, '/api/admin/activity-log');
   }
