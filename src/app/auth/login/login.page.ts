@@ -41,8 +41,8 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   constructor(
-    private router: Router,
-    private spinner: NgxSpinnerService,
+    // private router: Router,
+    // private spinner: NgxSpinnerService,
     public authService: AuthService,
     public pgSet: PaginationServiceService
 
@@ -116,7 +116,8 @@ export class LoginPage implements OnInit {
           // if (data && data.access_token) {
             localStorage.setItem('access_token', JSON.stringify(data.access_token));
           }
-          return this.router.navigate(['/main/dashboard']);
+          return Router.prototype.navigate(['/main/dashboard']);
+          // return this.router.navigate(['/main/dashboard']);
         }
       );
     }
