@@ -256,10 +256,50 @@ export class SubscriberDetailsPage implements OnInit {
   }
 
   async confirmDeactive() {
-    // this.subsDtlsInfoPopup.confirmationPopup('Are you sure want to deactive this subscription?', 'alert-warning').finally();
+    // // this.subsDtlsInfoPopup.confirmationPopup('Are you sure want to deactive this subscription?', 'alert-warning').finally();
+    // const confirmAlert = await this.subsDtlsAlert.create({
+    //   header: 'Confirmation',
+    //   // cssClass: 'al',
+    //   message: 'Are you sure want to deactive this subscription? Please fill in your reason',
+    //   inputs: [
+    //     {
+    //       name: 'inactiveSubscription',
+    //       type: 'text',
+    //       placeholder: 'Reason...'
+
+    //     }
+    //   ],
+    //   cssClass: 'alert-warning-confirm',
+    //   buttons: [
+    //     {
+    //       text: 'Cancel',
+    //       role: 'cancel',
+    //       handler: () => {
+    //         console.log('Confirm Cancel');
+    //         this.prevToggleVal = false;
+    //         this.subsToggle = true;
+    //         this.confirmOpt = false;
+
+    //       }
+    //     }, 
+    //     {
+    //       text: 'Okay',
+    //       handler: (data) => {
+    //         console.log('Confirm Okay: ' + JSON.stringify(data, null, " "));
+    //         console.log('inactiveSubscription: ' + JSON.stringify(data.inactiveSubscription, null, " "));
+    //         this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+    //         this.inactiveReason = data.inactiveSubscription;
+    //         document.getElementById('reasonTextId').hidden = false;
+    //         document.getElementById('reactivesubsnotice').hidden = false;
+    //         this.confirmOpt = true;
+    //       }
+    //     }
+    //   ]
+    // });
+
+
     const confirmAlert = await this.subsDtlsAlert.create({
       header: 'Confirmation',
-      // cssClass: 'al',
       message: 'Are you sure want to deactive this subscription? Please fill in your reason',
       inputs: [
         {
@@ -270,34 +310,64 @@ export class SubscriberDetailsPage implements OnInit {
         }
       ],
       cssClass: 'alert-warning-confirm',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Confirm Cancel');
-            this.prevToggleVal = false;
-            this.subsToggle = true;
-            this.confirmOpt = false;
+      buttons: this.confirmDeactiveButtons()
+      // buttons: [
+      //   {
+      //     text: 'Cancel',
+      //     role: 'cancel',
+      //     handler: () => {
+      //       this.prevToggleVal = false;
+      //       this.subsToggle = true;
+      //       this.confirmOpt = false;
 
-          }
-        }, {
-          text: 'Okay',
-          handler: (data) => {
-            console.log('Confirm Okay: ' + JSON.stringify(data, null, " "));
-            console.log('inactiveSubscription: ' + JSON.stringify(data.inactiveSubscription, null, " "));
-            this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
-            this.inactiveReason = data.inactiveSubscription;
-            document.getElementById('reasonTextId').hidden = false;
-            document.getElementById('reactivesubsnotice').hidden = false;
-            this.confirmOpt = true;
-          }
-        }
-      ]
+      //     }
+      //   },
+      //   {
+      //     text: 'Okay',
+      //     handler: (data) => {
+      //       this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+      //       this.inactiveReason = data.inactiveSubscription;
+      //       document.getElementById('reasonTextId').hidden = false;
+      //       document.getElementById('reactivesubsnotice').hidden = false;
+      //       this.confirmOpt = true;
+      //     }
+      //   }
+      // ]
     });
-
     await confirmAlert.present();
 
+  }
+
+  confirmDeactiveButtons() {
+    return [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          this.confirmDeactiveHandlerCancel()
+        }
+      },
+      {
+        text: 'Okay',
+        handler: (data) => {
+          this.confirmDeactiveHandlerOkay(data);
+        }
+      }
+    ]
+  }
+
+  confirmDeactiveHandlerCancel() {
+    this.prevToggleVal = false;
+    this.subsToggle = true;
+    this.confirmOpt = false;
+  }
+
+  confirmDeactiveHandlerOkay(data) {
+    this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+    this.inactiveReason = data.inactiveSubscription;
+    document.getElementById('reasonTextId').hidden = false;
+    document.getElementById('reactivesubsnotice').hidden = false;
+    this.confirmOpt = true;
   }
 
   /**
