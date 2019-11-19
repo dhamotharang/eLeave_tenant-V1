@@ -180,7 +180,7 @@ export class ReactiveSubscriptionComponent implements OnInit {
       this.subsActivatedDate = new Date(this.subsStartDate);
       this.checkCycleType();
       // this.getNextBillingDateFormat(this.subsNextBillDate);
-      this.subsNewNextBillDate = this.reactiveGlobalFn.changeDateFormatYYYYMMDDWoTime(this.subsNextBillDate);
+      this.subsNewNextBillDate = this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsNextBillDate, 1);
     }
   }
 
@@ -234,9 +234,9 @@ export class ReactiveSubscriptionComponent implements OnInit {
       'subscriptionStatus': this.reactiveSubsData['STATUS'],
       'subscriptionQuota': this.currUser,
       'usedQuota': this.reactiveSubsData['USED_QUOTA'],
-      'activationDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate),
-      'lastBillingDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate),
-      'nextBillingDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsExpDate),
+      'activationDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate, 0),
+      'lastBillingDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate, 0),
+      'nextBillingDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsExpDate, 0),
       'recurrIntervalVal': this.cycleNo,
       'recurrInterval': this.cycleEvery,
       'billingCycle': this.reactiveSubsData['BILLING_CYCLE'],

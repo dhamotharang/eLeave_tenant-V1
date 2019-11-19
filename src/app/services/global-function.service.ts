@@ -70,19 +70,22 @@ export class GlobalFunctionService {
    * @returns
    * @memberof GlobalFunctionService
    */
-  changeDateFormatYYYYMMDD(dateValue) {
-    const dateVal = new Date(dateValue); // 2019 - 12 - 02
-    const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;
-    return dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00";
-  }
-
-  changeDateFormatYYYYMMDDWoTime(dateValue) {
-    const dateVal = new Date(dateValue); // 2019 - 12 - 02
-
+  changeDateFormatYYYYMMDD(dateValue, cond) {
+    const dateVal = new Date(dateValue);
     const ddVal = (dateVal.getDate() < 10) ? '0' + dateVal.getDate() : dateVal.getDate();
     const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;
-    return ddVal + '/' + mmVal + '/' + dateVal.getFullYear();
+    // return dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00";
+    return (cond === 0) ? dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00" 
+      : ddVal + '/' + mmVal + '/' + dateVal.getFullYear();
   }
+
+  // changeDateFormatYYYYMMDDWoTime(dateValue) {
+  //   const dateVal = new Date(dateValue); // 2019 - 12 - 02
+
+  //   const ddVal = (dateVal.getDate() < 10) ? '0' + dateVal.getDate() : dateVal.getDate();
+  //   const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;
+  //   return ddVal + '/' + mmVal + '/' + dateVal.getFullYear();
+  // }
 
   getHoursFormatAMPM(dateValue) {
     const dateVal = new Date(dateValue);
@@ -91,7 +94,7 @@ export class GlobalFunctionService {
 
   appendArrayChangedDateFormat(obj) {
     return Object.assign(obj, { 
-      'HIST_TIME': this.changeDateFormatYYYYMMDD(obj.CREATION_TS) +
+      'HIST_TIME': this.changeDateFormatYYYYMMDD(obj.CREATION_TS, 0) +
         ' - ' + this.getHoursFormatAMPM(obj.CREATION_TS) 
     });
   }
