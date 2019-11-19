@@ -25,10 +25,12 @@
     <ion-label position="stacked">Bill Every</ion-label>
     <ion-row>
       <ion-col>
-        <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo" (ionChange)="newCycleTimes(cycleNo)"></ion-input>
+        <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo" (ionChange)="calcNextBillingDate()"></ion-input>
+        <!-- <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo" (ionChange)="newCycleTimes(cycleNo)"></ion-input> -->
       </ion-col> 
       <ion-col class="repeatEvery">
-        <ion-select [(ngModel)]="cycleEvery" (ionChange)="newCyclePeriod()">
+        <ion-select [(ngModel)]="cycleEvery" (ionChange)="calcNextBillingDate()">
+        <!-- <ion-select [(ngModel)]="cycleEvery" (ionChange)="newCyclePeriod()"> -->
           <ion-select-option selected value="Week(s)">Week(s)</ion-select-option>
           <ion-select-option value="Month(s)">Month(s)</ion-select-option>
           <ion-select-option value="Year(s)">Year(s)</ion-select-option>

@@ -76,6 +76,14 @@ export class GlobalFunctionService {
     return dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00";
   }
 
+  changeDateFormatYYYYMMDDWoTime(dateValue) {
+    const dateVal = new Date(dateValue); // 2019 - 12 - 02
+
+    const ddVal = (dateVal.getDate() < 10) ? '0' + dateVal.getDate() : dateVal.getDate();
+    const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;
+    return ddVal + '/' + mmVal + '/' + dateVal.getFullYear();
+  }
+
   getHoursFormatAMPM(dateValue) {
     const dateVal = new Date(dateValue);
     return dateVal.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });

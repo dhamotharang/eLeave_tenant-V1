@@ -206,21 +206,11 @@ export class SubscriberDetailsPage implements OnInit {
       cssClass: 'pop-over-style'
     });
 
-
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
-        console.log('onDidDismiss data: ' + JSON.stringify(data, null, " "));
-        // this.prevToggleVal = !data;
-        // this.subsToggle = data;
-        // this.confirmOpt = !data;
-        this.prevToggleVal = true;
-        this.subsToggle = false;
-        this.confirmOpt = true;
-        
-        
-
-      } else {
-        console.log('onDidDismiss no need data');
+        this.prevToggleVal = !data.data;
+        this.subsToggle = data.data;
+        this.confirmOpt = !data.data;
       }
     });
 

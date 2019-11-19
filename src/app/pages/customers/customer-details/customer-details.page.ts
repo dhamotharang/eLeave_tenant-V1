@@ -141,7 +141,6 @@ export class CustomerDetailsPage implements OnInit {
   ngOnInit() {
     this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
     this.selectedCustomerInfo = customerInfo;
-    // console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
     this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);

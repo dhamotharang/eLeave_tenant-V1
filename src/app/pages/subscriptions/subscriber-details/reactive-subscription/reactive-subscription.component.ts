@@ -128,21 +128,21 @@ export class ReactiveSubscriptionComponent implements OnInit {
     this.calcNextBillingDate();
   }
 
-  /**
-   * This method is to calculate next billing date when cycle number was changed
-   * @memberof ReactiveSubscriptionComponent
-   */
-  newCycleTimes(num) {
-    this.calcNextBillingDate();
-  }
+  // /**
+  //  * This method is to calculate next billing date when cycle number was changed
+  //  * @memberof ReactiveSubscriptionComponent
+  //  */
+  // newCycleTimes(num) {
+  //   this.calcNextBillingDate();
+  // }
 
-  /**
-   * This method is to calculate next billing date when cycle period was changed
-   * @memberof ReactiveSubscriptionComponent
-   */
-  newCyclePeriod() {
-    this.calcNextBillingDate();
-  }
+  // /**
+  //  * This method is to calculate next billing date when cycle period was changed
+  //  * @memberof ReactiveSubscriptionComponent
+  //  */
+  // newCyclePeriod() {
+  //   this.calcNextBillingDate();
+  // }
 
   /**
    * This method is to get next billing date based on cycle type (cycle period and cycle number)
@@ -158,17 +158,17 @@ export class ReactiveSubscriptionComponent implements OnInit {
     }
   }
 
-  /**
-   * This method is to set next billing date formats
-   * @memberof ReactiveSubscriptionComponent
-   */
-  getNextBillingDateFormat(valDate) {
-    const dd = (valDate.getDate() < 10) ? '0' + valDate.getDate() : valDate.getDate();
-    let mm = valDate.getMonth() + 1;
-    mm = (mm < 10) ? '0' + mm : mm;
+  // /**
+  //  * This method is to set next billing date formats
+  //  * @memberof ReactiveSubscriptionComponent
+  //  */
+  // getNextBillingDateFormat(valDate) {
+  //   const dd = (valDate.getDate() < 10) ? '0' + valDate.getDate() : valDate.getDate();
+  //   let mm = valDate.getMonth() + 1;
+  //   mm = (mm < 10) ? '0' + mm : mm;
 
-    this.subsNewNextBillDate = dd + '/' + mm + '/' + valDate.getFullYear();
-  }
+  //   this.subsNewNextBillDate = dd + '/' + mm + '/' + valDate.getFullYear();
+  // }
 
   /**
    * This method is to calculate next billing date
@@ -179,7 +179,8 @@ export class ReactiveSubscriptionComponent implements OnInit {
       this.subsNStartDate =  new Date(this.subsStartDate);
       this.subsActivatedDate = new Date(this.subsStartDate);
       this.checkCycleType();
-      this.getNextBillingDateFormat(this.subsNextBillDate);
+      // this.getNextBillingDateFormat(this.subsNextBillDate);
+      this.subsNewNextBillDate = this.reactiveGlobalFn.changeDateFormatYYYYMMDDWoTime(this.subsNextBillDate);
     }
   }
 
@@ -210,7 +211,8 @@ export class ReactiveSubscriptionComponent implements OnInit {
    */
   processData() {
     this.dateFormatOnCard(this.subsActivatedDate, this.subsNextBillDate);
-    subscriberUpdateInfo.FULL_ACTIVATION_DATE = this.getReactiveDate();
+    // subscriberUpdateInfo.FULL_ACTIVATION_DATE = this.getReactiveDate();
+    subscriberUpdateInfo.FULL_ACTIVATION_DATE = this.reactiveGlobalFn.changeDateFormatFull(new Date());
     subscriberUpdateInfo.FULL_LAST_BILLING_DATE = this.reactiveGlobalFn.changeDateFormatFull(this.subsActivatedDate);
     subscriberUpdateInfo.FULL_NEXT_BILLING_DATE = this.reactiveGlobalFn.changeDateFormatFull(this.subsExpDate);
     subscriberUpdateInfo.RECURR_INTERVAL_VAL = this.cycleNo;
@@ -224,7 +226,9 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   prepareObj() {
+    console.log('his.reactiveSubsData: ' + JSON.stringify(this.reactiveSubsData));
     return {
+      'subscriptionLabel': this.reactiveSubsData['SUBSCRIPTION_LABEL'],
       'customerGuid': this.reactiveSubsData['CUSTOMER_GUID'],
       'subscriptionPlan': this.reactiveSubsData['PLAN'],
       'subscriptionStatus': this.reactiveSubsData['STATUS'],
@@ -239,14 +243,14 @@ export class ReactiveSubscriptionComponent implements OnInit {
       'subscriptionGuid': this.reactiveSubsData['SUBSCRIPTION_GUID'],
     };
   }
-  /**
-   * This method is to get current date
-   * @returns
-   * @memberof ReactiveSubscriptionComponent
-   */
-  getReactiveDate() {
-    return this.reactiveGlobalFn.changeDateFormatFull(new Date());
-  }
+  // /**
+  //  * This method is to get current date
+  //  * @returns
+  //  * @memberof ReactiveSubscriptionComponent
+  //  */
+  // getReactiveDate() {
+  //   return this.reactiveGlobalFn.changeDateFormatFull(new Date());
+  // }
 
   /**
    * This method is to get returned object from API then processthe output
@@ -280,7 +284,7 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   async dissmissReactiveSubsPopup() {
-    return await subsDtlPopoverCtrlr.dismiss();
+    return await subsDtlPopoverCtrlr.dismiss(true);
   }
 
   async cancelReactiveSubsPopup() {
