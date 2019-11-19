@@ -208,24 +208,6 @@ export class AddnewcustomerPage implements OnInit {
     );
   }
 
-  // /**
-  //  * This method is to post request data and address to REST
-  //  * @returns {Observable<any>}
-  //  * @memberof AddnewcustomerPage
-  //  */
-  // postNewCust(): Observable<any> {
-  //   return this.addCustAPISvs.postApi(this.newCustForm, '/api/admin/customer');
-  // }
-
-  // /**
-  //  * This method is to post request data and address to REST
-  //  * @returns {Observable<any>}
-  //  * @memberof AddnewcustomerPage
-  //  */
-  // postNewSubs(): Observable<any> {
-  //   return this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');
-  // }
-
   postNewLog(type): Observable<any> {
     return (type === 'cust') ? this.addCustAPISvs.postApi(this.newCustForm, '/api/admin/customer') :
      this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');

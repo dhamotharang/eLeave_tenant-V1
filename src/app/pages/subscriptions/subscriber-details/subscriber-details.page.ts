@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit, } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
+import { APIService } from './../../../services/shared-service/api.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
 
 import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
@@ -54,6 +56,7 @@ export class SubscriberDetailsPage implements OnInit {
     private subsDtlsSearch: SearchDataService,
     public subsDtlsPaging: PaginationServiceService,
     // private subsDtlsInfoPopup: InfoPopupService
+    private subsDtlApiSvs: APIService
   ) { }
 
   private subsDtlsAlert = new AlertController;
@@ -112,20 +115,7 @@ export class SubscriberDetailsPage implements OnInit {
    * This property is to set slides configurations
    * @memberof SubscriberDetailsPage
    */
-  subsDtlsSlideOpts = {
-    slidesPerView: 3,
-    on: {
-      beforeInit() {
-        const swiper = this;
-
-        swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
-        swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
-
-        swiper.params.watchSlidesProgress = true;
-        swiper.originalParams.watchSlidesProgress = true;
-      }
-    }
-  };
+  subsDtlsSlideOpts = this.subDtlsGlobalFn.slideOption();
 
   /**
    * This method is to set initial value of properties. And it will be
@@ -134,7 +124,6 @@ export class SubscriberDetailsPage implements OnInit {
    */
   ngOnInit() {
     this.subscriberInfo = selectedSubscribersInfo;
-    console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     this.subsToggle = (this.subscriberInfo.STATUS === 1) ? true : false;
     this.prevToggleVal = !this.subsToggle;
     subscriberUpdateInfo = this.subscriberInfo;
@@ -209,8 +198,17 @@ export class SubscriberDetailsPage implements OnInit {
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
         this.prevToggleVal = !data.data;
-        this.subsToggle = data.data;
+        this.subsToggle = data.data; 
         this.confirmOpt = !data.data;
+        this.reqStatusLog({
+          customerId: this.subscriberInfo.CUSTOMER_GUID,
+          subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
+          message: 'Subscriptions has been reactivated'
+        }).subscribe(
+          respStatusLog => {
+            console.log('respStatusLog: ' + JSON.stringify(respStatusLog));
+          });
+
       }
     });
 
@@ -285,18 +283,29 @@ export class SubscriberDetailsPage implements OnInit {
     ]
   }
 
-  // confirmDeactiveHandlerCancel() {
-  //   this.prevToggleVal = false;
-  //   this.subsToggle = true;
-  //   this.confirmOpt = false;
-  // }
-
+  /**
+   * This method is to process the handler when user click Okay button
+   * @param {*} data This parameter is to pass value from okay button handler
+   * @memberof SubscriberDetailsPage
+   */
   confirmDeactiveHandlerOkay(data) {
     this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
     this.inactiveReason = data.inactiveSubscription;
     document.getElementById('reasonTextId').hidden = false;
     document.getElementById('reactivesubsnotice').hidden = false;
     this.confirmOpt = true;
+    console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
+    console.log('subscriberInfo CUSTOMER_GUID: ' + JSON.stringify(this.subscriberInfo.CUSTOMER_GUID, null, " "));
+    console.log('subscriberInfo SUBSCRIPTION_GUID: ' + JSON.stringify(this.subscriberInfo.SUBSCRIPTION_GUID, null, " "));
+    this.reqStatusLog({
+      customerId: this.subscriberInfo.CUSTOMER_GUID,
+      subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
+      message: 'Subscriptions has been deactivated' 
+    }).subscribe(
+      respStatusLog => {
+        console.log('respStatusLog: ' + JSON.stringify(respStatusLog)); 
+      }
+    );
   }
 
   /**
@@ -310,5 +319,9 @@ export class SubscriberDetailsPage implements OnInit {
       this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'COMPANY_NAME') :
         this.subscribersDetails;
     this.pageChanged(1);
+  }
+
+  reqStatusLog(reqObj): Observable<any> {
+    return this.subsDtlApiSvs.postApi(reqObj, '/api/admin/activity-log');
   }
 }

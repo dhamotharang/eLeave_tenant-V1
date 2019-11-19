@@ -112,12 +112,12 @@ export class CustomerDetailsPage implements OnInit {
    */
   public prevCustToggleVal = true;
   
-  /**
-   * This property is to calculate the days different between last billing date
-   * and next billing date
-   * @memberof CustomerDetailsPage
-   */
-  public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp, this.subsDtlsCompSearch, this.subsDtlsCompPaging);
+  // /**
+  //  * This property is to calculate the days different between last billing date
+  //  * and next billing date
+  //  * @memberof CustomerDetailsPage
+  //  */
+  // public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp, this.subsDtlsCompSearch, this.subsDtlsCompPaging);
   
   /**
    * This property is to set customer page's pagination configurations
@@ -139,7 +139,8 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   ngOnInit() {
-    this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
+    // this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
+    this.slideOpts = this.custDtlsGlobalFn.slideOption();
     this.selectedCustomerInfo = customerInfo;
     this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
     customerUpdateInfo = this.selectedCustomerInfo;

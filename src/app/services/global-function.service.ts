@@ -112,5 +112,20 @@ export class GlobalFunctionService {
 
   }
 
+  slideOption() {
+    return {
+      slidesPerView: 3,
+      on: {
+        beforeInit() {
+          const swiper = this;
 
+          swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
+          swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+
+          swiper.params.watchSlidesProgress = true;
+          swiper.originalParams.watchSlidesProgress = true;
+        }
+      }
+    }
+  }
 }
