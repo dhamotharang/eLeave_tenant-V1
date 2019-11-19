@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { SearchDataService } from '../../services/search-data.service';
 
-import { userDummiesData } from '../../app.component';
-
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { RolesDropDownComponent, selRolePopup } from './roles-drop-down/roles-drop-down.component';
@@ -59,8 +57,8 @@ export class SettingsPage implements OnInit {
    */
   constructor(
       private popoverController: PopoverController,
-      private settingSearch: SearchDataService,
-      private settingApiService: APIService,
+      // private settingSearch: SearchDataService,
+      // private settingApiService: APIService,
       public settingPaging: PaginationServiceService,
     ) { }
 
@@ -155,7 +153,8 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   getUserList(param): Observable<any> {
-    return this.settingApiService.getApi('/api/admin/user-manage/' + param);
+    return APIService.prototype.getApi('/api/admin/user-manage/' + param);
+    // return this.settingApiService.getApi('/api/admin/user-manage/' + param);
   }
 
   /**
@@ -244,8 +243,9 @@ export class SettingsPage implements OnInit {
   onSearchSettings(event) {
     this.userData = this.initUserData;
     this.userData = (event.detail.value.length > 0 ) ?
-                      this.settingSearch.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
-                      this.initUserData;
+      SearchDataService.prototype.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
+      this.initUserData;
+      // this.settingSearch.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
     this.pageSettingChanged(1);
   }
 }

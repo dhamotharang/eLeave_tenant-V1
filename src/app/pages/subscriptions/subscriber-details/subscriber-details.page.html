@@ -113,7 +113,7 @@
                     <ion-label>{{subscriberInfo.EMAIL}}</ion-label>
                     <ion-label>{{subscriberInfo.CONTACT_NO}}</ion-label>
                     <ion-label style="font-weight: bold; color: #3b86ff; cursor: pointer;" 
-                      (click)="openSubsPopover($event, 'SubscriberEditProfileComponent')">
+                      (click)="openSubsPopover($event, 'SubscriberEditProfileComponent', 1)">
                         Edit Profile
                       </ion-label>
                   </ion-col>
@@ -175,7 +175,7 @@
                   </ion-title>
                 </ion-col>
                 <ion-col class="subsctiberRecentActivitiesStyle" style="padding:0px;">
-                  <ion-label style="padding-right:15px; cursor: pointer;" (click)="openSubsPopover($event, 'SubscriberRecentActivitiesComponent')">
+                  <ion-label style="padding-right:15px; cursor: pointer;" (click)="openSubsPopover($event, 'SubscriberRecentActivitiesComponent', 1)">
                     Recent Activities
                   </ion-label>
                 </ion-col>
@@ -214,7 +214,7 @@
                             <ion-label class="subscriberDescriptionCardValue">{{subscriberInfo.FULL_NEXT_BILLING_DATE}}</ion-label>
                         </ion-row>
                         <ion-row>
-                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="openChangeDatePopup($event)">
+                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="openSubsPopover($event, 'ChangeNextBillingDateComponent', 0)">
                             Change Date
                           </ion-label>
                           <!-- <ion-datetime detail pickerFormat="D MMMM YYYY" max="2100" *ngIf="this.isShowingPicker">
@@ -261,7 +261,7 @@
                               </ion-label>
                               <ion-progress-bar id="subdtlPrgssBar" [value]="subscriberInfo.progressBarValue"></ion-progress-bar>
                               <!-- <ion-progress-bar id="subdtlPrgssBar" [value]="subsProgressBarValue"></ion-progress-bar> -->
-                              <ion-button (click)="openSubsPopover($event, 'UpdateUserNumbersComponent')">
+                              <ion-button (click)="openSubsPopover($event, 'UpdateUserNumbersComponent', 1)">
                                 Update User Quota
                               </ion-button>
                             </ion-item-group>

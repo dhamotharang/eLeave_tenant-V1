@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
 import { APIService } from './../../../services/shared-service/api.service';
+// import postApi from '../../../services/shared-service/api.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
 
 import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
@@ -53,10 +54,10 @@ export class SubscriberDetailsPage implements OnInit {
    */
   constructor(
     private popoverController: PopoverController,
-    private subsDtlsSearch: SearchDataService,
+    // private subsDtlsSearch: SearchDataService,
     public subsDtlsPaging: PaginationServiceService,
     // private subsDtlsInfoPopup: InfoPopupService
-    private subsDtlApiSvs: APIService
+    // private subsDtlApiSvs: APIService
   ) { }
 
   private subsDtlsAlert = new AlertController;
@@ -162,7 +163,7 @@ export class SubscriberDetailsPage implements OnInit {
         this.confirmDeactive();
       } else {
         document.getElementById('reactivesubsnotice').hidden = true;
-        this.openSubsPopover(Event, 'ReactiveSubscriptionComponent');
+        this.openSubsPopover(Event, 'ReactiveSubscriptionComponent', 1);
       }
       this.prevToggleVal = this.subsToggle;
     }
@@ -186,14 +187,24 @@ export class SubscriberDetailsPage implements OnInit {
    * This method is to execute popover components based on it's Componet's name
    * @memberof SubscriberDetailsPage
    */
-  async openSubsPopover(evtSubs, compName) {
-    const popover = await this.popoverController.create({
-      component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
-                  (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
-                   (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
-                    ReactiveSubscriptionComponent,
-      cssClass: 'pop-over-style'
-    });
+  async openSubsPopover(evtSubs, compName, type) {
+    let popover;
+
+    if (type === 1) {
+      popover = await this.popoverController.create({
+        component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
+          (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
+            (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
+              ReactiveSubscriptionComponent,
+        cssClass: 'pop-over-style'
+      });
+    } else {
+      popover = await this.popoverController.create({
+        component: ChangeNextBillingDateComponent,
+        componentProps: { viewType: this },
+        event: evtSubs
+      });
+    }
 
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
@@ -201,16 +212,6 @@ export class SubscriberDetailsPage implements OnInit {
         this.subsToggle = data.data; 
         this.confirmOpt = !data.data;
         this.statusLog('Subscriptions has been reactivated');
-
-        // this.reqStatusLog({
-        //   customerId: this.subscriberInfo.CUSTOMER_GUID,
-        //   subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
-        //   message: 'Subscriptions has been reactivated'
-        // }).subscribe(
-        //   respStatusLog => {
-        //     console.log('respStatusLog: ' + JSON.stringify(respStatusLog));
-        //   });
-
       }
     });
 
@@ -254,7 +255,6 @@ export class SubscriberDetailsPage implements OnInit {
           name: 'inactiveSubscription',
           type: 'text',
           placeholder: 'Reason...'
-
         }
       ],
       cssClass: 'alert-warning-confirm',
@@ -270,7 +270,6 @@ export class SubscriberDetailsPage implements OnInit {
         text: 'Cancel',
         role: 'cancel',
         handler: () => {
-          // this.confirmDeactiveHandlerCancel()
           this.prevToggleVal = false;
           this.subsToggle = true;
           this.confirmOpt = false;
@@ -296,19 +295,7 @@ export class SubscriberDetailsPage implements OnInit {
     document.getElementById('reasonTextId').hidden = false;
     document.getElementById('reactivesubsnotice').hidden = false;
     this.confirmOpt = true;
-    console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
-    console.log('subscriberInfo CUSTOMER_GUID: ' + JSON.stringify(this.subscriberInfo.CUSTOMER_GUID, null, " "));
-    console.log('subscriberInfo SUBSCRIPTION_GUID: ' + JSON.stringify(this.subscriberInfo.SUBSCRIPTION_GUID, null, " "));
     this.statusLog('Subscriptions has been deactivated');
-    // this.reqStatusLog({
-    //   customerId: this.subscriberInfo.CUSTOMER_GUID,
-    //   subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
-    //   message: 'Subscriptions has been deactivated' 
-    // }).subscribe(
-    //   respStatusLog => {
-    //     console.log('respStatusLog: ' + JSON.stringify(respStatusLog)); 
-    //   }
-    // );
   }
 
   /**
@@ -317,10 +304,14 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   onSearchSubsDtls(event) {
-    this.subscribersDetails = subscribersObjGlobal;
-    this.subscribersDetails = (event.detail.value.length > 0 ) ?
-      this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'COMPANY_NAME') :
-        this.subscribersDetails;
+    this.subscribersDetails = subscribersObjGlobal; // SearchDataService
+
+    this.subscribersDetails = (event.detail.value.length > 0) ?
+      SearchDataService.prototype.filerSearch(event.detail.value, this.subscribersDetails, 'COMPANY_NAME') :
+      this.subscribersDetails;
+    // this.subscribersDetails = (event.detail.value.length > 0 ) ?
+    //   this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'COMPANY_NAME') :
+    //     this.subscribersDetails;
     this.pageChanged(1);
   }
 
@@ -334,6 +325,6 @@ export class SubscriberDetailsPage implements OnInit {
     });
   }
   reqStatusLog(reqObj): Observable<any> {
-    return this.subsDtlApiSvs.postApi(reqObj, '/api/admin/activity-log');
+    return APIService.prototype.postApi(reqObj, '/api/admin/activity-log');
   }
 }
