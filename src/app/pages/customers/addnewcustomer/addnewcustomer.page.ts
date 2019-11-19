@@ -1,10 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-
 import { Observable } from 'rxjs';
 
-import { PaginationServiceService } from '../../../services/pagination-service.service';
-import { APIService } from '../../../services/shared-service/api.service';
+// import { PaginationServiceService } from '../../../services/pagination-service.service';
+import {APIService} from '../../../services/shared-service/api.service';
 
 import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.service';
 /**
@@ -28,9 +28,10 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   constructor(
-    public addCustPggSvs: PaginationServiceService,
+    // public addCustPggSvs: PaginationServiceService,
     private addCustAPISvs: APIService,
     private addCustInfoPopup: InfoPopupService,
+    private addCustRoute: Router
   ) { }
   
   /**
@@ -174,7 +175,6 @@ export class AddnewcustomerPage implements OnInit {
   async saveAddCustomer() {
     Object.assign(this.newCustForm, { currency: 'MYR', customerLabel: this.custLabelId });
     await this.postCustInfo();
-
   }
 
   /**
@@ -182,7 +182,7 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   cancelSaveAddingCustomer() {
-    console.log('cancelSaveAddingCustomer');
+    return this.addCustRoute.navigate['/main/customer'];
   }
 
   /**
@@ -190,7 +190,7 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   postCustInfo() {
-    this.postNewCust().subscribe(
+    this.postNewLog('cust').subscribe(
       data => {
         Object.assign(this.newSubsForm, {
           subscriptionLabel: this.subLabelId, customerGuid: data[0].CUSTOMER_GUID,
@@ -198,58 +198,44 @@ export class AddnewcustomerPage implements OnInit {
           recurrIntervalVal: this.custCycleNo, activationDate: this.custStartSubsDate,
           lastBillingDate: this.custStartSubsDate, nextBillingDate: this.custEndSubsDate, billingCycle: 0});
 
-        this.postNewSubs().subscribe(dataSubs => {
+        this.postNewLog('subs').subscribe(dataSubs => {
           this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');
-          console.log('cust data: ' + JSON.stringify(data[0].CUSTOMER_GUID, null, " "));
-          console.log('subs data: ' + JSON.stringify(dataSubs[0].SUBSCRIPTION_GUID, null, " "));
+          // console.log('cust data: ' + JSON.stringify(data[0].CUSTOMER_GUID, null, " "));
+          // console.log('subs data: ' + JSON.stringify(dataSubs[0].SUBSCRIPTION_GUID, null, " "));
           this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);
         });
       }
     );
   }
 
-  /**
-   * This method is to post request data and address to REST
-   * @returns {Observable<any>}
-   * @memberof AddnewcustomerPage
-   */
-  postNewCust(): Observable<any> {
-    return this.addCustAPISvs.postApi(this.newCustForm, '/api/admin/customer');
-  }
+  // /**
+  //  * This method is to post request data and address to REST
+  //  * @returns {Observable<any>}
+  //  * @memberof AddnewcustomerPage
+  //  */
+  // postNewCust(): Observable<any> {
+  //   return this.addCustAPISvs.postApi(this.newCustForm, '/api/admin/customer');
+  // }
 
-  /**
-   * This method is to post request data and address to REST
-   * @returns {Observable<any>}
-   * @memberof AddnewcustomerPage
-   */
-  postNewSubs(): Observable<any> {
-    console.log('this.newSubsForm: ' + JSON.stringify(this.newSubsForm, null, " "));
-    return this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');
+  // /**
+  //  * This method is to post request data and address to REST
+  //  * @returns {Observable<any>}
+  //  * @memberof AddnewcustomerPage
+  //  */
+  // postNewSubs(): Observable<any> {
+  //   return this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');
+  // }
+
+  postNewLog(type): Observable<any> {
+    return (type === 'cust') ? this.addCustAPISvs.postApi(this.newCustForm, '/api/admin/customer') :
+     this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');
   }
 
   addLog(valCustId, valSubsId) {
-    this.addCustLog({
-      customerId: valCustId, 
-      subscriptionId: valSubsId, 
-      message: 'Customer has been created'
-    });
-
-    this.addCustLog({
-      customerId: valCustId,
-      subscriptionId: valSubsId,
-      message: 'Customer has been activated'
-    });
-
-    this.addCustLog({
-      customerId: valCustId,
-      subscriptionId: valSubsId,
-      message: 'Subscription has been created'
-    });
-    this.addCustLog({
-      customerId: valCustId,
-      subscriptionId: valSubsId,
-      message: 'Subscription has been activated'
-    });
+    this.addCustLog({ customerId: valCustId, subscriptionId: valSubsId, message: 'Customer has been created' });
+    this.addCustLog({ customerId: valCustId, subscriptionId: valSubsId, message: 'Customer has been activated' });
+    this.addCustLog({ customerId: valCustId, subscriptionId: valSubsId, message: 'Subscription has been created' });
+    this.addCustLog({ customerId: valCustId, subscriptionId: valSubsId, message: 'Subscription has been activated' });
     
   }
 

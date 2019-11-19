@@ -63,10 +63,12 @@ export class CustomersPage implements OnInit {
   constructor(
     public custPaging: PaginationServiceService,
     private popoverController: PopoverController,
-    private custSearch: SearchDataService,
+    // private custSearch: SearchDataService,
     private custApiSvs: APIService
   ) { }
 
+  private custSearch = new SearchDataService();
+  
   /**
    * This property is to bind selected customer data
    * @memberof CustomersPage
