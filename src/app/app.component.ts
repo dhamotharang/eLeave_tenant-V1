@@ -70,15 +70,18 @@ export class AppComponent {
    */
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    // private splashScreen: SplashScreen,
+    // private statusBar: StatusBar,
     private popoverController: PopoverController,
     public settingPage: PaginationServiceService,
-    public userDataSvs: UserDataService
+    // public userDataSvs: UserDataService
   ) {
     this.initializeApp();
   }
 
+  public evt;
+  public storages;
+  public userDataSvs = new UserDataService(this.evt, this.storages);
   /**
    * This property is to set side menu's title, url and icon
    * @memberof AppComponent
@@ -136,8 +139,10 @@ export class AppComponent {
    */
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // this.statusBar.styleDefault();
+      new StatusBar().styleDefault();
+      new SplashScreen().hide();
+      // this.splashScreen.hide();
     });
 
     const json = require('./sample.json');
