@@ -200,14 +200,16 @@ export class SubscriberDetailsPage implements OnInit {
         this.prevToggleVal = !data.data;
         this.subsToggle = data.data; 
         this.confirmOpt = !data.data;
-        this.reqStatusLog({
-          customerId: this.subscriberInfo.CUSTOMER_GUID,
-          subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
-          message: 'Subscriptions has been reactivated'
-        }).subscribe(
-          respStatusLog => {
-            console.log('respStatusLog: ' + JSON.stringify(respStatusLog));
-          });
+        this.statusLog('Subscriptions has been reactivated');
+
+        // this.reqStatusLog({
+        //   customerId: this.subscriberInfo.CUSTOMER_GUID,
+        //   subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
+        //   message: 'Subscriptions has been reactivated'
+        // }).subscribe(
+        //   respStatusLog => {
+        //     console.log('respStatusLog: ' + JSON.stringify(respStatusLog));
+        //   });
 
       }
     });
@@ -297,15 +299,16 @@ export class SubscriberDetailsPage implements OnInit {
     console.log('subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     console.log('subscriberInfo CUSTOMER_GUID: ' + JSON.stringify(this.subscriberInfo.CUSTOMER_GUID, null, " "));
     console.log('subscriberInfo SUBSCRIPTION_GUID: ' + JSON.stringify(this.subscriberInfo.SUBSCRIPTION_GUID, null, " "));
-    this.reqStatusLog({
-      customerId: this.subscriberInfo.CUSTOMER_GUID,
-      subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
-      message: 'Subscriptions has been deactivated' 
-    }).subscribe(
-      respStatusLog => {
-        console.log('respStatusLog: ' + JSON.stringify(respStatusLog)); 
-      }
-    );
+    this.statusLog('Subscriptions has been deactivated');
+    // this.reqStatusLog({
+    //   customerId: this.subscriberInfo.CUSTOMER_GUID,
+    //   subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
+    //   message: 'Subscriptions has been deactivated' 
+    // }).subscribe(
+    //   respStatusLog => {
+    //     console.log('respStatusLog: ' + JSON.stringify(respStatusLog)); 
+    //   }
+    // );
   }
 
   /**
@@ -321,6 +324,15 @@ export class SubscriberDetailsPage implements OnInit {
     this.pageChanged(1);
   }
 
+  statusLog(msg) {
+    this.reqStatusLog({
+      customerId: this.subscriberInfo.CUSTOMER_GUID,
+      subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
+      message: msg
+    }).subscribe(data => {
+      console.log('statusLog: ' + JSON.stringify(data));
+    });
+  }
   reqStatusLog(reqObj): Observable<any> {
     return this.subsDtlApiSvs.postApi(reqObj, '/api/admin/activity-log');
   }
