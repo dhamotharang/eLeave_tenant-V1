@@ -237,9 +237,13 @@
               <ion-col style="margin: 0 5px 0 5px;">
                 <ion-item-group class="viewSubscriptionDetailsTextFormat">
                   <ion-row class="innerCardContentSpaceBetween">
+                      <!-- <ion-label *ngIf="selectedCustomerInfo.USED_QUOTA > 0" > -->
                       <ion-label>
                         TOTAL USERS: {{selectedCustomerInfo.USED_QUOTA}}/{{selectedCustomerInfo.QUOTA}}
                       </ion-label>
+                      <!-- <ion-label *ngIf="selectedCustomerInfo.USED_QUOTA < 1>" >
+                        TOTAL USERS: 0/{{selectedCustomerInfo.QUOTA}}
+                      </ion-label> -->
                       <ion-label class="innerCardContentViewHistoryStyle" (click)="openPopover($event, 'CustomerHistoryComponent')">
                         View History
                       </ion-label>

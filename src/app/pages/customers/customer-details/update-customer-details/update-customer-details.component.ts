@@ -91,6 +91,8 @@ export class UpdateCustomerDetailsComponent implements OnInit {
     this.patchUpdateCustomerEndpoint(obj).subscribe(
       data => {
         this.updateCustInfoPopup.alertPopup('You have successfully edited customer profile!', 'alert-success');
+        // console.log('succeed edit profile');
+        this.editCustProfileLog();
       }
     );
   }
@@ -142,4 +144,21 @@ export class UpdateCustomerDetailsComponent implements OnInit {
     return await popovrCtrlr.dismiss();
   }
 
+  editCustProfileLog() {
+
+    // console.log('selectedUpdateCustomerInfo: ' + JSON.stringify(this.selectedUpdateCustomerInfo, null, " "));
+    this.reqLogEditProfile({
+      customerId: this.selectedUpdateCustomerInfo['CUSTOMER_GUID'],
+      subscriptionId: this.selectedUpdateCustomerInfo['SUBSCRIPTION_GUID'],
+      message: 'Customer profile has been updated'
+    }).subscribe(
+      retLog => {
+        console.log('retLog: ' + JSON.stringify(retLog, null, " "));
+      }
+    );
+  }
+
+  reqLogEditProfile(reqObj): Observable<any> {
+    return this.updateCustAPI.postApi(reqObj, '/api/admin/activity-log');
+  }
 }

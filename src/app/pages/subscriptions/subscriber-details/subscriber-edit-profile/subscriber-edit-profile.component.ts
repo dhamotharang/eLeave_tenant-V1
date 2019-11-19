@@ -129,6 +129,11 @@ export class SubscriberEditProfileComponent implements OnInit {
       retObj => {
         // console.log('saveUpdate retObj: ' + JSON.stringify(retObj, null, " "));
         this.subEdProfInfoPopup.alertPopup('You have successfully edited customer profile!', 'alert-success');
+        console.log('obj: ' + JSON.stringify(obj, null, " "));
+        console.log('retObj: ' + JSON.stringify(retObj, null, " "));
+        console.log('selectedClientInfo: ' + JSON.stringify(this.selectedClientInfo, null, " "));
+        this.subsEditProfileLog();
+        
       }
     );
   }
@@ -141,6 +146,24 @@ export class SubscriberEditProfileComponent implements OnInit {
    */
   reqSaveUpdateAPI(obj): Observable<any> {
     return this.subEdProfAPISvs.patchApi(obj, '/api/admin/customer');
+  }
+
+  subsEditProfileLog() {
+    console.log('subsEditProfileLog');
+    this.subsReqEditProfileLog({
+      customerId: this.selectedClientInfo['CUSTOMER_GUID'],
+      subscriptionId: this.selectedClientInfo['SUBSCRIPTION_GUID'],
+      message: 'Customer profile has been updated'
+    }).subscribe(
+      respLogData => {
+        console.log('respLogData: ' + JSON.stringify(respLogData, null, " "));
+      }
+    );
+  }
+
+  subsReqEditProfileLog(logReqLog): Observable<any> {
+    return this.subEdProfAPISvs.postApi(logReqLog, '/api/admin/activity-log');
+
   }
 
 }

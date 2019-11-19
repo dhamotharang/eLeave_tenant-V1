@@ -168,6 +168,24 @@ export class AddnewcustomerPage implements OnInit {
   }
 
   /**
+   * This method will be executed when save button is triggered
+   * @memberof AddnewcustomerPage
+   */
+  async saveAddCustomer() {
+    Object.assign(this.newCustForm, { currency: 'MYR', customerLabel: this.custLabelId });
+    await this.postCustInfo();
+
+  }
+
+  /**
+   * This method will be executed when cancel button is triggered
+   * @memberof AddnewcustomerPage
+   */
+  cancelSaveAddingCustomer() {
+    console.log('cancelSaveAddingCustomer');
+  }
+
+  /**
    * This method is to bind returned value requested from API
    * @memberof AddnewcustomerPage
    */
@@ -180,7 +198,12 @@ export class AddnewcustomerPage implements OnInit {
           recurrIntervalVal: this.custCycleNo, activationDate: this.custStartSubsDate,
           lastBillingDate: this.custStartSubsDate, nextBillingDate: this.custEndSubsDate, billingCycle: 0});
 
-        this.postNewSubs().subscribe(data => {this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');});
+        this.postNewSubs().subscribe(dataSubs => {
+          this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');
+          console.log('cust data: ' + JSON.stringify(data[0].CUSTOMER_GUID, null, " "));
+          console.log('subs data: ' + JSON.stringify(dataSubs[0].SUBSCRIPTION_GUID, null, " "));
+          this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);
+        });
       }
     );
   }
@@ -200,24 +223,46 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   postNewSubs(): Observable<any> {
+    console.log('this.newSubsForm: ' + JSON.stringify(this.newSubsForm, null, " "));
     return this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');
   }
 
-  /**
-   * This method will be executed when save button is triggered
-   * @memberof AddnewcustomerPage
-   */
-  async saveAddCustomer() {
-    Object.assign(this.newCustForm, { currency: 'MYR', customerLabel: this.custLabelId});
-    await this.postCustInfo();
+  addLog(valCustId, valSubsId) {
+    this.addCustLog({
+      customerId: valCustId, 
+      subscriptionId: valSubsId, 
+      message: 'Customer has been created'
+    });
 
+    this.addCustLog({
+      customerId: valCustId,
+      subscriptionId: valSubsId,
+      message: 'Customer has been activated'
+    });
+
+    this.addCustLog({
+      customerId: valCustId,
+      subscriptionId: valSubsId,
+      message: 'Subscription has been created'
+    });
+    this.addCustLog({
+      customerId: valCustId,
+      subscriptionId: valSubsId,
+      message: 'Subscription has been activated'
+    });
+    
   }
 
-  /**
-   * This method will be executed when cancel button is triggered
-   * @memberof AddnewcustomerPage
-   */
-  cancelSaveAddingCustomer() {
-    console.log('cancelSaveAddingCustomer');
+  addCustLog(obj) {
+    this.addCusLogtPostApi(obj).subscribe(
+      dataLog => {
+        console.log('dataLog: ' + JSON.stringify(dataLog, null, " "));
+      }
+    );
+  }
+
+
+  addCusLogtPostApi(reqObj): Observable<any> {
+    return this.addCustAPISvs.postApi(reqObj, '/api/admin/activity-log');
   }
 }
