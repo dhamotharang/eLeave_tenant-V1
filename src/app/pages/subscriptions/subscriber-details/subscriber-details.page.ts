@@ -201,21 +201,21 @@ export class SubscriberDetailsPage implements OnInit {
   async openSubsPopover(evtSubs, compName, type) {
     let popover;
 
-    if (type === 1) {
-      popover = await this.popoverController.create({
-        component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
-          (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
-            (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
-              ReactiveSubscriptionComponent,
-        cssClass: 'pop-over-style'
-      });
-    } else {
-      popover = await this.popoverController.create({
-        component: ChangeNextBillingDateComponent,
-        componentProps: { viewType: this },
-        event: evtSubs
-      });
-    }
+    // if (type === 1) {
+    popover = await this.popoverController.create({
+      component: (compName === 'UpdateUserNumbersComponent') ? UpdateUserNumbersComponent :
+        (compName === 'SubscriberRecentActivitiesComponent') ? SubscriberRecentActivitiesComponent :
+          (compName === 'SubscriberEditProfileComponent') ? SubscriberEditProfileComponent :
+            ReactiveSubscriptionComponent,
+      cssClass: 'pop-over-style'
+    });
+    // } else {
+    //   popover = await this.popoverController.create({
+    //     component: ChangeNextBillingDateComponent,
+    //     componentProps: { viewType: this },
+    //     event: evtSubs
+    //   });
+    // }
 
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
@@ -227,6 +227,16 @@ export class SubscriberDetailsPage implements OnInit {
     });
 
     return await popover.present();
+  }
+
+  async openNextBillDatePopover(evtSubs) {
+    let popup = await this.popoverController.create({
+        component: ChangeNextBillingDateComponent,
+        componentProps: { viewType: this },
+        event: evtSubs
+      });
+
+    return await popup.present();
   }
 
   /**

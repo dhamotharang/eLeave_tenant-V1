@@ -214,7 +214,7 @@
                             <ion-label class="subscriberDescriptionCardValue">{{subscriberInfo.FULL_NEXT_BILLING_DATE}}</ion-label>
                         </ion-row>
                         <ion-row>
-                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="openSubsPopover($event, 'ChangeNextBillingDateComponent', 0)">
+                          <ion-label class="subscriberDescriptionCardChangeDate" (click)="openNextBillDatePopover($event)">
                             Change Date
                           </ion-label>
                           <!-- <ion-datetime detail pickerFormat="D MMMM YYYY" max="2100" *ngIf="this.isShowingPicker">
