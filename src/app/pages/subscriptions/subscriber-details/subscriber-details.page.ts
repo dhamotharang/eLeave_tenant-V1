@@ -229,6 +229,10 @@ export class SubscriberDetailsPage implements OnInit {
     return await popover.present();
   }
 
+  /**
+   * This method is to execute popover components based on it's Componet's name
+   * @memberof SubscriberDetailsPage
+   */
   async openNextBillDatePopover(evtSubs) {
     let popup = await this.popoverController.create({
         component: ChangeNextBillingDateComponent,

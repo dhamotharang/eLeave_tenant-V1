@@ -23,6 +23,7 @@ export class SubscriberRecentActivitiesComponent implements OnInit {
 
   /**
    * Creates an instance of SubscriberRecentActivitiesComponent.
+   * @param {APIService} recentActAPISvs This property is to get methods from APIService
    * @memberof SubscriberRecentActivitiesComponent
    */
   constructor(
@@ -35,9 +36,17 @@ export class SubscriberRecentActivitiesComponent implements OnInit {
    */
   public subscriberData = {};
 
+  /**
+   * This property is to bind historical activity logs data
+   * @memberof SubscriberRecentActivitiesComponent
+   */
   public subscriberHistoryData;
+
+  /**
+   * This property is to bind the length of historical activity logs data
+   * @memberof SubscriberRecentActivitiesComponent
+   */
   public subscriberHistoryDataLength;
-  // public recentActGlobalFn: GlobalFunctionService;
 
   /**
    * This method is to bind subscriber's historical info to subscriber's data
@@ -45,22 +54,29 @@ export class SubscriberRecentActivitiesComponent implements OnInit {
    */
   ngOnInit() {
     this.subscriberData = subscriberUpdateInfo.history;
-    // console.log('recent subscriberUpdateInfo: ' + JSON.stringify(subscriberUpdateInfo, null, " "));
     this.getHistoryList();
   }
 
+  /**
+   * This method is to get history logs from API then process it
+   * @memberof SubscriberRecentActivitiesComponent
+   */
   getHistoryList() {
     this.sendReqToAPI().subscribe(
       histData => {
         // console.log('histData1: ' + JSON.stringify(histData, null, " "));
-        this.subscriberHistoryData = histData;
+        // this.subscriberHistoryData = histData;
+        this.subscriberHistoryData = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
         this.subscriberHistoryDataLength = histData.length;
         histData.map(this.convertDataFormat);
-        // console.log('histData2: ' + JSON.stringify(histData, null, " "));
-        console.log('hist data sort 1: ' + JSON.stringify(histData.sort(function (a, b) { return a.CREATION_TS - b.CREATION_TS }), 
-        null, " "));
-        console.log('hist data sort 2: ' + JSON.stringify(histData.sort(function (a, b) { return b.CREATION_TS - a.CREATION_TS }), 
-        null, " "));
+        // // console.log('histData2: ' + JSON.stringify(histData, null, " "));
+        // console.log('hist data sort 1: ' + JSON.stringify(histData.sort(function (a, b) { return a.CREATION_TS - b.CREATION_TS }), 
+        // null, " "));
+        // console.log('hist data sort 2: ' + JSON.stringify(histData.sort(function (a, b) { return b.CREATION_TS - a.CREATION_TS }), 
+        //   // objs.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+        //   null, " ")); 
+        // const testSort = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+        // console.log('test sort: ' + JSON.stringify(testSort, null, " "));
       }
     );
   }

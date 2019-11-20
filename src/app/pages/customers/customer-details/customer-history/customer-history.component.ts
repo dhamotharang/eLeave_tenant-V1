@@ -54,7 +54,9 @@ export class CustomerHistoryComponent implements OnInit {
         // dataCustHist = new GlobalFunctionService().appendArrayChangedDateFormat(dataCustHist);
         // console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
 
-        this.customerData = dataCustHist;
+        this.customerData = dataCustHist.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+        // this.subscriberHistoryData = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+
         this.customerDataLength = dataCustHist.length;
         dataCustHist.map(this.convertCustHistDataFormat);
         console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
