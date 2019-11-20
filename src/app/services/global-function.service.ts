@@ -67,6 +67,7 @@ export class GlobalFunctionService {
   /**
    * This method is to change date format to YYYY-MM-DD HH:mm:ss
    * @param {*} dateValue This parameter is to pass date value to be converted
+   * @param {*} cond This parameter is to pass value that will decide the return format (0/1)
    * @returns
    * @memberof GlobalFunctionService
    */
@@ -75,26 +76,31 @@ export class GlobalFunctionService {
     const ddVal = (dateVal.getDate() < 10) ? '0' + dateVal.getDate() : dateVal.getDate();
     const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;
     // return dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00";
-    return (cond === 0) ? dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00" 
-      : ddVal + '/' + mmVal + '/' + dateVal.getFullYear();
+    return (cond === 0) ? dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate() + " 00:00:00" :
+      (cond === 1) ? ddVal + '/' + mmVal + '/' + dateVal.getFullYear() :
+        dateVal.getFullYear() + '-' + mmVal + '-' + dateVal.getDate();
   }
 
-  // changeDateFormatYYYYMMDDWoTime(dateValue) {
-  //   const dateVal = new Date(dateValue); // 2019 - 12 - 02
-
-  //   const ddVal = (dateVal.getDate() < 10) ? '0' + dateVal.getDate() : dateVal.getDate();
-  //   const mmVal = ((dateVal.getMonth() + 1) < 10) ? '0' + (dateVal.getMonth() + 1) : dateVal.getMonth() + 1;
-  //   return ddVal + '/' + mmVal + '/' + dateVal.getFullYear();
-  // }
-
+  /**
+   * This method is to get hourly time in AM or PM
+   * @param {*} dateValue This parameter is to pass date value to be converted
+   * @returns It will return hourly value in AM or PM
+   * @memberof GlobalFunctionService
+   */
   getHoursFormatAMPM(dateValue) {
     const dateVal = new Date(dateValue);
     return dateVal.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
   }
 
+  /**
+   * This method is to set time format in activty log
+   * @param {*} obj This parameter will pass objects that contain date to be converted
+   * @returns This returns will return the value of converted datetime
+   * @memberof GlobalFunctionService
+   */
   appendArrayChangedDateFormat(obj) {
     return Object.assign(obj, { 
-      'HIST_TIME': this.changeDateFormatYYYYMMDD(obj.CREATION_TS, 0) +
+      'HIST_TIME': this.changeDateFormatYYYYMMDD(obj.CREATION_TS, 2) +
         ' - ' + this.getHoursFormatAMPM(obj.CREATION_TS) 
     });
   }
@@ -112,6 +118,11 @@ export class GlobalFunctionService {
 
   }
 
+  /**
+   * This method is to set configurations to be shown in customer details and subscription details
+   * @returns 
+   * @memberof GlobalFunctionService
+   */
   slideOption() {
     return {
       slidesPerView: 3,

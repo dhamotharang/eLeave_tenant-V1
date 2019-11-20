@@ -6,7 +6,6 @@ import { AlertController } from '@ionic/angular';
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
 import { APIService } from './../../../services/shared-service/api.service';
-// import postApi from '../../../services/shared-service/api.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
 
 import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
@@ -46,18 +45,32 @@ export let subsDtlPopoverCtrlr;
 export class SubscriberDetailsPage implements OnInit {
 
   /**
-   * Creates an instance of SubscriberDetailsPage.
+   *Creates an instance of SubscriberDetailsPage.
    * @param {PopoverController} popoverController This property is to get methods from PopoverController
-   * @param {SearchDataService} subsDtlsSearch This property is to get methods from SearchDataService
-   * @param {PaginationServiceService} subsDtlsPaging This property is to get methods from PaginationServices
+   * @param {PaginationServiceService} subsDtlsPaging This property is to get methods from PaginationServiceService
+   * @param {APIService} subsDtls This property is to get methods from APIService
    * @memberof SubscriberDetailsPage
    */
   constructor(
-    private popoverController: PopoverController,
+    private popoverController: PopoverController, 
     public subsDtlsPaging: PaginationServiceService,
+    public subsDtls: APIService
   ) { }
 
+  /**
+   * This property is to get methods from AlertController
+   * @private
+   * @memberof SubscriberDetailsPage
+   */
   private subsDtlsAlert = new AlertController;
+
+  /**
+   * This property is to get methods from GlobalFunctionService
+   * @private
+   * @memberof SubscriberDetailsPage
+   */
+  private subDtlsGlobalFn = new GlobalFunctionService;
+
   /**
    * This property is to get list of subscribers details
    * @memberof SubscriberDetailsPage
@@ -100,12 +113,23 @@ export class SubscriberDetailsPage implements OnInit {
    */
   configPageSubDtls: any;
 
+  /**
+   * This property is to bind value from confirmation to deactive subcription's option
+   * @private
+   * @memberof SubscriberDetailsPage
+   */
   private confirmOpt;
 
-  private subDtlsGlobalFn = new GlobalFunctionService;
-
+  /**
+   * This property is to bind value from inactive subscription messages
+   * @memberof SubscriberDetailsPage
+   */
   public inactiveMsg = '';
 
+  /**
+   * This property is to bind value from inactivity subscription's reason
+   * @memberof SubscriberDetailsPage
+   */
   public inactiveReason = '';
 
   /**
@@ -132,6 +156,11 @@ export class SubscriberDetailsPage implements OnInit {
   }
 
 
+  /**
+   * This method is to calculate day(s) left between current date and next billing date. If it was expired, the 
+   * system will automatically deactive the subscription. Else, will keep subscription activated
+   * @memberof SubscriberDetailsPage
+   */
   checkDayLeft() {
     this.subscriberDetailsDaysLeft = this.subDtlsGlobalFn.dateDiff(this.subscriberInfo.NEXT_BILLING_DATE);
     if (this.subscriberDetailsDaysLeft < 1) {
@@ -164,20 +193,6 @@ export class SubscriberDetailsPage implements OnInit {
       this.prevToggleVal = this.subsToggle;
     }
   }
-
-  // /**
-  //  * This method is to execute pop over to change next billing date
-  //  * @memberof SubscriberDetailsPage
-  //  */
-  // async openChangeDatePopup(evt) {
-  //   const popup = await this.popoverController.create({
-  //     component: ChangeNextBillingDateComponent,
-  //     componentProps: { viewType: this},
-  //     event: evt
-  //   });
-
-  //   return await popup.present();
-  // }
 
   /**
    * This method is to execute popover components based on it's Componet's name
@@ -242,6 +257,10 @@ export class SubscriberDetailsPage implements OnInit {
     this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, event, this.subscribersDetails.length);
   }
 
+  /**
+   * This method is to configure popup that will be prompted when user trigger deactive slider  
+   * @memberof SubscriberDetailsPage
+   */
   async confirmDeactive() {
     const confirmAlert = await this.subsDtlsAlert.create({
       header: 'Confirmation',
@@ -260,6 +279,11 @@ export class SubscriberDetailsPage implements OnInit {
 
   }
 
+  /**
+   * This method is to set handler of confirmation popup window to deactive the subscription
+   * @returns
+   * @memberof SubscriberDetailsPage
+   */
   confirmDeactiveButtons() {
     return [
       {
@@ -274,31 +298,16 @@ export class SubscriberDetailsPage implements OnInit {
       {
         text: 'Okay',
         handler: (data) => {
-          // this.confirmDeactiveHandlerOkay(data);
           this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
           this.inactiveReason = data.inactiveSubscription;
           document.getElementById('reasonTextId').hidden = false;
           document.getElementById('reactivesubsnotice').hidden = false;
           this.confirmOpt = true;
-          this.statusLog('Subscriptions has been deactivated');
+          this.statusLog('Subscriptions has been deactivated by salesperson. Reason: ' + data.inactiveSubscription);
         }
       }
     ]
   }
-
-  // /**
-  //  * This method is to process the handler when user click Okay button
-  //  * @param {*} data This parameter is to pass value from okay button handler
-  //  * @memberof SubscriberDetailsPage
-  //  */
-  // confirmDeactiveHandlerOkay(data) {
-  //   this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
-  //   this.inactiveReason = data.inactiveSubscription;
-  //   document.getElementById('reasonTextId').hidden = false;
-  //   document.getElementById('reactivesubsnotice').hidden = false;
-  //   this.confirmOpt = true;
-  //   this.statusLog('Subscriptions has been deactivated');
-  // }
 
   /**
    * This method is to get search result for subscriber list
@@ -317,17 +326,16 @@ export class SubscriberDetailsPage implements OnInit {
     this.pageChanged(1);
   }
 
+  /**
+   * This method is to send request to API to into subscriber's activity log
+   * @param {*} msg This parametere is to pass message to activity log
+   * @memberof SubscriberDetailsPage
+   */
   statusLog(msg) {
-    this.reqStatusLog({
+    this.subsDtls.reqPostApi({
       customerId: this.subscriberInfo.CUSTOMER_GUID,
       subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
       message: msg
-    }).subscribe(data => {
-      console.log('statusLog: ' + JSON.stringify(data));
-    });
-  }
-  
-  reqStatusLog(reqObj): Observable<any> {
-    return APIService.prototype.postApi(reqObj, '/api/admin/activity-log');
+    }, '/api/admin/activity-log').subscribe(data => {});
   }
 }

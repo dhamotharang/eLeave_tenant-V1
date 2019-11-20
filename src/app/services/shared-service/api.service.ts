@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-
 import { Headers, Http, Response } from '@angular/http';
-import { map } from 'rxjs/operators';
+
+import { map } from 'rxjs/operators'; 
+import { Observable } from 'rxjs';
 
 /**
  * This injectable is to set API services for eLeave tenant
@@ -97,5 +98,9 @@ export class APIService {
     return this.http.post(this.ROOT_URL + address, data, { headers: this.headers })
         .pipe(map((res: Response) => res.json()
         ));
+  }
+
+  reqPostApi(obj, addr): Observable<any> {
+    return this.postApi(obj, addr);
   }
 }
