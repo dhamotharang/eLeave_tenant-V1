@@ -19,12 +19,12 @@
     <ion-item>
       <ion-label position="stacked">Email*</ion-label>
       <ion-input type="email" inputmode="email" placeholder="Insert email" required="true"
-      [(ngModel)]="userInfo.email"></ion-input>    
+      [(ngModel)]="userInfo.EMAIL"></ion-input>    
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Name*</ion-label>
       <ion-input type="text" placeholder="Insert Name" required="true"
-      [(ngModel)]="userInfo.name"></ion-input>
+      [(ngModel)]="userInfo.FULLNAME"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
@@ -39,10 +39,10 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Role</ion-label>
-      <ion-select [(ngModel)]="userInfo.role">
-        <ion-select-option value="Super Admin" >Super Admin</ion-select-option>
-        <ion-select-option value="Salesperson">Salesperson</ion-select-option>
-        <ion-select-option value="Support">Support</ion-select-option>
+      <ion-select [(ngModel)]="userInfo.ROLE">
+        <ion-select-option value="superadmin" >Super Admin</ion-select-option>
+        <ion-select-option value="salesperson">Salesperson</ion-select-option>
+        <ion-select-option value="support">Support</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item lines="none">

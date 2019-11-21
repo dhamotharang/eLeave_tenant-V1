@@ -101,7 +101,7 @@ export class APIService {
   }
 
   /**
-   * This method is to send request to API using requested body and address
+   * This method is to send request to post API using requested body and address
    * @param {*} obj This parameter will pass object to request body 
    * @param {*} addr This parameter will pass string to request url addresss
    * @returns {Observable<any>}
@@ -112,13 +112,24 @@ export class APIService {
   }
 
   /**
-   * This method is to send request to API using requested address
+   * This method is to send request to get API using requested address
    * @param {*} addr This parameter will pass string to request url addresss
    * @returns {Observable<any>}
    * @memberof APIService
    */
   reqGetApi(addr): Observable<any> {
     return this.getApi(addr);
+  }
+
+  /**
+   * This method is to send request to patch API using requested body and address
+   * @param {*} obj This parameter will pass object to request body
+   * @param {*} addr This parameter will pass string to request url addresss
+   * @returns {Observable<any>}
+   * @memberof APIService
+   */
+  reqPatchApi(obj, addr): Observable<any> {
+    return this.patchApi(obj, addr);
   }
 
 

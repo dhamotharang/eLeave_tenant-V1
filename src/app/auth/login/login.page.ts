@@ -118,6 +118,9 @@ export class LoginPage implements OnInit {
           }
           // return Router.prototype.navigate(['/main/dashboard']);
           return this.router.navigate(['/main/dashboard']);
+        },
+        error => {
+          console.error('login error: ' + JSON.stringify(error, null, " "));
         }
       );
     }

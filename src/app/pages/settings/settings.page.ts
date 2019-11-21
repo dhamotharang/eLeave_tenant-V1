@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { SearchDataService } from '../../services/search-data.service';
+import { APIService } from '../../services/shared-service/api.service';
 
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { RolesDropDownComponent, selRolePopup } from './roles-drop-down/roles-drop-down.component';
 
-import { APIService } from '../../services/shared-service/api.service';
 
 /**
  * This variable is to store data of selected customer to be edited
@@ -43,24 +43,30 @@ export let userRolesList;
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
-})
+}) 
 
 export class SettingsPage implements OnInit {
 
   /**
    * Creates an instance of SettingsPage.
    * @param {PopoverController} popoverController This property is to get methods from PopoverController
-   * @param {SearchDataService} settingSearch This property is to get methods from SearchDataService
    * @param {APIService} settingApiService This property is to get methods from APIService
    * @param {PaginationServiceService} settingPaging This property is to get methods from PaginationServiceService
    * @memberof SettingsPage
    */
   constructor(
       private popoverController: PopoverController,
-      // private settingSearch: SearchDataService,
-      // private settingApiService: APIService,
+      private settingApiService: APIService,
       public settingPaging: PaginationServiceService,
-    ) { }
+  ) { }
+
+  /**
+   * This property is to get methods from SearchDataService
+   * @private
+   * @memberof SettingsPage
+   */
+  private settingSearch = new SearchDataService();
+
 
   /**
    * This property is to set roles list of user
@@ -153,8 +159,8 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   getUserList(param): Observable<any> {
-    return APIService.prototype.getApi('/api/admin/user-manage/' + param);
-    // return this.settingApiService.getApi('/api/admin/user-manage/' + param);
+    // return APIService.prototype.getApi('/api/admin/user-manage/' + param);
+    return this.settingApiService.getApi('/api/admin/user-manage/' + param);
   }
 
   /**
@@ -243,7 +249,8 @@ export class SettingsPage implements OnInit {
   onSearchSettings(event) {
     this.userData = this.initUserData;
     this.userData = (event.detail.value.length > 0 ) ?
-      SearchDataService.prototype.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
+      this.settingSearch.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
+      // SearchDataService.prototype.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
       this.initUserData;
       // this.settingSearch.filerSearch(event.detail.value, this.initUserData, 'FULLNAME') :
     this.pageSettingChanged(1);

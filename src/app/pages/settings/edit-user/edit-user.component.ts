@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
+import { InfoPopupService } from './../../../layout/notificationPopup/info-popup.service';
+import { APIService } from './../../../services/shared-service/api.service';
+
 import { selectedEditUser, settingPopoverCtrlr } from '../settings.page';
 
 /**
@@ -18,7 +22,10 @@ export class EditUserComponent implements OnInit {
    * Creates an instance of EditUserComponent.
    * @memberof EditUserComponent
    */
-  constructor() { }
+  constructor(
+    private editUserApiSvs: APIService,
+    private editUserInfoPopup: InfoPopupService
+  ) { }
 
   /**
    * This property is to bind value of user data
@@ -45,8 +52,10 @@ export class EditUserComponent implements OnInit {
    */
   ngOnInit() {
     this.initUser = selectedEditUser;
+    console.log('initUser: ' + JSON.stringify(this.initUser, null, " "));
     this.userInfo = {...this.initUser, password2: this.initUser.password};
-    this.toggleVal = (this.userInfo.status === 'active') ? true : false;
+    console.log('userInfo: ' + JSON.stringify(this.userInfo, null, " "));
+    this.toggleVal = (this.userInfo.ACTIVATION_FLAG === 1) ? true : false;
   }
 
   /**
@@ -54,7 +63,7 @@ export class EditUserComponent implements OnInit {
    * @memberof EditUserComponent
    */
   checkSettingToggle() {
-    this.userInfo.status = (this.toggleVal === true) ? 'inactive' : 'active';
+    this.userInfo.ACTIVATION_FLAG = (this.toggleVal === true) ? 1 : 0;
   }
 
   /**
@@ -77,9 +86,10 @@ export class EditUserComponent implements OnInit {
    * component
    * @memberof EditUserComponent
    */
-  saveEditUser() {
+  saveEditUser() { 
     this.editPassValidation(this.userInfo.password, this.userInfo.password2);
     Object.assign(this.initUser, this.userInfo);
+    this.reqSaveEditUser(this.initUser);
     this.cancelEditUser();
   }
 
@@ -89,6 +99,22 @@ export class EditUserComponent implements OnInit {
    */
   async cancelEditUser() {
     return await settingPopoverCtrlr.dismiss();
+  }
+
+  reqSaveEditUser(obj) {
+    console.log('req save user obj: ' + JSON.stringify(obj, null, " "));
+    this.editUserApiSvs.patchApi({
+      userId: obj.USER_GUID,
+      email: obj.EMAIL,
+      fullname: obj.FULLNAME,
+      role: obj.ROLE,
+      status: obj.ACTIVATION_FLAG
+    }, '/api/admin/user-manage/user-main').subscribe(
+      retData => {
+        console.log('retData: ' + JSON.stringify(retData, null, " "));
+        this.editUserInfoPopup.alertPopup('You have successfully update user profile!', 'alert-success');
+      }
+    );
   }
 
 }
