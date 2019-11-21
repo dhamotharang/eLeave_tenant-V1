@@ -53,6 +53,13 @@ export class CustomerDetailsPage implements OnInit {
   ) { }
 
   /**
+   * This property is to get methods from GlobalFunctionService
+   * @private
+   * @memberof CustomerDetailsPage
+   */
+  private custDtlsGlobalFn = new GlobalFunctionService();
+
+  /**
    * This property is to bind configurations for slides
    * @memberof CustomerDetailsPage
    */
@@ -130,9 +137,7 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   public searchCust = '';
-
-  private custDtlsGlobalFn = new GlobalFunctionService();
-
+  
   /**
    * This method is to set initial value of properties.
    * And it will be executed when customer page is loaded.

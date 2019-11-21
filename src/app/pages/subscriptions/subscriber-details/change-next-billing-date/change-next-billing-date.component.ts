@@ -22,6 +22,8 @@ export class ChangeNextBillingDateComponent implements OnInit {
 
   /**
    * Creates an instance of ChangeNextBillingDateComponent.
+   * @param {APIService} chgNextBillAPISvs This property is to get methods from APIService
+   * @param {InfoPopupService} chgNxtBillInfoPopup This property is to get methods from InfoPopupService
    * @memberof ChangeNextBillingDateComponent
    */
   constructor(
@@ -29,9 +31,14 @@ export class ChangeNextBillingDateComponent implements OnInit {
     private chgNxtBillInfoPopup: InfoPopupService
   ) { }
 
-  public myDate;
+  // public myDate;
 
+  /**
+   * This property is to bind value of next billing date in datetime format
+   * @memberof ChangeNextBillingDateComponent
+   */
   public newNextBillDate;
+
   /**
    * This property is to bind value of next billing date (Full date with month's short name)
    * @memberof ChangeNextBillingDateComponent
@@ -44,9 +51,13 @@ export class ChangeNextBillingDateComponent implements OnInit {
    */
   public newDateFull = '';
 
+  /**
+   * This property is to bind initial value of next billing date before anything changed
+   * @private
+   * @memberof ChangeNextBillingDateComponent
+   */
   private prevNextBillDate;
 
-  private crtlr;
   /**
    * This method is to set initial value of properties. It will be executed when this component
    * is loaded
@@ -54,12 +65,8 @@ export class ChangeNextBillingDateComponent implements OnInit {
    */
   ngOnInit() {  
     // this.myDate = Date.now();
-    this.myDate = new Date().toLocaleString();
-    console.log('myDate init: ' + this.myDate);
-    console.log('subscriberUpdateInfo: ' + JSON.stringify(subscriberUpdateInfo, null, " "));
+    // this.myDate = new Date().toLocaleString();
     this.prevNextBillDate = subscriberUpdateInfo.SIMPLE_NEXT_BILLING_DATE;
-    console.log('subscriberUpdateInfo NEXT_BILLING_DATE: ' + JSON.stringify(subscriberUpdateInfo.NEXT_BILLING_DATE, null, " "));
-    // console.log('subsDtlPopoverCtrlr: ' + JSON.stringify(subsDtlPopoverCtrlr, null, " "));
   }
 
   /**
@@ -67,7 +74,6 @@ export class ChangeNextBillingDateComponent implements OnInit {
    * @memberof ChangeNextBillingDateComponent
    */
   updateNextBillingDate(evt) {
-    console.log('updateNextBillingDate evt.target.valueAsDate.: ' + JSON.stringify(evt.target.valueAsDate));
     if (evt.target.valueAsDate !== null) {
       this.newDateFull = GlobalFunctionService.prototype.changeDateFormatFull(evt.target.valueAsDate);
       this.newDateShort = GlobalFunctionService.prototype.changeDateFormatSimple(evt.target.valueAsDate);
@@ -111,6 +117,12 @@ export class ChangeNextBillingDateComponent implements OnInit {
     return await subsDtlPopoverCtrlr.dismiss();
   }
 
+  /**
+   * This method is to send request to API to update next billing date, prompt alert popup and update to activity log 
+   * when the next billing date is updated
+   * @param {*} reqObj This parameter is to send 
+   * @memberof ChangeNextBillingDateComponent
+   */
   updNextBillDate(reqObj) {
     this.sendReqChgNextBill(reqObj, 0).subscribe(
       respUpd => {
@@ -119,16 +131,39 @@ export class ChangeNextBillingDateComponent implements OnInit {
         this.sendReqChgNextBill({
           customerId: subscriberUpdateInfo['CUSTOMER_GUID'],
           subscriptionId: subscriberUpdateInfo['SUBSCRIPTION_GUID'],
-          message: 'Next billing date of subscriptions was updated from ' + this.prevNextBillDate + ' to ' + 
+          message: 'Next billing date of subscriptions was updated from ' + this.prevNextBillDate + ' to ' +
             subscriberUpdateInfo.SIMPLE_NEXT_BILLING_DATE
         }, 1).subscribe(
-          respUpdLog => {}
+          respUpdLog => { }
         );
-
       }
     );
+    // this.sendReqChgNextBill(reqObj, 0).subscribe(
+    //   respUpd => {
+    //     console.log('respUpd: ' + JSON.stringify(respUpd, null, " "));
+    //     this.chgNxtBillInfoPopup.alertPopup('You have successfully update next billing date!', 'alert-success');
+    //     this.sendReqChgNextBill({
+    //       customerId: subscriberUpdateInfo['CUSTOMER_GUID'],
+    //       subscriptionId: subscriberUpdateInfo['SUBSCRIPTION_GUID'],
+    //       message: 'Next billing date of subscriptions was updated from ' + this.prevNextBillDate + ' to ' + 
+    //         subscriberUpdateInfo.SIMPLE_NEXT_BILLING_DATE
+    //     }, 1).subscribe(
+    //       respUpdLog => {}
+    //     );
+
+    //   }
+    // );
   }
 
+  /**
+   * This method is to send request to API based on type and request object passed
+   * @param {*} reqObj This parameter will pass the request object to API
+   * @param {*} type This parameter is to decide which API will be requested to. Eg: 
+   * 0: To update subscription, 
+   * 1: To insert data into activity logs
+   * @returns {Observable <any>}
+   * @memberof ChangeNextBillingDateComponent
+   */
   sendReqChgNextBill(reqObj, type): Observable <any> {
     return (type === 0) ? this.chgNextBillAPISvs.patchApi(reqObj, '/api/admin/subscription')
       : this.chgNextBillAPISvs.postApi(reqObj, '/api/admin/activity-log');

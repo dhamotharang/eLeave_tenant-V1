@@ -100,7 +100,29 @@ export class APIService {
         ));
   }
 
+  /**
+   * This method is to send request to API using requested body and address
+   * @param {*} obj This parameter will pass object to request body 
+   * @param {*} addr This parameter will pass string to request url addresss
+   * @returns {Observable<any>}
+   * @memberof APIService
+   */
   reqPostApi(obj, addr): Observable<any> {
     return this.postApi(obj, addr);
   }
+
+  /**
+   * This method is to send request to API using requested address
+   * @param {*} addr This parameter will pass string to request url addresss
+   * @returns {Observable<any>}
+   * @memberof APIService
+   */
+  reqGetApi(addr): Observable<any> {
+    return this.getApi(addr);
+  }
+
+
+  // sendReqToAPI(): Observable<any> {
+  //   return this.recentActAPISvs.getApi('/api/admin/activity-log/' + subscriberUpdateInfo.SUBSCRIPTION_GUID);
+  // }
 }

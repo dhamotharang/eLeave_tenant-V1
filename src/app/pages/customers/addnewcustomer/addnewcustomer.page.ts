@@ -21,10 +21,10 @@ import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.s
 export class AddnewcustomerPage implements OnInit {
 
   /**
-   *Creates an instance of AddnewcustomerPage.
-   * @param {PaginationServiceService} addCustPggSvs This property is to get methods from PaginationServiceService
+   * Creates an instance of AddnewcustomerPage.
    * @param {APIService} addCustAPISvs This property is to get methods from APIService
    * @param {InfoPopupService} addCustInfoPopup This property is to get methods from InfoPopupService
+   * @param {Router} addCustRoute This property is to get methods from Router
    * @memberof AddnewcustomerPage
    */
   constructor(
@@ -93,7 +93,16 @@ export class AddnewcustomerPage implements OnInit {
    */
   public newSubsForm = {};
 
+  /**
+   * This property is to set the customer label id
+   * @memberof AddnewcustomerPage
+   */
   public custLabelId = 'CUS-' + Date.now();
+
+  /**
+   * This property is to set subscription label id
+   * @memberof AddnewcustomerPage
+   */
   public subLabelId = 'SUB-' + Date.now();
 
   /**
@@ -208,11 +217,23 @@ export class AddnewcustomerPage implements OnInit {
     );
   }
 
+  /**
+   * This method is to send POST request to API based on type parameter
+   * @param {*} type This parameter will set either post API to customer or subscirption. Value: cust, subs
+   * @returns {Observable<any>}
+   * @memberof AddnewcustomerPage
+   */
   postNewLog(type): Observable<any> {
     return (type === 'cust') ? this.addCustAPISvs.postApi(this.newCustForm, '/api/admin/customer') :
      this.addCustAPISvs.postApi(this.newSubsForm, '/api/admin/subscription');
   }
 
+  /**
+   * This method is to prepare request argument to post to update activity logs API
+   * @param {*} valCustId This parameter is to pass customer guid value
+   * @param {*} valSubsId This parameter is to pass subscription guid value
+   * @memberof AddnewcustomerPage
+   */
   addLog(valCustId, valSubsId) {
     this.addCustLog({ customerId: valCustId, subscriptionId: valSubsId, message: 'Customer has been created' });
     this.addCustLog({ customerId: valCustId, subscriptionId: valSubsId, message: 'Customer has been activated' });
@@ -221,15 +242,24 @@ export class AddnewcustomerPage implements OnInit {
     
   }
 
+  /**
+   * This method is to handle return response from post API to historical activity logs
+   * @param {*} obj This parameter is request object to send to API
+   * @memberof AddnewcustomerPage
+   */
   addCustLog(obj) {
     this.addCusLogtPostApi(obj).subscribe(
-      dataLog => {
-        console.log('dataLog: ' + JSON.stringify(dataLog, null, " "));
-      }
+      dataLog => {}
     );
   }
 
-
+  /**
+   * This method is to send POST request to API to insert data into historical activity logs based on
+   * request object
+   * @param {*} reqObj This parameter is to pass request object to API
+   * @returns {Observable<any>}
+   * @memberof AddnewcustomerPage
+   */
   addCusLogtPostApi(reqObj): Observable<any> {
     return this.addCustAPISvs.postApi(reqObj, '/api/admin/activity-log');
   }

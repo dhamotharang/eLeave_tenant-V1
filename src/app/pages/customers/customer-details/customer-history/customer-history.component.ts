@@ -1,5 +1,3 @@
-import { Observable } from '../../../../../../node_modules/rxjs';
-
 import { Component, OnInit } from '@angular/core';
 
 import { APIService } from '../../../../services/shared-service/api.service';
@@ -22,6 +20,7 @@ export class CustomerHistoryComponent implements OnInit {
 
   /**
    * Creates an instance of CustomerHistoryComponent.
+   * @param {APIService} custHistAPISvs This property is to get methods from APIService
    * @memberof CustomerHistoryComponent
    */
   constructor(
@@ -29,11 +28,15 @@ export class CustomerHistoryComponent implements OnInit {
   ) { }
 
   /**
-   * This property is to bind customer data's history
+   * This property is to bind customer historical data
    * @memberof CustomerHistoryComponent
    */
   public customerData;
 
+  /**
+   * This property is to bind the length of customer historical data
+   * @memberof CustomerHistoryComponent
+   */
   public customerDataLength;
 
   /**
@@ -42,37 +45,31 @@ export class CustomerHistoryComponent implements OnInit {
    * @memberof CustomerHistoryComponent
    */
   ngOnInit() {
-    console.log('customerUpdateInfo: ' + JSON.stringify(customerUpdateInfo, null, " "));
-    // this.customerData = customerUpdateInfo.history;
     this.getCustHistoryList();
   }
 
+  /**
+   * This method is to send request to API to get customer historical data then show it 
+   * @memberof CustomerHistoryComponent
+   */
   getCustHistoryList() {
-    this.reqAPICustHistoryList().subscribe(
+    this.custHistAPISvs.reqGetApi('/api/admin/activity-log/' + customerUpdateInfo.SUBSCRIPTION_GUID).subscribe(
       dataCustHist => {
-        // console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
-        // dataCustHist = new GlobalFunctionService().appendArrayChangedDateFormat(dataCustHist);
-        // console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
-
-        this.customerData = dataCustHist.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
-        // this.subscriberHistoryData = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
-
+        // this.customerData = dataCustHist.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+        this.customerData = new GlobalFunctionService().sortArrAsc(dataCustHist, 'desc');
         this.customerDataLength = dataCustHist.length;
         dataCustHist.map(this.convertCustHistDataFormat);
-        console.log('dataCustHist: ' + JSON.stringify(dataCustHist, null, " "));
 
-      }
-    );
+      });
   }
 
+  /**
+   * This method is to process CREATION_TS of historical data datetime format to formatted historical format (DD-MM-YYYY HH:mm)
+   * @param {*} obj This property is to pass object that contain historical data
+   * @returns
+   * @memberof CustomerHistoryComponent
+   */
   convertCustHistDataFormat(obj) {
-    // const testDate = new GlobalFunctionService().changeDateFormatFull(obj.CREATION_TS);
-    // const testTime = new GlobalFunctionService().getHoursFormatAMPM(obj.CREATION_TS);
-    // return Object.assign(obj, { 'HIST_TIME': testDate + ' - ' + testTime });
     return new GlobalFunctionService().appendArrayChangedDateFormat(obj);
-  }
-
-  reqAPICustHistoryList(): Observable<any> {
-    return this.custHistAPISvs.getApi('/api/admin/activity-log/' + customerUpdateInfo.SUBSCRIPTION_GUID);
   }
 }

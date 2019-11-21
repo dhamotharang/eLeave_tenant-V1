@@ -56,8 +56,8 @@ export class CustomersPage implements OnInit {
   /**
    *Creates an instance of CustomersPage.
    * @param {PaginationServiceService} custPaging This property is to bind method from PaginationServiceService
-   * @param {PopoverController} popoverController This property is to bind method from PopOverController
-   * @param {SearchDataService} custSearch This property is to bind method from SearchDataService
+   * @param {PopoverController} popoverController This property is to bind method from PopoverController
+   * @param {APIService} custApiSvs This property is to bind method from APIService
    * @memberof CustomersPage
    */
   constructor(
@@ -67,6 +67,11 @@ export class CustomersPage implements OnInit {
     private custApiSvs: APIService
   ) { }
 
+  /**
+   * This property is to bind method from SearchDataService
+   * @private
+   * @memberof CustomersPage
+   */
   private custSearch = new SearchDataService();
   
   /**

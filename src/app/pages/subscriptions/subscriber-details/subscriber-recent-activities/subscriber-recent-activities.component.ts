@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { APIService } from '../../../../services/shared-service/api.service';
@@ -62,34 +61,22 @@ export class SubscriberRecentActivitiesComponent implements OnInit {
    * @memberof SubscriberRecentActivitiesComponent
    */
   getHistoryList() {
-    this.sendReqToAPI().subscribe(
+    this.recentActAPISvs.reqGetApi('/api/admin/activity-log/' + subscriberUpdateInfo.SUBSCRIPTION_GUID).subscribe(
       histData => {
-        // console.log('histData1: ' + JSON.stringify(histData, null, " "));
-        // this.subscriberHistoryData = histData;
-        this.subscriberHistoryData = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+        this.subscriberHistoryData = new GlobalFunctionService().sortArrAsc(histData, 'desc');
+        // this.subscriberHistoryData = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
         this.subscriberHistoryDataLength = histData.length;
         histData.map(this.convertDataFormat);
-        // // console.log('histData2: ' + JSON.stringify(histData, null, " "));
-        // console.log('hist data sort 1: ' + JSON.stringify(histData.sort(function (a, b) { return a.CREATION_TS - b.CREATION_TS }), 
-        // null, " "));
-        // console.log('hist data sort 2: ' + JSON.stringify(histData.sort(function (a, b) { return b.CREATION_TS - a.CREATION_TS }), 
-        //   // objs.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
-        //   null, " ")); 
-        // const testSort = histData.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
-        // console.log('test sort: ' + JSON.stringify(testSort, null, " "));
-      }
-    );
+      });
   }
 
+  /**
+   * This method is to convert creation datetime format to DD-MM-YYYY HH:MM
+   * @param {*} value Object to be passsed
+   * @returns
+   * @memberof SubscriberRecentActivitiesComponent
+   */
   convertDataFormat(value) {
     return new GlobalFunctionService().appendArrayChangedDateFormat(value);
-    // const testDate = new GlobalFunctionService().changeDateFormatFull(value.CREATION_TS);
-    // const testTime = new GlobalFunctionService().getHoursFormatAMPM(value.CREATION_TS);
-    // return Object.assign(value, { 'HIST_TIME': testDate + ' - ' + testTime});
   } 
-
-  sendReqToAPI(): Observable <any> {
-    return this.recentActAPISvs.getApi('/api/admin/activity-log/' + subscriberUpdateInfo.SUBSCRIPTION_GUID);
-  }
-
 }

@@ -280,13 +280,18 @@ export class ReactiveSubscriptionComponent implements OnInit {
   }
 
   /**
-   * This method is to close this popup
+   * This method is to close this popup and set on close return data as true
    * @memberof ReactiveSubscriptionComponent
    */
   async dissmissReactiveSubsPopup() {
     return await subsDtlPopoverCtrlr.dismiss(true);
   }
 
+  /**
+   * This method is to close this popup and set on close return data as false
+   * @returns
+   * @memberof ReactiveSubscriptionComponent
+   */
   async cancelReactiveSubsPopup() {
     return await subsDtlPopoverCtrlr.dismiss(false);
   }

@@ -139,4 +139,20 @@ export class GlobalFunctionService {
       }
     }
   }
+
+  /**
+   * This method is to sort objects into ascending/descending order based on CREATION_TS. And this method
+   * will be used after getting historical activity log and before it displayed in UI
+   * @param {*} obj This parameter will pass an array object for historical activity log
+   * @param {*} type This parameter will pass the value to decide the order ascending/descending. Eg: asc, desc
+   * @returns
+   * @memberof GlobalFunctionService
+   */
+  sortArrAsc(obj, type) {
+    const ret = (type === 'asc') ? obj.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0)) 
+      : obj.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? -1 : ((b.CREATION_TS > a.CREATION_TS) ? 1 : 0));
+    
+      return ret;
+    // return obj.sort((a, b) => (a.CREATION_TS > b.CREATION_TS) ? 1 : ((b.CREATION_TS > a.CREATION_TS) ? -1 : 0));
+  }
 }

@@ -148,19 +148,27 @@ export class SubscriberEditProfileComponent implements OnInit {
     return this.subEdProfAPISvs.patchApi(obj, '/api/admin/customer');
   }
 
+  /**
+   * This method is to set request object to update historical activiy log then handle the response
+   * returned by the API
+   * @memberof SubscriberEditProfileComponent
+   */
   subsEditProfileLog() {
-    console.log('subsEditProfileLog');
     this.subsReqEditProfileLog({
       customerId: this.selectedClientInfo['CUSTOMER_GUID'],
       subscriptionId: this.selectedClientInfo['SUBSCRIPTION_GUID'],
       message: 'Customer profile has been updated'
     }).subscribe(
-      respLogData => {
-        console.log('respLogData: ' + JSON.stringify(respLogData, null, " "));
-      }
+      respLogData => { }
     );
   }
 
+  /**
+   * This method is to send request to API to insert historical activiy logs
+   * @param {*} logReqLog This parameter is to pass the request object
+   * @returns {Observable<any>}
+   * @memberof SubscriberEditProfileComponent
+   */
   subsReqEditProfileLog(logReqLog): Observable<any> {
     return this.subEdProfAPISvs.postApi(logReqLog, '/api/admin/activity-log');
 

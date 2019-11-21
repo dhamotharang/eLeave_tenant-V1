@@ -20,8 +20,9 @@ import { customerUpdateInfo, popovrCtrlr } from '../customer-details.page';
 export class UpdateCustomerDetailsComponent implements OnInit {
 
   /**
-   *Creates an instance of UpdateCustomerDetailsComponent.
+   * Creates an instance of UpdateCustomerDetailsComponent.
    * @param {APIService} updateCustAPI This property is to get methods from APIService
+   * @param {InfoPopupService} updateCustInfoPopup This property is to get methods from InfoPopupService
    * @memberof UpdateCustomerDetailsComponent
    */
   constructor(
@@ -57,9 +58,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
    */
   ngOnInit() {
     this.selectedUpdateCustomerInfo = customerUpdateInfo;
-    console.log('customerUpdateInfo: ' + JSON.stringify(customerUpdateInfo, null, " "));
     Object.assign(this.updateCustomerInfo, this.selectedUpdateCustomerInfo);
-    console.log('updateCustomerInfo: ' + JSON.stringify(this.updateCustomerInfo, null, " "));
     this.initGetSalesmanList();
   }
 
@@ -144,20 +143,26 @@ export class UpdateCustomerDetailsComponent implements OnInit {
     return await popovrCtrlr.dismiss();
   }
 
+  /**
+   * This method is to prepare the request object to send request to API then handle the returns response of API 
+   * @memberof UpdateCustomerDetailsComponent
+   */
   editCustProfileLog() {
-
-    // console.log('selectedUpdateCustomerInfo: ' + JSON.stringify(this.selectedUpdateCustomerInfo, null, " "));
     this.reqLogEditProfile({
       customerId: this.selectedUpdateCustomerInfo['CUSTOMER_GUID'],
       subscriptionId: this.selectedUpdateCustomerInfo['SUBSCRIPTION_GUID'],
       message: 'Customer profile has been updated'
     }).subscribe(
-      retLog => {
-        console.log('retLog: ' + JSON.stringify(retLog, null, " "));
-      }
+      retLog => { }
     );
   }
 
+  /**
+   * This method is to send request to API to update historical activity logs 
+   * @param {*} reqObj This parameter is to pass request object to API
+   * @returns {Observable<any>}
+   * @memberof UpdateCustomerDetailsComponent
+   */
   reqLogEditProfile(reqObj): Observable<any> {
     return this.updateCustAPI.postApi(reqObj, '/api/admin/activity-log');
   }

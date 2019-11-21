@@ -61,11 +61,8 @@ export class AppComponent {
   /**
    * Creates an instance of AppComponent.
    * @param {Platform} platform This property is to get method from Platform
-   * @param {SplashScreen} splashScreen This property is to get method from SplashScreen
-   * @param {StatusBar} statusBar This property is to get method from StatusBar
    * @param {PopoverController} popoverController This property is to get method from PopoverController
-   * @param {PaginationServiceService} settingPage This property is to set/get methods from PaginationServiceService
-   * @param {UserDataService} userDataSvs This property is to set/get methods from UserDataService
+   * @param {PaginationServiceService} settingPage This property is to get method from PaginationServiceService
    * @memberof AppComponent
    */
   constructor(
@@ -79,9 +76,24 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  /**
+   * This property is to get events from UserDataService
+   * @memberof AppComponent
+   */
   public evt;
+
+  /**
+   * This property is to get Storage from UserDataService
+   * @memberof AppComponent
+   */
   public storages;
+
+  /**
+   * This property is to get methods from UserDataService
+   * @memberof AppComponent
+   */
   public userDataSvs = new UserDataService(this.evt, this.storages);
+  
   /**
    * This property is to set side menu's title, url and icon
    * @memberof AppComponent
