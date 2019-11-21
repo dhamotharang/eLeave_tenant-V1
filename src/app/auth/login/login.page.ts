@@ -79,6 +79,8 @@ export class LoginPage implements OnInit {
    */
   public homePage = '/main/dashboard';
 
+  public errorMsg;
+  public errorLogin;
   /**
    * This property is to bind methods from cryptoJS
    * @memberof LoginPage
@@ -107,11 +109,12 @@ export class LoginPage implements OnInit {
     this.pgSet.setShowToolbarSideMenu(false);
 
     if (loginForm.valid) {
-      this.pgSet.setShowToolbarSideMenu(true);
       Object.assign(currUser, {value: this.userLogin.email});
       await this.authService.login(this.userLogin.email, this.userLogin.password).subscribe(
         data => {
-          console.log('apopooop: ' + JSON.stringify(data));
+          this.pgSet.setShowToolbarSideMenu(true);
+          console.log('apopooop: ' + JSON.stringify(data, null, " "));
+          this.errorLogin = false;
           if (data.access_token) {
           // if (data && data.access_token) {
             localStorage.setItem('access_token', JSON.stringify(data.access_token));
@@ -120,7 +123,9 @@ export class LoginPage implements OnInit {
           return this.router.navigate(['/main/dashboard']);
         },
         error => {
-          console.error('login error: ' + JSON.stringify(error, null, " "));
+          this.errorMsg = (error.statusText === 'Unauthorized') ? 'Invalid Credential' : error.statusText;
+          this.errorLogin = true;
+
         }
       );
     }

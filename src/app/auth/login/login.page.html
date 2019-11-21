@@ -7,7 +7,9 @@
       <ion-avatar class="loginLogo">
           <img src="../../../assets/icon/logo.PNG"/>
       </ion-avatar>
-      <ion-note class="noteStyle">Welcome back! Please login to your account</ion-note>      
+      <ion-note class="noteStyle">Welcome back! Please login to your account</ion-note> 
+      <ion-note class="noteStyle" style="color: var(--ion-color-danger); display: flex;
+    justify-content: center;" *ngIf="errorLogin === true" >Error: {{errorMsg}}</ion-note>     
   
       <form class="formStyle" #loginForm="ngForm">
         <!-- Email -->
@@ -66,8 +68,13 @@
         <ion-avatar class="loginLogo">
             <img src="../../../assets/icon/logo.PNG"/>
         </ion-avatar>
-        <ion-label class="noteStyle note-sm-format">Please login to your account.</ion-label>      
-    
+        <ion-item-group class="note-sm-format">
+          <ion-label class="noteStyle">Please login to your account.</ion-label>   
+          <ion-label class="noteStyle" style="color: var(--ion-color-danger); display: flex; justify-content: center;" 
+          *ngIf="errorLogin === true" >Error: {{errorMsg}}</ion-label>
+
+        </ion-item-group>
+
         <form class="formStyle" #loginForm="ngForm">
           <!-- Email -->
           <ion-item  color="transparent" style="color: var(--ion-color-light);">

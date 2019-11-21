@@ -1,4 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
+
+import { AlertController } from '@ionic/angular';
 
 import { InfoPopupService } from './../../../layout/notificationPopup/info-popup.service';
 import { APIService } from './../../../services/shared-service/api.service';
@@ -27,6 +30,8 @@ export class EditUserComponent implements OnInit {
     private editUserInfoPopup: InfoPopupService
   ) { }
 
+  private editUserAlert = new AlertController();
+
   /**
    * This property is to bind value of user data
    * @memberof EditUserComponent
@@ -45,6 +50,8 @@ export class EditUserComponent implements OnInit {
    */
   public toggleVal;
 
+  public confirmDeactive;
+
   /**
    * This method is to set initial value of properties. And
    * it will be executed when this component is being loaded
@@ -52,9 +59,7 @@ export class EditUserComponent implements OnInit {
    */
   ngOnInit() {
     this.initUser = selectedEditUser;
-    console.log('initUser: ' + JSON.stringify(this.initUser, null, " "));
     this.userInfo = {...this.initUser, password2: this.initUser.password};
-    console.log('userInfo: ' + JSON.stringify(this.userInfo, null, " "));
     this.toggleVal = (this.userInfo.ACTIVATION_FLAG === 1) ? true : false;
   }
 
@@ -63,8 +68,50 @@ export class EditUserComponent implements OnInit {
    * @memberof EditUserComponent
    */
   checkSettingToggle() {
+    console.log('this.toggleVal: ' + this.toggleVal);
+    this.confirmDeactive = this.toggleVal;
     this.userInfo.ACTIVATION_FLAG = (this.toggleVal === true) ? 1 : 0;
   }
+
+  // async confirmDeactivePopover() {
+  //   const confirmDeactive = await this.editUserAlert.create({
+  //     header: 'Confirmation',
+  //     message: 'Are you sure want to deactive this user? Please fill up your reason',
+  //     inputs: [
+  //       {
+  //         name: 'inactiveSubscription',
+  //         type: 'text',
+  //         placeholder: 'Reason...'
+  //       }
+  //     ],
+  //     cssClass: 'alert-warning-confirm',
+  //     buttons: this.confirmDeactivePopoverButtons()
+  //   });
+  // }
+
+  // confirmDeactivePopoverButtons() {
+  //   return [
+  //     {
+  //       text: 'Cancel',
+  //       role: 'cancel',
+  //       handler: () => {
+  //         console.log('cancel')
+  //       }
+  //     },
+  //     {
+  //       text: 'Okay',
+  //       handler: (data) => {
+  //         this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+  //         this.inactiveReason = data.inactiveSubscription;
+  //         document.getElementById('reasonTextId').hidden = false;
+  //         document.getElementById('reactivesubsnotice').hidden = false;
+  //         this.confirmOpt = true;
+  //         this.statusLog('Subscriptions has been deactivated by salesperson. Reason: ' + data.inactiveSubscription);
+  //       }
+  //     }
+  //   ]
+
+  // }
 
   /**
    * This method is to validate updated password in this coomponent
@@ -102,7 +149,6 @@ export class EditUserComponent implements OnInit {
   }
 
   reqSaveEditUser(obj) {
-    console.log('req save user obj: ' + JSON.stringify(obj, null, " "));
     this.editUserApiSvs.patchApi({
       userId: obj.USER_GUID,
       email: obj.EMAIL,
@@ -111,7 +157,6 @@ export class EditUserComponent implements OnInit {
       status: obj.ACTIVATION_FLAG
     }, '/api/admin/user-manage/user-main').subscribe(
       retData => {
-        console.log('retData: ' + JSON.stringify(retData, null, " "));
         this.editUserInfoPopup.alertPopup('You have successfully update user profile!', 'alert-success');
       }
     );

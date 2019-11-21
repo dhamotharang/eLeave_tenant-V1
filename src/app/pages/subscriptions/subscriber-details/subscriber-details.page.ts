@@ -278,7 +278,7 @@ export class SubscriberDetailsPage implements OnInit {
   async confirmDeactive() {
     const confirmAlert = await this.subsDtlsAlert.create({
       header: 'Confirmation',
-      message: 'Are you sure want to deactive this subscription? Please fill in your reason',
+      message: 'Deactive this subscription? Please fill in your reason',
       inputs: [
         {
           name: 'inactiveSubscription',
@@ -310,7 +310,7 @@ export class SubscriberDetailsPage implements OnInit {
         }
       },
       {
-        text: 'Okay',
+        text: 'Deactive',
         handler: (data) => {
           this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
           this.inactiveReason = data.inactiveSubscription;
