@@ -216,12 +216,14 @@ export class SubscriberDetailsPage implements OnInit {
     //     event: evtSubs
     //   });
     // }
-
+ 
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
+        document.getElementById('reactivesubsnotice').hidden = (data.data === false) ? false : true;
         this.prevToggleVal = !data.data;
         this.subsToggle = data.data; 
         this.confirmOpt = !data.data;
+
         this.statusLog('Subscriptions has been reactivated');
       }
     });
