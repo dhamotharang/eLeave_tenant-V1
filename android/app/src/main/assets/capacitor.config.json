@@ -1,0 +1,23 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "eLeave-v1-tenant",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "19",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000"
+    }
+  },
+  "server": {
+    "url": "http://172.16.1.140:8102",
+    "originalUrl": "http://172.16.1.140:8101"
+  }
+}

@@ -1,13 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { NgxSpinnerService } from 'ngx-spinner';
-
 import {UserOptions} from '../../interfaces/user-options';
-
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { AuthService } from '../../services/shared-service/auth.service';
+
 import {currUser} from '../../app.component';
 
 /**
@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     // private spinner: NgxSpinnerService,
     public authService: AuthService,
-    public pgSet: PaginationServiceService
+    public pgSet: PaginationServiceService,
 
   ) { }
 
@@ -91,6 +91,8 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   ngOnInit() {
+    // this.infoPopup.alertPopup('You have successfully create user', 'alert-success');
+    // this.infoPopup.alertPopup('You have successfully create user', 'alert-error');
     this.pgSet.setShowToolbarSideMenu(false);
     if ( localStorage.getItem('email') !== null && localStorage.getItem('password') !== null) {
       this.userLogin.email = localStorage.getItem('email');

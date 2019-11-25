@@ -157,7 +157,7 @@ export class EditUserComponent implements OnInit {
       status: obj.ACTIVATION_FLAG
     }, '/api/admin/user-manage/user-main').subscribe(
       retData => {
-        this.editUserInfoPopup.alertPopup('You have successfully update user profile!', 'alert-success');
+        this.editUserInfoPopup.alertPopup('You have successfully update user profile', 'alert-success');
       }
     );
   }

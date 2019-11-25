@@ -260,7 +260,7 @@ export class ReactiveSubscriptionComponent implements OnInit {
   patchUpdateSubs(obj) {
     this.sendReqPatchUpdateSubs(obj).subscribe(
       respondData => {
-        this.reactiveInfoPopup.alertPopup('You have successfully reactive subscription!', 'alert-success');
+        this.reactiveInfoPopup.alertPopup('You have successfully reactive subscription', 'alert-success');
       }, 
       error => {
         console.log('error: ' + JSON.stringify(error, null, " "));

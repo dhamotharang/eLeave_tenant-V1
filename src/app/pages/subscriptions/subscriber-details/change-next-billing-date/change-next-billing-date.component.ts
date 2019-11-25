@@ -127,7 +127,7 @@ export class ChangeNextBillingDateComponent implements OnInit {
     this.sendReqChgNextBill(reqObj, 0).subscribe(
       respUpd => {
         console.log('respUpd: ' + JSON.stringify(respUpd, null, " "));
-        this.chgNxtBillInfoPopup.alertPopup('You have successfully update next billing date!', 'alert-success');
+        this.chgNxtBillInfoPopup.alertPopup('You have successfully update next billing date', 'alert-success');
         this.sendReqChgNextBill({
           customerId: subscriberUpdateInfo['CUSTOMER_GUID'],
           subscriptionId: subscriberUpdateInfo['SUBSCRIPTION_GUID'],
@@ -141,7 +141,7 @@ export class ChangeNextBillingDateComponent implements OnInit {
     // this.sendReqChgNextBill(reqObj, 0).subscribe(
     //   respUpd => {
     //     console.log('respUpd: ' + JSON.stringify(respUpd, null, " "));
-    //     this.chgNxtBillInfoPopup.alertPopup('You have successfully update next billing date!', 'alert-success');
+    //     this.chgNxtBillInfoPopup.alertPopup('You have successfully update next billing date', 'alert-success');
     //     this.sendReqChgNextBill({
     //       customerId: subscriberUpdateInfo['CUSTOMER_GUID'],
     //       subscriptionId: subscriberUpdateInfo['SUBSCRIPTION_GUID'],

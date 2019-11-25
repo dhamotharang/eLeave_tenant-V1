@@ -208,7 +208,7 @@ export class AddnewcustomerPage implements OnInit {
           lastBillingDate: this.custStartSubsDate, nextBillingDate: this.custEndSubsDate, billingCycle: 0});
 
         this.postNewLog('subs').subscribe(dataSubs => {
-          this.addCustInfoPopup.alertPopup('You have successfully create user!', 'alert-success');
+          this.addCustInfoPopup.alertPopup('You have successfully create user', 'alert-success');
           // console.log('cust data: ' + JSON.stringify(data[0].CUSTOMER_GUID, null, " "));
           // console.log('subs data: ' + JSON.stringify(dataSubs[0].SUBSCRIPTION_GUID, null, " "));
           this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);

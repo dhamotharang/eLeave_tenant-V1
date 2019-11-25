@@ -29,10 +29,13 @@ export class InfoPopupService {
    */
   async alertPopup(msg, cssTitle) {
     const alert = await this.alertController.create({
-      message: msg,
+      message: (cssTitle === 'alert-success') ? '<img src="../../../assets/icon/layout/icon_tick.svg">' + msg :
+        '<img src="../../../assets/icon/layout/icon_untick.svg">' + msg,
+      // message: '<img src="../../../assets/icon/layout/icon_tick.svg" style="padding-right: 15px;">' + msg,
+      // message: msg,
       cssClass: cssTitle// 'alert-success' / 'alert-warning' / 'alert-danger'
     });
-
+    
     await alert.present();
     setTimeout(() => {
       alert.dismiss();
@@ -41,7 +44,7 @@ export class InfoPopupService {
 
   // async confirmationPopup(msg, cssTitle) {
   //   const confirm = await this.alertController.create({
-  //     header: 'Confirm!',
+  //     header: 'Confirm'.
   //     cssClass: cssTitle,
   //     message: msg,
   //     buttons: [

@@ -104,7 +104,7 @@ export class UpdateUserNumbersComponent implements OnInit {
   updateUserQuota(obj) {
     this.patchUpdateUserQuota(obj).subscribe(
       patchRespond => {
-        this.updQuotaInfoPopup.alertPopup('You have successfully update user quota!', 'alert-success');
+        this.updQuotaInfoPopup.alertPopup('You have successfully update user quota', 'alert-success');
       }
     );
   }

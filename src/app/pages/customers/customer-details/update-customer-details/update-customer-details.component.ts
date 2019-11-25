@@ -89,7 +89,7 @@ export class UpdateCustomerDetailsComponent implements OnInit {
   setUpdateCustomer(obj: any) {
     this.patchUpdateCustomerEndpoint(obj).subscribe(
       data => {
-        this.updateCustInfoPopup.alertPopup('You have successfully edited customer profile!', 'alert-success');
+        this.updateCustInfoPopup.alertPopup('You have successfully edited customer profile', 'alert-success');
         // console.log('succeed edit profile');
         this.editCustProfileLog();
       }

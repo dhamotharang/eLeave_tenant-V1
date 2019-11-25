@@ -102,7 +102,7 @@ export class AddNewUserComponent implements OnInit {
     };
     this.addUserApiService.postApi(newUserData, '/api/admin/user-manage/sign-up').subscribe(
       data => {
-        this.addUserInfoPopup.alertPopup('You have successfully create user!', 'alert-success');
+        this.addUserInfoPopup.alertPopup('You have successfully create user', 'alert-success');
       }
     );
   }

@@ -128,7 +128,7 @@ export class SubscriberEditProfileComponent implements OnInit {
     this.reqSaveUpdateAPI(obj).subscribe(
       retObj => {
         // console.log('saveUpdate retObj: ' + JSON.stringify(retObj, null, " "));
-        this.subEdProfInfoPopup.alertPopup('You have successfully edited customer profile!', 'alert-success');
+        this.subEdProfInfoPopup.alertPopup('You have successfully edited customer profile', 'alert-success');
         console.log('obj: ' + JSON.stringify(obj, null, " "));
         console.log('retObj: ' + JSON.stringify(retObj, null, " "));
         console.log('selectedClientInfo: ' + JSON.stringify(this.selectedClientInfo, null, " "));
