@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-// import { PaginationServiceService } from '../../../services/pagination-service.service';
+import { PaginationServiceService } from '../../../services/pagination-service.service';
 import {APIService} from '../../../services/shared-service/api.service';
 
 import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.service';
@@ -34,6 +34,12 @@ export class AddnewcustomerPage implements OnInit {
     private addCustRoute: Router
   ) { }
   
+  /**
+   * This property is to get methods from PaginationServiceService
+   * @memberof AddnewcustomerPage
+   */
+  public addCustPggSvs = new PaginationServiceService;
+
   /**
    * This property is to bind value start subscription's date selected
    * from calender
