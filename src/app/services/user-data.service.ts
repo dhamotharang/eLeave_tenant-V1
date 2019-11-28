@@ -66,7 +66,7 @@ export class UserDataService {
   forgetPassword(emailData) {
     console.log('forgetPassword');
     console.log(emailData);
-    console.log('need to notify superadmin');
+    // console.log('need to notify superadmin');
   }
 
   /**

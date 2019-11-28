@@ -64,21 +64,21 @@
                     <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-building.svg"></ion-icon>
                     <ion-text class="customerCardIconText">
                       <!-- {{cardData.tenantNumber}} SUBCOMPANY NUMBERS -->
-                      10
+                      {{cardData.COMPANY_NO}}
                     </ion-text>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-icon class="customerCardIcon" src="../../../assets/icon/customer/icon-office-team.svg"></ion-icon>
                     <ion-text class="customerCardIconText">
                       <!-- {{cardData.employeeNumber}} USED_EMPLOYEE_QUOTA-->
-                      3000
+                      {{cardData.EMPLOYEE_NO}}
                     </ion-text>
                   </ion-item>
                 </ion-item-group>
                 
                 <span [ngSwitch]="cardData.STATUS">
-                  <ion-button fill="clear" *ngSwitchCase="0" [ngStyle]="{'background-color': '#5ee2a0'}">active</ion-button>
-                  <ion-button fill="clear" *ngSwitchCase="1" [ngStyle]="{'background-color': '#808495'}">inactive</ion-button>
+                  <ion-button fill="clear" *ngSwitchCase="1" [ngStyle]="{'background-color': '#5ee2a0'}">active</ion-button>
+                  <ion-button fill="clear" *ngSwitchCase="0" [ngStyle]="{'background-color': '#808495'}">inactive</ion-button>
                 </span>
                 <!-- <ion-button fill="clear" [ngStyle]="{'background-color': cardData.subsStatus === 'active' ? 
                   '#5ee2a0' : '#a5a4bf'}">
@@ -148,18 +148,12 @@
                     <!-- <ion-col style="min-width: fit-content;" size="1.5">{{tableData.plan}}</ion-col> subs.PLAN -->
                     <ion-col style="min-width: fit-content;" size="1.5"> 
                       <!-- {{tableData.status}} -->
-                        <span [ngSwitch]="tableData.status">
-                          <p *ngSwitchCase="'LIVE'" style="color: #5ee2a0;">
-                              {{tableData.status}}
+                        <span [ngSwitch]="tableData.STATUS">
+                          <p *ngSwitchCase="'1'" style="color: #5ee2a0;">
+                              Active
                           </p>
-                          <p *ngSwitchCase="'TRIAL'" style="color: #3b86ff;">
-                              {{tableData.status}}                  
-                          </p>
-                          <p *ngSwitchCase="'PAST DUE'" style="color: #ff3b3b;">
-                              {{tableData.status}}                  
-                          </p>
-                          <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" style="color: #ff3b3b;">
-                              {{tableData.status}}                  
+                          <p *ngSwitchCase="'0'" style="color: #3b86ff;">
+                              Inactive               
                           </p>
                         </span>
                     </ion-col>                    

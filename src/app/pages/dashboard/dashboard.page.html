@@ -66,7 +66,7 @@
       </ion-col>
     </!--> 
 
-    <!--------------------------- Card Section --------------------------------->
+    <!-- -------------------------- Card Section ------------------------------ -->
     <ion-row style="display: flex; flex-wrap: wrap;">      
       <!-- All Customers -->
       <ion-card mode="md" class="cardStyle">
@@ -77,15 +77,22 @@
             <div class="cardColumn">
               <div class="cardRow">
                 <ion-label class="cardValueStyle">
-                  7721K
+                  <!-- {{dashboardData.totalCustomer}} -->
+                  {{allCust}}
                 </ion-label>
               </div>
-              <div class="cardRow cardValueDiffStyleIncr"
+              <div *ngIf="allCustDiff1 > -1" class="cardRow cardValueDiffStyleIncr"
               [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-                <!-- ngif diff, arrow down (red). else arrow up (green) -->
-                <ion-icon name="arrow-up"></ion-icon>
+                <ion-icon *ngIf="allCustDiff1 > 0" name="arrow-up"></ion-icon>
                 <ion-label>
-                    11.2%
+                  {{allCustDiff1}} %
+                </ion-label>
+              </div>
+              <div  *ngIf="allCustDiff1 < 0; " class="cardRow cardValueDiffStyleDecr"
+               [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+                <ion-icon name="arrow-down"></ion-icon>
+                <ion-label>
+                  {{allCustDiff1}} %
                 </ion-label>
               </div>
             </div>
@@ -94,7 +101,6 @@
             </div>
           </ion-card-content>
       </ion-card>
-        
       <!-- Active Customers -->
       <ion-card mode="md" class="cardStyle">
         <ion-card-header>
@@ -104,15 +110,21 @@
             <div class="cardColumn">
               <div class="cardRow">
                 <ion-label class="cardValueStyle">
-                    7000K
+                    <!-- 7000K -->
+                  {{activeCust}}
+
                 </ion-label>
               </div>
-              <div class="cardRow cardValueDiffStyleIncr"
-              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-                <!-- ngif diff, arrow down (red). else arrow up (green) -->
-                <ion-icon name="arrow-up"></ion-icon>
+              <div *ngIf="actvCustDiff1 > -1" class="cardRow cardValueDiffStyleIncr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+                <ion-icon *ngIf="allCustDiff1 > 0" name="arrow-up"></ion-icon>
                 <ion-label>
-                    8.8%
+                  {{actvCustDiff1}} %
+                </ion-label>
+              </div>
+              <div *ngIf="actvCustDiff1 < 0; " class="cardRow cardValueDiffStyleDecr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+                <ion-icon name="arrow-down"></ion-icon>
+                <ion-label>
+                  {{actvCustDiff1}} %
                 </ion-label>
               </div>
             </div>
@@ -131,15 +143,20 @@
             <div class="cardColumn">
               <div class="cardRow">
                 <ion-label class="cardValueStyle">
-                    13K
+                  {{inactiveCust}}
+                    <!-- 13K -->
                 </ion-label>
               </div>
-              <div class="cardRow cardValueDiffStyleDecr"
-              [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-                <!-- ngif diff, arrow down (red). else arrow up (green) -->
+              <div *ngIf="inactvCustDiff1 > -1" class="cardRow cardValueDiffStyleIncr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+                <ion-icon *ngIf="allCustDiff1 > 0" name="arrow-up"></ion-icon>
+                <ion-label>
+                  {{inactvCustDiff1}} %
+                </ion-label>
+              </div>
+              <div *ngIf="inactvCustDiff1 < 0; " class="cardRow cardValueDiffStyleDecr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
                 <ion-icon name="arrow-down"></ion-icon>
                 <ion-label>
-                    13.6%
+                  {{inactvCustDiff1}} %
                 </ion-label>
               </div>
             </div>
@@ -158,15 +175,20 @@
           <div class="cardColumn">
             <div class="cardRow">
               <ion-label class="cardValueStyle">
-                  2453K
+                  {{compNo}}
+                  <!-- 2453K -->
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleIncr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
-              <!-- ngif diff, arrow down (red). else arrow up (green) -->
-              <ion-icon name="arrow-up"></ion-icon>
+            <div *ngIf="compNoDiff1 > -1" class="cardRow cardValueDiffStyleIncr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon *ngIf="allCustDiff1 > 0" name="arrow-up"></ion-icon>
               <ion-label>
-                  13.8%
+                {{compNoDiff1}} %
+              </ion-label>
+            </div>
+            <div *ngIf="compNoDiff1 < 0; " class="cardRow cardValueDiffStyleDecr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon name="arrow-down"></ion-icon>
+              <ion-label>
+                {{compNoDiff1}} %
               </ion-label>
             </div>
           </div>
@@ -185,14 +207,20 @@
           <div class="cardColumn">
             <div class="cardRow">
               <ion-label class="cardValueStyle">
-                  43180K
+                {{empNo}}
+                  <!-- 43180K -->
               </ion-label>
             </div>
-            <div class="cardRow cardValueDiffStyleDecr"
-            [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+            <div *ngIf="empNoDiff1 > -1" class="cardRow cardValueDiffStyleIncr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
+              <ion-icon *ngIf="allCustDiff1 > 0" name="arrow-up"></ion-icon>
+              <ion-label>
+                {{empNoDiff1}} %
+              </ion-label>
+            </div>
+            <div *ngIf="empNoDiff1 < 0; " class="cardRow cardValueDiffStyleDecr" [ngStyle]="{'visibility': (this.overviewSgmtOpt === 'all') ? 'hidden' : 'visible'}">
               <ion-icon name="arrow-down"></ion-icon>
               <ion-label>
-                  9.8%
+                {{empNoDiff1}} %
               </ion-label>
             </div>
           </div>

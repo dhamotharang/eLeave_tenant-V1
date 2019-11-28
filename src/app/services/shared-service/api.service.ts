@@ -85,6 +85,13 @@ export class APIService {
         .pipe(map((res: Response) => res.json()));
   }
 
+  postApiResetPassword(address: string) {
+    this.headerAuthorization();
+    return this.http.post(this.ROOT_URL + address, { headers: this.headers })
+      .pipe(map((res: Response) => res.json()
+      ));
+  }
+
   /**
    * This method is to set http request (post) with assigned path
    * and parameters

@@ -228,6 +228,14 @@ export class CustomersPage implements OnInit {
     subsObj.forEach(itemSubs => {
       if (itemCust.CUSTOMER_GUID === itemSubs.CUSTOMER_GUID) {
         itemCust = Object.assign(itemCust, itemSubs);
+        this.custApiSvs.reqGetApi('/api/admin/subscription/company_info/' + itemCust.SUBSCRIPTION_GUID).subscribe(
+          itemChildCpny => {
+            itemCust = Object.assign(itemCust, {
+              COMPANY_NO: itemChildCpny.total_company,
+              EMPLOYEE_NO: itemChildCpny.total_employee
+            });
+          }
+        );
       }
     });
 

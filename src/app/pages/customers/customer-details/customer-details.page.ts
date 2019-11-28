@@ -1,15 +1,16 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
 import { SearchDataService } from '../../../services/search-data.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
+import { APIService } from './../../../services/shared-service/api.service';
 
 import { customerInfo, customerDataList, currCustPage } from '../customers.page';
 import { SubscriberDetailsPage } from '../../subscriptions/subscriber-details/subscriber-details.page';
 import { UpdateCustomerDetailsComponent } from './update-customer-details/update-customer-details.component';
 import { CustomerHistoryComponent } from './customer-history/customer-history.component';
-
 
 /**
  * This variable is to store data of customer details
@@ -49,8 +50,10 @@ export class CustomerDetailsPage implements OnInit {
   constructor(
     public custDtlsPaging: PaginationServiceService,
     private popoverController: PopoverController,
-    private custListSearch: SearchDataService
+    private custListSearch: SearchDataService,
+    private custDtlsAPISvs: APIService
   ) { }
+
 
   /**
    * This property is to get methods from GlobalFunctionService
@@ -138,6 +141,8 @@ export class CustomerDetailsPage implements OnInit {
    */
   public searchCust = '';
   
+  public childCompList;
+
   /**
    * This method is to set initial value of properties.
    * And it will be executed when customer page is loaded.
@@ -148,6 +153,7 @@ export class CustomerDetailsPage implements OnInit {
     this.slideOpts = this.custDtlsGlobalFn.slideOption();
     this.selectedCustomerInfo = customerInfo;
     this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
+    console.log('selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
     customerUpdateInfo = this.selectedCustomerInfo;
     this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
     // this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
@@ -155,6 +161,7 @@ export class CustomerDetailsPage implements OnInit {
     this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
     popovrCtrlr = this.popoverController;
     this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, currCustPage, this.customerList.length);
+    this.getChildCompanyList(this.selectedCustomerInfo);
   }
 
   /**
@@ -184,6 +191,13 @@ export class CustomerDetailsPage implements OnInit {
     // this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
     this.custToggle = (this.calcDays < 0) ? false : true;
     this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
+    this.getChildCompanyList(this.selectedCustomerInfo);
+  }
+
+  onViewSubscriptionDetails(obj) {
+    console.log('objeee: ' + JSON.stringify(obj, null, " "));
+    console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
+    
   }
 
   /**
@@ -217,6 +231,18 @@ export class CustomerDetailsPage implements OnInit {
       this.custListSearch.filerSearch(event.detail.value, this.customerList, 'FULLNAME') :
                             this.customerList;
     this.pageCustDtlsChanged(1);
+  }
+
+  getChildCompanyList(custData) {
+    console.log('getChildCompanyList: ' + JSON.stringify(custData, null, " "));
+    console.log('getChildCompanyList SUBSCRIPTION_GUID: ' + JSON.stringify(custData.SUBSCRIPTION_GUID, null, " "));
+    this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/company_info/' + custData.SUBSCRIPTION_GUID).subscribe(
+      respChildData => {
+        console.log('respChildData: ' + JSON.stringify(respChildData.company_details, null, " "));
+        this.childCompList = respChildData.company_details;
+      }
+    );
+    
   }
 
 

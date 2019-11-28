@@ -282,7 +282,10 @@
             </ion-row>
             <ion-row style="display: flex; justify-content: flex-end;">
               <!-- <ion-item> -->
-                <ion-button class="viewSubscriptionButton">
+                <ion-button class="viewSubscriptionButton" 
+                (click)="onViewSubscriptionDetails(selectedCustomerInfo)">
+
+                 <!-- [routerDirection]="'root'" [routerLink]="['/main/subscriptions/subscriber-details/', selectedCustomerInfo.SUBSCRIPTION_GUID]" -->
                   <ion-label style="padding: 5%">
                     View & Edit Subscriptions
                   </ion-label>
@@ -300,32 +303,23 @@
         <ion-content [scrollEvents]="true" 
           class="childCompanyContentFormat childCompanyListStyle"
           [ngClass]="{'subscriptionDisabled': (custToggle === false) ? true : false}"> 
-          <ion-row>     
-            <ion-item-group *ngFor="let childCompanies of selectedCustomerInfo.childrenCompany"
-              style="margin: 2%;">
-                <ion-label style="font-weight: bold;">
-                  {{childCompanies.childCpnyName}}
+          <ion-row>        
+            <ion-item-group *ngFor="let childCompanies of childCompList"
+              style="margin: 2%; width: 28%; min-width: fit-content;">
+                <ion-label style="font-weight: bold; white-space: pre-wrap;">
+                  {{childCompanies.name}}
                 </ion-label>
-                <ion-label>
-                    {{childCompanies.childCpnyAddrL1}}            
+                <ion-label style="white-space: pre-wrap;" *ngIf="childCompanies.registration_no !== null" >
+                    {{childCompanies.registration_no}}            
                 </ion-label>
-                <ion-label>
-                    {{childCompanies.childCpnyAddrL2}}            
+                <ion-label style="white-space: pre-wrap;" *ngIf="childCompanies.address !== null">
+                    {{childCompanies.address}}            
                 </ion-label>
-                <ion-label>
-                    {{childCompanies.childCpnyAddrZip}} {{childCompanies.childCpnyAddrCity}}             
-                </ion-label>
-                <ion-label>
-                    {{childCompanies.childCpnyAddrState}}            
-                </ion-label>
-                <ion-label>
-                    {{childCompanies.childCpnyAddrCountry}}            
-                </ion-label>
-                <ion-label style="font-weight: bold;">
-                  Staff No: {{childCompanies.childCpnyEmployeeNo}}
-                </ion-label>
+                <ion-label style="font-weight: bold; white-space: pre-wrap;">
+                  Staff No: {{childCompanies.total_employee}}
+                </ion-label> 
             </ion-item-group>
-          </ion-row> 
+          </ion-row>   
         </ion-content>
 
       </ion-col>

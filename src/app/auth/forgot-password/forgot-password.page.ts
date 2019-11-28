@@ -1,8 +1,11 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { InfoPopupService } from './../../layout/notificationPopup/info-popup.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 import { UserDataService } from '../../services/user-data.service';
+import { APIService } from './../../services/shared-service/api.service';
 
 
 /**
@@ -31,8 +34,11 @@ export class ForgotPasswordPage implements OnInit {
   constructor(
     private userData: UserDataService,
     private router: Router,
-    public pgSetting: PaginationServiceService
+    public pgSetting: PaginationServiceService,
+    private fgtPswdAPISvs: APIService,
+    private fgtPswdInfoPopup: InfoPopupService
     ) { }
+
 
   /**
    * This property is to bind inserted email valie
@@ -47,6 +53,7 @@ export class ForgotPasswordPage implements OnInit {
    */
   public sideMenuShow;
 
+  public resetErrorMsg;
 
   /**
    * This method is to initialize forget password page
@@ -54,6 +61,7 @@ export class ForgotPasswordPage implements OnInit {
    */
   ngOnInit() {
     this.pgSetting.setShowToolbarSideMenu(false);
+    this.userEmail = '';
   }
 
 
@@ -64,8 +72,28 @@ export class ForgotPasswordPage implements OnInit {
    * @memberof ForgotPasswordPage
    */
   requestForgotPassword() {
-    this.userData.forgetPassword(this.userEmail);
-    return this.router.navigateByUrl('/login');
+    if (this.userEmail === '') {
+      this.resetErrorMsg = 'Email is required';
+    } else {
+      this.userData.forgetPassword(this.userEmail);
+      this.reqPostToApi(this.userEmail).subscribe(
+        data => {
+          if (data.status === 404) {
+            this.resetErrorMsg = data.response.message;
+          } else {
+            this.resetErrorMsg = '';
+            this.fgtPswdInfoPopup.alertPopup("We've sent you an email with the instructions", 'alert-success');
+            // console.log('email sent to reset password');
+            return this.router.navigateByUrl('/login');
+
+          }
+        }
+      );
+    }
+  }
+
+  reqPostToApi(emailAddr): Observable<any> {
+    return this.fgtPswdAPISvs.postApiResetPassword('/api/forgot-password/' + emailAddr);
   }
 
 }

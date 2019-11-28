@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { APIService } from './../../services/shared-service/api.service';
 import { PaginationServiceService } from '../../services/pagination-service.service';
 
 /**
@@ -21,6 +23,7 @@ export class DashboardPage implements OnInit {
    */
   constructor(
     public pgSett: PaginationServiceService,
+    public dshbAPISvs: APIService
   ) { }
 
   /**
@@ -108,6 +111,20 @@ export class DashboardPage implements OnInit {
    */
   public overviewSgmtOpt;
 
+  public dashboardData;
+  public allCust;
+  public activeCust;
+  public inactiveCust;
+  public compNo;
+  public empNo;
+  public diffVal;
+  public allCustDiff1;
+  public actvCustDiff1;
+  public inactvCustDiff1;
+  public compNoDiff1;
+  public empNoDiff1;
+
+
 
   /**
    * This method is to set inital value of properties. It
@@ -117,6 +134,14 @@ export class DashboardPage implements OnInit {
   ngOnInit() {
     this.overviewSgmtOpt = 'all';
     this.pgSett.setShowToolbarSideMenu(true);
+    this.reqDashboardAPI('all');
+    // this.dshbAPISvs.reqGetApi('/api/admin/dashboard/all').subscribe(
+    //   respData => {
+    //     this.dashboardData = respData;
+    //     console.log('dashboardData2: ' + JSON.stringify(this.dashboardData, null, " "));
+
+    //   }
+    // );
   }
 
 
@@ -127,7 +152,43 @@ export class DashboardPage implements OnInit {
    */
   segmentChanged(ev: any) {
     console.log('Segment changed:', ev.detail.value);
+    this.reqDashboardAPI(ev.detail.value);
+    console.log('dashboardData3: ' + JSON.stringify(this.dashboardData, null, " "));
     console.log(this.overviewSgmtOpt);
+  }
+
+  async reqDashboardAPI(type) {
+    await this.dshbAPISvs.reqGetApi('/api/admin/dashboard/' + type).subscribe(
+      retDsbData => {
+        this.dashboardData = retDsbData;
+        this.allCust = retDsbData.totalCustomer;
+        this.activeCust = retDsbData.totalActiveCustomer;
+        this.inactiveCust = retDsbData.totalInactiveCustomer;
+        this.compNo = retDsbData.totalCompany;
+        this.empNo = retDsbData.totalEmployee;
+        if (type !== 'all') {
+          // this.allCustDiff1 = -10;
+          this.allCustDiff1 = this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer);
+          this.actvCustDiff1 =  this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer);
+          this.inactvCustDiff1 = this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer);
+          this.compNoDiff1 = this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany);
+          this.empNoDiff1 = this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee);
+          this.diffVal = {
+            allCustDiff: this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer),
+            actvCustDiff: this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer),
+            inactvCustDiff: this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer),
+            compNoDiff: this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany),
+            empNoDiff: this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee),
+          };
+          console.log('rthis.diffVal: ' + JSON.stringify(this.diffVal, null, " ")); 
+        }
+        console.log('rthis.dashboardData: ' + JSON.stringify(this.dashboardData, null, " "))
+      }
+    );
+  }
+
+  calcDiff(currVal, prevVal) {
+    return Math.round(((currVal - prevVal) / currVal) * 100);
   }
 }
 
