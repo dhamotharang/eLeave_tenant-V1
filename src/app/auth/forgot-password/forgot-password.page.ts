@@ -34,11 +34,12 @@ export class ForgotPasswordPage implements OnInit {
   constructor(
     private userData: UserDataService,
     private router: Router,
-    public pgSetting: PaginationServiceService,
+    // public pgSetting: PaginationServiceService,
     private fgtPswdAPISvs: APIService,
     private fgtPswdInfoPopup: InfoPopupService
     ) { }
 
+  public pgSetting = new PaginationServiceService;
 
   /**
    * This property is to bind inserted email valie

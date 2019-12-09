@@ -8,7 +8,6 @@ import { GlobalFunctionService } from '../../../services/global-function.service
 import { APIService } from './../../../services/shared-service/api.service';
 
 import { customerInfo, customerDataList, currCustPage } from '../customers.page';
-import { SubscriberDetailsPage } from '../../subscriptions/subscriber-details/subscriber-details.page';
 import { UpdateCustomerDetailsComponent } from './update-customer-details/update-customer-details.component';
 import { CustomerHistoryComponent } from './customer-history/customer-history.component';
 
@@ -121,13 +120,6 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   public prevCustToggleVal = true;
-  
-  // /**
-  //  * This property is to calculate the days different between last billing date
-  //  * and next billing date
-  //  * @memberof CustomerDetailsPage
-  //  */
-  // public daysLeftFn: SubscriberDetailsPage = new SubscriberDetailsPage(this.comp, this.subsDtlsCompSearch, this.subsDtlsCompPaging);
   
   /**
    * This property is to set customer page's pagination configurations

@@ -40,6 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'main/subscriptions/subscriber-details',
+    // path: 'main/subscriptions/subscriber-details',
     loadChildren: './pages/subscriptions/subscriber-details/subscriber-details.module#SubscriberDetailsPageModule',
     canActivate: [AuthGuard]
   },
@@ -56,6 +57,11 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: './auth/forgot-password/forgot-password.module#ForgotPasswordPageModule'
+  },
+  {
+    path: 'reset-password/:token',
+    // path: 'reset-password/:id/:email',
+    loadChildren: './auth/reset-password/reset-password.module#ResetPasswordPageModule'
   }
 
 
