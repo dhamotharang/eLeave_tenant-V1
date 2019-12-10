@@ -60,7 +60,6 @@ const routes: Routes = [
   },
   {
     path: 'reset-password/:token',
-    // path: 'reset-password/:id/:email',
     loadChildren: './auth/reset-password/reset-password.module#ResetPasswordPageModule'
   }
 
