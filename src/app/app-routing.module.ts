@@ -59,7 +59,8 @@ const routes: Routes = [
     loadChildren: './auth/forgot-password/forgot-password.module#ForgotPasswordPageModule'
   },
   {
-    path: 'reset-password/:token',
+    // path: 'reset-password/:token',
+    path: 'reset-password',
     loadChildren: './auth/reset-password/reset-password.module#ResetPasswordPageModule'
   }
 
