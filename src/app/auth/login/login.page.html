@@ -1,5 +1,5 @@
 <ion-content [class]="(pgSet.getSideMenuType() === 'fullMenu') ? 'hide-sm-down' : 'hide-sm-down'"> 
-  <ion-item-group class="mainLayout">
+  <ion-item-group class="mainLayout"> 
     <img class="sideimg" src="../../../assets/icon//signin/sign-in-abstract.svg"/>
     <ion-item-group class="bodyStyle">
 
@@ -44,7 +44,7 @@
             <ion-checkbox (ionChange)="rememberMe($event)"></ion-checkbox>
             <ion-label style="cursor: default;">Remember Me</ion-label>
           </ion-item-group>
-          <ion-label [routerDirection]="'root'" [routerLink]="'/forgot-password'"
+          <ion-label  (click)="redirectToForgetPassword()" 
           style="cursor: pointer;">Forgot Password</ion-label>
         </ion-row>
 
@@ -108,7 +108,7 @@
               <ion-checkbox (ionChange)="rememberMe($event)"></ion-checkbox>
               <ion-label style="cursor: default;">Remember Me</ion-label>
             </ion-item-group>
-            <ion-label [routerDirection]="'root'" [routerLink]="'/forgot-password'"
+            <ion-label (click)="redirectToForgetPassword()"
             style="cursor: pointer;">Forgot Password</ion-label>
           </ion-row>
   

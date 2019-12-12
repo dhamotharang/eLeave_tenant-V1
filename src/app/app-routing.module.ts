@@ -53,15 +53,6 @@ const routes: Routes = [
     path: 'main/settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule',
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'forgot-password',
-    loadChildren: './auth/forgot-password/forgot-password.module#ForgotPasswordPageModule'
-  },
-  {
-    // path: 'reset-password/:token',
-    path: 'reset-password',
-    loadChildren: './auth/reset-password/reset-password.module#ResetPasswordPageModule'
   }
 
 
