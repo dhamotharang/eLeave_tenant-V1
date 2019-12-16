@@ -192,6 +192,7 @@ export class SubscriptionsPage implements OnInit {
    * @memberof SubscriptionsPage
    */
   viewSubscriptionDetails(subscribersData) {
+    console.log('subscribersData: ' + JSON.stringify(subscribersData, null, " "));
     return selectedSubscribersInfo = subscribersData;
   }
 

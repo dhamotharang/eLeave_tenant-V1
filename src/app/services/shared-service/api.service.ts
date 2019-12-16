@@ -29,7 +29,6 @@ export class APIService {
    */
   public ROOT_URL = 'http://zencore.zen.com.my:3001';
 
-
   /**
    * This property is to decalre the headers and save it for token
    * authorization
@@ -83,13 +82,6 @@ export class APIService {
   postApiLogin(data: any, address: string) {
     return this.http.post(this.ROOT_URL + address, data)
         .pipe(map((res: Response) => res.json()));
-  }
-
-  postApiResetPassword(address: string) {
-    this.headerAuthorization();
-    return this.http.post(this.ROOT_URL + address, { headers: this.headers })
-      .pipe(map((res: Response) => res.json()
-      ));
   }
 
   /**

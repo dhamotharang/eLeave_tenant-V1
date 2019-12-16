@@ -32,7 +32,7 @@ export let userDummiesData;
  * This variable is to store value of logged user's email
  * @memberof AppComponent
  */
-export let currUser = { value: 'senglong@zen.com.my' };
+export let currUser = { value: '' };
 
 /**
  * This variable is to store value for popup in toolbar
@@ -162,7 +162,7 @@ export class AppComponent {
     customersDummiesData = json.customerSample;
     salesmanDummiesData = json.salepersonList;
     userDummiesData = json.userDetails;
-    this.loggedUser = 'No user';
+    // this.loggedUser = 'No user';
     this.loggedUser = currUser;
     this.checkWindowWidth();
     // this.settingPage.setSideMenuType(this.sideMenuStyle);

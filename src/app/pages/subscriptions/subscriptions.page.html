@@ -189,8 +189,8 @@
                   <ion-label> Next Billing Date: {{card.SIMPLE_NEXT_BILLING_DATE}} </ion-label>
                 </ion-item-group>
                 <ion-label style="color: #3b86ff; text-align: center; margin: 10px 0px 0px; cursor: pointer;"                    
-                  [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
-                  (click)="viewSubscriptionDetails(card)">View Details</ion-label>
+                  [routerDirection]="'root'" [routerLink]="['/main/subscriptions/subscriber-details/', card.SUBSCRIPTION_GUID]"
+                  (click)="viewSubscriptionDetails(card)">View Details</ion-label> 
               </ion-card-content>
             </ion-card>
           </ion-item-group>
