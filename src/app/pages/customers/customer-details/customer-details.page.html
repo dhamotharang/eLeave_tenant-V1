@@ -303,7 +303,7 @@
         <ion-content [scrollEvents]="true" 
           class="childCompanyContentFormat childCompanyListStyle"
           [ngClass]="{'subscriptionDisabled': (custToggle === false) ? true : false}"> 
-          <ion-row>        
+          <ion-row *ngIf="childCompLength > 0" >        
             <ion-item-group *ngFor="let childCompanies of childCompList"
               style="margin: 2%; width: 28%; min-width: fit-content;">
                 <ion-label style="font-weight: bold; white-space: pre-wrap;">
@@ -320,6 +320,13 @@
                 </ion-label> 
             </ion-item-group>
           </ion-row>   
+          <ion-row *ngIf="childCompLength < 1" style="justify-content: center; color: var(--eleave-body-empty-color);">
+            <ion-item-group style="margin: 2% auto; color: var(--eleave-body-empty-color); width: 28%; min-width: fit-content;">
+              <ion-label style="font-weight: bold; white-space: pre-wrap;">
+                No child company found
+              </ion-label>
+            </ion-item-group>
+          </ion-row>
         </ion-content>
 
       </ion-col>

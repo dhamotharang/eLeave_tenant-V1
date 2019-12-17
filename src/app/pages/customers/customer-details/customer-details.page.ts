@@ -133,7 +133,18 @@ export class CustomerDetailsPage implements OnInit {
    */
   public searchCust = '';
   
+  /**
+   * This property is to bind value of child company list
+   *
+   * @memberof CustomerDetailsPage
+   */
   public childCompList;
+
+  /**
+   * This property is to bind length value of child company list
+   * @memberof CustomerDetailsPage
+   */
+  public childCompLength;
 
   /**
    * This method is to set initial value of properties.
@@ -225,13 +236,16 @@ export class CustomerDetailsPage implements OnInit {
     this.pageCustDtlsChanged(1);
   }
 
+  /**
+   * This method is to get child company list from API
+   * @param {*} custData This parameter will pass the customer object
+   * @memberof CustomerDetailsPage
+   */
   getChildCompanyList(custData) {
-    console.log('getChildCompanyList: ' + JSON.stringify(custData, null, " "));
-    console.log('getChildCompanyList SUBSCRIPTION_GUID: ' + JSON.stringify(custData.SUBSCRIPTION_GUID, null, " "));
     this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/company_info/' + custData.SUBSCRIPTION_GUID).subscribe(
       respChildData => {
-        console.log('respChildData: ' + JSON.stringify(respChildData.company_details, null, " "));
         this.childCompList = respChildData.company_details;
+        this.childCompLength = this.childCompList.length;
       }
     );
     
