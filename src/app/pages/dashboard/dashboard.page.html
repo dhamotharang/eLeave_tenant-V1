@@ -294,48 +294,42 @@
             <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers; let i=index">
               <ion-col size="4" style="text-align: left; width:40%;">
                 <div>
-                  {{table.companyName}}
+                  {{table.COMPANY_NAME}}
                 </div>
               </ion-col>
               <ion-col>
                 <div>
-                  {{table.activationDate}}
+                  {{table.SIMPLE_ACTIVATION_DATE}}
                 </div>
               </ion-col>
               <ion-col>
                 <div>
-                  {{table.creationDate}}
+                  {{table.SIMPLE_CREATION_TS}}
                 </div>
               </ion-col>
               <ion-col>
                 <div>
-                  {{table.plan}}
+                  {{table.PLAN}}
                 </div>
               </ion-col>
               <ion-col>
-                <span [ngSwitch]="table.status">
-                  <p *ngSwitchCase="'LIVE'" class="columnStatusGreen">
-                      {{table.status}}
+                <span [ngSwitch]="table.STATUS">
+                  <p *ngSwitchCase="1" class="columnStatusGreen">
+                      Active
                   </p>
-                  <p *ngSwitchCase="'TRIAL'" class="columnStatusBlue">
-                      {{table.status}}                  
-                  </p>
-                  <p *ngSwitchCase="'PAST DUE'" class="columnStatusRed">
-                      {{table.status}}                  
-                  </p>
-                  <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="columnStatusRed">
-                      {{table.status}}                  
+                  <p *ngSwitchCase="0" class="columnStatusRed">
+                      Inactive               
                   </p>
                 </span>
               </ion-col>
               <ion-col>
                 <div>
-                  {{table.lastBillingOn}}
+                  {{table.SIMPLE_LAST_BILLING_DATE}}
                 </div>
               </ion-col>
               <ion-col>
                 <div>
-                  {{table.nextBillingOn}}
+                  {{table.SIMPLE_NEXT_BILLING_DATE}}
                 </div>
               </ion-col>
             </ion-row> 
@@ -348,32 +342,26 @@
             <ion-card  mode="md" *ngFor="let table of subscribers; let i=index">
               <ion-card-content mode="md" class="cardStyle cardStyles">
                 <ion-card-title>
-                    {{table.companyName}}
+                    {{table.COMPANY_NAME}}
                   <ion-card-subtitle>
                     <span>
-                      {{table.plan}}
+                      {{table.PLAN}}
                     </span>
-                    <span [ngSwitch]="table.status">
-                      <p *ngSwitchCase="'LIVE'" class="columnStatusGreen">
-                          {{table.status}}
+                    <span [ngSwitch]="table.STATUS">
+                      <p *ngSwitchCase="1" class="columnStatusGreen">
+                          Active
                       </p>
-                      <p *ngSwitchCase="'TRIAL'" class="columnStatusBlue">
-                          {{table.status}}                  
-                      </p>
-                      <p *ngSwitchCase="'PAST DUE'" class="columnStatusRed">
-                          {{table.status}}                  
-                      </p>
-                      <p *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="columnStatusRed">
-                          {{table.status}}                  
+                      <p *ngSwitchCase="0" class="columnStatusRed">
+                          Inactive     
                       </p>
                     </span>
                   </ion-card-subtitle>
                 </ion-card-title>
                 <ion-item-group style="padding-top: 10px;">
-                  <ion-label> Creation Date: {{table.creationDate}} </ion-label>
-                  <ion-label> Activatation Date: {{table.activationDate}} </ion-label>
-                  <ion-label> Last Billing Date: {{table.lastBillingOn}} </ion-label>
-                  <ion-label> Next Billing Date: {{table.nextBillingOn}} </ion-label>
+                  <ion-label> Creation Date: {{table.SIMPLE_CREATION_TS}} </ion-label>
+                  <ion-label> Activatation Date: {{table.SIMPLE_ACTIVATION_DATE}} </ion-label>
+                  <ion-label> Last Billing Date: {{table.SIMPLE_LAST_BILLING_DATE}} </ion-label>
+                  <ion-label> Next Billing Date: {{table.SIMPLE_NEXT_BILLING_DATE}} </ion-label>
                 </ion-item-group>
               </ion-card-content>
             </ion-card>

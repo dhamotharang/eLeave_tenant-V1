@@ -1,3 +1,4 @@
+import { GlobalFunctionService } from './../../services/global-function.service';
 import { Component, OnInit } from '@angular/core';
 
 import { APIService } from './../../services/shared-service/api.service';
@@ -19,91 +20,21 @@ export class DashboardPage implements OnInit {
   /**
    *Creates an instance of DashboardPage.
    * @param {PaginationServiceService} pgSett This property is to get method/function from PaginationServiceService
+   * @param {APIService} dshbAPISvs This property is to get method/function from APIService
+   * @param {GlobalFunctionService} dshbGlobalFn This property is to get method/function from GlobalFunctionService
    * @memberof DashboardPage
    */
   constructor(
     public pgSett: PaginationServiceService,
-    public dshbAPISvs: APIService
+    public dshbAPISvs: APIService,
+    private dshbGlobalFn: GlobalFunctionService
   ) { }
 
   /**
    * This properties is to set subscribers data
    * @memberof DashboardPage
    */
-  public subscribers = [
-    {
-      creationDate: '3 Jan 2018',
-      activationDate: '3 Jan 2018',
-      subscription: 'SUB-00008',
-      clientName: 'Amelia Hart',
-      clientEmail: 'amelia@abccompany1.com.my',
-      companyName: 'ABC Company 1 Sdn. Bhd.',
-      plan: 'Standard',
-      status: 'LIVE',
-      lastBillingOn: '20 Jun 2019',
-      nextBillingOn: '20 Jul 2019'
-    },
-    {
-      creationDate: '5 Jan 2018',
-      activationDate: '6 Jan 2018',
-      subscription: 'SUB-00007',
-      clientName: 'Brit Robertson',
-      clientEmail: 'brit@celtic.com.my',
-      companyName: 'Celtic Sdn. Bhd.',
-      plan: 'Standard',
-      status: 'LIVE',
-      lastBillingOn: '6 Jun 2019',
-      nextBillingOn: '6 Jul 2019'
-    },
-    {
-      creationDate: '3 Feb 2018',
-      activationDate: '3 Feb 2018',
-      subscription: 'SUB-00006',
-      clientName: 'Maya Hopkins',
-      clientEmail: 'maya@boghope.com',
-      companyName: 'Bog Hope Sdn. Bhd.',
-      plan: 'Standard',
-      status: 'TRIAL',
-      lastBillingOn: '-',
-      nextBillingOn: '3 Aug 2019'
-    },
-    {
-      creationDate: '10 Feb 2018',
-      activationDate: '10 Feb 2018',
-      subscription: 'SUB-00005',
-      clientName: 'James Moya',
-      clientEmail: 'James@cdfcompany.com',
-      companyName: 'Cdf Company Sdn. Bhd.',
-      plan: 'Standard',
-      status: 'LIVE',
-      lastBillingOn: '4 Jul 2019',
-      nextBillingOn: '4 Aug 2019'
-    },
-    {
-      creationDate: '12 Feb 2018',
-      activationDate: '15 Feb 2018',
-      subscription: 'SUB-00004',
-      clientName: 'Camella Hips',
-      clientEmail: 'camella@camelloind.com',
-      companyName: 'Camelloind Sdn. Bhd.',
-      plan: 'Standard',
-      status: 'TRIAL',
-      lastBillingOn: '-',
-      nextBillingOn: '1 Sep 2019'
-    },
-    {
-      creationDate: '20 Mar 2018',
-      activationDate: '20 Mar 2018',
-      subscription: 'SUB-00003',
-      clientName: 'Richards Hanks',
-      clientEmail: 'richards@celticcorp.com',
-      companyName: 'Celtic Corp Sdn. Bhd.',
-      plan: 'Standard',
-      status: 'LIVE',
-      lastBillingOn: '30 Jul 2019',
-      nextBillingOn: '30 Aug 2019'
-    }
-  ];
+  public subscribers;
 
   /**
    * This properties is to set value of segment in dashboard
@@ -111,18 +42,84 @@ export class DashboardPage implements OnInit {
    */
   public overviewSgmtOpt;
 
+  /**
+   * This property is to bind value of dashboard cards data
+   * @memberof DashboardPage
+   */
   public dashboardData;
+
+  /**
+   * This property is to bind value of all customers
+   * @memberof DashboardPage
+   */
   public allCust;
+
+  /**
+   * This property is to bind value of activated customers
+   * @memberof DashboardPage
+   */
   public activeCust;
+
+  /**
+   * This property is to bind value of inactive customers
+   * @memberof DashboardPage
+   */
   public inactiveCust;
+
+  /**
+   * This property is to bind value of total company numbers
+   * @memberof DashboardPage
+   */
   public compNo;
+
+  /**
+   * This property is to bind value of total employee number
+   * @memberof DashboardPage
+   */
   public empNo;
+
+  /**
+   * This property is to bind value of difference value between previous customers no, active customer no, 
+   * inactive customer no, company no and employee no
+   * @memberof DashboardPage
+   */
   public diffVal;
+
+  /**
+   * This property is to bind difference value of all customers 
+   * @memberof DashboardPage
+   */
   public allCustDiff1;
+
+  /**
+   * This property is to bind difference value of active customers
+   * @memberof DashboardPage
+   */
   public actvCustDiff1;
+
+  /**
+   * This property is to bind difference value of inactive customers
+   * @memberof DashboardPage
+   */
   public inactvCustDiff1;
+
+  /**
+   * This property is to bind difference value of companies numbers
+   * @memberof DashboardPage
+   */
   public compNoDiff1;
+
+  /**
+   * This property is to bind difference value of employee numbers
+   * @memberof DashboardPage
+   */
   public empNoDiff1;
+
+  /**
+   * This property is to bind value of recent subscribers data
+   * @memberof DashboardPage
+   */
+  public recentSubscribers;
 
 
 
@@ -135,13 +132,7 @@ export class DashboardPage implements OnInit {
     this.overviewSgmtOpt = 'all';
     this.pgSett.setShowToolbarSideMenu(true);
     this.reqDashboardAPI('all');
-    // this.dshbAPISvs.reqGetApi('/api/admin/dashboard/all').subscribe(
-    //   respData => {
-    //     this.dashboardData = respData;
-    //     console.log('dashboardData2: ' + JSON.stringify(this.dashboardData, null, " "));
-
-    //   }
-    // );
+    this.getTop10Subs();
   }
 
 
@@ -151,12 +142,14 @@ export class DashboardPage implements OnInit {
    * @memberof DashboardPage
    */
   segmentChanged(ev: any) {
-    console.log('Segment changed:', ev.detail.value);
     this.reqDashboardAPI(ev.detail.value);
-    console.log('dashboardData3: ' + JSON.stringify(this.dashboardData, null, " "));
-    console.log(this.overviewSgmtOpt);
   }
 
+  /**
+   * This method is to get data for dashboard's cards
+   * @param {*} type Segment type (all/week/month/quarter)
+   * @memberof DashboardPage
+   */
   async reqDashboardAPI(type) {
     await this.dshbAPISvs.reqGetApi('/api/admin/dashboard/' + type).subscribe(
       retDsbData => {
@@ -180,15 +173,59 @@ export class DashboardPage implements OnInit {
             compNoDiff: this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany),
             empNoDiff: this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee),
           };
-          console.log('rthis.diffVal: ' + JSON.stringify(this.diffVal, null, " ")); 
         }
-        console.log('rthis.dashboardData: ' + JSON.stringify(this.dashboardData, null, " "))
       }
     );
   }
 
+  /**
+   * This method is to calcualte the difference value between current value and previous value
+   * @param {*} currVal This parameter is refer to current value
+   * @param {*} prevVal This parameter is refer to previous value to be compared
+   * @returns
+   * @memberof DashboardPage
+   */
   calcDiff(currVal, prevVal) {
     return Math.round(((currVal - prevVal) / currVal) * 100);
   }
+
+  /**
+   * This method is to get recent subscribers list from API
+   * @memberof DashboardPage
+   */
+  getTop10Subs() {
+    this.dshbAPISvs.reqGetApi('/api/admin/customer').subscribe(
+      custData => {
+        custData.forEach(custObj => {
+          this.getDshbSubsList(custObj);
+        });
+        this.subscribers = custData.sort((a, b) => (a.LAST_BILLING_DATE > b.LAST_BILLING_DATE) ? -1 :
+          ((b.LAST_BILLING_DATE > a.LAST_BILLING_DATE) ? 1 : 0)).slice(0,6);
+      }
+    )
+  }
+
+  /**
+   * This method is to process response returned from API to merge between customers data and subscriptions data
+   * @param {*} custObj
+   * @memberof DashboardPage
+   */
+  getDshbSubsList(custObj) {
+    this.dshbAPISvs.reqGetApi('/api/admin/subscription').subscribe(
+      subsData => {
+        subsData.forEach(subsObj => {
+          if (custObj.CUSTOMER_GUID === subsObj.CUSTOMER_GUID) {
+            custObj = Object.assign(custObj, subsObj, { 
+              SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.CREATION_TS),
+              SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.ACTIVATION_DATE),
+              SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.LAST_BILLING_DATE),
+              SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.NEXT_BILLING_DATE),
+            });
+          }
+        });
+      }
+    )
+  }
+
 }
 
