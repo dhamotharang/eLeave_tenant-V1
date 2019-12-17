@@ -280,7 +280,7 @@ export class SubscriberDetailsPage implements OnInit {
   async confirmDeactive() {
     const confirmAlert = await this.subsDtlsAlert.create({
       header: 'Confirmation',
-      message: 'Deactive this subscription? Please fill in your reason',
+      message: 'Deactivate this subscription? Please fill in your reason',
       inputs: [
         {
           name: 'inactiveSubscription',
