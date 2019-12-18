@@ -7,6 +7,7 @@ import { PaginationServiceService } from '../../../services/pagination-service.s
 import { SearchDataService } from '../../../services/search-data.service';
 import { APIService } from './../../../services/shared-service/api.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
+import { InfoPopupService } from './../../../layout/notificationPopup/info-popup.service';
 
 import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
@@ -14,7 +15,6 @@ import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activit
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
 import { ChangeNextBillingDateComponent } from './change-next-billing-date/change-next-billing-date.component';
-
 
 /**
  * This variable is to store updated data of subscriber info
@@ -48,14 +48,17 @@ export class SubscriberDetailsPage implements OnInit {
    *Creates an instance of SubscriberDetailsPage.
    * @param {PopoverController} popoverController This property is to get methods from PopoverController
    * @param {PaginationServiceService} subsDtlsPaging This property is to get methods from PaginationServiceService
-   * @param {APIService} subsDtls This property is to get methods from APIService
+   * @param {APIService} subsDtlsApiSvs This property is to get methods from APIService
    * @memberof SubscriberDetailsPage
    */
   constructor(
     private popoverController: PopoverController, 
+    private subsDtlsInfoPopup: InfoPopupService,
     public subsDtlsPaging: PaginationServiceService,
-    public subsDtls: APIService
+    public subsDtlsApiSvs: APIService,
   ) { }
+
+  // public subsDtlsPaging = new PaginationServiceService;
 
   /**
    * This property is to get methods from AlertController
@@ -144,17 +147,30 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   ngOnInit() {
+    console.log('subscribersDetails: ' + JSON.stringify(this.subscribersDetails, null, " "));
+    console.log('selectedSubscribersInfo: ' + JSON.stringify(selectedSubscribersInfo, null, " "));
+    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, 10);
     this.subscriberInfo = selectedSubscribersInfo;
+    this.getSubscriptionsData(selectedSubscribersInfo);
     this.subsToggle = (this.subscriberInfo.STATUS === 1) ? true : false;
     this.prevToggleVal = !this.subsToggle;
     subscriberUpdateInfo = this.subscriberInfo;
-    this.checkDayLeft();
-    this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
+    // this.checkDayLeft();
+    // this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
     subsDtlPopoverCtrlr = this.popoverController;
-    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, 10);
     // this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
   }
 
+  checkStatus(selectedSubsData) {
+    if (selectedSubsData.STATUS === 0) {
+      this.subsToggle = false;
+    } else {
+      // this.custToggle = true
+      this.subsToggle = (this.subscriberDetailsDaysLeft < 0) ? false : true;
+
+    }
+    
+  }
 
   /**
    * This method is to calculate day(s) left between current date and next billing date. If it was expired, the 
@@ -162,6 +178,7 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   checkDayLeft() {
+    console.log('subscriberInfo:' + JSON.stringify(this.subscriberInfo, null, " "));
     this.subscriberDetailsDaysLeft = this.subDtlsGlobalFn.dateDiff(this.subscriberInfo.NEXT_BILLING_DATE);
     if (this.subscriberDetailsDaysLeft < 1) {
       this.prevToggleVal = true;
@@ -250,12 +267,65 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   selectedClient(updateSubscriberInfo) {
-    this.subscriberInfo = updateSubscriberInfo;
-    subscriberUpdateInfo = this.subscriberInfo;
-    this.subscriberDetailsDaysLeft = this.checkDayLeft();
-    this.updateProgressBar(updateSubscriberInfo.USED_QUOTA, updateSubscriberInfo.QUOTA);
+    this.getSubscriptionsData(updateSubscriberInfo);
+    // this.subscriberInfo = updateSubscriberInfo;
+    // subscriberUpdateInfo = this.subscriberInfo;
+    // this.subscriberDetailsDaysLeft = this.checkDayLeft();
+    // this.updateProgressBar(updateSubscriberInfo.USED_QUOTA, updateSubscriberInfo.QUOTA);
   }
 
+  getSubscriptionsData(data) {
+    this.subsDtlsApiSvs.reqGetApi('/api/admin/subscription/customer_info/' + data.SUBSCRIPTION_GUID).subscribe(
+      subsResp => {
+        console.log(subsResp);
+        const newData = {
+          CUSTOMER_GUID: data.CUSTOMER_GUID,
+          CUSTOMER_LABEL: data.CUSTOMER_LABEL,
+          FULLNAME: subsResp.customer_name,
+          NICKNAME: data.NICKNAME,
+          EMAIL: subsResp.customer_email,
+          CONTACT_NO: subsResp.customer_contact_no,
+          COMPANY_NAME: subsResp.customer_company_name,
+          ADDRESS1: subsResp.customer_address1,
+          ADDRESS2: subsResp.customer_address2,
+          POSTCODE: subsResp.customer_zip,
+          CITY: subsResp.customer_city,
+          STATE: subsResp.customer_state,
+          COUNTRY: subsResp.customer_country,
+          CURRENCY: subsResp.customer_currency,
+          SALESPERSON: subsResp.salesperson_pic,
+          CREATION_TS: subsResp.creation_date,
+          SUBSCRIPTION_GUID: subsResp.subscription_id,
+          SUBSCRIPTION_LABEL: subsResp.subscription_label,
+          PLAN: subsResp.subscription_plan,
+          STATUS: subsResp.subscription_status,
+          QUOTA: subsResp.subscription_quota,
+          USED_QUOTA: subsResp.subscription_used_quota,
+          ACTIVATION_DATE: subsResp.activation_date,
+          LAST_BILLING_DATE: subsResp.last_billing_date,
+          NEXT_BILLING_DATE: subsResp.next_billing_date,
+          RECURR_INTERVAL: subsResp.recurr_interval,
+          RECURR_INTERVAL_VAL: subsResp.recurr_interval_val,
+          BILLING_CYCLE: subsResp.billing_cycle,
+          SIMPLE_CREATION_TS: this.subDtlsGlobalFn.changeDateFormatSimple(subsResp.creation_date),
+          SIMPLE_ACTIVATION_DATE: this.subDtlsGlobalFn.changeDateFormatSimple(subsResp.activation_date),
+          SIMPLE_LAST_BILLING_DATE: this.subDtlsGlobalFn.changeDateFormatSimple(subsResp.last_billing_date),
+          SIMPLE_NEXT_BILLING_DATE: this.subDtlsGlobalFn.changeDateFormatSimple(subsResp.next_billing_date),
+          FULL_CREATION_TS: this.subDtlsGlobalFn.changeDateFormatFull(subsResp.creation_date),
+          FULL_ACTIVATION_DATE: this.subDtlsGlobalFn.changeDateFormatFull(subsResp.activation_date),
+          FULL_LAST_BILLING_DATE: this.subDtlsGlobalFn.changeDateFormatFull(subsResp.last_billing_date),
+          FULL_NEXT_BILLING_DATE: this.subDtlsGlobalFn.changeDateFormatFull(subsResp.next_billing_date),
+        }
+        this.subscriberInfo = newData;
+        subscriberUpdateInfo = this.subscriberInfo;
+        this.checkDayLeft();
+        this.checkStatus(this.subscriberInfo);
+        this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
+
+
+      }
+    );
+  }
   /**
    * This method is to calculate percentage of current used employee qouta over total qouta 
    * @memberof SubscriberDetailsPage
@@ -320,9 +390,33 @@ export class SubscriberDetailsPage implements OnInit {
           document.getElementById('reactivesubsnotice').hidden = false;
           this.confirmOpt = true;
           this.statusLog('Subscriptions has been deactivated by salesperson. Reason: ' + data.inactiveSubscription);
+          this.reqToUpdateSubs();
         }
       }
     ]
+  }
+
+  reqToUpdateSubs() {
+    console.log('this.subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
+    this.subsDtlsApiSvs.reqPatchApi({
+      subscriptionLabel: this.subscriberInfo.SUBSCRIPTION_LABEL,
+      customerGuid: this.subscriberInfo.CUSTOMER_GUID,
+      subscriptionPlan: this.subscriberInfo.PLAN,
+      subscriptionStatus: 0,// this.subscriberInfo.STATUS,
+      subscriptionQuota: this.subscriberInfo.QUOTA,
+      activationDate: this.subscriberInfo.ACTIVATION_DATE,
+      lastBillingDate: this.subscriberInfo.LAST_BILLING_DATE,
+      nextBillingDate: this.subscriberInfo.NEXT_BILLING_DATE,
+      recurrInterval: this.subscriberInfo.RECURR_INTERVAL,
+      recurrIntervalVal: this.subscriberInfo.RECURR_INTERVAL_VAL,
+      billingCycle: this.subscriberInfo.BILLING_CYCLE,
+      subscriptionGuid: this.subscriberInfo.SUBSCRIPTION_GUID,
+    }, '/api/admin/subscription').subscribe(
+      resData => {
+        console.log(resData);
+        this.subsDtlsInfoPopup.alertPopup('Subscription is deactivated', 'alert-success');
+      }
+    );
   }
 
   /**
@@ -348,7 +442,7 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   statusLog(msg) {
-    this.subsDtls.reqPostApi({
+    this.subsDtlsApiSvs.reqPostApi({
       customerId: this.subscriberInfo.CUSTOMER_GUID,
       subscriptionId: this.subscriberInfo.SUBSCRIPTION_GUID,
       message: msg

@@ -120,11 +120,6 @@
           <ion-label style="padding: 1%;">{{selectedCustomerInfo.POSTCODE}} {{selectedCustomerInfo.CITY}}</ion-label>
           <ion-label style="padding: 1%;">{{selectedCustomerInfo.STATE}}</ion-label>
           <ion-label style="padding: 1%;">{{selectedCustomerInfo.COUNTRY}}</ion-label>
-          <!-- <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressLine1}}</ion-label>
-          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressLine2}}</ion-label>
-          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressZip}} {{selectedCustomerInfo.addressCity}}</ion-label>
-          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressState}}</ion-label>
-          <ion-label style="padding: 1%;">{{selectedCustomerInfo.addressCountry}}</ion-label> -->
         </ion-item-group>
         
         <!-- Other Details -->
@@ -142,13 +137,14 @@
         <!--Customer Status -->
         <ion-list  class="customerOverviewContent">
           <ion-label>
-              CUSTOMER STATUS
+              CUSTOMER'S SUBSCRIPTION STATUS
           </ion-label>
         </ion-list>
         <ion-item-group class="customerOverviewDetails" style="max-width: min-content; margin: auto auto 10px;">
           <div class="onoffswitch">
             <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" unchecked> -->
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" [(ngModel)]="custToggle">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" [(ngModel)]="custToggle"
+            (click)="optionToDeactivateCustomer()">
             <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="1" (click)="optionsSelected(this)"> -->
             <label class="onoffswitch-label" for="myonoffswitch">
               <span class="onoffswitch-inner"></span>

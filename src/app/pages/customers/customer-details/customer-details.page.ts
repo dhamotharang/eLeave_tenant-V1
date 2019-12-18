@@ -153,33 +153,44 @@ export class CustomerDetailsPage implements OnInit {
    */
   ngOnInit() {
     // this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
-    this.slideOpts = this.custDtlsGlobalFn.slideOption();
-    this.selectedCustomerInfo = customerInfo;
-    this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
-    console.log('selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
-    customerUpdateInfo = this.selectedCustomerInfo;
-    this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
-    // this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
-    this.custToggle = (this.calcDays < 0) ? false : true;
-    this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
-    popovrCtrlr = this.popoverController;
     this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, currCustPage, this.customerList.length);
-    this.getChildCompanyList(this.selectedCustomerInfo);
+    this.slideOpts = this.custDtlsGlobalFn.slideOption();
+    console.log('customerInfo: ' + JSON.stringify(customerInfo, null, " "));
+    this.selectedCustomerInfo = customerInfo;
+    this.getDataCustomerDetails(customerInfo);
+    // console.log('this.selectedCustomerInfo 1: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
+    // this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
+    customerUpdateInfo = this.selectedCustomerInfo;
+    this.checkCustomerStatus(this.selectedCustomerInfo);
+    // this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
+    popovrCtrlr = this.popoverController;
+    // this.getChildCompanyList(this.selectedCustomerInfo);
+  }
+  
+
+  checkCustomerStatus(selectedCustData) {
+    if (selectedCustData.STATUS === 0) {
+      this.custToggle = false;
+    } else {
+      // this.custToggle = true
+      this.custToggle = (this.calcDays < 0) ? false : true;
+
+    }
   }
 
-  /**
-   * This method is to append element into object that contain formatted date time
-   * @param {*} obj This property will pass the customer details data into method
-   * @returns
-   * @memberof CustomerDetailsPage
-   */
-  addDateFormat(obj) {
-    const addDateFormat = {
-      'FULL_LAST_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.LAST_BILLING_DATE),
-      'FULL_NEXT_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.NEXT_BILLING_DATE),
-    };
-    return Object.assign(obj, addDateFormat);
-  }
+  // /**
+  //  * This method is to append element into object that contain formatted date time
+  //  * @param {*} obj This property will pass the customer details data into method
+  //  * @returns
+  //  * @memberof CustomerDetailsPage
+  //  */
+  // addDateFormat(obj) {
+  //   const addDateFormat = {
+  //     'FULL_LAST_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.LAST_BILLING_DATE),
+  //     'FULL_NEXT_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.NEXT_BILLING_DATE),
+  //   };
+  //   return Object.assign(obj, addDateFormat);
+  // }
 
   /**
    * This method is to set the value of selected customer details in the property.
@@ -187,15 +198,67 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   onChangeSelectedCustomer(changedCustomerItem) {
-    changedCustomerItem = this.addDateFormat(changedCustomerItem);
-    this.selectedCustomerInfo = changedCustomerItem;
+    console.log(changedCustomerItem);
+    this.getDataCustomerDetails(changedCustomerItem);
     customerUpdateInfo = this.selectedCustomerInfo;
-    this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
-    // this.calcDays = this.daysLeftFn.dateDifference(this.selectedCustomerInfo.LAST_BILLING_DATE, this.selectedCustomerInfo.NEXT_BILLING_DATE);
-    this.custToggle = (this.calcDays < 0) ? false : true;
-    this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
-    this.getChildCompanyList(this.selectedCustomerInfo);
+    this.checkCustomerStatus(this.selectedCustomerInfo);
   }
+
+  optionToDeactivateCustomer() {
+    console.log(this.custToggle);  //true == change to inactive
+    console.log(this.selectedCustomerInfo);
+
+  }
+
+
+  getDataCustomerDetails(data) {
+    this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/customer_info/' + data.SUBSCRIPTION_GUID).subscribe(
+      custData => {
+        console.log('custData');
+        console.log(custData);
+        const newData = {
+          CUSTOMER_GUID: data.CUSTOMER_GUID,
+          CUSTOMER_LABEL: data.CUSTOMER_LABEL,
+          FULLNAME: custData.customer_name,
+          NICKNAME: data.NICKNAME,
+          EMAIL: custData.customer_email,
+          CONTACT_NO: custData.customer_contact_no,
+          COMPANY_NAME: custData.customer_company_name,
+          ADDRESS1: custData.customer_address1,
+          ADDRESS2: custData.customer_address2,
+          POSTCODE: custData.customer_zip,
+          CITY: custData.customer_city,
+          STATE: custData.customer_state,
+          COUNTRY: custData.customer_country,
+          CURRENCY: custData.customer_currency,
+          SALESPERSON: custData.salesperson_pic,
+          CREATION_TS: custData.creation_date,
+          SUBSCRIPTION_GUID: custData.subscription_id,
+          SUBSCRIPTION_LABEL: custData.subscription_label,
+          PLAN: custData.subscription_plan,
+          STATUS: custData.ubscription_status,
+          QUOTA: custData.subscription_quota,
+          USED_QUOTA: custData.subscription_used_quota,
+          ACTIVATION_DATE: custData.activation_date,
+          LAST_BILLING_DATE: custData.last_billing_date,
+          NEXT_BILLING_DATE: custData.next_billing_date,
+          RECURR_INTERVAL: custData.recurr_interval,
+          RECURR_INTERVAL_VAL: custData.recurr_interval_val,
+          BILLING_CYCLE: custData.billing_cycle,
+          FULL_LAST_BILLING_DATE: this.custDtlsGlobalFn.changeDateFormatFull(custData.last_billing_date),
+          FULL_NEXT_BILLING_DATE: this.custDtlsGlobalFn.changeDateFormatFull(custData.next_billing_date)
+        }
+        this.selectedCustomerInfo = newData;
+
+        this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
+        this.getChildCompanyList(this.selectedCustomerInfo);
+
+
+      }
+    );
+
+  }
+
 
   onViewSubscriptionDetails(obj) {
     console.log('objeee: ' + JSON.stringify(obj, null, " "));
@@ -244,7 +307,9 @@ export class CustomerDetailsPage implements OnInit {
   getChildCompanyList(custData) {
     this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/company_info/' + custData.SUBSCRIPTION_GUID).subscribe(
       respChildData => {
+        console.log(respChildData);
         this.childCompList = respChildData.company_details;
+        console.log(this.childCompList);
         this.childCompLength = this.childCompList.length;
       }
     );

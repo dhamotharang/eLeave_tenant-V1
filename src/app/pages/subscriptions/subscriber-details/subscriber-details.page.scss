@@ -145,7 +145,8 @@
     }
 
     .subscriberDescriptionCardValue {        
-        height: 30px;
+        height: auto;
+        // height: 30px;
         object-fit: contain;
         font-size: 12px;
         font-weight: bold;
