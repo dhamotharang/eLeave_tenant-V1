@@ -110,10 +110,11 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   ngOnInit() {
+    this.customerData = [];
     // console.log(this.custPaging.getSideMenuType());
     this.custPaging.setCustomerViewType('card');
     this.getCustList();
-    this.configPageCust = this.custPaging.pageConfig(9, 1, 10);
+    this.configPageCust = this.custPaging.pageConfig(10, 1, 10);
   }
 
   /**
