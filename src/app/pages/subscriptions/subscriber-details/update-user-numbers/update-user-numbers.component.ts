@@ -49,12 +49,19 @@ export class UpdateUserNumbersComponent implements OnInit {
   public updateClientData;
 
   /**
+   * This property is to bind initial user quota value
+   * @private
+   * @memberof UpdateUserNumbersComponent
+   */
+  private initUserQuota;
+  /**
    * This method is to initiate properties values in this component. It will
    * be executed the this popup is loaded
    * @memberof UpdateUserNumbersComponent
    */
   ngOnInit() {
     this.selectedSubscriberInfo = subscriberUpdateInfo;
+    this.initUserQuota = this.selectedSubscriberInfo.QUOTA;
     this.updateClientData = {...this.selectedSubscriberInfo, progressBarValue:
       this.selectedSubscriberInfo.USED_QUOTA / this.selectedSubscriberInfo.USED_QUOTA};
     this.updateEmployeeQuota = this.selectedSubscriberInfo.QUOTA;
@@ -81,6 +88,7 @@ export class UpdateUserNumbersComponent implements OnInit {
       'billingCycle': this.selectedSubscriberInfo['BILLING_CYCLE'],
       'subscriptionGuid': this.selectedSubscriberInfo['SUBSCRIPTION_GUID'],
       'subscriptionLabel': this.selectedSubscriberInfo['SUBSCRIPTION_LABEL'],
+      'remarks': '-'
     };
 
     this.updateUserQuota(reqUpdate);
@@ -105,6 +113,7 @@ export class UpdateUserNumbersComponent implements OnInit {
     this.patchUpdateUserQuota(obj).subscribe(
       patchRespond => {
         this.updQuotaInfoPopup.alertPopup('You have successfully update user quota', 'alert-success');
+        this.updateStatusLog();
       }
     );
   }
@@ -119,4 +128,15 @@ export class UpdateUserNumbersComponent implements OnInit {
     return this.updQuotaAPISvs.patchApi(obj,'/api/admin/subscription');
   }
 
+  /**
+   * This method is to send request to patch API to update user quota
+   * @memberof UpdateUserNumbersComponent
+   */
+  updateStatusLog() {
+    this.updQuotaAPISvs.reqPostApi({
+      customerId: this.selectedSubscriberInfo['CUSTOMER_GUID'],
+      subscriptionId: this.selectedSubscriberInfo['SUBSCRIPTION_GUID'],
+      message: 'User quota has been updated from ' + this.initUserQuota + ' to ' + this.updateClientData.QUOTA
+    }, '/api/admin/activity-log').subscribe(data => { });
+  }
 }

@@ -108,6 +108,20 @@
         --ion-background-color: transparent !important;
     }
 
+    .custsReactivationNotice {
+        display: flex;
+        border: solid 1px #a5a4bf;
+        margin: 5px 35px;
+        padding: 10px;
+
+        ion-icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+            color: orangered;
+        }
+    }
+
     .customerAvatar {
         max-width: 100%;
         height: auto;
@@ -270,7 +284,7 @@
 
     .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
         right: 0px; 
-    }
+    } 
       
 }
 

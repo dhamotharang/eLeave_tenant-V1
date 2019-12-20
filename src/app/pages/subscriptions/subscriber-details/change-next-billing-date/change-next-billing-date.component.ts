@@ -102,7 +102,8 @@ export class ChangeNextBillingDateComponent implements OnInit {
       'recurrIntervalVal': subscriberUpdateInfo['RECURR_INTERVAL_VAL'],
       'recurrInterval': subscriberUpdateInfo['RECURR_INTERVAL'],
       'billingCycle': subscriberUpdateInfo['BILLING_CYCLE'],
-      'subscriptionGuid': subscriberUpdateInfo['SUBSCRIPTION_GUID']
+      'subscriptionGuid': subscriberUpdateInfo['SUBSCRIPTION_GUID'],
+      'remarks': '-'
       
     };
     this.updNextBillDate(updObj);

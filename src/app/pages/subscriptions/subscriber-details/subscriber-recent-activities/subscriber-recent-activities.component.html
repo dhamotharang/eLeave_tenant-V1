@@ -25,10 +25,15 @@
             {{subscriberHistory.MESSAGE}}
             <!-- {{subscriberHistory.description}} -->
           </ion-label>
-          <ion-label style="font-weight: normal;">
-            by {{subscriberHistory.CREATOR_DATA.FULLNAME}}
-            <!-- by {{subscriberHistory.pic}} -->
-          </ion-label>
+          <ion-item-group style="display: flex;">
+            <ion-label style="font-weight: normal;">
+              by {{subscriberHistory.CREATOR_DATA.FULLNAME}} 
+              <!-- by {{subscriberHistory.pic}} -->
+            </ion-label>
+            <ion-label style="text-transform: capitalize;font-weight: normal;">
+              ({{subscriberHistory.CREATOR_DATA.ROLE}})
+            </ion-label>
+          </ion-item-group>
         </ion-item-group>
       </ion-item>
     </ion-item-group>

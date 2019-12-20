@@ -26,7 +26,8 @@
 
         <ion-slides [options]="slideOpts">
         <!-- <ion-slides pager="true" [options]="slideOpts"> -->
-          <ion-slide *ngFor="let cL of customerList | paginate : configPageCustDtls"
+          <!-- <ion-slide *ngFor="let cL of customerList | paginate : configPageCustDtls" -->
+          <ion-slide *ngFor="let cL of customerList"
           style="width: auto;">
             <ion-item-group class="customerListHorizontalContent" style="display: flex; height: auto; white-space: nowrap;">
               <ion-list 
@@ -52,11 +53,14 @@
         <!-- Body -->
         <ion-item-group style="height: 94%">
           <ion-searchbar mode="md" class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
-          <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
-            <ion-label [ngStyle]="{'color': cL.FULLNAME === selectedCustomerInfo.FULLNAME ? '#3b86ff' : '#4d4f5c'}">
-                {{cL.FULLNAME}}
+          <!-- <ion-label class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)"> -->
+          <div style="height: 500px; overflow-y: auto;">
+            <ion-label class="customerListContent" *ngFor="let cL of customerList" (click)="onChangeSelectedCustomer(cL)">
+              <ion-label [ngStyle]="{'color': cL.FULLNAME === selectedCustomerInfo.FULLNAME ? '#3b86ff' : '#4d4f5c'}">
+                  {{cL.FULLNAME}}
+              </ion-label>
             </ion-label>
-          </ion-list>
+          </div>
         </ion-item-group>
         <!-- <ion-list class="customerListContent" *ngFor="let cL of customerList | paginate : configPageCustDtls" (click)="onChangeSelectedCustomer(cL)">
           <ion-label [ngStyle]="{'color': cL.clientName === selectedCustomerInfo.clientName ? '#3b86ff' : '#4d4f5c'}">
@@ -152,7 +156,20 @@
             </label>
           </div>
         </ion-item-group>
-      </ion-col>
+
+        <ion-item-group id="reactivesubsnotice" hidden class="customerListOverviewStyle custsReactivationNotice">
+          <ion-icon name="warning"></ion-icon>
+          <ion-list style="display: grid;">
+            <ion-text>
+              {{subsInactiveMsg}}
+            </ion-text>
+            <ion-text>
+              Please fill in the subscription details upon reactivation of this subscription.
+            </ion-text>
+
+          </ion-list>
+        </ion-item-group>
+      </ion-col> 
 
       <!-- ------------------ Client's Description  -------------------------- -->
       <ion-col style="padding:0; min-width: fit-content;"
@@ -279,7 +296,7 @@
             <ion-row style="display: flex; justify-content: flex-end;">
               <!-- <ion-item> -->
                 <ion-button class="viewSubscriptionButton" 
-                (click)="onViewSubscriptionDetails(selectedCustomerInfo)">
+                (click)="onViewSubscriptionDetails(selectedCustomerInfo)" [routerDirection]="'root'" [routerLink]="['/main/subscriptions/subscriber-details']">
 
                  <!-- [routerDirection]="'root'" [routerLink]="['/main/subscriptions/subscriber-details/', selectedCustomerInfo.SUBSCRIPTION_GUID]" -->
                   <ion-label style="padding: 5%">
@@ -312,7 +329,7 @@
                     {{childCompanies.address}}            
                 </ion-label>
                 <ion-label style="font-weight: bold; white-space: pre-wrap;">
-                  Staff No: {{childCompanies.total_employee}}
+                  Headcount: {{childCompanies.total_employee}}
                 </ion-label> 
             </ion-item-group>
           </ion-row>   
@@ -331,9 +348,9 @@
     </ion-row>
     
     <!-- Customer Details pagination -->
-    <ion-row>
+    <!-- <ion-row>
       <pagination-controls (pageChange)="pageCustDtlsChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
-    </ion-row>
+    </ion-row> -->
   </ion-content>
   
   

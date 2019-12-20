@@ -58,9 +58,14 @@
           <ion-label>
             {{customerHistory.MESSAGE}}
           </ion-label>
-          <ion-label style="font-weight: normal;">
-            by {{customerHistory.CREATOR_DATA.FULLNAME}}
-          </ion-label>
+          <ion-item-group style="display: flex;">
+            <ion-label style="font-weight: normal;">
+              by {{customerHistory.CREATOR_DATA.FULLNAME}} 
+            </ion-label>
+            <ion-label style="text-transform: capitalize;font-weight: normal;">
+              ({{customerHistory.CREATOR_DATA.ROLE}})
+            </ion-label>
+          </ion-item-group>
         </ion-item-group>
       </ion-item>
     </ion-item-group>

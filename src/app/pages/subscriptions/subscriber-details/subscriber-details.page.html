@@ -26,7 +26,8 @@
               <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSubsDtls($event)"></ion-searchbar>
               <ion-slides [options]="subsDtlsSlideOpts">
               <!-- <ion-slides pager="true" [options]="slideOpts"> -->
-                <ion-slide *ngFor="let subscribersList of subscribersDetails | paginate : configPageSubDtls"
+                <!-- <ion-slide *ngFor="let subscribersList of subscribersDetails | paginate : configPageSubDtls" -->
+                <ion-slide *ngFor="let subscribersList of subscribersDetails"
                 style="width: auto;">
                   <ion-item-group class="subsDtlsListHorizontalContent subscriberListStyle" style="display: flex; height: auto; white-space: nowrap;">
                     <!-- <ion-item lines="none"> -->
@@ -49,16 +50,42 @@
                 SUBSCRIBER LIST
               </ion-title>
               <ion-list style="padding: 0; background: #ffffff;">
-                <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSubsDtls($event)"></ion-searchbar>
-                <ion-item-group  *ngFor="let subscribersList of subscribersDetails  | paginate: configPageSubDtls">
+                <!-- <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSubsDtls($event)"></ion-searchbar>
+               <ion-item-group  *ngFor="let subscribersList of subscribersDetails">
                   <ion-item class="subscriberListStyle" (click)="selectedClient(subscribersList)"
                     [ngStyle]="{'color': subscribersList.NICKNAME === subscriberInfo.NICKNAME ? '#3b86ff' : '#4d4f5c'}">
                     <ion-list>
-                      <!-- <ion-label>{{subscribersList.subscription}}</ion-label> -->
+                      <ion-label>{{subscribersList.SUBSCRIPTION_LABEL}}</ion-label>
                       <ion-label>{{subscribersList.COMPANY_NAME}}</ion-label>
                     </ion-list>
                   </ion-item>
+                </ion-item-group> -->
+                <ion-item-group style="height: 94%">
+                  <ion-searchbar class="customer-searchbar-style" (ionChange)="onSearchSubsDtls($event)"></ion-searchbar>
+                  <div style="height: 500px; overflow-y: auto;">
+                    <ion-item class="subscriberListStyle"  *ngFor="let subscribersList of subscribersDetails"
+                      (click)="selectedClient(subscribersList)"
+                      [ngStyle]="{'color': subscribersList.NICKNAME === subscriberInfo.NICKNAME ? '#3b86ff' : '#4d4f5c'}">
+                      <ion-list>
+                        <!-- <ion-label>{{subscribersList.subscription}}</ion-label> -->
+                        <ion-label>{{subscribersList.SUBSCRIPTION_LABEL}}</ion-label>
+                        <ion-label>{{subscribersList.COMPANY_NAME}}</ion-label>
+                      </ion-list>
+                    </ion-item>
+                  </div>
                 </ion-item-group>
+
+
+                <!-- <ion-item-group style="height: 94%">
+                  <ion-searchbar mode="md" class="customer-searchbar-style" (ionChange)="onSearchCustDtls($event)"></ion-searchbar>
+                  <div style="height: 500px; overflow-y: auto;">
+                    <ion-label class="customerListContent" *ngFor="let cL of customerList" (click)="onChangeSelectedCustomer(cL)">
+                      <ion-label [ngStyle]="{'color': cL.FULLNAME === selectedCustomerInfo.FULLNAME ? '#3b86ff' : '#4d4f5c'}">
+                        {{cL.FULLNAME}}
+                      </ion-label>
+                    </ion-label>
+                  </div>
+                </ion-item-group> -->
               </ion-list>
             </ion-col>
 
@@ -152,9 +179,9 @@
                     <ion-text>
                       {{inactiveMsg}}
                     </ion-text>
-                    <ion-text id="reasonTextId">
+                    <!-- <ion-text id="reasonTextId">
                       Reason: {{inactiveReason}}
-                    </ion-text>
+                    </ion-text> -->
                     <ion-text>
                       Please fill in the subscription details upon reactivation of this subscription.
                     </ion-text>
@@ -359,9 +386,9 @@
       </ion-row>
       
       <!-- Subscriber list's pagination -->
-      <ion-item-group class="custompgtn">        
+      <!-- <ion-item-group class="custompgtn">        
         <pagination-controls (pageChange)="pageChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
-      </ion-item-group>
+      </ion-item-group> -->
       
     </ion-content>
   </ion-app>

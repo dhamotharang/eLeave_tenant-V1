@@ -114,7 +114,8 @@ export class GlobalFunctionService {
   dateDiff(nextBillDate) {
     const currDate = new Date().toDateString();
     let daysleft: number = (Date.parse(nextBillDate) - Date.parse(currDate)) / (24 * 3600 * 1000);
-    return daysleft = (isNaN(daysleft) || (daysleft < 0)) ? daysleft = 0 : daysleft;
+    return daysleft = (isNaN(daysleft)) ? daysleft = 0 : daysleft;
+    // return daysleft = (isNaN(daysleft) || (daysleft < 0)) ? daysleft = 0 : daysleft;
 
   }
 

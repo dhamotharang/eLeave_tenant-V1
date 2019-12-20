@@ -9,13 +9,17 @@ import { APIService } from './../../../services/shared-service/api.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
 import { InfoPopupService } from './../../../layout/notificationPopup/info-popup.service';
 
-import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
+import { selectedSubscribersInfo, subscribersObjGlobal } from '../subscriptions.page';
+// import { selectedSubscribersInfo, currSubsPage, subscribersObjGlobal } from '../subscriptions.page';
 import { UpdateUserNumbersComponent } from './update-user-numbers/update-user-numbers.component';
 import { SubscriberRecentActivitiesComponent } from './subscriber-recent-activities/subscriber-recent-activities.component';
 import { SubscriberEditProfileComponent } from './subscriber-edit-profile/subscriber-edit-profile.component';
 import { ReactiveSubscriptionComponent } from './reactive-subscription/reactive-subscription.component';
 import { ChangeNextBillingDateComponent } from './change-next-billing-date/change-next-billing-date.component';
 
+import { customerAllList, selectedCustomerList } from './../../customers/customer-details/customer-details.page';
+
+ 
 /**
  * This variable is to store updated data of subscriber info
  * @export
@@ -114,7 +118,7 @@ export class SubscriberDetailsPage implements OnInit {
    * This property is to set values of pagination's configurations
    * @memberof SubscriberDetailsPage
    */
-  configPageSubDtls: any;
+  // configPageSubDtls: any;
 
   /**
    * This property is to bind value from confirmation to deactive subcription's option
@@ -135,6 +139,7 @@ export class SubscriberDetailsPage implements OnInit {
    */
   public inactiveReason = '';
 
+  public inactivePIC;
   /**
    * This property is to set slides configurations
    * @memberof SubscriberDetailsPage
@@ -149,28 +154,51 @@ export class SubscriberDetailsPage implements OnInit {
   ngOnInit() {
     console.log('subscribersDetails: ' + JSON.stringify(this.subscribersDetails, null, " "));
     console.log('selectedSubscribersInfo: ' + JSON.stringify(selectedSubscribersInfo, null, " "));
-    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, 10);
-    this.subscriberInfo = selectedSubscribersInfo;
-    this.getSubscriptionsData(selectedSubscribersInfo);
-    this.subsToggle = (this.subscriberInfo.STATUS === 1) ? true : false;
-    this.prevToggleVal = !this.subsToggle;
+    console.log('customerAllList: ' + JSON.stringify(customerAllList, null, " "));
+    console.log('selectedCustomerList: ' + JSON.stringify(selectedCustomerList, null, " "));
+    this.subscribersDetails = (customerAllList !== undefined) ? customerAllList : subscribersObjGlobal;
+    this.subscriberInfo = (selectedCustomerList !== undefined) ? selectedCustomerList : selectedSubscribersInfo;
+
+    // if (customerAllList !== undefined && selectedCustomerList !== undefined) {
+    //   this.subscribersDetails = customerAllList;
+    //   this.subscriberInfo = selectedCustomerList;
+
+    // } else {
+    //   this.subscribersDetails = subscribersObjGlobal;
+    //   this.subscriberInfo = selectedSubscribersInfo;
+    // }
+    // this.subscriberInfo = selectedSubscribersInfo;
+    this.getSubscriptionsData(this.subscriberInfo);
     subscriberUpdateInfo = this.subscriberInfo;
-    // this.checkDayLeft();
-    // this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
     subsDtlPopoverCtrlr = this.popoverController;
+    this.subsDtlsApiSvs.reqGetCurrUserDetails().subscribe(
+      resData => {
+        // console.log('reqGetCurrUserDetails');
+        this.inactivePIC = resData[0];
+      }
+    );
+    console.log('this.inactivePIC 1: ' + JSON.stringify(this.inactivePIC, null, " "));
+
     // this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
   }
 
   checkStatus(selectedSubsData) {
     if (selectedSubsData.STATUS === 0) {
       this.subsToggle = false;
+      this.prevToggleVal = !this.subsToggle;
+      this.inactiveMsg =  selectedSubsData.REMARKS;// 'This subscription has been deactivated'
+      // this.inactiveReason = selectedSubsData.REMARKS;
+      // document.getElementById('reasonTextId').hidden = true;
+      document.getElementById('reactivesubsnotice').hidden = false;
+
     } else {
       // this.custToggle = true
       this.subsToggle = (this.subscriberDetailsDaysLeft < 0) ? false : true;
+      this.prevToggleVal = !this.subsToggle;
 
     }
     
-  }
+  } 
 
   /**
    * This method is to calculate day(s) left between current date and next billing date. If it was expired, the 
@@ -180,13 +208,14 @@ export class SubscriberDetailsPage implements OnInit {
   checkDayLeft() {
     console.log('subscriberInfo:' + JSON.stringify(this.subscriberInfo, null, " "));
     this.subscriberDetailsDaysLeft = this.subDtlsGlobalFn.dateDiff(this.subscriberInfo.NEXT_BILLING_DATE);
-    if (this.subscriberDetailsDaysLeft < 1) {
+    if (this.subscriberDetailsDaysLeft < 0) {
       this.prevToggleVal = true;
       this.subsToggle = false;
-      document.getElementById('reasonTextId').hidden = true;
-      this.inactiveMsg = 'This subscription was deactivated by system due to expired subscription. ';
+      // document.getElementById('reasonTextId').hidden = true;
+      this.inactiveMsg = 'This subscription has been deactivated by system due to expired license. ';
       // this.inactiveReason = 'Expired subscription';
       document.getElementById('reactivesubsnotice').hidden = false;
+      this.reqToUpdateSubs('expired', 0, this.inactiveMsg);
     } else {
       this.prevToggleVal = false;
       this.subsToggle = true;
@@ -200,6 +229,9 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   checkToggle() {
+    console.log('toggle');
+    console.log('this.subsToggle: ' + this.subsToggle);
+    console.log('his.prevToggleVal: ' + this.prevToggleVal);
     if (this.subsToggle !== this.prevToggleVal) {
       if ((this.prevToggleVal === false) && (this.subsToggle === true)) {
         this.confirmDeactive();
@@ -236,12 +268,16 @@ export class SubscriberDetailsPage implements OnInit {
  
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
+        
         document.getElementById('reactivesubsnotice').hidden = (data.data === false) ? false : true;
         this.prevToggleVal = !data.data;
         this.subsToggle = data.data; 
         this.confirmOpt = !data.data;
-
-        this.statusLog('Subscriptions has been reactivated');
+        console.log('this.subscriberInfo reactive: ' + JSON.stringify(this.subscriberInfo, null, " "));
+        if (data.data === true) {
+          this.statusLog('Subscriptions has been reactivated');
+          this.selectedClient(this.subscriberInfo);
+        }
       }
     });
 
@@ -267,6 +303,7 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   selectedClient(updateSubscriberInfo) {
+    
     this.getSubscriptionsData(updateSubscriberInfo);
     // this.subscriberInfo = updateSubscriberInfo;
     // subscriberUpdateInfo = this.subscriberInfo;
@@ -277,7 +314,7 @@ export class SubscriberDetailsPage implements OnInit {
   getSubscriptionsData(data) {
     this.subsDtlsApiSvs.reqGetApi('/api/admin/subscription/customer_info/' + data.SUBSCRIPTION_GUID).subscribe(
       subsResp => {
-        console.log(subsResp);
+        console.log('getSubscriptionsData:' + JSON.stringify(subsResp, null, " "));
         const newData = {
           CUSTOMER_GUID: data.CUSTOMER_GUID,
           CUSTOMER_LABEL: data.CUSTOMER_LABEL,
@@ -299,6 +336,7 @@ export class SubscriberDetailsPage implements OnInit {
           SUBSCRIPTION_LABEL: subsResp.subscription_label,
           PLAN: subsResp.subscription_plan,
           STATUS: subsResp.subscription_status,
+          REMARKS: subsResp.remarks,
           QUOTA: subsResp.subscription_quota,
           USED_QUOTA: subsResp.subscription_used_quota,
           ACTIVATION_DATE: subsResp.activation_date,
@@ -318,6 +356,8 @@ export class SubscriberDetailsPage implements OnInit {
         }
         this.subscriberInfo = newData;
         subscriberUpdateInfo = this.subscriberInfo;
+        this.subsToggle = (this.subscriberInfo.STATUS === 1) ? true : false;
+        this.prevToggleVal = !this.subsToggle;
         this.checkDayLeft();
         this.checkStatus(this.subscriberInfo);
         this.updateProgressBar(this.subscriberInfo.USED_QUOTA, this.subscriberInfo.QUOTA);
@@ -335,13 +375,13 @@ export class SubscriberDetailsPage implements OnInit {
     return this.subscriberInfo.progressBarValue =  this.subsProgressBarValue;
   }
 
-  /**
-   * This method is to update Subscriber's list pagination
-   * @memberof SubscriberDetailsPage
-   */
-  pageChanged(event) {
-    this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, event, this.subscribersDetails.length);
-  }
+  // /**
+  //  * This method is to update Subscriber's list pagination
+  //  * @memberof SubscriberDetailsPage
+  //  */
+  // pageChanged(event) {
+  //   // this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, event, this.subscribersDetails.length);
+  // }
 
   /**
    * This method is to configure popup that will be prompted when user trigger deactive slider  
@@ -382,27 +422,30 @@ export class SubscriberDetailsPage implements OnInit {
         }
       },
       {
-        text: 'Deactive',
+        text: 'Deactivate',
         handler: (data) => {
-          this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+          console.log('this.inactivePIC 1: ' + JSON.stringify(this.inactivePIC, null, " "));
+          this.inactiveMsg = 'This subscription has been deactivated by ' + this.inactivePIC.FULLNAME + ' (' + 
+            this.inactivePIC.ROLE + '). Reason: ' + data.inactiveSubscription;
           this.inactiveReason = data.inactiveSubscription;
-          document.getElementById('reasonTextId').hidden = false;
+          // document.getElementById('reasonTextId').hidden = false;
           document.getElementById('reactivesubsnotice').hidden = false;
           this.confirmOpt = true;
-          this.statusLog('Subscriptions has been deactivated by salesperson. Reason: ' + data.inactiveSubscription);
-          this.reqToUpdateSubs();
+          this.statusLog('Subscriptions has been deactivated');
+          console.log('this.inactiveMsg: ' + JSON.stringify(this.inactiveMsg, null, " "));
+          this.reqToUpdateSubs('deactivated', 0, this.inactiveMsg);
         }
       }
     ]
   }
 
-  reqToUpdateSubs() {
+  reqToUpdateSubs(type, status, reason) {
     console.log('this.subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     this.subsDtlsApiSvs.reqPatchApi({
       subscriptionLabel: this.subscriberInfo.SUBSCRIPTION_LABEL,
       customerGuid: this.subscriberInfo.CUSTOMER_GUID,
       subscriptionPlan: this.subscriberInfo.PLAN,
-      subscriptionStatus: 0,// this.subscriberInfo.STATUS,
+      subscriptionStatus: status,// this.subscriberInfo.STATUS,
       subscriptionQuota: this.subscriberInfo.QUOTA,
       activationDate: this.subscriberInfo.ACTIVATION_DATE,
       lastBillingDate: this.subscriberInfo.LAST_BILLING_DATE,
@@ -411,10 +454,13 @@ export class SubscriberDetailsPage implements OnInit {
       recurrIntervalVal: this.subscriberInfo.RECURR_INTERVAL_VAL,
       billingCycle: this.subscriberInfo.BILLING_CYCLE,
       subscriptionGuid: this.subscriberInfo.SUBSCRIPTION_GUID,
+      remarks: reason,
     }, '/api/admin/subscription').subscribe(
       resData => {
-        console.log(resData);
-        this.subsDtlsInfoPopup.alertPopup('Subscription is deactivated', 'alert-success');
+        console.log('reqToUpdateSubs: ' + JSON.stringify(resData, null, " "));
+        if (type === 'deactivated') {
+          this.subsDtlsInfoPopup.alertPopup('Subscription is deactivated', 'alert-success');
+        }
       }
     );
   }
@@ -433,7 +479,7 @@ export class SubscriberDetailsPage implements OnInit {
     // this.subscribersDetails = (event.detail.value.length > 0 ) ?
     //   this.subsDtlsSearch.filerSearch(event.detail.value, this.subscribersDetails, 'COMPANY_NAME') :
     //     this.subscribersDetails;
-    this.pageChanged(1);
+    // this.pageChanged(1);
   }
 
   /**

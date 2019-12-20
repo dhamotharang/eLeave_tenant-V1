@@ -101,7 +101,7 @@ export class EditUserComponent implements OnInit {
   //     {
   //       text: 'Okay',
   //       handler: (data) => {
-  //         this.inactiveMsg = 'This subscription was deactivated by salesperson. ';
+  //         this.inactiveMsg = 'This subscription has been deactivated by salesperson. ';
   //         this.inactiveReason = data.inactiveSubscription;
   //         document.getElementById('reasonTextId').hidden = false;
   //         document.getElementById('reactivesubsnotice').hidden = false;

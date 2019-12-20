@@ -132,6 +132,9 @@ export class APIService {
   }
 
 
+  reqGetCurrUserDetails(): Observable<any> {
+    return this.getApi('/api/admin/user-manage/personal-detail');
+  }
   // sendReqToAPI(): Observable<any> {
   //   return this.recentActAPISvs.getApi('/api/admin/activity-log/' + subscriberUpdateInfo.SUBSCRIPTION_GUID);
   // }

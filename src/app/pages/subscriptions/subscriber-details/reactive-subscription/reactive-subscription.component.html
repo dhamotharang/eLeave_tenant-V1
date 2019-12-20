@@ -15,14 +15,16 @@
 
  <!-- Update No of total users -->
  <ion-item-group class="contentStyle">
-   <ion-item>
+   <ion-item required>
       <ion-label position="stacked">Subscription Start On</ion-label>
+      <ion-note *ngIf="checkVaildStartDate !== ''" style="padding: 5px 0px 0px; color: #ff6768">{{checkVaildStartDate}}</ion-note>
       <ion-input type="date" placeholder="Insert start date" [(ngModel)]="subsStartDate" (change)="newStartDate($event)"></ion-input>    
       <!-- <ion-input type="date" placeholder="Insert start date" [(ngModel)]="subsStartDate" (ioninput)="newStartDate(subsStartDate)"></ion-input>     -->
    </ion-item>
 
-   <ion-item lines="none">
+   <ion-item lines="none" required>
     <ion-label position="stacked">Bill Every</ion-label>
+    <ion-note *ngIf="checkVaildSCycleNo !== ''" style="padding: 5px 0px 0px;">{{checkVaildSCycleNo}}</ion-note>
     <ion-row>
       <ion-col>
         <ion-input type="number" placeholder="Insert cycle" [(ngModel)]="cycleNo" (ionChange)="calcNextBillingDate()"></ion-input>
@@ -38,6 +40,7 @@
       </ion-col>
     </ion-row>
    </ion-item>
+
    <ion-item lines="none">
      <ion-row style="display: flow-root;">
       <ion-label position="stacked">Next Billing Date:</ion-label>
@@ -50,11 +53,14 @@
       <ion-input type="date" placeholder="Insert expired date" [(ngModel)]="subsExpDate"></ion-input>    
    </ion-item> -->
 
-   <ion-item>
+   <ion-item required>
       <ion-label position="stacked">User Quota</ion-label>
-      <ion-input type="number" placeholder="User qouta" [(ngModel)]="currUser"></ion-input>    
+      <ion-note *ngIf="checkVaildUserQuota !== ''" style="padding: 5px 0px 0px;">{{checkVaildUserQuota}}</ion-note>
+      <ion-input type="number" placeholder="User qouta" [(ngModel)]="currUser"></ion-input>  
    </ion-item>
+
  </ion-item-group>
+ 
 
  <!-- Save / Cancel button -->
  <ion-buttons class="buttonzStyle">

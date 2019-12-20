@@ -106,12 +106,17 @@ export class ReactiveSubscriptionComponent implements OnInit {
    */
   public reactiveGlobalFn = new GlobalFunctionService;
 
+  public checkVaildStartDate;
+  public checkVaildSCycleNo;
+  public checkVaildUserQuota;
+
   /**
    * This method is to set initial value of properties. It will be executed when
    * this popup is loaded
    * @memberof ReactiveSubscriptionComponent
    */
   ngOnInit() {
+    console.log('subscriberUpdateInfo: ' + JSON.stringify(subscriberUpdateInfo, null, " "));
     this.currUser = subscriberUpdateInfo.QUOTA;
     this.cycleNo = subscriberUpdateInfo.RECURR_INTERVAL_VAL;
     this.cycleEvery = subscriberUpdateInfo.RECURR_INTERVAL; 
@@ -128,22 +133,6 @@ export class ReactiveSubscriptionComponent implements OnInit {
     this.calcNextBillingDate();
   }
 
-  // /**
-  //  * This method is to calculate next billing date when cycle number was changed
-  //  * @memberof ReactiveSubscriptionComponent
-  //  */
-  // newCycleTimes(num) {
-  //   this.calcNextBillingDate();
-  // }
-
-  // /**
-  //  * This method is to calculate next billing date when cycle period was changed
-  //  * @memberof ReactiveSubscriptionComponent
-  //  */
-  // newCyclePeriod() {
-  //   this.calcNextBillingDate();
-  // }
-
   /**
    * This method is to get next billing date based on cycle type (cycle period and cycle number)
    * @memberof ReactiveSubscriptionComponent
@@ -157,18 +146,6 @@ export class ReactiveSubscriptionComponent implements OnInit {
       this.subsNextBillDate = new Date(this.subsNStartDate.setFullYear(this.subsNStartDate.getFullYear() + this.cycleNo));
     }
   }
-
-  // /**
-  //  * This method is to set next billing date formats
-  //  * @memberof ReactiveSubscriptionComponent
-  //  */
-  // getNextBillingDateFormat(valDate) {
-  //   const dd = (valDate.getDate() < 10) ? '0' + valDate.getDate() : valDate.getDate();
-  //   let mm = valDate.getMonth() + 1;
-  //   mm = (mm < 10) ? '0' + mm : mm;
-
-  //   this.subsNewNextBillDate = dd + '/' + mm + '/' + valDate.getFullYear();
-  // }
 
   /**
    * This method is to calculate next billing date
@@ -200,9 +177,11 @@ export class ReactiveSubscriptionComponent implements OnInit {
   saveReactiveSubsChanges() {
     this.processData();
     // check if quota is < employee quota then notify user error
-    this.patchUpdateSubs(this.prepareObj());
-    document.getElementById('reactivesubsnotice').hidden = true;
-    this.dissmissReactiveSubsPopup();
+    if (this.checkValidForm() === true) {
+      this.patchUpdateSubs(this.prepareObj());
+      document.getElementById('reactivesubsnotice').hidden = true;
+      this.dissmissReactiveSubsPopup();
+    }
   }
 
   /**
@@ -226,14 +205,15 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   prepareObj() {
-    console.log('his.reactiveSubsData: ' + JSON.stringify(this.reactiveSubsData));
+    console.log('his.reactiveSubsData: ' + JSON.stringify(this.reactiveSubsData, null, " "));
     return {
       'subscriptionLabel': this.reactiveSubsData['SUBSCRIPTION_LABEL'],
       'customerGuid': this.reactiveSubsData['CUSTOMER_GUID'],
       'subscriptionPlan': this.reactiveSubsData['PLAN'],
-      'subscriptionStatus': this.reactiveSubsData['STATUS'],
+      'subscriptionStatus': 1,
+      // 'subscriptionStatus': this.reactiveSubsData['STATUS'],
       'subscriptionQuota': this.currUser,
-      'usedQuota': this.reactiveSubsData['USED_QUOTA'],
+      // 'usedQuota': this.reactiveSubsData['USED_QUOTA'],
       'activationDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate, 0),
       'lastBillingDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsActivatedDate, 0),
       'nextBillingDate': this.reactiveGlobalFn.changeDateFormatYYYYMMDD(this.subsExpDate, 0),
@@ -241,16 +221,9 @@ export class ReactiveSubscriptionComponent implements OnInit {
       'recurrInterval': this.cycleEvery,
       'billingCycle': this.reactiveSubsData['BILLING_CYCLE'],
       'subscriptionGuid': this.reactiveSubsData['SUBSCRIPTION_GUID'],
+      'remarks': '-'
     };
   }
-  // /**
-  //  * This method is to get current date
-  //  * @returns
-  //  * @memberof ReactiveSubscriptionComponent
-  //  */
-  // getReactiveDate() {
-  //   return this.reactiveGlobalFn.changeDateFormatFull(new Date());
-  // }
 
   /**
    * This method is to get returned object from API then processthe output
@@ -258,9 +231,10 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   patchUpdateSubs(obj) {
-    this.sendReqPatchUpdateSubs(obj).subscribe(
+    console.log('req Obj: ' + JSON.stringify(obj, null, " "));
+    this.reactiveAPISvs.reqPatchApi(obj, '/api/admin/subscription').subscribe(
       respondData => {
-        this.reactiveInfoPopup.alertPopup('You have successfully reactive subscription', 'alert-success');
+        this.reactiveInfoPopup.alertPopup('You have successfully reactivate subscription', 'alert-success');
       }, 
       error => {
         console.log('error: ' + JSON.stringify(error, null, " "));
@@ -269,14 +243,27 @@ export class ReactiveSubscriptionComponent implements OnInit {
     );
   }
 
-  /**
-   * This method is send request to API for update reactive subscriptions
-   * @param {*} obj This parameter is to pass request object to API
-   * @returns {Observable<any>}
-   * @memberof ReactiveSubscriptionComponent
-   */
-  sendReqPatchUpdateSubs(obj): Observable<any> {
-    return this.reactiveAPISvs.patchApi(obj, '/api/admin/subscription');
+  checkValidForm() {
+    if (this.subsStartDate === undefined || this.cycleNo === null || this.currUser === null) {
+      if(this.subsStartDate === undefined) {
+        this.checkVaildStartDate = 'Start date is required';
+      }
+
+      if (this.cycleNo === null) {
+        this.checkVaildSCycleNo = 'Billing cycle is required';
+      }
+
+      if (this.currUser === null) {
+        this.checkVaildUserQuota = 'User is required';
+      }
+      return false;
+    } else {
+      this.checkVaildStartDate = '';
+      this.checkVaildSCycleNo = '';
+      this.checkVaildUserQuota = '';
+      return true;
+    }
+    
   }
 
   /**
@@ -297,3 +284,4 @@ export class ReactiveSubscriptionComponent implements OnInit {
   }
 
 }
+
