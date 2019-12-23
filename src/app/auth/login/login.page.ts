@@ -35,7 +35,6 @@ export class LoginPage implements OnInit {
   /**
    * Creates an instance of LoginPage.
    * @param {Router} router This property is to get methods from Router
-   * @param {NgxSpinnerService} spinner This property is to get methods from NgxSpinnerService
    * @param {AuthService} authService This property is to get methods from AuthService
    * @param {PaginationServiceService} pgSet This property is to get methods from PaginationServiceService
    * @memberof LoginPage
@@ -79,8 +78,18 @@ export class LoginPage implements OnInit {
    */
   public homePage = '/main/dashboard';
 
+  /**
+   * This property is to bind value of error message
+   * @memberof LoginPage
+   */
   public errorMsg;
+
+  /**
+   * This property is to bind value of error message during login
+   * @memberof LoginPage
+   */
   public errorLogin;
+
   /**
    * This property is to bind methods from cryptoJS
    * @memberof LoginPage
@@ -91,8 +100,6 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   ngOnInit() {
-    // this.infoPopup.alertPopup('You have successfully create user', 'alert-success');
-    // this.infoPopup.alertPopup('You have successfully create user', 'alert-error');
     this.pgSet.setShowToolbarSideMenu(false);
     if ( localStorage.getItem('email') !== null && localStorage.getItem('password') !== null) {
       this.userLogin.email = localStorage.getItem('email');
@@ -155,6 +162,11 @@ export class LoginPage implements OnInit {
     }
   }
 
+  /**
+   * This method is to redirect to forgot password page
+   * @returns
+   * @memberof LoginPage
+   */
   redirectToForgetPassword() {
     return window.location.href = 'http://zencore.zen.com.my:8104/#/forgot-password/tenant';
   }

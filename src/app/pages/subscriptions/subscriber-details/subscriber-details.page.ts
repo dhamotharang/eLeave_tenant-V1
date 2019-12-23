@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit, } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -51,6 +50,7 @@ export class SubscriberDetailsPage implements OnInit {
   /**
    *Creates an instance of SubscriberDetailsPage.
    * @param {PopoverController} popoverController This property is to get methods from PopoverController
+   * @param {InfoPopupService} subsDtlsInfoPopup This property is to get methods from InfoPopupService
    * @param {PaginationServiceService} subsDtlsPaging This property is to get methods from PaginationServiceService
    * @param {APIService} subsDtlsApiSvs This property is to get methods from APIService
    * @memberof SubscriberDetailsPage
@@ -139,7 +139,12 @@ export class SubscriberDetailsPage implements OnInit {
    */
   public inactiveReason = '';
 
+  /**
+   * This propery is to bind value from subscription inactivator 
+   * @memberof SubscriberDetailsPage
+   */
   public inactivePIC;
+
   /**
    * This property is to set slides configurations
    * @memberof SubscriberDetailsPage
@@ -152,22 +157,8 @@ export class SubscriberDetailsPage implements OnInit {
    * @memberof SubscriberDetailsPage
    */
   ngOnInit() {
-    console.log('subscribersDetails: ' + JSON.stringify(this.subscribersDetails, null, " "));
-    console.log('selectedSubscribersInfo: ' + JSON.stringify(selectedSubscribersInfo, null, " "));
-    console.log('customerAllList: ' + JSON.stringify(customerAllList, null, " "));
-    console.log('selectedCustomerList: ' + JSON.stringify(selectedCustomerList, null, " "));
     this.subscribersDetails = (customerAllList !== undefined) ? customerAllList : subscribersObjGlobal;
     this.subscriberInfo = (selectedCustomerList !== undefined) ? selectedCustomerList : selectedSubscribersInfo;
-
-    // if (customerAllList !== undefined && selectedCustomerList !== undefined) {
-    //   this.subscribersDetails = customerAllList;
-    //   this.subscriberInfo = selectedCustomerList;
-
-    // } else {
-    //   this.subscribersDetails = subscribersObjGlobal;
-    //   this.subscriberInfo = selectedSubscribersInfo;
-    // }
-    // this.subscriberInfo = selectedSubscribersInfo;
     this.getSubscriptionsData(this.subscriberInfo);
     subscriberUpdateInfo = this.subscriberInfo;
     subsDtlPopoverCtrlr = this.popoverController;
@@ -177,18 +168,20 @@ export class SubscriberDetailsPage implements OnInit {
         this.inactivePIC = resData[0];
       }
     );
-    console.log('this.inactivePIC 1: ' + JSON.stringify(this.inactivePIC, null, " "));
 
     // this.configPageSubDtls = this.subsDtlsPaging.pageConfig(10, currSubsPage, this.subscribersDetails.length);
   }
 
+  /**
+   * This method is to check subscription's status
+   * @param {*} selectedSubsData
+   * @memberof SubscriberDetailsPage
+   */
   checkStatus(selectedSubsData) {
     if (selectedSubsData.STATUS === 0) {
       this.subsToggle = false;
       this.prevToggleVal = !this.subsToggle;
       this.inactiveMsg =  selectedSubsData.REMARKS;// 'This subscription has been deactivated'
-      // this.inactiveReason = selectedSubsData.REMARKS;
-      // document.getElementById('reasonTextId').hidden = true;
       document.getElementById('reactivesubsnotice').hidden = false;
 
     } else {
@@ -311,10 +304,14 @@ export class SubscriberDetailsPage implements OnInit {
     // this.updateProgressBar(updateSubscriberInfo.USED_QUOTA, updateSubscriberInfo.QUOTA);
   }
 
+  /**
+   * This method is to get current subscription data from subscription_guid
+   * @param {*} data
+   * @memberof SubscriberDetailsPage
+   */
   getSubscriptionsData(data) {
     this.subsDtlsApiSvs.reqGetApi('/api/admin/subscription/customer_info/' + data.SUBSCRIPTION_GUID).subscribe(
       subsResp => {
-        console.log('getSubscriptionsData:' + JSON.stringify(subsResp, null, " "));
         const newData = {
           CUSTOMER_GUID: data.CUSTOMER_GUID,
           CUSTOMER_LABEL: data.CUSTOMER_LABEL,
@@ -366,6 +363,7 @@ export class SubscriberDetailsPage implements OnInit {
       }
     );
   }
+
   /**
    * This method is to calculate percentage of current used employee qouta over total qouta 
    * @memberof SubscriberDetailsPage
@@ -439,8 +437,14 @@ export class SubscriberDetailsPage implements OnInit {
     ]
   }
 
+  /**
+   * This method is to send request to API to update subscription
+   * @param {*} type This parameter is to bind value of deacrivation type
+   * @param {*} status This parameter is to pass subscriptions status value
+   * @param {*} reason This parameter is to pass subscriptions remarks value
+   * @memberof SubscriberDetailsPage
+   */
   reqToUpdateSubs(type, status, reason) {
-    console.log('this.subscriberInfo: ' + JSON.stringify(this.subscriberInfo, null, " "));
     this.subsDtlsApiSvs.reqPatchApi({
       subscriptionLabel: this.subscriberInfo.SUBSCRIPTION_LABEL,
       customerGuid: this.subscriberInfo.CUSTOMER_GUID,
@@ -457,7 +461,6 @@ export class SubscriberDetailsPage implements OnInit {
       remarks: reason,
     }, '/api/admin/subscription').subscribe(
       resData => {
-        console.log('reqToUpdateSubs: ' + JSON.stringify(resData, null, " "));
         if (type === 'deactivated') {
           this.subsDtlsInfoPopup.alertPopup('Subscription is deactivated', 'alert-success');
         }

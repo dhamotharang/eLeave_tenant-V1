@@ -111,10 +111,10 @@ export class AddnewcustomerPage implements OnInit {
    */
   public subLabelId = 'SUB-' + Date.now();
 
-  public fullnameCheck = false;
-
-  public disableSaveButton;
-
+  /**
+   * This property is to bind form value in checking the validity of form
+   * @memberof AddnewcustomerPage
+   */
   public formCheck = {};
 
   /**
@@ -202,6 +202,11 @@ export class AddnewcustomerPage implements OnInit {
     }
   }
 
+  /**
+   * This method is to check form validity
+   * @returns
+   * @memberof AddnewcustomerPage
+   */
   checkFormValid() {
     this.formCheck = {
       fullnameCheck: false,
@@ -283,6 +288,7 @@ export class AddnewcustomerPage implements OnInit {
 
     return (Object.keys(this.formCheck).every((k) => !this.formCheck[k])) ? true : false;
   }
+  
   /**
    * This method will be executed when cancel button is triggered
    * @memberof AddnewcustomerPage

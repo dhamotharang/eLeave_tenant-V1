@@ -25,9 +25,20 @@ export let customerUpdateInfo;
  */
 export let popovrCtrlr;
 
+/**
+ * This variable is to store data of all customer list
+ * @export
+ * @class CustomerDetailsPage
+ */
 export let customerAllList;
 
+/**
+ * This variable is to store data of current selected customer list 
+ * @export
+ * @class CustomerDetailsPage
+ */
 export let selectedCustomerList;
+
 /**
  * This component is to set Customer Details page
  * @export
@@ -43,10 +54,11 @@ export let selectedCustomerList;
 export class CustomerDetailsPage implements OnInit {
 
   /**
-   * Creates an instance of CustomerDetailsPage.
+   *Creates an instance of CustomerDetailsPage.
    * @param {PaginationServiceService} custDtlsPaging This property is to get methods from PaginationServiceService
-   * @param {PopoverController} popoverController  This property is to get methods from PopoverController
-   * @param {SearchDataService} custListSearch  This property is to get methods from SearchDataService
+   * @param {PopoverController} popoverController This property is to get methods from PopoverController
+   * @param {SearchDataService} custListSearch This property is to get methods from SearchDataService
+   * @param {APIService} custDtlsAPISvs This property is to get methods from APIService
    * @memberof CustomerDetailsPage
    */
   constructor(
@@ -149,6 +161,10 @@ export class CustomerDetailsPage implements OnInit {
    */
   public childCompLength;
 
+  /**
+   * This property is to bind value of deactivated message
+   * @memberof CustomerDetailsPage
+   */
   public subsInactiveMsg;
 
   /**
@@ -157,29 +173,24 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   ngOnInit() {
-    // this.slideOpts = this.daysLeftFn.subsDtlsSlideOpts;
-    // this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, currCustPage, this.customerList.length);
     this.slideOpts = this.custDtlsGlobalFn.slideOption();
-    console.log('customerInfo: ' + JSON.stringify(customerInfo, null, " "));
     this.selectedCustomerInfo = customerInfo;
     this.getDataCustomerDetails(customerInfo);
-    // console.log('this.selectedCustomerInfo 1: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
-    // this.selectedCustomerInfo = this.addDateFormat(this.selectedCustomerInfo);
     customerUpdateInfo = this.selectedCustomerInfo;
     this.checkCustomerStatus(this.selectedCustomerInfo);
-    // this.progressBarValue = this.selectedCustomerInfo.USED_QUOTA / this.selectedCustomerInfo.QUOTA;
     popovrCtrlr = this.popoverController;
-    // this.getChildCompanyList(this.selectedCustomerInfo);
   }
   
-
+  /**
+   * This method is to check customer status 
+   * @param {*} selectedCustData
+   * @memberof CustomerDetailsPage
+   */
   checkCustomerStatus(selectedCustData) {
     if (selectedCustData.STATUS === 0) {
       this.custToggle = false;
       this.prevCustToggleVal = !this.custToggle;
     } else {
-    //   // this.custToggle = true
-    //   // this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
       this.custToggle = (this.calcDays < 0) ? false : true;
       this.prevCustToggleVal = !this.custToggle;
 
@@ -187,6 +198,10 @@ export class CustomerDetailsPage implements OnInit {
     }
   }
 
+  /**
+   * This method is to calcualte balance day left from last billing date
+   * @memberof CustomerDetailsPage
+   */
   calcSubsDaysLeft() {
     this.calcDays = this.custDtlsGlobalFn.dateDiff(this.selectedCustomerInfo.NEXT_BILLING_DATE);
     if (this.calcDays < 0) {
@@ -202,11 +217,14 @@ export class CustomerDetailsPage implements OnInit {
       document.getElementById('reactivesubsnotice').hidden = true;
 
     }
-
-
-
   }
 
+  /**
+   * This method is to send request to API to update remarks data
+   * @param {*} currStatus This property is to pass status value
+   * @param {*} remarksNote This property is to pass remarks value
+   * @memberof CustomerDetailsPage
+   */
   updateSubsRemarks(currStatus, remarksNote) {
     this.custDtlsAPISvs.reqPatchApi({
       subscriptionLabel: this.selectedCustomerInfo.SUBSCRIPTION_LABEL,
@@ -226,19 +244,6 @@ export class CustomerDetailsPage implements OnInit {
       data => { }
     );
   }
-  // /**
-  //  * This method is to append element into object that contain formatted date time
-  //  * @param {*} obj This property will pass the customer details data into method
-  //  * @returns
-  //  * @memberof CustomerDetailsPage
-  //  */
-  // addDateFormat(obj) {
-  //   const addDateFormat = {
-  //     'FULL_LAST_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.LAST_BILLING_DATE),
-  //     'FULL_NEXT_BILLING_DATE': this.custDtlsGlobalFn.changeDateFormatFull(this.selectedCustomerInfo.NEXT_BILLING_DATE),
-  //   };
-  //   return Object.assign(obj, addDateFormat);
-  // }
 
   /**
    * This method is to set the value of selected customer details in the property.
@@ -246,23 +251,25 @@ export class CustomerDetailsPage implements OnInit {
    * @memberof CustomerDetailsPage
    */
   onChangeSelectedCustomer(changedCustomerItem) {
-    // console.log(changedCustomerItem);
     this.getDataCustomerDetails(changedCustomerItem);
-    // customerUpdateInfo = this.selectedCustomerInfo;
   }
 
-  optionToDeactivateCustomer() {
-    console.log('optionToDeactivateCustomer');
-    console.log(this.custToggle);  //true == change to inactive
-    console.log(this.selectedCustomerInfo);
+  // optionToDeactivateCustomer() {
+  //   console.log('optionToDeactivateCustomer');
+  //   console.log(this.custToggle);  //true == change to inactive
+  //   console.log(this.selectedCustomerInfo);
 
-  }
+  // }
 
 
+  /**
+   * This method is to get customer details data from API
+   * @param {*} data
+   * @memberof CustomerDetailsPage
+   */
   getDataCustomerDetails(data) {
     this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/customer_info/' + data.SUBSCRIPTION_GUID).subscribe(
       custData => {
-        // console.log('custData: ' + JSON.stringify(custData, null, " "));
         const newData = {
           CUSTOMER_GUID: data.CUSTOMER_GUID,
           CUSTOMER_LABEL: data.CUSTOMER_LABEL,
@@ -298,11 +305,6 @@ export class CustomerDetailsPage implements OnInit {
         }
         this.selectedCustomerInfo = newData;
         customerUpdateInfo = this.selectedCustomerInfo;
-        // console.log('this.selectedCustomerInfo a');
-        // console.log(this.selectedCustomerInfo);
-
-        // this.custToggle = (this.selectedCustomerInfo.STATUS === 1) ? true : false;
-        // this.prevCustToggleVal = !this.custToggle;
         this.checkCustomerStatus(this.selectedCustomerInfo);
         
         this.calcSubsDaysLeft();
@@ -315,11 +317,12 @@ export class CustomerDetailsPage implements OnInit {
 
   }
 
-
+  /**
+   * This method is to set customer list, selected customer list before it redirected to subscription details page
+   * @param {*} obj
+   * @memberof CustomerDetailsPage
+   */
   onViewSubscriptionDetails(obj) {
-    console.log('objeee: ' + JSON.stringify(obj, null, " "));
-    console.log('this.selectedCustomerInfo: ' + JSON.stringify(this.selectedCustomerInfo, null, " "));
-    console.log('this.customerList: ' + JSON.stringify(this.customerList, null, " ")); 
     selectedCustomerList = this.selectedCustomerInfo;
     customerAllList = this.customerList;
     
@@ -338,14 +341,6 @@ export class CustomerDetailsPage implements OnInit {
     return await historyPopOver.present();
   }
 
-  // /**
-  //  * This method is to set pagination configuration in  Customer Details page
-  //  * @memberof CustomerDetailsPage
-  //  */
-  // pageCustDtlsChanged(event) {
-  //   // this.configPageCustDtls = this.custDtlsPaging.pageConfig(9, event, this.customerList.length);
-  // }
-
   /**
    * This method is to get search result for customer list
    * @memberof CustomerDetailsPage
@@ -355,7 +350,6 @@ export class CustomerDetailsPage implements OnInit {
     this.customerList = (event.detail.value.length > 0 ) ?
       this.custListSearch.filerSearch(event.detail.value, this.customerList, 'FULLNAME') :
                             this.customerList;
-    // this.pageCustDtlsChanged(1);
   }
 
   /**
@@ -366,9 +360,7 @@ export class CustomerDetailsPage implements OnInit {
   getChildCompanyList(custData) {
     this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/company_info/' + custData.SUBSCRIPTION_GUID).subscribe(
       respChildData => {
-        // console.log(respChildData);
         this.childCompList = respChildData.company_details;
-        // console.log(this.childCompList);
         this.childCompLength = this.childCompList.length;
       }
     );

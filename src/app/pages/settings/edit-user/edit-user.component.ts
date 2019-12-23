@@ -22,7 +22,9 @@ import { selectedEditUser, settingPopoverCtrlr } from '../settings.page';
 export class EditUserComponent implements OnInit {
 
   /**
-   * Creates an instance of EditUserComponent.
+   *Creates an instance of EditUserComponent.
+   * @param {APIService} editUserApiSvs This property is go get methods from APIService
+   * @param {InfoPopupService} editUserInfoPopup This property is go get methods from InfoPopupService
    * @memberof EditUserComponent
    */
   constructor(
@@ -30,6 +32,11 @@ export class EditUserComponent implements OnInit {
     private editUserInfoPopup: InfoPopupService
   ) { }
 
+  /**
+   * This property is to get methods from AlertController
+   * @private
+   * @memberof EditUserComponent
+   */
   private editUserAlert = new AlertController();
 
   /**
@@ -50,6 +57,10 @@ export class EditUserComponent implements OnInit {
    */
   public toggleVal;
 
+  /**
+   * This property is to bind deactivation value
+   * @memberof EditUserComponent
+   */
   public confirmDeactive;
 
   /**
@@ -68,7 +79,6 @@ export class EditUserComponent implements OnInit {
    * @memberof EditUserComponent
    */
   checkSettingToggle() {
-    console.log('this.toggleVal: ' + this.toggleVal);
     this.confirmDeactive = this.toggleVal;
     this.userInfo.ACTIVATION_FLAG = (this.toggleVal === true) ? 1 : 0;
   }
@@ -118,12 +128,9 @@ export class EditUserComponent implements OnInit {
    * @memberof EditUserComponent
    */
   editPassValidation(pass1, pass2) {
-    console.log(pass1);
-    console.log(pass2);
     if (pass1 === pass2) {
       return this.userInfo.password = pass1;
     } else {
-      console.error ('Password is Mismatch');
       return null;
     }
   }
@@ -148,6 +155,11 @@ export class EditUserComponent implements OnInit {
     return await settingPopoverCtrlr.dismiss();
   }
 
+  /**
+   * This method is to send request to API to save edited user
+   * @param {*} obj
+   * @memberof EditUserComponent
+   */
   reqSaveEditUser(obj) {
     this.editUserApiSvs.patchApi({
       userId: obj.USER_GUID,

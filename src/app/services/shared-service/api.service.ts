@@ -132,6 +132,11 @@ export class APIService {
   }
 
 
+  /**
+   * This method is to send request to API to get personal details 
+   * @returns {Observable<any>}
+   * @memberof APIService
+   */
   reqGetCurrUserDetails(): Observable<any> {
     return this.getApi('/api/admin/user-manage/personal-detail');
   }

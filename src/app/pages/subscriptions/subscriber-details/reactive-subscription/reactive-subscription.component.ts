@@ -106,8 +106,22 @@ export class ReactiveSubscriptionComponent implements OnInit {
    */
   public reactiveGlobalFn = new GlobalFunctionService;
 
+  /**
+   * This property is to bind the value of checking startdate for validation process
+   * @memberof ReactiveSubscriptionComponent
+   */
   public checkVaildStartDate;
+
+  /**
+   * This property is to bind the value of checking cycle number for validation process
+   * @memberof ReactiveSubscriptionComponent
+   */
   public checkVaildSCycleNo;
+ 
+  /**
+   * This property is to bind the value of user quota for validation process
+   * @memberof ReactiveSubscriptionComponent
+   */
   public checkVaildUserQuota;
 
   /**
@@ -116,7 +130,6 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   ngOnInit() {
-    console.log('subscriberUpdateInfo: ' + JSON.stringify(subscriberUpdateInfo, null, " "));
     this.currUser = subscriberUpdateInfo.QUOTA;
     this.cycleNo = subscriberUpdateInfo.RECURR_INTERVAL_VAL;
     this.cycleEvery = subscriberUpdateInfo.RECURR_INTERVAL; 
@@ -205,7 +218,6 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   prepareObj() {
-    console.log('his.reactiveSubsData: ' + JSON.stringify(this.reactiveSubsData, null, " "));
     return {
       'subscriptionLabel': this.reactiveSubsData['SUBSCRIPTION_LABEL'],
       'customerGuid': this.reactiveSubsData['CUSTOMER_GUID'],
@@ -231,7 +243,6 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   patchUpdateSubs(obj) {
-    console.log('req Obj: ' + JSON.stringify(obj, null, " "));
     this.reactiveAPISvs.reqPatchApi(obj, '/api/admin/subscription').subscribe(
       respondData => {
         this.reactiveInfoPopup.alertPopup('You have successfully reactivate subscription', 'alert-success');
@@ -243,6 +254,11 @@ export class ReactiveSubscriptionComponent implements OnInit {
     );
   }
 
+  /**
+   * This method is to check reactive subscriptions form is valid or not
+   * @returns
+   * @memberof ReactiveSubscriptionComponent
+   */
   checkValidForm() {
     if (this.subsStartDate === undefined || this.cycleNo === null || this.currUser === null) {
       if(this.subsStartDate === undefined) {
