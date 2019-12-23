@@ -114,7 +114,7 @@ export class CustomersPage implements OnInit {
     // console.log(this.custPaging.getSideMenuType());
     this.custPaging.setCustomerViewType('card');
     this.getCustList();
-    this.configPageCust = this.custPaging.pageConfig(10, 1, 10);
+    this.configPageCust = this.custPaging.pageConfig(10, 1, 10); 
   }
 
   /**
@@ -161,7 +161,7 @@ export class CustomersPage implements OnInit {
    * @memberof CustomersPage
    */
   pageCustChanged(event) {
-    this.configPageCust = this.custPaging.pageConfig(9, event, this.customerData.length);
+    this.configPageCust = this.custPaging.pageConfig(10, event, this.customerData.length);
     currCustPage = event;
   }
 
