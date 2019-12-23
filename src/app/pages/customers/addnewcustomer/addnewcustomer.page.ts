@@ -111,6 +111,12 @@ export class AddnewcustomerPage implements OnInit {
    */
   public subLabelId = 'SUB-' + Date.now();
 
+  public fullnameCheck = false;
+
+  public disableSaveButton;
+
+  public formCheck = {};
+
   /**
    * This method is to set inital properties value.
    * It will be executed when add new page is being loaded
@@ -188,10 +194,95 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   async saveAddCustomer() {
+
+    // this.returnToCustPage();
     Object.assign(this.newCustForm, { currency: 'MYR', customerLabel: this.custLabelId });
-    await this.postCustInfo();
+    if (this.checkFormValid()) {
+      await this.postCustInfo();
+    }
   }
 
+  checkFormValid() {
+    this.formCheck = {
+      fullnameCheck: false,
+      companynameCheck: false,
+      emailCheck: false,
+      contactNoCheck: false,
+      nicknameCheck: false,
+      address1Check: false,
+      address2Check: false,
+      postcodeCheck: false,
+      cityCheck: false,
+      stateCheck: false,
+      countryCheck: false,
+      salespersonCheck: false,
+      startdataCheck: false,
+      cycleCheck: false,
+      quotaCheck: false,
+    }
+    
+    if (this.newCustForm["fullname"] === "" || this.newCustForm["fullname"] === undefined ) {
+      this.formCheck['fullnameCheck'] = true;
+    } 
+
+    if (this.newCustForm["companyName"] === "" || this.newCustForm["companyName"] === undefined) {
+      this.formCheck['companynameCheck'] = true;
+    } 
+
+    if (this.newCustForm["email"] === "" || this.newCustForm["email"] === undefined) {
+      this.formCheck['emailCheck'] = true;
+    }
+
+    if (this.newCustForm["contactNo"] === "" || this.newCustForm["contactNo"] === undefined) {
+      this.formCheck['contactNoCheck'] = true;
+    }
+
+    if (this.newCustForm["nickname"] === "" || this.newCustForm["nickname"] === undefined) {
+      this.formCheck['nicknameCheck'] = true;
+    }
+
+    if (this.custStartSubsDate === "" || this.custStartSubsDate === undefined) {
+      this.formCheck['startdataCheck'] = true;
+    }
+    
+    if (this.custCycleNo === "" || this.custCycleNo === undefined || this.custCycleEvery === "" || this.custCycleEvery === undefined) {
+      this.formCheck['cycleCheck'] = true;
+    }
+
+    if (this.newSubsForm["subscriptionQuota"] === "" || this.newSubsForm["subscriptionQuota"]  === undefined) {
+      this.formCheck['quotaCheck'] = true;
+    }
+
+    if (this.newCustForm["salesperson"] === "" || this.newCustForm["salesperson"] === undefined) {
+      this.formCheck['salespersonCheck'] = true;
+    }
+
+    if (this.newCustForm["address1"] === "" || this.newCustForm["address1"] === undefined) {
+      this.formCheck['address1Check'] = true;
+    }
+
+    if (this.newCustForm["address2"] === "" || this.newCustForm["address2"] === undefined) {
+      this.formCheck['address2Check'] = true;
+    }
+
+    if (this.newCustForm["postcode"] === "" || this.newCustForm["postcode"] === undefined) {
+      this.formCheck['postcodeCheck'] = true;
+    }
+
+    if (this.newCustForm["city"] === "" || this.newCustForm["city"] === undefined) {
+      this.formCheck['cityCheck'] = true;
+    }
+
+    if (this.newCustForm["state"] === "" || this.newCustForm["state"] === undefined) {
+      this.formCheck['stateCheck'] = true;
+    }
+
+    if (this.newCustForm["country"] === "" || this.newCustForm["country"] === undefined) {
+      this.formCheck['countryCheck'] = true;
+    }
+
+    return (Object.keys(this.formCheck).every((k) => !this.formCheck[k])) ? true : false;
+  }
   /**
    * This method will be executed when cancel button is triggered
    * @memberof AddnewcustomerPage
@@ -214,10 +305,17 @@ export class AddnewcustomerPage implements OnInit {
           lastBillingDate: this.custStartSubsDate, nextBillingDate: this.custEndSubsDate, billingCycle: 0});
 
         this.postNewLog('subs').subscribe(dataSubs => {
-          this.addCustInfoPopup.alertPopup('You have successfully create user', 'alert-success');
           // console.log('cust data: ' + JSON.stringify(data[0].CUSTOMER_GUID, null, " "));
           // console.log('subs data: ' + JSON.stringify(dataSubs[0].SUBSCRIPTION_GUID, null, " "));
           this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);
+          this.addCustInfoPopup.alertPopup('You have successfully create user', 'alert-success').then(
+            data => {
+              window.location.href = 'http://zencore.zen.com.my:8103/#/main/customers';
+              this.addCustPggSvs.setShowToolbarSideMenu(true);
+            }
+          );
+          // this.returnToCustPage();
+          // //  this.addCustRoute.navigate['/main/customer'];
         });
       }
     );

@@ -23,40 +23,45 @@
 
                     <ion-item-group class="addCustomerDetailsBody">
                       <ion-row>
-                        <ion-label>Primary Contact</ion-label>
+                        <ion-label style="color: #ff6768;">* </ion-label><ion-label>Primary Contact</ion-label>
                       </ion-row>
-                      <ion-row class="addCustomerInputBackgroundStyle">
+                      <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
                         <ion-input type="text" required placeholder="Full Name" [(ngModel)]="newCustForm.fullname" name="fullname"></ion-input>
+                        <ion-note *ngIf="formCheck['fullnameCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                       <ion-row>
-                        <ion-label>Company Name</ion-label>
+                        <ion-label style="color: #ff6768;">* </ion-label><ion-label>Company Name</ion-label>
                       </ion-row>
-                      <ion-row class="addCustomerInputBackgroundStyle">
+                      <ion-row class="addCustomerInputBackgroundStyle"  style="display: flow-root;">
                         <ion-input type="text" required placeholder="Company name" [(ngModel)]="newCustForm.companyName" name="companyName"></ion-input>
+                        <ion-note *ngIf="formCheck['companynameCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                       <!-- need to handle cannot blank -->
                       <ion-row>
-                        <ion-label style="color: #ff6768;">Customer Email*</ion-label>
+                        <ion-label style="color: #ff6768;">* </ion-label><ion-label>Customer Email</ion-label>
                       </ion-row>
-                      <ion-row class="addCustomerInputBackgroundStyle">
+                      <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
                         <ion-input type="email" required placeholder="Email address (Eg: abc@example.com)" [(ngModel)]="newCustForm.email" name="email"></ion-input>
+                        <ion-note *ngIf="formCheck['emailCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                       <!-- need to handle cannot blank -->
                       <ion-row>
-                        <ion-label style="color: #ff6768;">Phone Number*</ion-label>
+                        <ion-label style="color: #ff6768;">* </ion-label><ion-label>Phone Number</ion-label>
                       </ion-row>
-                      <ion-row class="addCustomerInputBackgroundStyle">
+                      <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
                         <ion-input type="tel" required placeholder="Contact no (Eg: +6012-3455678)" [(ngModel)]="newCustForm.contactNo" name="contactNo"></ion-input>
+                        <ion-note *ngIf="formCheck['contactNoCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                       <ion-row>
-                        <ion-label>Display Name</ion-label>
+                        <ion-label style="color: #ff6768;">* </ion-label><ion-label>Display Name</ion-label>
                       </ion-row>
-                      <ion-row class="addCustomerInputBackgroundStyle">
+                      <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
                         <ion-input type="text" required placeholder="Display name/Username" [(ngModel)]="newCustForm.nickname" name="nickname"></ion-input>
+                        <ion-note *ngIf="formCheck['nicknameCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                     </ion-item-group>
@@ -81,29 +86,41 @@
                           <ion-label class="addCustomerInputDatetimeBackgroundStyle" style="margin: unset;">{{subLabelId}}</ion-label>
                         </ion-item-group>
                         <ion-item-group style="margin-right: auto;">
-                          <ion-label>Subscription Start On</ion-label>
-                          <ion-input class="addCustomerInputDatetimeBackgroundStyle" 
-                          type="date" mode="md" placeholder="Insert start date" 
-                          [(ngModel)]="custStartSubsDate" (change)="newStartSubs($event)"></ion-input>
+                          <ion-item-group style="display: flex;">
+                            <ion-label style="color: #ff6768;">* </ion-label>
+                            <ion-label>Subscription Start On</ion-label>
+                          </ion-item-group>
+                          <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
+                            <ion-input 
+                            type="date" mode="md" placeholder="Insert start date" 
+                            [(ngModel)]="custStartSubsDate" (change)="newStartSubs($event)"></ion-input>
+                            <ion-note *ngIf="formCheck['startdataCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
+                          </ion-row>
+
                         </ion-item-group>
                       </ion-row>
 
                       <ion-row style="display: flow-root;">
-                        <ion-label>Bill Every: </ion-label>
-                        <ion-item-group class="addCustomerInputDatetimeBackgroundStyle" style="display: flex;">
-                          <ion-input type="number" mode="md" style="margin-right: 5px;" 
-                          placeholder="Insert cycle" [(ngModel)]="custCycleNo" name="custCycleNo" (ionChange)="setNextBillingDate()"></ion-input>
-
-                          <ion-select [(ngModel)]="custCycleEvery" name="custCycleEvery" (ionChange)="setNextBillingDate()" 
-                          style="border-radius: 3px !important;
-                            border: solid 0.5px #a5a4bf;
-                            align-items: center;
-                            margin: auto 0px;
-                            padding: 6px;">
-                            <ion-select-option selected value="Week(s)">Week(s)</ion-select-option>
-                            <ion-select-option value="Month(s)">Month(s)</ion-select-option>
-                            <ion-select-option value="Year(s)">Year(s)</ion-select-option>
-                          </ion-select>
+                        <ion-item-group style="display: flex;">
+                          <ion-label style="color: #ff6768;">* </ion-label>
+                          <ion-label>Bill Every: </ion-label>
+                        </ion-item-group>
+                        <ion-item-group class="addCustomerInputDatetimeBackgroundStyle" style="display: flow-root;">
+                          <ion-row>
+                            <ion-input type="number" mode="md" style="margin-right: 5px;" 
+                            placeholder="Insert cycle" [(ngModel)]="custCycleNo" name="custCycleNo" (ionChange)="setNextBillingDate()"></ion-input>
+                            <ion-select [(ngModel)]="custCycleEvery" name="custCycleEvery" (ionChange)="setNextBillingDate()" 
+                            style="border-radius: 3px !important;
+                              border: solid 0.5px #a5a4bf;
+                              align-items: center;
+                              margin: auto 0px;
+                              padding: 6px;">
+                              <ion-select-option selected value="Week(s)">Week(s)</ion-select-option>
+                              <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+                              <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+                            </ion-select>
+                          </ion-row>
+                          <ion-note *ngIf="formCheck['cycleCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                         </ion-item-group>
                       </ion-row>
 
@@ -112,25 +129,31 @@
                         <ion-label class="addCustomerInputDatetimeBackgroundStyle">{{custEndSubsDate}}</ion-label>
                       </ion-row>
                       <ion-row>
-                        <ion-label>Subscriptions quota</ion-label>
+                        <ion-label style="color: #ff6768;">* </ion-label><ion-label>Subscriptions quota</ion-label>
                       </ion-row>
-                      <ion-row class="addCustomerInputBackgroundStyle">
+                      <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
                         <ion-input type="number" required placeholder="Quota number" mode="md" [(ngModel)]="newSubsForm.subscriptionQuota" name="subscriptionQuota"></ion-input>
+                        <ion-note *ngIf="formCheck['cycleCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                       <ion-row style="display: block;">
-                        <ion-label>
-                          Sales Person:
-                        </ion-label>
+                        <ion-item-group style="display: flex;">
+                          <ion-label style="color: #ff6768;">* </ion-label>
+                          <ion-label>Sales Person: </ion-label>
+                        </ion-item-group>
                         <!-- <ion-select [(ngModel)]="selSalesperson" (ionChange)="selectedSalesperson()" -->
-                        <ion-select [(ngModel)]="newCustForm.salesperson" name="salesperson"
-                          placeholder="Select a salesperson" style="border-radius: 3px !important;
-                          border: solid 0.5px #a5a4bf;
-                          align-items: center;
-                          margin: 5px 0px;
-                          padding: 6px;">
-                          <ion-select-option *ngFor="let sp of salepersonList" [value]=sp.FULLNAME>{{sp.FULLNAME}}</ion-select-option>
-                        </ion-select>
+                        <ion-row class="addCustomerInputDatetimeBackgroundStyle" style="display: flow-root;">
+                          <ion-select [(ngModel)]="newCustForm.salesperson" name="salesperson"
+                            placeholder="Select a salesperson" style="border-radius: 3px !important;
+                            border: solid 0.5px #a5a4bf;
+                            align-items: center;
+                            margin: 5px 0px;
+                            padding: 6px;">
+                            <ion-select-option *ngFor="let sp of salepersonList" [value]=sp.FULLNAME>{{sp.FULLNAME}}</ion-select-option>
+                          </ion-select>
+                          <ion-note *ngIf="formCheck['salespersonCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
+
+                        </ion-row>
                       </ion-row>
 
                     </ion-item-group>
@@ -147,31 +170,37 @@
 
                   <ion-item-group class="addCustomerDetailsBody">
                     <ion-row>
-                        <ion-label>Customer Address</ion-label>
+                      <ion-label style="color: #ff6768;">* </ion-label><ion-label>Customer Address</ion-label>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle" style="padding-bottom: 0px;">
-                      <ion-col>
+                      <ion-col style="display: flow-root;">
                         <ion-input type="text" required placeholder="Streets 1" [(ngModel)]="newCustForm.address1" name="address1"></ion-input>
+                        <ion-note *ngIf="formCheck['address1Check']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
-                      <ion-col>
-                        <ion-input type="text" placeholder="Streets 2 (Optional)" [(ngModel)]="newCustForm.address2" name="address2"></ion-input>
+                      <ion-col style="display: flow-root;">
+                        <ion-input type="text" placeholder="Streets 2" [(ngModel)]="newCustForm.address2" name="address2"></ion-input>
+                        <ion-note *ngIf="formCheck['address2Check']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                       <!-- <ion-input></ion-input> -->
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle" style="padding-bottom: 0px;">
-                      <ion-col>
+                      <ion-col style="display: flow-root;">
                         <ion-input type="text" required placeholder="Postal code" [(ngModel)]="newCustForm.postcode" name="postcode"></ion-input>
+                        <ion-note *ngIf="formCheck['postcodeCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
-                      <ion-col>
+                      <ion-col style="display: flow-root;">
                         <ion-input type="text" required placeholder="Village/Township" [(ngModel)]="newCustForm.city" name="city"></ion-input>
+                        <ion-note *ngIf="formCheck['cityCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
-                      <ion-col>
+                      <ion-col style="display: flow-root;">
                         <ion-input type="text" required placeholder="State" [(ngModel)]="newCustForm.state" name="state"></ion-input>
+                        <ion-note *ngIf="formCheck['stateCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
-                      <ion-col>
-                          <ion-input type="text" required placeholder="Country" [(ngModel)]="newCustForm.country" name="country"></ion-input>                    
+                      <ion-col style="display: flow-root;">
+                        <ion-input type="text" required placeholder="Country" [(ngModel)]="newCustForm.country" name="country"></ion-input>                    
+                        <ion-note *ngIf="formCheck['countryCheck']" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                     </ion-row>
                   </ion-item-group>
