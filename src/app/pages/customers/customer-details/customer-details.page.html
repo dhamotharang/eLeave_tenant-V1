@@ -139,17 +139,15 @@
         </ion-item-group>
 
         <!--Customer Status -->
-        <ion-list  class="customerOverviewContent">
+        <ion-list hidden class="customerOverviewContent">
           <ion-label>
               CUSTOMER'S SUBSCRIPTION STATUS
           </ion-label>
         </ion-list>
-        <ion-item-group class="customerOverviewDetails" style="max-width: min-content; margin: auto auto 10px;">
+        <ion-item-group hidden class="customerOverviewDetails" style="max-width: min-content; margin: auto auto 10px;">
           <div class="onoffswitch">
-            <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" unchecked> -->
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" [(ngModel)]="custToggle"
             (click)="optionToDeactivateCustomer()">
-            <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="1" (click)="optionsSelected(this)"> -->
             <label class="onoffswitch-label" for="myonoffswitch">
               <span class="onoffswitch-inner"></span>
               <span class="onoffswitch-switch"></span>
@@ -157,7 +155,7 @@
           </div>
         </ion-item-group>
 
-        <ion-item-group id="reactivesubsnotice" hidden class="customerListOverviewStyle custsReactivationNotice">
+        <ion-item-group hidden id="reactivesubsnotice" hidden class="customerListOverviewStyle custsReactivationNotice">
           <ion-icon name="warning"></ion-icon>
           <ion-list style="display: grid;">
             <ion-text>
@@ -270,23 +268,8 @@
                   <ion-label>SUBSCRIPTION ID: {{selectedCustomerInfo.SUBSCRIPTION_LABEL}}</ion-label>
                   <ion-label>SUBSCRIPTION PLAN: {{selectedCustomerInfo.PLAN}}</ion-label>
                   <ion-label>SUBSCRIPTION RECURRENCE: Every {{selectedCustomerInfo.RECURR_INTERVAL_VAL}} {{selectedCustomerInfo.RECURR_INTERVAL}}</ion-label>
-                  <!-- <ion-row [ngSwitch]="selectedCustomerInfo.STATUS">
-                    <ion-label >
-                      STATUS: 
-                    </ion-label>
-                    <ion-label *ngSwitchCase="'0'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #5ee2a0">
-                      {{selectedCustomerInfo.status}}
-                    </ion-label>
-                    <ion-label *ngSwitchCase="'TRIAL'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: #3b86ff">
-                      {{selectedCustomerInfo.status}}
-                    </ion-label>
-                    <ion-label *ngSwitchCase="'PAST DUE'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: red">
-                      {{selectedCustomerInfo.status}}
-                    </ion-label>
-                    <ion-label *ngSwitchCase="'CANCEL SUBSCRIPTION'" class="viewSubscriptionDetailsTextFormat" style="display: contents; color: red">
-                      {{selectedCustomerInfo.status}}
-                    </ion-label>
-                  </ion-row> -->
+                  <ion-label *ngIf="selectedCustomerInfo.STATUS === 0" >SUBSCRIPTION STATUS: Inactive</ion-label>
+                  <ion-label *ngIf="selectedCustomerInfo.STATUS === 1" >SUBSCRIPTION STATUS: Actvie</ion-label>
                 </ion-item-group>
               </ion-col>
               <ion-col size="1.5">
