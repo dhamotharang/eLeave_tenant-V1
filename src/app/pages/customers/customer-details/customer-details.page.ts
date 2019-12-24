@@ -270,39 +270,7 @@ export class CustomerDetailsPage implements OnInit {
   getDataCustomerDetails(data) {
     this.custDtlsAPISvs.reqGetApi('/api/admin/subscription/customer_info/' + data.SUBSCRIPTION_GUID).subscribe(
       custData => {
-        const newData = {
-          CUSTOMER_GUID: data.CUSTOMER_GUID,
-          CUSTOMER_LABEL: data.CUSTOMER_LABEL,
-          FULLNAME: custData.customer_name,
-          NICKNAME: data.NICKNAME,
-          EMAIL: custData.customer_email,
-          CONTACT_NO: custData.customer_contact_no,
-          COMPANY_NAME: custData.customer_company_name,
-          ADDRESS1: custData.customer_address1,
-          ADDRESS2: custData.customer_address2,
-          POSTCODE: custData.customer_zip,
-          CITY: custData.customer_city,
-          STATE: custData.customer_state,
-          COUNTRY: custData.customer_country,
-          CURRENCY: custData.customer_currency,
-          SALESPERSON: custData.salesperson_pic,
-          CREATION_TS: custData.creation_date,
-          SUBSCRIPTION_GUID: custData.subscription_id,
-          SUBSCRIPTION_LABEL: custData.subscription_label,
-          PLAN: custData.subscription_plan,
-          STATUS: custData.subscription_status,
-          SUBS_REMARKS: custData.remarks,
-          QUOTA: custData.subscription_quota,
-          USED_QUOTA: custData.subscription_used_quota,
-          ACTIVATION_DATE: custData.activation_date,
-          LAST_BILLING_DATE: custData.last_billing_date,
-          NEXT_BILLING_DATE: custData.next_billing_date,
-          RECURR_INTERVAL: custData.recurr_interval,
-          RECURR_INTERVAL_VAL: custData.recurr_interval_val,
-          BILLING_CYCLE: custData.billing_cycle,
-          FULL_LAST_BILLING_DATE: this.custDtlsGlobalFn.changeDateFormatFull(custData.last_billing_date),
-          FULL_NEXT_BILLING_DATE: this.custDtlsGlobalFn.changeDateFormatFull(custData.next_billing_date),
-        }
+        const newData = this.prepareCustData1(data, custData);
         this.selectedCustomerInfo = newData;
         customerUpdateInfo = this.selectedCustomerInfo;
         this.checkCustomerStatus(this.selectedCustomerInfo);
@@ -315,6 +283,50 @@ export class CustomerDetailsPage implements OnInit {
       }
     );
 
+  }
+
+  /**
+   * This method is to set returned data according to model name
+   * @param {*} data
+   * @param {*} custData
+   * @returns
+   * @memberof CustomerDetailsPage
+   */
+  prepareCustData1(data, custData) {
+    return {
+      CUSTOMER_GUID: data.CUSTOMER_GUID,
+      CUSTOMER_LABEL: data.CUSTOMER_LABEL,
+      FULLNAME: custData.customer_name,
+      NICKNAME: data.NICKNAME,
+      EMAIL: custData.customer_email,
+      CONTACT_NO: custData.customer_contact_no,
+      COMPANY_NAME: custData.customer_company_name,
+      ADDRESS1: custData.customer_address1,
+      ADDRESS2: custData.customer_address2,
+      POSTCODE: custData.customer_zip,
+      CITY: custData.customer_city,
+      STATE: custData.customer_state,
+      COUNTRY: custData.customer_country,
+      CURRENCY: custData.customer_currency,
+      SALESPERSON: custData.salesperson_pic,
+      CREATION_TS: custData.creation_date,
+      SUBSCRIPTION_GUID: custData.subscription_id,
+      SUBSCRIPTION_LABEL: custData.subscription_label,
+      PLAN: custData.subscription_plan,
+      STATUS: custData.subscription_status,
+      SUBS_REMARKS: custData.remarks,
+      QUOTA: custData.subscription_quota,
+      USED_QUOTA: custData.subscription_used_quota,
+      ACTIVATION_DATE: custData.activation_date,
+      LAST_BILLING_DATE: custData.last_billing_date,
+      NEXT_BILLING_DATE: custData.next_billing_date,
+      RECURR_INTERVAL: custData.recurr_interval,
+      RECURR_INTERVAL_VAL: custData.recurr_interval_val,
+      BILLING_CYCLE: custData.billing_cycle,
+      FULL_LAST_BILLING_DATE: this.custDtlsGlobalFn.changeDateFormatFull(custData.last_billing_date),
+      FULL_NEXT_BILLING_DATE: this.custDtlsGlobalFn.changeDateFormatFull(custData.next_billing_date),
+
+    }
   }
 
   /**
