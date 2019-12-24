@@ -58,11 +58,11 @@ export class SubscriberDetailsPage implements OnInit {
   constructor(
     private popoverController: PopoverController, 
     private subsDtlsInfoPopup: InfoPopupService,
-    public subsDtlsPaging: PaginationServiceService,
+    // public subsDtlsPaging: PaginationServiceService,
     public subsDtlsApiSvs: APIService,
   ) { }
 
-  // public subsDtlsPaging = new PaginationServiceService;
+  public subsDtlsPaging = new PaginationServiceService;
 
   /**
    * This property is to get methods from AlertController
