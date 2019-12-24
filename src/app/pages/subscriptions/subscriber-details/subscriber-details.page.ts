@@ -437,17 +437,35 @@ export class SubscriberDetailsPage implements OnInit {
       {
         text: 'Deactivate',
         handler: (data) => {
-          this.inactiveMsg = 'This subscription has been deactivated by ' + this.inactivePIC.FULLNAME + ' (' + 
-            this.inactivePIC.ROLE + '). Reason: ' + data.inactiveSubscription;
-          this.inactiveReason = data.inactiveSubscription;
-          // document.getElementById('reasonTextId').hidden = false;
-          document.getElementById('reactivesubsnotice').hidden = false;
-          this.confirmOpt = true;
-          this.statusLog('Subscriptions has been deactivated');
-          this.reqToUpdateSubs('deactivated', 0, this.inactiveMsg);
+          this.onConfirmDeactive(data);
+          // this.inactiveMsg = 'This subscription has been deactivated by ' + this.inactivePIC.FULLNAME + ' (' + 
+          //   this.inactivePIC.ROLE + '). Reason: ' + data.inactiveSubscription;
+          // this.inactiveReason = data.inactiveSubscription;
+          // // document.getElementById('reasonTextId').hidden = false;
+          // document.getElementById('reactivesubsnotice').hidden = false;
+          // this.confirmOpt = true;
+          // this.statusLog('Subscriptions has been deactivated');
+          // this.reqToUpdateSubs('deactivated', 0, this.inactiveMsg);
         }
       }
     ]
+  }
+
+  /**
+   * This method is to handle when deactivation button is clicked
+   * @param {*} data
+   * @memberof SubscriberDetailsPage
+   */
+  onConfirmDeactive(data) {
+    this.inactiveMsg = 'This subscription has been deactivated by ' + this.inactivePIC.FULLNAME + ' (' +
+      this.inactivePIC.ROLE + '). Reason: ' + data.inactiveSubscription;
+    this.inactiveReason = data.inactiveSubscription;
+    // document.getElementById('reasonTextId').hidden = false;
+    document.getElementById('reactivesubsnotice').hidden = false;
+    this.confirmOpt = true;
+    this.statusLog('Subscriptions has been deactivated');
+    this.reqToUpdateSubs('deactivated', 0, this.inactiveMsg);
+
   }
 
   /**
