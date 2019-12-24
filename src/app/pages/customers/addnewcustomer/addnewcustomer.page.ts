@@ -115,7 +115,24 @@ export class AddnewcustomerPage implements OnInit {
    * This property is to bind form value in checking the validity of form
    * @memberof AddnewcustomerPage
    */
-  public addNewCustForm: FormGroup;
+  public addNewCustForm: FormGroup = new FormBuilder().group({
+    fullName: ['', Validators.compose([Validators.required])],
+    companyName: ['', Validators.compose([Validators.required])],
+    email: ['', Validators.compose([Validators.required])],
+    contactNo: ['', Validators.compose([Validators.required])],
+    nickname: ['', Validators.compose([Validators.required])],
+    startdate: ['', Validators.compose([Validators.required])],
+    custCycleNo: ['', Validators.compose([Validators.required])],
+    custCycleEvery: ['', Validators.compose([Validators.required])],
+    subscriptionQuota: ['', Validators.compose([Validators.required])],
+    salesperson: ['', Validators.compose([Validators.required])],
+    address1: ['', Validators.compose([Validators.required])],
+    address2: ['', Validators.compose([Validators.required])],
+    postcode: ['', Validators.compose([Validators.required])],
+    city: ['', Validators.compose([Validators.required])],
+    state: ['', Validators.compose([Validators.required])],
+    country: ['', Validators.compose([Validators.required])],
+  });
 
   /**
    * This property is to bind value the save button is clicked
@@ -130,29 +147,30 @@ export class AddnewcustomerPage implements OnInit {
    */
   ngOnInit() {
 
-    this.addNewCustForm = new FormBuilder().group({
-      fullName: ['', Validators.compose([Validators.required])],
-      companyName: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required])],
-      contactNo: ['', Validators.compose([Validators.required])],
-      nickname: ['', Validators.compose([Validators.required])],
-      startdate: ['', Validators.compose([Validators.required])],
-      custCycleNo: ['', Validators.compose([Validators.required])],
-      custCycleEvery: ['', Validators.compose([Validators.required])],
-      subscriptionQuota: ['', Validators.compose([Validators.required])],
-      salesperson: ['', Validators.compose([Validators.required])],
-      address1: ['', Validators.compose([Validators.required])],
-      address2: ['', Validators.compose([Validators.required])],
-      postcode: ['', Validators.compose([Validators.required])],
-      city: ['', Validators.compose([Validators.required])],
-      state: ['', Validators.compose([Validators.required])],
-      country: ['', Validators.compose([Validators.required])],
-    });
+    // this.addNewCustForm = new FormBuilder().group({
+    //   fullName: ['', Validators.compose([Validators.required])],
+    //   companyName: ['', Validators.compose([Validators.required])],
+    //   email: ['', Validators.compose([Validators.required])],
+    //   contactNo: ['', Validators.compose([Validators.required])],
+    //   nickname: ['', Validators.compose([Validators.required])],
+    //   startdate: ['', Validators.compose([Validators.required])],
+    //   custCycleNo: ['', Validators.compose([Validators.required])],
+    //   custCycleEvery: ['', Validators.compose([Validators.required])],
+    //   subscriptionQuota: ['', Validators.compose([Validators.required])],
+    //   salesperson: ['', Validators.compose([Validators.required])],
+    //   address1: ['', Validators.compose([Validators.required])],
+    //   address2: ['', Validators.compose([Validators.required])],
+    //   postcode: ['', Validators.compose([Validators.required])],
+    //   city: ['', Validators.compose([Validators.required])],
+    //   state: ['', Validators.compose([Validators.required])],
+    //   country: ['', Validators.compose([Validators.required])],
+    // });
 
     this.saveButtonClick = false;
     this.custEndSubsDate = '-';
     this.getInitList();
   }
+
 
   /**
    * This method is to get salesperson list from database
