@@ -160,22 +160,43 @@ export class DashboardPage implements OnInit {
         this.compNo = retDsbData.totalCompany;
         this.empNo = retDsbData.totalEmployee;
         if (type !== 'all') {
-          // this.allCustDiff1 = -10;
-          this.allCustDiff1 = this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer);
-          this.actvCustDiff1 =  this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer);
-          this.inactvCustDiff1 = this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer);
-          this.compNoDiff1 = this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany);
-          this.empNoDiff1 = this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee);
-          this.diffVal = {
-            allCustDiff: this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer),
-            actvCustDiff: this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer),
-            inactvCustDiff: this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer),
-            compNoDiff: this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany),
-            empNoDiff: this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee),
-          };
+          this.onCalcValueDiff(retDsbData);
+          // this.allCustDiff1 = this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer);
+          // this.actvCustDiff1 =  this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer);
+          // this.inactvCustDiff1 = this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer);
+          // this.compNoDiff1 = this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany);
+          // this.empNoDiff1 = this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee);
+          // this.diffVal = {
+          //   allCustDiff: this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer),
+          //   actvCustDiff: this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer),
+          //   inactvCustDiff: this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer),
+          //   compNoDiff: this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany),
+          //   empNoDiff: this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee),
+          // };
         }
       }
     );
+  }
+
+  /**
+   * This method is to calculate the value to be returned in dashboard cards
+   * @param {*} retDsbData
+   * @memberof DashboardPage
+   */
+  onCalcValueDiff(retDsbData) {
+    this.allCustDiff1 = this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer);
+    this.actvCustDiff1 = this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer);
+    this.inactvCustDiff1 = this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer);
+    this.compNoDiff1 = this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany);
+    this.empNoDiff1 = this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee);
+    this.diffVal = {
+      allCustDiff: this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer),
+      actvCustDiff: this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer),
+      inactvCustDiff: this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer),
+      compNoDiff: this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany),
+      empNoDiff: this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee),
+    };
+    
   }
 
   /**
@@ -213,19 +234,39 @@ export class DashboardPage implements OnInit {
   getDshbSubsList(custObj) {
     this.dshbAPISvs.reqGetApi('/api/admin/subscription').subscribe(
       subsData => {
-        subsData.forEach(subsObj => {
-          if (custObj.CUSTOMER_GUID === subsObj.CUSTOMER_GUID) {
-            custObj = Object.assign(custObj, subsObj, { 
-              SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.CREATION_TS),
-              SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.ACTIVATION_DATE),
-              SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.LAST_BILLING_DATE),
-              SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.NEXT_BILLING_DATE),
-            });
-          }
-        });
+        this.onHandleSubsDataList(subsData, custObj);
+        // subsData.forEach(subsObj => {
+        //   if (custObj.CUSTOMER_GUID === subsObj.CUSTOMER_GUID) {
+        //     custObj = Object.assign(custObj, subsObj, { 
+        //       SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.CREATION_TS),
+        //       SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.ACTIVATION_DATE),
+        //       SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.LAST_BILLING_DATE),
+        //       SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.NEXT_BILLING_DATE),
+        //     });
+        //   }
+        // });
       }
     )
   }
 
+  /**
+   * This method is to handle subprocess from returned subscriptions data
+   * @param {*} subsData
+   * @param {*} custObj
+   * @memberof DashboardPage
+   */
+  onHandleSubsDataList(subsData, custObj) {
+    subsData.forEach(subsObj => {
+      if (custObj.CUSTOMER_GUID === subsObj.CUSTOMER_GUID) {
+        custObj = Object.assign(custObj, subsObj, {
+          SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.CREATION_TS),
+          SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.ACTIVATION_DATE),
+          SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.LAST_BILLING_DATE),
+          SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.NEXT_BILLING_DATE),
+        });
+      }
+    });
+
+  }
 }
 

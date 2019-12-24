@@ -249,19 +249,36 @@ export class SubscriberDetailsPage implements OnInit {
  
     popover.onDidDismiss().then((data) => {
       if (compName === 'ReactiveSubscriptionComponent') {
-        
-        document.getElementById('reactivesubsnotice').hidden = (data.data === false) ? false : true;
-        this.prevToggleVal = !data.data;
-        this.subsToggle = data.data; 
-        this.confirmOpt = !data.data;
-        if (data.data === true) {
-          this.statusLog('Subscriptions has been reactivated');
-          this.selectedClient(this.subscriberInfo);
-        }
+        this.onDidDismissFn(data);
+        // document.getElementById('reactivesubsnotice').hidden = (data.data === false) ? false : true;
+        // this.prevToggleVal = !data.data;
+        // this.subsToggle = data.data; 
+        // this.confirmOpt = !data.data;
+        // if (data.data === true) {
+        //   this.statusLog('Subscriptions has been reactivated');
+        //   this.selectedClient(this.subscriberInfo);
+        // }
       }
     });
 
     return await popover.present();
+  }
+
+  /**
+   * This method is to handle dismiss reactive subscriptions popup
+   * @param {*} data
+   * @memberof SubscriberDetailsPage
+   */
+  onDidDismissFn(data) {
+    document.getElementById('reactivesubsnotice').hidden = (data.data === false) ? false : true;
+    this.prevToggleVal = !data.data;
+    this.subsToggle = data.data;
+    this.confirmOpt = !data.data;
+    if (data.data === true) {
+      this.statusLog('Subscriptions has been reactivated');
+      this.selectedClient(this.subscriberInfo);
+    }
+
   }
 
   /**
