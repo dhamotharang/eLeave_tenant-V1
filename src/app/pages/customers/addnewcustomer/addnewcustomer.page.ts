@@ -7,6 +7,7 @@ import { PaginationServiceService } from '../../../services/pagination-service.s
 import {APIService} from '../../../services/shared-service/api.service';
 
 import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.service';
+import { GlobalFunctionService } from '../../../services/global-function.service';
 /**
  * This component is for adding a new customer
  * @export
@@ -40,6 +41,7 @@ export class AddnewcustomerPage implements OnInit {
    */
   public addCustPggSvs = new PaginationServiceService;
 
+  public addCustGlobalFn = new GlobalFunctionService;
   /**
    * This property is to bind value start subscription's date selected
    * from calender
@@ -146,26 +148,6 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   ngOnInit() {
-
-    // this.addNewCustForm = new FormBuilder().group({
-    //   fullName: ['', Validators.compose([Validators.required])],
-    //   companyName: ['', Validators.compose([Validators.required])],
-    //   email: ['', Validators.compose([Validators.required])],
-    //   contactNo: ['', Validators.compose([Validators.required])],
-    //   nickname: ['', Validators.compose([Validators.required])],
-    //   startdate: ['', Validators.compose([Validators.required])],
-    //   custCycleNo: ['', Validators.compose([Validators.required])],
-    //   custCycleEvery: ['', Validators.compose([Validators.required])],
-    //   subscriptionQuota: ['', Validators.compose([Validators.required])],
-    //   salesperson: ['', Validators.compose([Validators.required])],
-    //   address1: ['', Validators.compose([Validators.required])],
-    //   address2: ['', Validators.compose([Validators.required])],
-    //   postcode: ['', Validators.compose([Validators.required])],
-    //   city: ['', Validators.compose([Validators.required])],
-    //   state: ['', Validators.compose([Validators.required])],
-    //   country: ['', Validators.compose([Validators.required])],
-    // });
-
     this.saveButtonClick = false;
     this.custEndSubsDate = '-';
     this.getInitList();
@@ -229,9 +211,14 @@ export class AddnewcustomerPage implements OnInit {
     } else {
       this.custEndSubsDatetime = new Date(this.custStartSubsDatetime.setFullYear(this.custStartSubsDatetime.getFullYear() + this.custCycleNo));
     }
+    // console.log('this.custEndSubsDatetime');
+    // console.log(this.custEndSubsDatetime);
+    // console.log(this.addCustGlobalFn.changeDateFormatYYYYMMDD(this.custEndSubsDatetime, 2));
+    // const endSubDD = (this.custEndSubsDatetime.getDate() < 10) ? '0' + this.custEndSubsDatetime.getDate() : this.custEndSubsDatetime.getDate();
+    // this.custEndSubsDate = this.custEndSubsDatetime.getFullYear() + '-'+(this.custEndSubsDatetime.getMonth() + 1) + '-' + endSubDD;
+    // console.log(this.custEndSubsDate);
+    this.custEndSubsDate = this.addCustGlobalFn.changeDateFormatYYYYMMDD(this.custEndSubsDatetime, 2);
 
-    const endSubDD = (this.custEndSubsDatetime.getDate() < 10) ? '0' + this.custEndSubsDatetime.getDate() : this.custEndSubsDatetime.getDate();
-    this.custEndSubsDate = this.custEndSubsDatetime.getFullYear() + '-'+(this.custEndSubsDatetime.getMonth() + 1) + '-' + endSubDD;
   }
 
   /**
