@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { PaginationServiceService } from '../../../services/pagination-service.service';
@@ -31,7 +31,7 @@ export class AddnewcustomerPage implements OnInit {
     // public addCustPggSvs: PaginationServiceService,
     private addCustAPISvs: APIService,
     private addCustInfoPopup: InfoPopupService,
-    private addCustRoute: Router
+    private addCustRoute: Router,
   ) { }
   
   /**
@@ -115,7 +115,13 @@ export class AddnewcustomerPage implements OnInit {
    * This property is to bind form value in checking the validity of form
    * @memberof AddnewcustomerPage
    */
-  public formCheck = {};
+  public addNewCustForm: FormGroup;
+
+  /**
+   * This property is to bind value the save button is clicked
+   * @memberof AddnewcustomerPage
+   */
+  public saveButtonClick;
 
   /**
    * This method is to set inital properties value.
@@ -123,6 +129,27 @@ export class AddnewcustomerPage implements OnInit {
    * @memberof AddnewcustomerPage
    */
   ngOnInit() {
+
+    this.addNewCustForm = new FormBuilder().group({
+      fullName: ['', Validators.compose([Validators.required])],
+      companyName: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required])],
+      contactNo: ['', Validators.compose([Validators.required])],
+      nickname: ['', Validators.compose([Validators.required])],
+      startdate: ['', Validators.compose([Validators.required])],
+      custCycleNo: ['', Validators.compose([Validators.required])],
+      custCycleEvery: ['', Validators.compose([Validators.required])],
+      subscriptionQuota: ['', Validators.compose([Validators.required])],
+      salesperson: ['', Validators.compose([Validators.required])],
+      address1: ['', Validators.compose([Validators.required])],
+      address2: ['', Validators.compose([Validators.required])],
+      postcode: ['', Validators.compose([Validators.required])],
+      city: ['', Validators.compose([Validators.required])],
+      state: ['', Validators.compose([Validators.required])],
+      country: ['', Validators.compose([Validators.required])],
+    });
+
+    this.saveButtonClick = false;
     this.custEndSubsDate = '-';
     this.getInitList();
   }
@@ -193,102 +220,23 @@ export class AddnewcustomerPage implements OnInit {
    * This method will be executed when save button is triggered
    * @memberof AddnewcustomerPage
    */
-  async saveAddCustomer() {
-
-    // this.returnToCustPage();
+  saveAddCustomer() {
     Object.assign(this.newCustForm, { currency: 'MYR', customerLabel: this.custLabelId });
-    if (this.checkFormValid()) {
-      await this.postCustInfo();
-    }
+    this.formChecking();
   }
+
 
   /**
-   * This method is to check form validity
-   * @returns
+   * This method is to check either the form is valid or not
    * @memberof AddnewcustomerPage
    */
-  checkFormValid() {
-    this.formCheck = {
-      fullnameCheck: false,
-      companynameCheck: false,
-      emailCheck: false,
-      contactNoCheck: false,
-      nicknameCheck: false,
-      address1Check: false,
-      address2Check: false,
-      postcodeCheck: false,
-      cityCheck: false,
-      stateCheck: false,
-      countryCheck: false,
-      salespersonCheck: false,
-      startdataCheck: false,
-      cycleCheck: false,
-      quotaCheck: false,
+  formChecking() {
+    this.saveButtonClick = true;
+    if (this.addNewCustForm.valid) {
+      this.postCustInfo();
     }
-    
-    if (this.newCustForm["fullname"] === "" || this.newCustForm["fullname"] === undefined ) {
-      this.formCheck['fullnameCheck'] = true;
-    } 
-
-    if (this.newCustForm["companyName"] === "" || this.newCustForm["companyName"] === undefined) {
-      this.formCheck['companynameCheck'] = true;
-    } 
-
-    if (this.newCustForm["email"] === "" || this.newCustForm["email"] === undefined) {
-      this.formCheck['emailCheck'] = true;
-    }
-
-    if (this.newCustForm["contactNo"] === "" || this.newCustForm["contactNo"] === undefined) {
-      this.formCheck['contactNoCheck'] = true;
-    }
-
-    if (this.newCustForm["nickname"] === "" || this.newCustForm["nickname"] === undefined) {
-      this.formCheck['nicknameCheck'] = true;
-    }
-
-    if (this.custStartSubsDate === "" || this.custStartSubsDate === undefined) {
-      this.formCheck['startdataCheck'] = true;
-    }
-    
-    if (this.custCycleNo === "" || this.custCycleNo === undefined || this.custCycleEvery === "" || this.custCycleEvery === undefined) {
-      this.formCheck['cycleCheck'] = true;
-    }
-
-    if (this.newSubsForm["subscriptionQuota"] === "" || this.newSubsForm["subscriptionQuota"]  === undefined) {
-      this.formCheck['quotaCheck'] = true;
-    }
-
-    if (this.newCustForm["salesperson"] === "" || this.newCustForm["salesperson"] === undefined) {
-      this.formCheck['salespersonCheck'] = true;
-    }
-
-    if (this.newCustForm["address1"] === "" || this.newCustForm["address1"] === undefined) {
-      this.formCheck['address1Check'] = true;
-    }
-
-    if (this.newCustForm["address2"] === "" || this.newCustForm["address2"] === undefined) {
-      this.formCheck['address2Check'] = true;
-    }
-
-    if (this.newCustForm["postcode"] === "" || this.newCustForm["postcode"] === undefined) {
-      this.formCheck['postcodeCheck'] = true;
-    }
-
-    if (this.newCustForm["city"] === "" || this.newCustForm["city"] === undefined) {
-      this.formCheck['cityCheck'] = true;
-    }
-
-    if (this.newCustForm["state"] === "" || this.newCustForm["state"] === undefined) {
-      this.formCheck['stateCheck'] = true;
-    }
-
-    if (this.newCustForm["country"] === "" || this.newCustForm["country"] === undefined) {
-      this.formCheck['countryCheck'] = true;
-    }
-
-    return (Object.keys(this.formCheck).every((k) => !this.formCheck[k])) ? true : false;
   }
-  
+
   /**
    * This method will be executed when cancel button is triggered
    * @memberof AddnewcustomerPage
@@ -311,8 +259,6 @@ export class AddnewcustomerPage implements OnInit {
           lastBillingDate: this.custStartSubsDate, nextBillingDate: this.custEndSubsDate, billingCycle: 0});
 
         this.postNewLog('subs').subscribe(dataSubs => {
-          // console.log('cust data: ' + JSON.stringify(data[0].CUSTOMER_GUID, null, " "));
-          // console.log('subs data: ' + JSON.stringify(dataSubs[0].SUBSCRIPTION_GUID, null, " "));
           this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);
           this.addCustInfoPopup.alertPopup('You have successfully create user', 'alert-success').then(
             data => {
