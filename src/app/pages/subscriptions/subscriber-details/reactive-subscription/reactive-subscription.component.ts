@@ -188,9 +188,11 @@ export class ReactiveSubscriptionComponent implements OnInit {
    * @memberof ReactiveSubscriptionComponent
    */
   saveReactiveSubsChanges() {
-    this.processData();
+    // this.processData();
     // check if quota is < employee quota then notify user error
     if (this.checkValidForm() === true) {
+
+      this.processData();
       this.patchUpdateSubs(this.prepareObj());
       document.getElementById('reactivesubsnotice').hidden = true;
       this.dissmissReactiveSubsPopup();
