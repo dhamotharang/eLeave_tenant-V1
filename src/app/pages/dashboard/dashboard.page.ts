@@ -31,12 +31,6 @@ export class DashboardPage implements OnInit {
   ) { }
 
   /**
-   * This properties is to set subscribers data
-   * @memberof DashboardPage
-   */
-  public subscribers;
-
-  /**
    * This properties is to set value of segment in dashboard
    * @memberof DashboardPage
    */
@@ -119,7 +113,7 @@ export class DashboardPage implements OnInit {
    * This property is to bind value of recent subscribers data
    * @memberof DashboardPage
    */
-  public recentSubscribers;
+  public recentSubscribers = [];
 
 
 
@@ -132,9 +126,36 @@ export class DashboardPage implements OnInit {
     this.overviewSgmtOpt = 'all';
     this.pgSett.setShowToolbarSideMenu(true);
     this.reqDashboardAPI('all');
-    this.getTop10Subs();
+    this.subsTop5();
   }
 
+  /**
+   * This method is to get top 5 of recent subscribers from customer & subscription API based on last billing date
+   * @memberof DashboardPage
+   */
+  subsTop5() {
+    this.dshbAPISvs.reqGetApi('/api/admin/subscription').subscribe(
+      subsData => {
+        this.dshbAPISvs.reqGetApi('/api/admin/customer').subscribe(
+          custData => {
+            const tempSubsData = subsData.sort((a, b) => (a.LAST_BILLING_DATE < b.LAST_BILLING_DATE) ? 1 : -1);
+            tempSubsData.forEach((elementSubs, index) => {
+              if (index < 5) {
+                const convertFormatDate = {
+                  SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(elementSubs.CREATION_TS),
+                  SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(elementSubs.ACTIVATION_DATE),
+                  SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(elementSubs.LAST_BILLING_DATE),
+                  SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(elementSubs.NEXT_BILLING_DATE),
+                }
+                const list = Object.assign(elementSubs, custData.find(cust => cust.CUSTOMER_GUID === elementSubs.CUSTOMER_GUID), convertFormatDate)
+                this.recentSubscribers.push(list);
+              }
+            });
+          } 
+        )
+      }
+    );
+  }
 
   /**
    * This method is to get changed value of segment
@@ -161,18 +182,6 @@ export class DashboardPage implements OnInit {
         this.empNo = retDsbData.totalEmployee;
         if (type !== 'all') {
           this.onCalcValueDiff(retDsbData);
-          // this.allCustDiff1 = this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer);
-          // this.actvCustDiff1 =  this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer);
-          // this.inactvCustDiff1 = this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer);
-          // this.compNoDiff1 = this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany);
-          // this.empNoDiff1 = this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee);
-          // this.diffVal = {
-          //   allCustDiff: this.calcDiff(retDsbData.totalCustomer, retDsbData.diffCustomer),
-          //   actvCustDiff: this.calcDiff(retDsbData.totalActiveCustomer, retDsbData.diffActiveCustomer),
-          //   inactvCustDiff: this.calcDiff(retDsbData.totalInactiveCustomer, retDsbData.diffInactiveCustomer),
-          //   compNoDiff: this.calcDiff(retDsbData.totalCompany, retDsbData.diffCompany),
-          //   empNoDiff: this.calcDiff(retDsbData.totalEmployee, retDsbData.diffEmployee),
-          // };
         }
       }
     );
@@ -210,63 +219,5 @@ export class DashboardPage implements OnInit {
     return Math.round(((currVal - prevVal) / currVal) * 100);
   }
 
-  /**
-   * This method is to get recent subscribers list from API
-   * @memberof DashboardPage
-   */
-  getTop10Subs() {
-    this.dshbAPISvs.reqGetApi('/api/admin/customer').subscribe(
-      custData => {
-        custData.forEach(custObj => {
-          this.getDshbSubsList(custObj);
-        });
-        this.subscribers = custData.sort((a, b) => (a.LAST_BILLING_DATE > b.LAST_BILLING_DATE) ? -1 :
-          ((b.LAST_BILLING_DATE > a.LAST_BILLING_DATE) ? 1 : 0)).slice(0,6);
-      }
-    )
-  }
-
-  /**
-   * This method is to process response returned from API to merge between customers data and subscriptions data
-   * @param {*} custObj
-   * @memberof DashboardPage
-   */
-  getDshbSubsList(custObj) {
-    this.dshbAPISvs.reqGetApi('/api/admin/subscription').subscribe(
-      subsData => {
-        this.onHandleSubsDataList(subsData, custObj);
-        // subsData.forEach(subsObj => {
-        //   if (custObj.CUSTOMER_GUID === subsObj.CUSTOMER_GUID) {
-        //     custObj = Object.assign(custObj, subsObj, { 
-        //       SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.CREATION_TS),
-        //       SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.ACTIVATION_DATE),
-        //       SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.LAST_BILLING_DATE),
-        //       SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.NEXT_BILLING_DATE),
-        //     });
-        //   }
-        // });
-      }
-    )
-  }
-
-  /**
-   * This method is to handle subprocess from returned subscriptions data
-   * @param {*} subsData
-   * @param {*} custObj
-   * @memberof DashboardPage
-   */
-  onHandleSubsDataList(subsData, custObj) {
-    subsData.forEach(subsObj => {
-      if (custObj.CUSTOMER_GUID === subsObj.CUSTOMER_GUID) {
-        custObj = Object.assign(custObj, subsObj, {
-          SIMPLE_CREATION_TS: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.CREATION_TS),
-          SIMPLE_ACTIVATION_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.ACTIVATION_DATE),
-          SIMPLE_LAST_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.LAST_BILLING_DATE),
-          SIMPLE_NEXT_BILLING_DATE: this.dshbGlobalFn.changeDateFormatSimpleDDMMYYYY(subsObj.NEXT_BILLING_DATE),
-        });
-      }
-    });
-
-  }
 }
 

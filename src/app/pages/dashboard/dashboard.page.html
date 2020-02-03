@@ -291,7 +291,7 @@
             </ion-row>
 
             <!-- Table body. NOTE: At this moment use dummy data only -->
-            <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of subscribers; let i=index">
+            <ion-row class="tableBodyTheme tableHorizontalDivider"  *ngFor="let table of recentSubscribers; let i=index">
               <ion-col size="4" style="text-align: left; width:40%;">
                 <div>
                   {{table.COMPANY_NAME}}
@@ -339,7 +339,7 @@
 
         <ion-row [class]="(pgSett.getSideMenuType() === 'fullMenu') ? 'hide-md-up' : 'hide-sm-up'">
           <ion-item-group class="subsCardStyles">
-            <ion-card  mode="md" *ngFor="let table of subscribers; let i=index">
+            <ion-card  mode="md" *ngFor="let table of recentSubscribers; let i=index">
               <ion-card-content mode="md" class="cardStyle cardStyles">
                 <ion-card-title>
                     {{table.COMPANY_NAME}}
