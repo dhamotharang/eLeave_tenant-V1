@@ -32,7 +32,7 @@
             </ion-card>
             
             <!------- Customer Card View ----- -->
-            <ion-card mode="md" #customerNotEmpty class="customerCardStyle" *ngFor="let cardData of customerData | paginate: configPageCust">
+            <ion-card mode="md" #customerNotEmpty class="customerCardStyle" *ngFor="let cardData of customerData | paginate: { itemsPerPage: 10, currentPage: currCustPage, totalItems: customerData.length };">
               <ion-item-group class="cardBodyStyle" style="border-bottom: 1px solid var(--eleave-border-color);"> 
                 <ion-avatar class="customerProfilePicture">
                   <img src="../assets/icon/layout/picture.png">
@@ -99,7 +99,7 @@
             <div style="width: -webkit-fill-available;"></div>
             <!-- Customer list's pagination -->
             <ion-row style="margin: 0px 20px 0px auto; display: table;">        
-              <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+              <pagination-controls (pageChange)="currCustPage = $event"  directionLinks="true" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
             </ion-row>
 
             <!-- hide when max width 576
@@ -134,7 +134,7 @@
                     <ion-label style="font-size: 9px;">Add one now</ion-label>
                   </ion-row>
           
-                  <ion-row #customerNotEmpty *ngFor="let tableData of customerData | paginate: configPageCust" class="bodyStyle"
+                  <ion-row #customerNotEmpty *ngFor="let tableData of customerData | paginate: { itemsPerPage: 10, currentPage: currCustPage, totalItems: customerData.length }" class="bodyStyle"
                   [routerDirection]="'root'" [routerLink]="'/main/customers/customer-details'"
                   (click)="onClickCustomerViewDetails(tableData)"
                   style="height: 10%; min-width: fit-content;">
@@ -164,7 +164,7 @@
               <div style="width: -webkit-fill-available;"></div>
               <!-- Customer list's pagination -->
               <ion-item-group style="margin: 0px 20px 0px auto; display: table;">        
-                <pagination-controls (pageChange)="pageCustChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+                <pagination-controls (pageChange)="currCustPage = $event" directionLinks="true" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
               </ion-item-group>
 
             </ion-row>

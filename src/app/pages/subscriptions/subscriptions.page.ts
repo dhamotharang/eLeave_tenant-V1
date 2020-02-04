@@ -46,11 +46,6 @@ export class SubscriptionsPage implements OnInit {
   /**
    * Creates an instance of SubscriptionsPage.
    * @param {PaginationServiceService} subsPaging This property is to get method from PaginationServiceService
-   * @memberof SubscriptionsPage
-   */
-  /**
-   * Creates an instance of SubscriptionsPage.
-   * @param {PaginationServiceService} subsPaging This property is to get method from PaginationServiceService
    * @param {APIService} subsAPISvs This property is to get method from APIService
    * @param {SearchDataService} subsSearch This property is to get method from SearchDataService
    * @memberof SubscriptionsPage
@@ -106,8 +101,6 @@ export class SubscriptionsPage implements OnInit {
   ngOnInit() {
     this.subscribers = [];
     this.subscribeCustList();
-    this.configPageSubs = this.subsPaging.pageConfig(10, 1, 10);
-    // this.configPageSubs = this.subsPaging.pageConfig(10, 1, this.subscribers.length);
   }
 
   /**
@@ -207,7 +200,6 @@ export class SubscriptionsPage implements OnInit {
     this.subscribers = (event.detail.value.length > 0) ?
       this.subsSearch.filerSearch(event.detail.value, this.subscribers, 'FULLNAME') :
       this.subscribers;
-    this.pageSubsChanged(1);
   }
 
   /**
@@ -218,6 +210,5 @@ export class SubscriptionsPage implements OnInit {
    */
   pageSubsChanged(event) {
     currSubsPage = this.configPageSubs.currentPage;
-    this.configPageSubs = this.subsPaging.pageConfig(10, event, this.subscribers.length);
   }
 }

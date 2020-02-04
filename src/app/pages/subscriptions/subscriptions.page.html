@@ -77,7 +77,7 @@
           </ion-row>
           <!-- body -->
           <ion-row class="fitContent subscriptionTableBodyTheme subscriptionTableLine" ion-item 
-            *ngFor="let table of subscribers  | paginate: configPageSubs"
+            *ngFor="let table of subscribers  | paginate: { itemsPerPage: 10, currentPage: currSubsPage, totalItems: subscribers.length };"
             [routerDirection]="'root'" [routerLink]="'/main/subscriptions/subscriber-details'"
             [class.highlight]="table.FULLNAME === currentClient"
             (click)="viewSubscriptionDetails(table)"> 
@@ -161,7 +161,7 @@
                 </ion-button>
               </ion-card-content>
             </ion-card>
-            <ion-card mode="md" #subscribersNotEmpty *ngFor="let card of subscribers | paginate: configPageSubs">
+            <ion-card mode="md" #subscribersNotEmpty *ngFor="let card of subscribers | paginate:  { itemsPerPage: 10, currentPage: currSubsPage, totalItems: subscribers.length };">
               <ion-card-content class="cardStyle cardStyles">
                 <ion-card-title>
                   <ion-label style="font-weight: bold; margin: 3px 0px; color: var(--eleave-header-color);">
@@ -200,7 +200,7 @@
 
     <!-- Subscriber list's pagination -->
     <ion-item-group style="text-align: end; margin: 0px 20px 0px auto;">        
-      <pagination-controls (pageChange)="pageSubsChanged($event)" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
+      <pagination-controls (pageChange)="currSubsPage = $event" directionLinks="true" maxSize="5" previousLabel="" nextLabel="" class="pagination-style"></pagination-controls>
     </ion-item-group>
   </ion-content>
 </ion-app>

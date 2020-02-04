@@ -98,11 +98,6 @@ export class CustomersPage implements OnInit {
    */
   public customerDataLength;
 
-  /**
-   * This property is to bind customer's pagination configurations
-   * @memberof CustomersPage
-   */
-  public configPageCust;
 
   /**
    * This method will be executed during customer page's initilization.
@@ -114,7 +109,6 @@ export class CustomersPage implements OnInit {
     // console.log(this.custPaging.getSideMenuType());
     this.custPaging.setCustomerViewType('card');
     this.getCustList();
-    this.configPageCust = this.custPaging.pageConfig(10, 1, 10); 
   }
 
   /**
@@ -153,18 +147,7 @@ export class CustomersPage implements OnInit {
     customerInfo = item;
     customerDataList = this.customerData;
   }
-
-  /**
-   * This funciton is to set pagination style.
-   * It will be executed when user change page.
-   * @param {*} event
-   * @memberof CustomersPage
-   */
-  pageCustChanged(event) {
-    this.configPageCust = this.custPaging.pageConfig(10, event, this.customerData.length);
-    currCustPage = event;
-  }
-
+  
   /**
    * This method is to set search function for this componenet
    * @param {*} event
@@ -175,7 +158,6 @@ export class CustomersPage implements OnInit {
     this.customerData = (event.detail.value.length > 0 ) ?
       this.custSearch.filerSearch(event.detail.value, this.customerData, 'FULLNAME') :
         this.customerData;
-    this.pageCustChanged(1);
   }
 
   /**
