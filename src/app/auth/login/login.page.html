@@ -1,13 +1,13 @@
 <ion-content [class]="(pgSet.getSideMenuType() === 'fullMenu') ? 'hide-sm-down' : 'hide-sm-down'"> 
   <ion-item-group class="mainLayout"> 
-    <img class="sideimg" src="../../../assets/icon//signin/sign-in-abstract.svg"/>
+    <img class="sideimg" src="../../../assets/icon/signin/sign-in-abstract@2x.png"/>
     <ion-item-group class="bodyStyle">
 
       <!-- Logo and welcome note -->
       <ion-avatar class="loginLogo">
           <img src="../../../assets/icon/logo.PNG"/>
       </ion-avatar>
-      <ion-note class="noteStyle">Welcome back! Please login to your account</ion-note> 
+      <ion-note class="noteStyle">Welcome back! Please login to your account.</ion-note> 
       <ion-note class="noteStyle" style="color: var(--ion-color-danger); display: flex;
     justify-content: center;" *ngIf="errorLogin === true" >Error: {{errorMsg}}</ion-note>     
   
@@ -61,7 +61,7 @@
 <div [class]="(pgSet.getSideMenuType() === 'fullMenu') ? 'hide-sm-up' : 'hide-sm-up'"
  style="height: 100%; width: 100%;">
   <ion-item-group class="mainLayout">
-      <img class="sideimg-sm" src="../../../assets/icon//signin/sign-in-abstract.svg"/>
+      <img class="sideimg-sm" src="../../../assets/icon/signin/sign-in-abstract.png"/>
       <ion-item-group class="bodyStyle-sm">
   
         <!-- Logo and welcome note -->
@@ -73,7 +73,7 @@
           <ion-label class="noteStyle" style="color: var(--ion-color-danger); display: flex; justify-content: center;" 
           *ngIf="errorLogin === true" >Error: {{errorMsg}}</ion-label>
 
-        </ion-item-group>
+        </ion-item-group> 
 
         <form class="formStyle" #loginForm="ngForm">
           <!-- Email -->

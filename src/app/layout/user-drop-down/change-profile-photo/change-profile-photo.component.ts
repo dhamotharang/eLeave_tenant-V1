@@ -39,8 +39,8 @@ export class ChangeProfilePhotoComponent implements OnInit {
    */
   ngOnInit() {
     console.log(this.imgUrl);
-    this.imgUrl = '../../../../assets/icon/signin/zlatan';
-    this.userInfo.setUserProfilePicture('../../assets/icon/signin/zlatan');
+    this.imgUrl = '../../../../assets/icon/signin/zlatan.jpg';
+    this.userInfo.setUserProfilePicture('../../assets/icon/signin/zlatan.jpg');
   }
 
   /**

@@ -166,7 +166,7 @@ export class AppComponent {
     this.loggedUser = currUser;
     this.checkWindowWidth();
     // this.settingPage.setSideMenuType(this.sideMenuStyle);
-    this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan');
+    this.userDataSvs.setUserProfilePicture('../assets/icon/signin/zlatan.jpg');
   }
 
   /**
