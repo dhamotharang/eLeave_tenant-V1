@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { Platform, PopoverController } from '@ionic/angular';
 
@@ -71,6 +72,7 @@ export class AppComponent {
     // private statusBar: StatusBar,
     private popoverController: PopoverController,
     public settingPage: PaginationServiceService,
+    private router: Router
     // public userDataSvs: UserDataService
   ) {
     this.initializeApp();
@@ -175,7 +177,7 @@ export class AppComponent {
    * @memberof AppComponent
    */
   checkWindowWidth() {
-    if (window.innerWidth < 500) {
+    if (window.innerWidth < 992) {
       this.settingPage.setSideMenuType('iconMenu');
     } else {
       this.settingPage.setSideMenuType('fullMenu');
@@ -221,5 +223,11 @@ export class AppComponent {
   clickNotiBtn(event) {
     console.log('clickNotiBtn');
     console.log(event);
+  }
+
+  onResize() {
+    if (window.innerWidth < 992) {
+      this.collapseMenu(true);
+    }
   }
 }
