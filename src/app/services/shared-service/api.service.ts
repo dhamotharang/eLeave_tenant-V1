@@ -27,7 +27,7 @@ export class APIService {
    * This property is to declare base url to http request API
    * @memberof APIService
    */
-  public ROOT_URL = 'http://zencore.zen.com.my:3001';
+  public ROOT_URL = 'https://zencore.zen.com.my:3001';
 
   /**
    * This property is to decalre the headers and save it for token

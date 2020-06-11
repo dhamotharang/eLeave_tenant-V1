@@ -42,7 +42,7 @@ export class AuthService {
    * This property is to declare base Url body for http request
    * @memberof AuthService
    */
-  public ROOT_URL = 'http://zencore.zen.com.my:3001';
+  public ROOT_URL = 'https://zencore.zen.com.my:3001';
 
 
   /**

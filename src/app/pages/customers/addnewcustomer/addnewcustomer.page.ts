@@ -267,7 +267,7 @@ export class AddnewcustomerPage implements OnInit {
           this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);
           this.addCustInfoPopup.alertPopup('You have successfully create user', 'alert-success').then(
             data => {
-              window.location.href = 'http://zencore.zen.com.my:8103/#/main/customers';
+              window.location.href = 'https://zencore.zen.com.my:8103/#/main/customers';
               this.addCustPggSvs.setShowToolbarSideMenu(true);
             }
           );

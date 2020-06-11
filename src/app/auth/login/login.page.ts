@@ -168,7 +168,7 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   redirectToForgetPassword() {
-    return window.location.href = 'http://zencore.zen.com.my:8104/#/forgot-password/tenant';
+    return window.location.href = 'https://zencore.zen.com.my:8104/#/forgot-password/tenant';
   }
 
 }
