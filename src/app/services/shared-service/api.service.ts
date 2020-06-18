@@ -1,9 +1,10 @@
+
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
-import { map } from 'rxjs/operators'; 
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
+import { environment as ENV } from 'src/environments/environment';
 /**
  * This injectable is to set API services for eLeave tenant
  * @export
@@ -27,7 +28,8 @@ export class APIService {
    * This property is to declare base url to http request API
    * @memberof APIService
    */
-  public ROOT_URL = 'https://zencore.zen.com.my:3001';
+  // public ROOT_URL = 'https://zencore.zen.com.my:3001';
+  public ROOT_URL = ENV.URL_API;
 
   /**
    * This property is to decalre the headers and save it for token

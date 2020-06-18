@@ -1,3 +1,4 @@
+import { environment as ENV } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -5,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { map } from 'rxjs/operators';
-
 import { APIService } from './api.service';
 /**
  * This injectable is to set authentication services for eLeave tenant
@@ -42,7 +42,8 @@ export class AuthService {
    * This property is to declare base Url body for http request
    * @memberof AuthService
    */
-  public ROOT_URL = 'https://zencore.zen.com.my:3001';
+  // public ROOT_URL = 'https://zencore.zen.com.my:3001';
+  public ROOT_URL = ENV.URL_API;
 
 
   /**

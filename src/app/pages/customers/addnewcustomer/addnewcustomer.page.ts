@@ -1,3 +1,4 @@
+import { environment as ENV } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -8,6 +9,8 @@ import {APIService} from '../../../services/shared-service/api.service';
 
 import { InfoPopupService } from '../../../layout/notificationPopup/info-popup.service';
 import { GlobalFunctionService } from '../../../services/global-function.service';
+
+
 /**
  * This component is for adding a new customer
  * @export
@@ -267,7 +270,8 @@ export class AddnewcustomerPage implements OnInit {
           this.addLog(data[0].CUSTOMER_GUID, dataSubs[0].SUBSCRIPTION_GUID);
           this.addCustInfoPopup.alertPopup('You have successfully create user', 'alert-success').then(
             data => {
-              window.location.href = 'https://zencore.zen.com.my:8103/#/main/customers';
+              // window.location.href = 'https://zencore.zen.com.my:8103/#/main/customers';
+              window.location.href = ENV.URL_BASE + '/#/main/customers';
               this.addCustPggSvs.setShowToolbarSideMenu(true);
             }
           );

@@ -1,3 +1,4 @@
+import { environment as ENV } from 'src/environments/environment';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
@@ -168,7 +169,8 @@ export class LoginPage implements OnInit {
    * @memberof LoginPage
    */
   redirectToForgetPassword() {
-    return window.location.href = 'https://zencore.zen.com.my:8104/#/forgot-password/tenant';
+    // return window.location.href = 'https://zencore.zen.com.my:8104/#/forgot-password/tenant';
+    return window.location.href = ENV.URL_FORGOTPASSWORD + '/#/forgot-password/tenant';
   }
 
 }

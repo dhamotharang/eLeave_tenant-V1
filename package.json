@@ -52,6 +52,7 @@
     "cordova-plugin-telerik-imagepicker": "^2.3.3",
     "cordova-sqlite-storage": "^3.4.1",
     "core-js": "^2.6.11",
+    "cross-env": "^7.0.2",
     "crypto-js": "^3.1.9-1",
     "ionic": "^5.4.16",
     "ngx-pagination": "^4.1.0",
