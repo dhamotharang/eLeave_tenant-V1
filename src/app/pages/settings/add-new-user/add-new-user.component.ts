@@ -44,7 +44,7 @@ export class AddNewUserComponent implements OnInit {
    * This property is to set return value of password validation
    * @memberof AddNewUserComponent
    */
-  private errPass = false;
+  public errPass = false;
 
   /**
    * This property is to set return value of error messages

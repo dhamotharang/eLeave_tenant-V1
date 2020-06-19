@@ -17,24 +17,25 @@
   <ion-item-group class="contentStyle">
     <ion-item>
       <ion-label position="stacked">Primary Contact</ion-label>
-      <ion-input type="text" placeholder="Insert Full Name" [(ngModel)]="updateClientInfo.FULLNAME"></ion-input>    
+      <ion-input type="text" placeholder="Insert Full Name" [(ngModel)]="updateClientInfo['FULLNAME']"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Display Name</ion-label>
-      <ion-input type="text" placeholder="Insert Display Name" [(ngModel)]="updateClientInfo.NICKNAME"></ion-input>    
+      <ion-input type="text" placeholder="Insert Display Name" [(ngModel)]="updateClientInfo['NICKNAME']"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Company Name</ion-label>
-      <ion-input type="text" placeholder="Insert Company Name" [(ngModel)]="updateClientInfo.COMPANY_NAME"></ion-input>
+      <ion-input type="text" placeholder="Insert Company Name" [(ngModel)]="updateClientInfo['COMPANY_NAME']">
+      </ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Customer Email*</ion-label>
-      <ion-input type="email" inputmode="email" placeholder="Email" [(ngModel)]="updateClientInfo.EMAIL"
+      <ion-input type="email" inputmode="email" placeholder="Email" [(ngModel)]="updateClientInfo['EMAIL']"
                   required="true" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Phone No.*</ion-label>
-      <ion-input type="tel" inputmode="tel" placeholder="Phone no." [(ngModel)]="updateClientInfo.CONTACT_NO"
+      <ion-input type="tel" inputmode="tel" placeholder="Phone no." [(ngModel)]="updateClientInfo['CONTACT_NO']"
                   required="true" ></ion-input>
     </ion-item>
   </ion-item-group>
@@ -46,22 +47,25 @@
   <ion-item-group class="contentStyle">
     <ion-item>
       <ion-label position="stacked">Customer Address</ion-label>
-      <ion-input type="text" placeholder="Insert Street address" [(ngModel)]="updateClientInfo.ADDRESS1"></ion-input>
-      <ion-input type="text" placeholder="Insert Village/Township Name" [(ngModel)]="updateClientInfo.ADDRESS2"></ion-input>
+      <ion-input type="text" placeholder="Insert Street address" [(ngModel)]="updateClientInfo['ADDRESS1']"></ion-input>
+      <ion-input type="text" placeholder="Insert Village/Township Name" [(ngModel)]="updateClientInfo['ADDRESS2']">
+      </ion-input>
       <ion-row>
-        <ion-input style="max-width: 40%;" type="text" placeholder="Insert Postal code" [(ngModel)]="updateClientInfo.POSTCODE"></ion-input>
-        <ion-input type="text" placeholder="Insert City Name" [(ngModel)]="updateClientInfo.CITY"></ion-input>
+        <ion-input style="max-width: 40%;" type="text" placeholder="Insert Postal code"
+          [(ngModel)]="updateClientInfo['POSTCODE']"></ion-input>
+        <ion-input type="text" placeholder="Insert City Name" [(ngModel)]="updateClientInfo['CITY']"></ion-input>
       </ion-row>
-      <ion-input type="text" placeholder="Insert State Name" [(ngModel)]="updateClientInfo.STATE"></ion-input>
-      <ion-input type="text" placeholder="Insert Country/Region Name" [(ngModel)]="updateClientInfo.COUNTRY"></ion-input>
+      <ion-input type="text" placeholder="Insert State Name" [(ngModel)]="updateClientInfo['STATE']"></ion-input>
+      <ion-input type="text" placeholder="Insert Country/Region Name" [(ngModel)]="updateClientInfo['COUNTRY']">
+      </ion-input>
     </ion-item>
     <ion-list>
       <ion-item lines="none">
         <ion-label position="stacked">Sales Person</ion-label>
-        <ion-select placeholder="Select Sales Person" [(ngModel)]="updateClientInfo.SALESPERSON">
+        <ion-select placeholder="Select Sales Person" [(ngModel)]="updateClientInfo['SALESPERSON']">
           <ion-select-option *ngFor="let salesman of salesmanLists" 
-            [value]=salesman.FULLNAME name=salesman.FULLNAME>
-              {{salesman.FULLNAME}}
+            [value]="salesman['FULLNAME']" name="salesman['FULLNAME']">
+              {{salesman['FULLNAME']}}
           </ion-select-option>
         </ion-select>
       </ion-item>

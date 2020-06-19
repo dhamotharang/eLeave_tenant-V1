@@ -28,15 +28,15 @@
                         <ion-label>Primary Contact</ion-label>
                       </ion-row>
                       <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Full Name" [(ngModel)]="newCustForm.fullname" formControlName="fullName" name="fullname"></ion-input>
-                        <ion-note *ngIf="!addNewCustForm.controls.fullName.valid  && (addNewCustForm.controls.fullName.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
+                        <ion-input type="text" required placeholder="Full Name" [(ngModel)]="newCustForm['fullname']" formControlName="fullName" name="fullname"></ion-input>
+                        <ion-note *ngIf="!addNewCustForm.controls['fullName'].valid  && (addNewCustForm.controls.fullName.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
                       <ion-row>
                         <ion-label>Company Name</ion-label>
                       </ion-row>
                       <ion-row class="addCustomerInputBackgroundStyle"  style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Company name" [(ngModel)]="newCustForm.companyName" formControlName="companyName" name="companyName"></ion-input>
+                        <ion-input type="text" required placeholder="Company name" [(ngModel)]="newCustForm['companyName']" formControlName="companyName" name="companyName"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.companyName.valid && (addNewCustForm.controls.companyName.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
@@ -45,7 +45,7 @@
                         <ion-label>Customer Email</ion-label>
                       </ion-row>
                       <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
-                        <ion-input type="email" required placeholder="Email address (Eg: abc@example.com)" [(ngModel)]="newCustForm.email" formControlName="email" name="email"></ion-input>
+                        <ion-input type="email" required placeholder="Email address (Eg: abc@example.com)" [(ngModel)]="newCustForm['email']" formControlName="email" name="email"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.email.valid && (addNewCustForm.controls.email.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
@@ -54,7 +54,7 @@
                         <ion-label>Phone Number</ion-label>
                       </ion-row>
                       <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
-                        <ion-input type="tel" required placeholder="Contact no (Eg: +6012-3455678)" [(ngModel)]="newCustForm.contactNo" formControlName="contactNo" name="contactNo"></ion-input>
+                        <ion-input type="tel" required placeholder="Contact no (Eg: +6012-3455678)" [(ngModel)]="newCustForm['contactNo']" formControlName="contactNo" name="contactNo"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.contactNo.valid && (addNewCustForm.controls.contactNo.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
@@ -62,7 +62,7 @@
                         <ion-label>Display Name</ion-label>
                       </ion-row>
                       <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Display name/Username" [(ngModel)]="newCustForm.nickname" formControlName="nickname" name="nickname"></ion-input>
+                        <ion-input type="text" required placeholder="Display name/Username" [(ngModel)]="newCustForm['nickname']" formControlName="nickname" name="nickname"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.nickname.valid && (addNewCustForm.controls.nickname.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
@@ -135,7 +135,7 @@
                         <ion-label>Subscriptions quota</ion-label>
                       </ion-row>
                       <ion-row class="addCustomerInputBackgroundStyle" style="display: flow-root;">
-                        <ion-input type="number" required placeholder="Quota number" mode="md" [(ngModel)]="newSubsForm.subscriptionQuota" formControlName="subscriptionQuota" name="subscriptionQuota"></ion-input>
+                        <ion-input type="number" required placeholder="Quota number" mode="md" [(ngModel)]="newSubsForm['subscriptionQuota']" formControlName="subscriptionQuota" name="subscriptionQuota"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.subscriptionQuota.valid && (addNewCustForm.controls.subscriptionQuota.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-row>
 
@@ -146,7 +146,7 @@
                         </ion-item-group>
                         <!-- <ion-select [(ngModel)]="selSalesperson" (ionChange)="selectedSalesperson()" -->
                         <ion-row class="addCustomerInputDatetimeBackgroundStyle" style="display: flow-root;">
-                          <ion-select [(ngModel)]="newCustForm.salesperson" formControlName="salesperson" name="salesperson" 
+                          <ion-select [(ngModel)]="newCustForm['salesperson']" formControlName="salesperson" name="salesperson" 
                             placeholder="Select a salesperson" style="border-radius: 3px !important;
                             border: solid 0.5px #a5a4bf;
                             align-items: center;
@@ -177,32 +177,32 @@
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle" style="padding-bottom: 0px;">
                       <ion-col style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Streets 1" [(ngModel)]="newCustForm.address1" formControlName="address1" name="address1"></ion-input>
+                        <ion-input type="text" required placeholder="Streets 1" [(ngModel)]="newCustForm['address1']" formControlName="address1" name="address1"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.address1.valid && (addNewCustForm.controls.address1.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                       <ion-col style="display: flow-root;">
-                        <ion-input type="text" placeholder="Streets 2" [(ngModel)]="newCustForm.address2" formControlName="address2" name="address2"></ion-input>
+                        <ion-input type="text" placeholder="Streets 2" [(ngModel)]="newCustForm['address2']" formControlName="address2" name="address2"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.address2.valid && (addNewCustForm.controls.address2.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                       <!-- <ion-input></ion-input> -->
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle" style="padding-bottom: 0px;">
                       <ion-col style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Postal code" [(ngModel)]="newCustForm.postcode" formControlName="postcode" name="postcode"></ion-input>
+                        <ion-input type="text" required placeholder="Postal code" [(ngModel)]="newCustForm['postcode']" formControlName="postcode" name="postcode"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.postcode.valid && (addNewCustForm.controls.postcode.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                       <ion-col style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Village/Township" [(ngModel)]="newCustForm.city" formControlName="city" name="city"></ion-input>
+                        <ion-input type="text" required placeholder="Village/Township" [(ngModel)]="newCustForm['city']" formControlName="city" name="city"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.city.valid && (addNewCustForm.controls.city.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                     </ion-row>
                     <ion-row class="addCustomerInputBackgroundStyle">
                       <ion-col style="display: flow-root;">
-                        <ion-input type="text" required placeholder="State" [(ngModel)]="newCustForm.state" formControlName="state" name="state"></ion-input>
+                        <ion-input type="text" required placeholder="State" [(ngModel)]="newCustForm['state']" formControlName="state" name="state"></ion-input>
                         <ion-note *ngIf="!addNewCustForm.controls.state.valid && (addNewCustForm.controls.state.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                       <ion-col style="display: flow-root;">
-                        <ion-input type="text" required placeholder="Country" [(ngModel)]="newCustForm.country" formControlName="country" name="country"></ion-input>                    
+                        <ion-input type="text" required placeholder="Country" [(ngModel)]="newCustForm['country']" formControlName="country" name="country"></ion-input>                    
                         <ion-note *ngIf="!addNewCustForm.controls.country.valid && (addNewCustForm.controls.country.dirty || saveButtonClick)" style="color: #ff6768; font-size: 9px;">*required</ion-note>
                       </ion-col>
                     </ion-row>
@@ -230,19 +230,19 @@
                 <ion-col class="addCustomerPreviewBody">
                   <ion-row style="padding-bottom: 5px;">
                     <ion-text>
-                      {{newCustForm.fullname}}
+                      {{newCustForm['fullname']}}
                     </ion-text>
                   </ion-row>
                   <ion-row style="padding-bottom: 5px;">
                     <ion-text>
-                      {{newCustForm.nickname}}
+                      {{newCustForm['nickname']}}
                     </ion-text>
                   </ion-row>
                   <ion-row style="padding-bottom: 5px;">
-                    {{newCustForm.email}}
+                    {{newCustForm['email']}}
                   </ion-row>
                   <ion-row style="padding-bottom: 5px;">
-                    {{newCustForm.contactNo}}
+                    {{newCustForm['contactNo']}}
                   </ion-row>
                 </ion-col>
               </ion-row>
@@ -260,19 +260,19 @@
                     Billing Address
                   </ion-row>
                   <ion-row style="padding-top:10px;">
-                    {{newCustForm.address1}}
+                    {{newCustForm['address1']}}
                   </ion-row>
                   <ion-row style="padding-top:10px;">
-                    {{newCustForm.address2}}
+                    {{newCustForm['address2']}}
                   </ion-row>
                   <ion-row style="padding-top:10px;">
-                    {{newCustForm.postcode}}, {{newCustForm.city}}
+                    {{newCustForm['postcode']}}, {{newCustForm['city']}}
                   </ion-row>
                   <ion-row style="padding-top:10px;">
-                    {{newCustForm.state}}
+                    {{newCustForm['state']}}
                   </ion-row>
                   <ion-row style="padding-top:10px;">
-                    {{newCustForm.country}}
+                    {{newCustForm['country']}}
                   </ion-row>
                 </ion-col>
               </ion-row>
@@ -302,11 +302,11 @@
                   </ion-row>
                   <ion-row style="padding-top:10px;">
                     <ion-text>Subscription quota:</ion-text>
-                    <ion-text style="font-weight: bold;">{{newSubsForm.subscriptionQuota}}</ion-text>
+                    <ion-text style="font-weight: bold;">{{newSubsForm['subscriptionQuota']}}</ion-text>
                   </ion-row>
                   <ion-row style="padding-top:10px;">
                     <ion-text>Salesperson:</ion-text>
-                    <ion-text style="font-weight: bold;">{{newCustForm.salesperson}}</ion-text>
+                    <ion-text style="font-weight: bold;">{{newCustForm['salesperson']}}</ion-text>
                   </ion-row>
                 </ion-col>
               </ion-row>

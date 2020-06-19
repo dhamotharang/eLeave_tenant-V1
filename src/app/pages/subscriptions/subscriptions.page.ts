@@ -88,6 +88,18 @@ export class SubscriptionsPage implements OnInit {
   public subscribersObjLength;
   
   /**
+   *  This property is to bind the value to show subscriptions in card or table
+   * @memberof SubscriptionsPage
+   */
+  public subscribersNotEmpty;
+
+  /**
+   * This propery is to bind the value of current subscription's page number
+   * @memberof SubscriptionsPage
+   */
+  public currSubsPage;
+
+  /**
    * This property is to get methods from GlobalFunctionService
    * @memberof SubscriptionsPage
    */

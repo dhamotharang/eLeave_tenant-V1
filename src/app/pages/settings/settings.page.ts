@@ -88,6 +88,12 @@ export class SettingsPage implements OnInit {
   public userDataLength;
 
   /**
+   * This property is to bind the ui value to be showed
+   * @memberof SettingsPage
+   */
+  public userNotEmpty;
+
+  /**
    * This property is to set selected role. By default is "All roles"
    * @memberof SettingsPage
    */
