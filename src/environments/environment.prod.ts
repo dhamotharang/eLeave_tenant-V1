@@ -4,7 +4,7 @@
  */
 export const environment = {
   production: true,
-  URL_BASE: 'http://zencore.zen.com.my:8103',
-  URL_API: 'https://zencore.zen.com.my:3001',
-  URL_FORGOTPASSWORD: 'http://zencore.zen.com.my:8104'
+  URL_BASE: 'https://tenant.beesuite.app',
+  URL_API: 'https://tenantcore.beesuite.app/api/docs/',
+  URL_FORGOTPASSWORD: 'https://resetpassword.beesuite.app'
 };
