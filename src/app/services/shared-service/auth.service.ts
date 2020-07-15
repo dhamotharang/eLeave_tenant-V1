@@ -64,7 +64,8 @@ export class AuthService {
    */
   login(emailValue: string, passwordValue: string) {
     const encryptPass = (this.CryptoJS.SHA256(passwordValue)).toString(this.CryptoJS.enc.Hex);
-    return this.authApiService.postApiLogin({ loginId: emailValue,  password: encryptPass }, '/api/auth/login/local').pipe(
+    return this.authApiService.postApiLogin({ loginId: emailValue, password: encryptPass }, '/api/auth/login/local').pipe(
+    // return this.authApiService.postApiLogin({ loginId: emailValue, password: encryptPass }, '/api/auth/login/local').pipe(
       map(data => {
         return data;
       })
