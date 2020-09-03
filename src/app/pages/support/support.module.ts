@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SupportPage } from './support.page';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { EditorModule } from 'primeng/editor';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     PdfViewerModule,
+    EditorModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SupportPage]

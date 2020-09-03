@@ -21,7 +21,6 @@ export class SupportPage implements OnInit {
 
   public supportList: any;
   public suggestLength: number;
-  public requestLength: number;
   public pendingVal: number = 0;
   public approvedVal: number = 0;
   public rejectedVal: number = 0;
@@ -30,7 +29,8 @@ export class SupportPage implements OnInit {
   public url: any;
   public selectedDetails: any;
   public conversationList: any;
-  public fileTypeOutput: string;
+  public info: any;
+  public message: any;
 
 
   /**
@@ -46,26 +46,12 @@ export class SupportPage implements OnInit {
    * @memberof SupportPage
    */
   ngOnInit() {
+    this.apiService.reqGetCurrUserDetails().subscribe(info => this.info = info)
     this.getSupportList().pipe(
       map(data => {
         this.suggestLength = data.suggestion.length;
-        this.requestLength = data.request.length;
-        let value = data.request.concat(data.suggestion);
-        value.sort((a, b) => new Date(b.CREATION_TS).getTime() - new Date(a.CREATION_TS).getTime());
-        this.supportList = value;
-        // for (let i = 0; i < this.supportList.length; i++) {
-        //   if (this.supportList[i].STATUS != undefined) {
-        //     if (this.supportList[i].STATUS === 'pending') {
-        //       this.pendingVal++
-        //     }
-        //     if (this.supportList[i].STATUS === 'approved') {
-        //       this.approvedVal++
-        //     }
-        //     if (this.supportList[i].STATUS === 'rejected') {
-        //       this.rejectedVal++
-        //     }
-        //   }
-        // }
+        data.suggestion.sort((a, b) => new Date(b.CREATION_TS).getTime() - new Date(a.CREATION_TS).getTime());
+        this.supportList = data.suggestion;
         this.showSpinner = false;
       })
     ).subscribe(list => { })
@@ -81,6 +67,26 @@ export class SupportPage implements OnInit {
   }
 
   /**
+   * get support conversation list by id
+   * @param {string} supportId
+   * @returns {Observable<any>}
+   * @memberof SupportPage
+   */
+  getSupportById(supportId: string): Observable<any> {
+    return this.apiService.getApi('/support/' + supportId);
+  }
+
+  /**
+   * post suggestion message
+   * @param {*} data
+   * @returns {Observable<any>}
+   * @memberof SupportPage
+   */
+  post_support_clarification(data): Observable<any> {
+    return this.apiService.postApi(data, '/support/admin/clarification');
+  }
+
+  /**
    * select message to view details info
    * @param {number} i
    * @param {*} data
@@ -89,15 +95,30 @@ export class SupportPage implements OnInit {
   selectedMessage(i: number, data) {
     this.clickedIndex = i;
     this.selectedDetails = data;
-    let fileType = this.selectedDetails.ATTACHMENT.split('.');
-    this.fileTypeOutput = fileType.pop();
-    // this.supportApi.get_support_conversation_id(data.SUPPORT_GUID).subscribe(data => {
-    //   this.conversationList = data;
-    //   for (let i = 0; i < this.conversationList.length; i++) {
-    //     let type = this.conversationList[i].ATTACHMENT.split('.');
-    //     this.conversationList[i]["type"] = type.pop();
-    //   }
-    // })
+    this.getSupportById(data.SUPPORT_GUID).subscribe(data => {
+      this.conversationList = data;
+    })
+  }
+
+  /**
+   * reply message to the suggestion
+   * @param {string} status
+   * @memberof SupportPage
+   */
+  replyMessage(status: string) {
+    const data = {
+      "supportId": this.selectedDetails.SUPPORT_GUID,
+      "userId": this.info[0].USER_GUID,
+      "doc": '',
+      "message": this.message,
+      "status": status
+    }
+    this.post_support_clarification(data).subscribe(res => {
+      if (res[0] != undefined) {
+        this.message = '';
+      }
+      this.selectedMessage(this.clickedIndex, this.selectedDetails);
+    })
   }
 
   /**
