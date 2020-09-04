@@ -29,7 +29,7 @@
                   <ion-col size="11"
                     style="font-size: 12px;white-space: nowrap;
                                             text-overflow: ellipsis;overflow: hidden;padding-bottom: 0;margin-bottom: 5px;">
-                    Inbox</ion-col>
+                    Suggestion</ion-col>
                 </ion-row>
               </div>
               <div style="font-size: 12px;width:100%;padding: 10px;margin-bottom: 5px;color: #43425D;">
@@ -83,7 +83,8 @@
               </div>
               <div style="overflow-y: auto;height: calc(100% - 91px);">
                 <ng-container *ngFor="let item of supportList; let i = index">
-                  <ion-item lines="none" class="textHover" style="cursor: pointer;border-right: 1px solid #f5f6fa;"
+                  <ion-item lines="none" class="textHover"
+                    style="cursor: pointer;border-left: 1px solid #f5f6fa;border-right: 1px solid #f5f6fa;"
                     [ngClass]="{ 'textColor': clickedIndex === i, 'oriColor': clickedIndex !== i}"
                     (click)="selectedMessage(i, item)">
                     <ng-container>
